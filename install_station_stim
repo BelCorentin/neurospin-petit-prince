@@ -1,0 +1,33 @@
+sudo apt install vim
+sudo apt install python3-pip
+
+### Installation de Git
+
+sudo install git
+
+### Installation de Pyenv:
+
+sudo apt-get install -y make build-essential libssl-dev zlib1g-dev \
+libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev \
+libncursesw5-dev xz-utils tk-dev libffi-dev liblzma-dev python3-openssl
+
+
+curl https://pyenv.run | bash
+
+Ajouter au bashrc:
+
+cat >> .bashrc <<'EOF'
+export PYENV_ROOT="$HOME/.pyenv"
+command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
+
+sudo apt install python-is-python3 python3.10-venv
+
+
+pyenv install --list | grep " 3\.[678]"
+
+pyenv install 3.7.6
+
+pyenv virtualenv 3.7.6 expyriment
+
+
