@@ -1,9 +1,11 @@
+##### Astuce : ajouter -y à la fin de chaque commande pour éviter d'avoir à taper yes pour l'installation
+
 sudo apt install vim
 sudo apt install python3-pip
 
 ### Installation de Git
 
-sudo install git
+sudo apt install git
 
 ### Installation de Pyenv:
 
@@ -24,11 +26,25 @@ EOF
 
 sudo apt install python-is-python3 python3.10-venv
 
+#### Ici, pour sauvegarder la modification du mot clé pyenv, il faut soit:
+- Redémarrer le terminal bash 
+- lancer:
+source .bashrc
 
 pyenv install --list | grep " 3\.[678]"
+
+Expyriment n'est pas "compatible" (son installation par pip) avec Python 3.10, on ne prend donc pas de risques et on utilise
+Python 3.7.6 à la place.
 
 pyenv install 3.7.6
 
 pyenv virtualenv 3.7.6 expyriment
 
+pyenv activate expyriment
 
+(à ce moment-là, votre ligne de commande doit commencer par (expyriment)
+ex: (expyriment)user357@machine666$
+
+On peut alors installer les packages Python voulus dans cet env:
+
+pip install expyriment
