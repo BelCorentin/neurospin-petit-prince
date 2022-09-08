@@ -47,4 +47,4 @@ ex: (expyriment)user357@machine666$
 
 On peut alors installer les packages Python voulus dans cet env:
 
-pip install expyriment
+pip install expyriment pandas numpy
