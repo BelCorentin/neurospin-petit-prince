@@ -22,7 +22,7 @@ import re
 import numpy as np
 
 # CONST
-BIDS_PATH = '/home/is153802/workspace_LPP/data/MEG/LPP/alternative_bids'
+BIDS_PATH = '/home/is153802/workspace_LPP/data/MEG/LPP/LPP_bids'
 RAW_DATA_PATH = '/home/is153802/workspace_LPP/data/MEG/LPP/raw'
 
 """ 
@@ -68,9 +68,10 @@ for folder in raw_list:
                 if len(run) > 2:
                     run = re.search(r"_run([^']*)_raw", file).group(1)
             except:
+                print(f"No run found for file: {file}")
                 continue
 
-                    # Check if the BIDS dataset already exists:
+            # Check if the BIDS dataset already exists:
             if(os.path.exists(os.path.join(BIDS_PATH,f"sub-{sub}/ses-0/meg/\
             sub-{sub}_ses-0_task-0_run-{run}_meg.fif"))):
                 continue
@@ -78,8 +79,8 @@ for folder in raw_list:
             raw = mne.io.read_raw_fif(os.path.join(run_dir,file),allow_maxshield=True)
 
             # Create a BIDS path with the correct parameters 
-            bids_path = BIDSPath(subject=sub, session='0', run='0'+str(run),datatype='meg', root=BIDS_PATH)
-            bids_path.task = "0"
+            bids_path = BIDSPath(subject=sub, session='01', run='0'+str(run),datatype='meg', root=BIDS_PATH)
+            bids_path.task = "rest"
 
             # Write the BIDS path from the raw file
             write_raw_bids(raw, bids_path=bids_path,overwrite = True)
