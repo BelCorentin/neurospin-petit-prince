@@ -1,0 +1,12 @@
+mne
+scikit-learn
+wordfreq
+mne_bids
+pandas
+python-Levenshtein
+seaborn
+pathlib
+joblib
+matplotlib
+tdqm
+
