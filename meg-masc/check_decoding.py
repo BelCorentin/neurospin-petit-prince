@@ -24,7 +24,7 @@ from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
 from sklearn.model_selection import KFold, cross_val_predict
 from sklearn.pipeline import make_pipeline
 from sklearn.preprocessing import StandardScaler, scale, RobustScaler
-from sklearn.linear_model import Ridge*
+from sklearn.linear_model import Ridge
 from wordfreq import zipf_frequency
 from Levenshtein import editops
 
@@ -232,6 +232,7 @@ def get_subjects():
     subjects = np.delete(subjects,subjects.shape[0]-1)
     print("\nSubjects for which the decoding will be tested: \n")
     print(subjects)
+    return subjects
 
 
 ##########################################################################################################
@@ -246,7 +247,7 @@ if __name__ == "__main__":
 
     for subject in subjects[[-1]]:
         print(f'Subject {subject}\'s decoding started')
-    epochs = []
+        epochs = []
         for run_id in range(1, 10):
             print('.', end='')
             epo = epoch_data(subject, '%.2i' % run_id)
