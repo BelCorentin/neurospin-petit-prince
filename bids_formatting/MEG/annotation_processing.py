@@ -11,4 +11,4 @@ df_['trial_type'] = [{"kind":"word",'word':df.loc[i,'word'].replace("'","")} for
 
 print(df_)
 
-df_.to_csv('./annotation_processed.tsv',sep='\t')
+df_.to_csv('./annotation_processed.tsv',sep='\t',index=False)
