@@ -14,16 +14,15 @@ the different subject foldes for other analysis.
 
 # Imports
 from __future__ import annotations
-import sys
-import os
 import mne
+from pathlib import Path
 from mne_bids import BIDSPath, write_raw_bids  
 import re
-import numpy as np
 
 # CONST
-BIDS_PATH = '/home/is153802/workspace_LPP/data/MEG/LPP/LPP_bids'
-RAW_DATA_PATH = '/home/is153802/workspace_LPP/data/MEG/LPP/raw'
+BASE_PATH = Path('/home/is153802/workspace_LPP/data/MEG/LPP/')
+BIDS_PATH = BASE_PATH / 'LPP_bids'
+RAW_DATA_PATH = BASE_PATH / 'raw'
 
 """ 
 
@@ -44,23 +43,17 @@ BIDS Datasets
 """
 
 
-# Get the list of raw folders
-raw_list = os.listdir(RAW_DATA_PATH)
-
 # For each of these folders, go into the sub folder (that has the name of a subject)
-for folder in raw_list:
-    sub_dir = os.path.join(RAW_DATA_PATH,folder)
-    sub_list = os.listdir(sub_dir)
-    for sub in sub_list:
-
-
+for folder in RAW_DATA_PATH.iterdir():
+    sub_dir = RAW_DATA_PATH / folder
+    for sub in sub_dir.iterdir():
 
         # Get the list of runs
-        run_dir = os.path.join(sub_dir,sub)
-        run_list = os.listdir(run_dir)
-        run_total = len(run_list)
-        for file in run_list:
+        run_dir = sub_dir / sub
+        for file in run_dir.iterdir():
             # Use a regular expression to get the run number in the file name
+            assert file.name.startswith('_r')
+            assert file.name.endswith('_raw')
             try:
                 run = re.search(r"_r([^']*)_raw", file).group(1)
             # Two cases: filenames is sub_r{run_number}_raw or sub_run{run_number}_raw
@@ -72,18 +65,18 @@ for folder in raw_list:
                 continue
 
             # Check if the BIDS dataset already exists:
-            if(os.path.exists(os.path.join(BIDS_PATH,f"sub-{sub}/ses-0/meg/\
-            sub-{sub}_ses-0_task-0_run-{run}_meg.fif"))):
+            fname = f"sub-{sub}/ses-0/meg/sub-{sub}_ses-0_task-0_run-{run}_meg.fif"
+            if (BIDS_PATH / fname).exists():
                 continue
             # Open the raw file
-            raw = mne.io.read_raw_fif(os.path.join(run_dir,file),allow_maxshield=True)
+            raw = mne.io.read_raw_fif(run_dir /file, allow_maxshield=True)
 
             # Create a BIDS path with the correct parameters 
-            bids_path = BIDSPath(subject=sub, session='01', run='0'+str(run),datatype='meg', root=BIDS_PATH)
+            bids_path = BIDSPath(subject=sub, session='01', run='0'+str(run), datatype='meg', root=BIDS_PATH)
             bids_path.task = "rest"
 
             # Write the BIDS path from the raw file
-            write_raw_bids(raw, bids_path=bids_path,overwrite = True)
+            write_raw_bids(raw, bids_path=bids_path, overwrite=True)
 
 
 
