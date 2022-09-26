@@ -30,6 +30,7 @@ from Levenshtein import editops
 
 # Tools
 import matplotlib.pyplot as plt
+import seaborn as sns
 from pathlib import Path
 import matplotlib
 from joblib import Parallel, delayed
@@ -57,7 +58,7 @@ class PATHS:
     path_file = Path("./data_path.txt")
     if not path_file.exists():
         data = Path(input("data_path?"))
-        assert data.exists()
+        # assert data.exists()
         with open(path_file, "w") as f:
             f.write(str(data) + "\n")
     with open(path_file, "r") as f:
@@ -68,14 +69,14 @@ class PATHS:
         if str(data).__contains__('BIDS'):
             print("Raw data (no filtering) used")
 
-    assert data.exists()
+    # assert data.exists()
 
 # To simplify for the time being
 
 # To run on the Neurospin workstation
 PATHS.data = Path("/home/is153802/workspace_LPP/data/MEG/LPP/LPP_bids")
 # On the DELL
-PATHS.data = Path("/home/co/workspace_LPP/data/MEG/LPP/LPP_bids")
+# PATHS.data = Path("/home/co/workspace_LPP/data/MEG/LPP/LPP_bids")
 
 
 
@@ -128,7 +129,6 @@ def epoch_data(subject, run_id):
     epochs = mne.Epochs(raw, events, metadata=meta, tmin=-.3, tmax=.8, decim=10)
     return epochs
 
-
 def decod(X, y):
     assert len(X) == len(y)
     
@@ -146,7 +146,6 @@ def decod(X, y):
     return R
 
 # Function to correlate 
-
 def correlate(X, Y):
     if X.ndim == 1:
         X = X[:, None]
@@ -159,7 +158,6 @@ def correlate(X, Y):
     SY2 = (Y**2).sum(0) ** 0.5
     SXY = (X * Y).sum(0)
     return SXY / (SX2 * SY2)
-
 
 # Scaling and clipping the noise that has an amplitude higher than 15 sigmas
 def scale_epochs(data,epochs):
@@ -175,6 +173,15 @@ def scale_epochs(data,epochs):
 
 
 # Utils
+
+def plot(result):
+    fig, ax = plt.subplots(1, figsize=[6, 6])
+    print(result)
+    #sns.lineplot(data=result, ax=ax)
+    # sns.lineplot(x="time", y="score", data=result, hue="label", ax=ax)
+
+    ax.axhline(0, color="k")
+    return fig
 
 def match_list(A, B, on_replace="delete"):
     """Match two lists of different sizes and return corresponding indice
@@ -245,12 +252,13 @@ if __name__ == "__main__":
     report = mne.Report()
     subjects = get_subjects()
 
-    for subject in subjects[[-1]]:
+    for subject in subjects:
         print(f'Subject {subject}\'s decoding started')
         epochs = []
         for run_id in range(1, 10):
             print('.', end='')
             epo = epoch_data(subject, '%.2i' % run_id)
+            epo.metadata['label'] = f"run_{run_id}"
             epochs.append(epo)
 
         # Quick fix for the dev_head: has to be fixed before doing source reconstruction
@@ -264,8 +272,10 @@ if __name__ == "__main__":
 
         epochs_proc = scale_epochs(data,epochs)
 
+
+
         # Get the evoked potential averaged on all epochs for each channel
-        evo = epochs.average()
+        evo = epochs.average(method="median")
         evo.plot(spatial_colors=True)
 
         # Handling the data structure
@@ -278,52 +288,11 @@ if __name__ == "__main__":
         R = decod(X, y)
 
         dec  = plt.fill_between(epochs.times, R)
+        # plt.show()
 
-        report.add_figure(evo, subject, tags="evo_word")
-        report.add_figure(dec, subject, tags="decoding word")
+        report.add_evokeds(evo)
+        #report.add_figure(dec, subject, tags="word")
 
         report.save("decoding.html", open_browser=False, overwrite=True)
 
 
-
-    
-    # report = mne.Report()
-
-    # decoding
-    # all_results = list()
-    # results = list()
-    
-    # # Parallelizing the for loop:
-    # # Parallel(n_jobs=16,prefer="threads")(delayed(fig_gen)(subject) for subject in subjects)
-    # Parallel(n_jobs=1,prefer="threads")(delayed(fig_gen)(subject) for subject in subjects)
-
-
-    # # for subject in subjects:
-
-    #     # print(subject)
-
-    #     # out = _decod_one_subject(subject)
-    #     # if out is None:
-    #     #     continue
-
-    #     # (
-    #     #     fig_evo,
-    #     #     fig_decod,
-    #     #     results,
-    #     #     fig_evo_ph,
-    #     #     fig_decod_ph,
-    #     #     results_ph,
-    #     # ) = out
-
-    #     # report.add_figure(fig_evo, subject, tags="evo_word")
-    #     # report.add_figure(fig_decod, subject, tags="word")
-    #     # report.add_figure(fig_evo_ph, subject, tags="evo_phoneme")
-    #     # report.add_figure(fig_decod_ph, subject, tags="phoneme")
-
-    #     # report.save("decoding.html", open_browser=False, overwrite=True)
-
-    #     # all_results.append(results)
-    #     # all_results.append(results_ph)
-    #     # print("done")
-
-    # pd.concat(all_results, ignore_index=True).to_csv("decoding_results.csv")
