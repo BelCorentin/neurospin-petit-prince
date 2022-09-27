@@ -113,7 +113,7 @@ The sessions to process. If ``'all'``, will process all sessions found in the
 BIDS dataset.
 """
 
-task: str = 'rest'
+task: str = 'listen'
 """
 The task to process.
 """
@@ -191,7 +191,7 @@ section).
     ```
 """
 
-exclude_subjects: Iterable[str] = ['180131']
+exclude_subjects: Iterable[str] = []
 """
 Specify subjects to exclude from analysis. The MEG empty-room mock-subject
 is automatically excluded from regular analysis.

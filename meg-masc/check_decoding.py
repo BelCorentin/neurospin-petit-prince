@@ -74,7 +74,8 @@ class PATHS:
 # To simplify for the time being
 
 # To run on the Neurospin workstation
-PATHS.data = Path("/home/is153802/workspace_LPP/data/MEG/LPP/LPP_bids")
+PATHS.data = Path("/home/is153802/workspace_LPP/data/MEG/LPP/LPP_bids_old") # for raw data
+# PATHS.data = Path("/home/is153802/workspace_LPP/d/ata/MEG/LPP/derivatives/final_all_old") # for filtered data
 # On the DELL
 # PATHS.data = Path("/home/co/workspace_LPP/data/MEG/LPP/LPP_bids")
 
@@ -115,13 +116,14 @@ def epoch_data(subject, run_id):
     
     # read events
     meta = pd.read_csv(event_file, sep='\t')
-    events = mne.find_events(raw, stim_channel='STI101')
+    events = mne.find_events(raw, stim_channel='STI101',shortest_event = 1)
     
     # match events and metadata
     word_events = events[events[:, 2]==128]
     meg_delta = np.round(np.diff(word_events[:, 0]/raw.info['sfreq']))
     meta_delta = np.round(np.diff(meta.onset.values))
     i, j = match_list(meg_delta, meta_delta)
+    print(f'Len i : {len(i)}')
     assert len(i) > 1000
     events = events[i]
     meta = meta.iloc[j].reset_index()
@@ -252,10 +254,12 @@ if __name__ == "__main__":
     report = mne.Report()
     subjects = get_subjects()
 
-    for subject in subjects:
+    RUN = 9
+
+    for subject in subjects[2:]:
         print(f'Subject {subject}\'s decoding started')
         epochs = []
-        for run_id in range(1, 10):
+        for run_id in range(1, RUN+1):
             print('.', end='')
             epo = epoch_data(subject, '%.2i' % run_id)
             epo.metadata['label'] = f"run_{run_id}"
@@ -287,12 +291,14 @@ if __name__ == "__main__":
         y = epochs.metadata.word.apply(lambda w: zipf_frequency(w, 'fr'))
         R = decod(X, y)
 
+        fig, ax = plt.subplots(1, figsize=[6, 6])
         dec  = plt.fill_between(epochs.times, R)
         # plt.show()
-
-        report.add_evokeds(evo)
+        report.add_evokeds(evo,titles=f"Evoked for sub {subject}")
+        report.add_figure(fig,title = f"decoding for subject {subject}")
         #report.add_figure(dec, subject, tags="word")
-
-        report.save("decoding.html", open_browser=False, overwrite=True)
-
+        if str(PATHS.data).__contains__('LPP_bids'):
+            report.save(f"decoding_raw.html", open_browser=False, overwrite=True)
+        elif str(PATHS.data).__contains__('derivatives'):
+            report.save(f"decoding_filtered.html", open_browser=False, overwrite=True)
 
