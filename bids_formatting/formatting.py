@@ -71,7 +71,6 @@ for folder in RAW_DATA_PATH.iterdir():
         # Get the list of runs
         run_dir = sub_dir / sub
         for file in os.listdir(run_dir):
-        # for file in run_dir.iterdir():
             # Use a regular expression to get the run number in the file name
             # assert file.name.startswith('_r')
             # assert file.name.endswith('_raw')
@@ -88,15 +87,17 @@ for folder in RAW_DATA_PATH.iterdir():
 
             # Check if the BIDS dataset already exists:
             sub = str(sub)
-            fname = f"sub-{sub}/ses-01/meg/sub-{sub}_ses-01_task-{TASK}_run-0{run}_meg.fif"
+            fname = f"sub-{sub}/ses-01/meg/sub-{sub}_ses-01_task-{TASK}_run-0\
+                {run}_meg.fif"
             if (BIDS_PATH / fname).exists():
                 print(f"The file {fname} already exists: not created again.")
                 continue
             # Open the raw file
-            raw = mne.io.read_raw_fif(run_dir /file, allow_maxshield=True)
+            raw = mne.io.read_raw_fif(run_dir / file, allow_maxshield=True)
 
             # Create a BIDS path with the correct parameters 
-            bids_path = BIDSPath(subject=sub, session='01', run='0'+str(run), datatype='meg', root=BIDS_PATH)
+            bids_path = BIDSPath(subject=sub, session='01', run='0'+str(run),\
+                datatype='meg', root=BIDS_PATH)
             bids_path.task = TASK
 
             # Write the BIDS path from the raw file
@@ -107,7 +108,7 @@ for folder in RAW_DATA_PATH.iterdir():
 
 if not (BASE_PATH / 'sub_emptyroom/' / 'ses-20220628').exists():
     raw_er = '/home/is153802/workspace_LPP/data/MEG/LPP/empty_room/220628/empty_raw.fif'
-    er_raw = mne.io.read_raw_fif(raw_er,allow_maxshield = True)
+    er_raw = mne.io.read_raw_fif(raw_er,allow_maxshield=True)
 
     er_raw.info['line_freq'] = 60
     er_date = er_raw.info['meas_date'].strftime('%Y%m%d')
@@ -136,7 +137,8 @@ df_ = pd.DataFrame(df['onset'])
 
 df_['duration'] = df['offset'] - df['onset']
 
-df_['trial_type'] = [{"kind":"word",'word':df.loc[i,'word'].replace("'","")} for i in range(df_.shape[0])]
+df_['trial_type'] = [{"kind": "word", 'word': df.loc[i, 'word'].replace("'", "")}\
+    for i in range(df_.shape[0])]
 
 df_.to_csv('./annotations/annotation_processed.tsv',sep='\t',index=False)
 
@@ -144,39 +146,39 @@ df_.to_csv('./annotations/annotation_processed.tsv',sep='\t',index=False)
 
 df = pd.read_csv('./annotations/annotation_processed.tsv',sep='\t')
 
-df1 = df.iloc[0:1632,:]
+df1 = df.iloc[0:1632, :]
 df1.to_csv('./annotations/annotation_processed1.tsv',sep='\t',index=False)
 
 # print(df1)
-df2 = df.iloc[1632:3419,:]
+df2 = df.iloc[1632:3419, :]
 df2.to_csv('./annotations/annotation_processed2.tsv',sep='\t',index=False)
 
 # print(df2)
-df3 = df.iloc[3419:5295,:]
+df3 = df.iloc[3419:5295, :]
 df3.to_csv('./annotations/annotation_processed3.tsv',sep='\t',index=False)
 
 # print(df3)
-df4 = df.iloc[5295:6945,:]
+df4 = df.iloc[5295:6945, :]
 df4.to_csv('./annotations/annotation_processed4.tsv',sep='\t',index=False)
 
 # print(df4)
-df5 = df.iloc[6945:8472,:]
+df5 = df.iloc[6945:8472, :]
 df5.to_csv('./annotations/annotation_processed5.tsv',sep='\t',index=False)
 
 # print(df5)
-df6 = df.iloc[8472:10330,:]
+df6 = df.iloc[8472:10330, :]
 df6.to_csv('./annotations/annotation_processed6.tsv',sep='\t',index=False)
 
 # print(df6)
-df7 = df.iloc[10330:12042,:]
+df7 = df.iloc[10330:12042, :]
 df7.to_csv('./annotations/annotation_processed7.tsv',sep='\t',index=False)
 
 # print(df7)
-df8 = df.iloc[12042:13581,:]
+df8 = df.iloc[12042:13581, :]
 df8.to_csv('./annotations/annotation_processed8.tsv',sep='\t',index=False)
 
 # print(df8)
-df9 = df.iloc[13581:15391,:]
+df9 = df.iloc[13581:15391, :]
 df9.to_csv('./annotations/annotation_processed9.tsv',sep='\t',index=False)
 
 

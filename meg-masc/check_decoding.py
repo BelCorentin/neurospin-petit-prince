@@ -20,11 +20,10 @@ import mne_bids
 # ML/Data
 import numpy as np
 import pandas as pd
-from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
 from sklearn.model_selection import KFold, cross_val_predict
 from sklearn.pipeline import make_pipeline
-from sklearn.preprocessing import StandardScaler, scale, RobustScaler
-from sklearn.linear_model import Ridge
+from sklearn.preprocessing import StandardScaler, RobustScaler
+from sklearn.linear_model import RidgeCV
 from wordfreq import zipf_frequency
 from Levenshtein import editops
 
@@ -112,34 +111,53 @@ def epoch_data(subject, run_id):
     event_file += f'_ses-{bids_path.session}'
     event_file += f'_task-{bids_path.task}'
     event_file += f'_run-{bids_path.run}_events.tsv'
-    assert(Path(event_file).exists())
+    assert (Path(event_file).exists())
     
     # read events
     meta = pd.read_csv(event_file, sep='\t')
-    events = mne.find_events(raw, stim_channel='STI101',shortest_event = 1)
+    events = mne.find_events(raw, stim_channel='STI101',shortest_event=1)
 
     # match events and metadata
-    word_events = events[(np.where(events[:, 2]==128)) and (np.where(events[:, 2]==129))]
+    word_events = events[(np.where(events[:, 2]==128))\
+        or (np.where(events[:, 2]==129))]
     meg_delta = np.round(np.diff(word_events[:, 0]/raw.info['sfreq']))
     meta_delta = np.round(np.diff(meta.onset.values))
 
-    print(events)
-
-
+    # print(events[(np.where(events[:, 2]==128)) or (np.where(events[:, 2]==129))])
+    # print(meta.onset.values)
     i, j = match_list(meg_delta, meta_delta)
     print(f'Len i : {len(i)} for run {run_id}')
     assert len(i) > 1000
-    events = events[i]
+    events = words_events[i]
+    # events = events[i]  # events = words_events[i]
     meta = meta.iloc[j].reset_index()
 
+
+    
     epochs = mne.Epochs(raw, events, metadata=meta, tmin=-.3, tmax=.8, decim=10)
+
+    meta['kind'] = epochs.metadata.trial_type.apply(lambda s: eval(s)['kind'])
+    meta['word'] = epochs.metadata.trial_type.apply(lambda s: eval(s)['word'])
+
+    data = epochs.get_data()
+
+    n_words, n_chans, n_times = data.shape 
+    vec = data.transpose(0, 2, 1).reshape(-1, n_chans)
+    scaler = RobustScaler()
+    idx = np.arange(len(vec))
+    np.random.shuffle(idx)
+    vec = scaler.fit(vec[idx[:20_000]]).transform(vec)
+    vec = np.clip(vec, -15, 15)
+    print(vec)
+    epochs._data[:,:,:] = scaler.inverse_transform(vec).reshape(n_words, n_times, n_chans).transpose(0, 2, 1)
+
     return epochs
 
 def decod(X, y):
     assert len(X) == len(y)
     
     # define data
-    model = make_pipeline(StandardScaler(), Ridge())
+    model = make_pipeline(StandardScaler(), RidgeCV(alphas=np.logspace(-3,8,10)))
     cv = KFold(5, shuffle=True, random_state=0)
 
     # fit predict
@@ -164,18 +182,6 @@ def correlate(X, Y):
     SY2 = (Y**2).sum(0) ** 0.5
     SXY = (X * Y).sum(0)
     return SXY / (SX2 * SY2)
-
-# Scaling and clipping the noise that has an amplitude higher than 15 sigmas
-def scale_epochs(data,epochs):
-    n_words, n_chans, n_times = data.shape 
-    vec = data.transpose(0, 2, 1).reshape(-1, n_chans)
-    scaler = RobustScaler()
-    idx = np.arange(len(vec))
-    np.random.shuffle(idx)
-    vec = scaler.fit(vec[idx[:20_000]]).transform(vec)
-    vec = np.clip(vec, -15, 15)
-    epochs._data[:,:,:] = scaler.inverse_transform(vec).reshape(n_words, n_times, n_chans).transpose(0, 2, 1)
-    return epochs
 
 
 # Utils
@@ -254,13 +260,12 @@ def get_subjects():
 
 if __name__ == "__main__":
 
-
     report = mne.Report()
     subjects = get_subjects()
 
     RUN = 9
-
-    for subject in subjects[2:]:
+    for subject in ['190611']:
+    # for subject in subjects[2:]:
         print(f'Subject {subject}\'s decoding started')
         epochs = []
         for run_id in range(1, RUN+1):
@@ -276,19 +281,12 @@ if __name__ == "__main__":
 
         epochs = mne.concatenate_epochs(epochs) 
 
-        data = epochs.get_data()
-
-        epochs_proc = scale_epochs(data,epochs)
-
-
-
         # Get the evoked potential averaged on all epochs for each channel
         evo = epochs.average(method="median")
         evo.plot(spatial_colors=True)
 
         # Handling the data structure
-        epochs.metadata['kind'] = epochs.metadata.trial_type.apply(lambda s: eval(s)['kind'])
-        epochs.metadata['word'] = epochs.metadata.trial_type.apply(lambda s: eval(s)['word'])
+
 
         # Run a linear regression between MEG signals and word frequency classification
         X = epochs.get_data()
