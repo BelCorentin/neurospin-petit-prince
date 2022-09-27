@@ -112,18 +112,22 @@ def epoch_data(subject, run_id):
     event_file += f'_ses-{bids_path.session}'
     event_file += f'_task-{bids_path.task}'
     event_file += f'_run-{bids_path.run}_events.tsv'
-    Path(event_file).exists()
+    assert(Path(event_file).exists())
     
     # read events
     meta = pd.read_csv(event_file, sep='\t')
     events = mne.find_events(raw, stim_channel='STI101',shortest_event = 1)
-    
+
     # match events and metadata
-    word_events = events[events[:, 2]==128]
+    word_events = events[(np.where(events[:, 2]==128)) and (np.where(events[:, 2]==129))]
     meg_delta = np.round(np.diff(word_events[:, 0]/raw.info['sfreq']))
     meta_delta = np.round(np.diff(meta.onset.values))
+
+    print(events)
+
+
     i, j = match_list(meg_delta, meta_delta)
-    print(f'Len i : {len(i)}')
+    print(f'Len i : {len(i)} for run {run_id}')
     assert len(i) > 1000
     events = events[i]
     meta = meta.iloc[j].reset_index()
