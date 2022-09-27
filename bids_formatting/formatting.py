@@ -37,7 +37,7 @@ from mne_bids import BIDSPath, write_raw_bids
 ###  CONST ###
 BASE_PATH = Path('/home/is153802/workspace_LPP/data/MEG/LPP/')
 BIDS_PATH = BASE_PATH / 'LPP_bids'
-RAW_DATA_PATH = BASE_PATH / 'raw'
+RAW_DATA_PATH = BASE_PATH / 'raw_old'
 PROC_DATA_PATH = BASE_PATH / 'derivatives' / 'final_all'
 TASK = 'listen'
 

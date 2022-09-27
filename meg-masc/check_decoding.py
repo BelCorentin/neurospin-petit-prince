@@ -96,7 +96,8 @@ def epoch_data(subject, run_id):
         datatype="meg",
         root=PATHS.data,
         run=run_id,
-        #processing = 'sss' # Uncomment this line when working with preprocessed files (undergone Max Filter)
+        # processing = 'sss' # Uncomment this line when working with 
+        # preprocessed files (undergone Max Filter)
     )
 
     raw = mne_bids.read_raw_bids(bids_path)
@@ -115,32 +116,28 @@ def epoch_data(subject, run_id):
     
     # read events
     meta = pd.read_csv(event_file, sep='\t')
-    events = mne.find_events(raw, stim_channel='STI101',shortest_event=1)
+    events = mne.find_events(raw, stim_channel='STI101', shortest_event=1)
 
     # match events and metadata
-    word_events = events[(np.where(events[:, 2]==128))\
-        or (np.where(events[:, 2]==129))]
+    word_events = events[events[:, 2]>1]
     meg_delta = np.round(np.diff(word_events[:, 0]/raw.info['sfreq']))
     meta_delta = np.round(np.diff(meta.onset.values))
 
-    # print(events[(np.where(events[:, 2]==128)) or (np.where(events[:, 2]==129))])
-    # print(meta.onset.values)
+    print(word_events)
+    print(meta.onset.values)
     i, j = match_list(meg_delta, meta_delta)
     print(f'Len i : {len(i)} for run {run_id}')
     assert len(i) > 1000
-    events = words_events[i]
+    events = word_events[i]
     # events = events[i]  # events = words_events[i]
     meta = meta.iloc[j].reset_index()
 
-
-    
     epochs = mne.Epochs(raw, events, metadata=meta, tmin=-.3, tmax=.8, decim=10)
 
-    meta['kind'] = epochs.metadata.trial_type.apply(lambda s: eval(s)['kind'])
-    meta['word'] = epochs.metadata.trial_type.apply(lambda s: eval(s)['word'])
-
     data = epochs.get_data()
+    epochs.load_data()
 
+    # Scaling the data
     n_words, n_chans, n_times = data.shape 
     vec = data.transpose(0, 2, 1).reshape(-1, n_chans)
     scaler = RobustScaler()
@@ -148,8 +145,8 @@ def epoch_data(subject, run_id):
     np.random.shuffle(idx)
     vec = scaler.fit(vec[idx[:20_000]]).transform(vec)
     vec = np.clip(vec, -15, 15)
-    print(vec)
-    epochs._data[:,:,:] = scaler.inverse_transform(vec).reshape(n_words, n_times, n_chans).transpose(0, 2, 1)
+    epochs._data[: , : , :] = scaler.inverse_transform(vec)\
+        .reshape(n_words, n_times, n_chans).transpose(0, 2, 1)
 
     return epochs
 
@@ -191,9 +188,9 @@ def plot(result):
     print(result)
     #sns.lineplot(data=result, ax=ax)
     # sns.lineplot(x="time", y="score", data=result, hue="label", ax=ax)
-
     ax.axhline(0, color="k")
     return fig
+
 
 def match_list(A, B, on_replace="delete"):
     """Match two lists of different sizes and return corresponding indice
@@ -243,12 +240,10 @@ def match_list(A, B, on_replace="delete"):
     assert len(B_sel) == len(A_sel)
     return A_sel.astype(int), B_sel.astype(int)
 
-
-
 def get_subjects():
     subjects = pd.read_csv(str(PATHS.data) + "/participants.tsv", sep="\t")
     subjects = subjects.participant_id.apply(lambda x: x.split("-")[1]).values
-    subjects = np.delete(subjects,subjects.shape[0]-1)
+    subjects = np.delete(subjects, subjects.shape[0]-1)
     print("\nSubjects for which the decoding will be tested: \n")
     print(subjects)
     return subjects
@@ -263,8 +258,8 @@ if __name__ == "__main__":
     report = mne.Report()
     subjects = get_subjects()
 
-    RUN = 9
-    for subject in ['190611']:
+    RUN = 1
+    for subject in subjects[3:]:
     # for subject in subjects[2:]:
         print(f'Subject {subject}\'s decoding started')
         epochs = []
@@ -286,10 +281,14 @@ if __name__ == "__main__":
         evo.plot(spatial_colors=True)
 
         # Handling the data structure
+        epochs.metadata['kind'] = epochs.metadata.trial_type.apply(lambda s: eval(s)['kind'])
+        epochs.metadata['word'] = epochs.metadata.trial_type.apply(lambda s: eval(s)['word'])
 
 
         # Run a linear regression between MEG signals and word frequency classification
-        X = epochs.get_data()
+        # X = epochs.get_data() # Regular data: mag & grad
+        X = epochs.copy().pick_types(meg='mag').get_data()  # Only mag data
+        # X = epochs.copy().pick_types(meg='grad') # Only grad data
         y = epochs.metadata.word.apply(lambda w: zipf_frequency(w, 'fr'))
         R = decod(X, y)
 
