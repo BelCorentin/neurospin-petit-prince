@@ -191,7 +191,7 @@ section).
     ```
 """
 
-exclude_subjects: Iterable[str] = []
+exclude_subjects: Iterable[str] = ['180131']
 """
 Specify subjects to exclude from analysis. The MEG empty-room mock-subject
 is automatically excluded from regular analysis.
