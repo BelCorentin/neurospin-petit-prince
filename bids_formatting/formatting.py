@@ -24,10 +24,10 @@ https://openneuro.org/datasets/ds003643/versions/1.0.4
 
 ###### Imports ######
 
+from __future__ import annotations
 import pandas as pd
 import os 
 import re 
-from __future__ import annotations
 import mne
 from pathlib import Path
 from mne_bids import BIDSPath, write_raw_bids  
@@ -37,7 +37,8 @@ from mne_bids import BIDSPath, write_raw_bids
 ###  CONST ###
 BASE_PATH = Path('/home/is153802/workspace_LPP/data/MEG/LPP/')
 BIDS_PATH = BASE_PATH / 'LPP_bids'
-RAW_DATA_PATH = BASE_PATH / 'raw'
+RAW_DATA_PATH = BASE_PATH / 'raw_old'
+PROC_DATA_PATH = BASE_PATH / 'derivatives' / 'final_all'
 TASK = 'listen'
 
 """ 
@@ -64,55 +65,67 @@ rX_raw.fif
 # For each of these folders, go into the sub folder (that has the name of a subject)
 for folder in RAW_DATA_PATH.iterdir():
     sub_dir = RAW_DATA_PATH / folder
-    for sub in sub_dir.iterdir():
+    # for sub in sub_dir.iterdir():
+    for sub in os.listdir(sub_dir):
 
         # Get the list of runs
         run_dir = sub_dir / sub
-        for file in run_dir.iterdir():
+        for file in os.listdir(run_dir):
             # Use a regular expression to get the run number in the file name
-            assert file.name.startswith('_r')
-            assert file.name.endswith('_raw')
+            # assert file.name.startswith('_r')
+            # assert file.name.endswith('_raw')
+            file = str(file)
             try:
-                run = re.search(r"_r([^']*)_raw", file).group(1)
+                run = re.search(r"_r([^']*)_raw.fif", file).group(1)
             # Two cases: filenames is sub_r{run_number}_raw or sub_run{run_number}_raw
             # so it's we are in the second case, ignore the first re and keep the 2nd result
                 if len(run) > 2:
-                    run = re.search(r"_run([^']*)_raw", file).group(1)
+                    run = re.search(r"_run([^']*)_raw.fif", file).group(1)
             except:
                 print(f"No run found for file: {file}")
                 continue
 
             # Check if the BIDS dataset already exists:
-            fname = f"sub-{sub}/ses-01/meg/sub-{sub}_ses-01_task-{TASK}_run-{run}_meg.fif"
+            sub = str(sub)
+            fname = f"sub-{sub}/ses-01/meg/sub-{sub}_ses-01_task-{TASK}_run-0{run}_meg.fif"
             if (BIDS_PATH / fname).exists():
+                print(f"The file {fname} already exists: not created again.")
                 continue
             # Open the raw file
-            raw = mne.io.read_raw_fif(run_dir /file, allow_maxshield=True)
+            raw = mne.io.read_raw_fif(run_dir / file, allow_maxshield=True)
 
             # Create a BIDS path with the correct parameters 
-            bids_path = BIDSPath(subject=sub, session='01', run='0'+str(run), datatype='meg', root=BIDS_PATH)
-            bids_path.task = "listen"
+            bids_path = BIDSPath(subject=sub, session='01', run='0'+str(run),\
+                datatype='meg', root=BIDS_PATH)
+            bids_path.task = TASK
 
             # Write the BIDS path from the raw file
             write_raw_bids(raw, bids_path=bids_path, overwrite=True)
 
 
 ### Do the same for the empty room:
+EMPTY_ROOM_PATH = BIDS_PATH / 'sub-emptyroom/' / 'ses-20220628'
 
-# raw_er = '/home/is153802/workspace_LPP/data/MEG/LPP/empty_room/220628/empty_raw.fif'
-# er_raw = mne.io.read_raw_fif(raw_er,allow_maxshield = True)
+if not (EMPTY_ROOM_PATH).exists():
+    print(f'This folder : {EMPTY_ROOM_PATH} does not exist....')
+    raw_er = '/home/is153802/workspace_LPP/data/MEG/LPP/empty_room/220628/empty_raw.fif'
+    er_raw = mne.io.read_raw_fif(raw_er, allow_maxshield=True)
 
-# er_raw.info['line_freq'] = 60
-# er_date = er_raw.info['meas_date'].strftime('%Y%m%d')
-# print(er_date)
+    er_raw.info['line_freq'] = 60
+    er_date = er_raw.info['meas_date'].strftime('%Y%m%d')
+    print(er_date)
 
-# er_bids_path = BIDSPath(subject='emptyroom', session=er_date,
-#                         task='noise', root=bids_root)
-# write_raw_bids(er_raw, er_bids_path, overwrite=True)
+    er_bids_path = BIDSPath(subject='emptyroom', session=er_date,
+                            task='noise', root=BIDS_PATH)
+    write_raw_bids(er_raw, er_bids_path, overwrite=True)
 
+else: 
+    print("Empty room folder already existing !!!")
 ##### 2) Running the Maxwell filter #####
 
-os.system('python ./mne_preproc/run.py --config=./mne_preproc/custom_config_LPP.py --steps=preprocessing')
+output = os.popen('python ./mne_preproc/run.py --config=./mne_preproc/custom_config_LPP.py \
+    --steps=preprocessing/1').read()
+print(f'\n Output of BIDS pipeline is: {output}\n')
 
 ##### 3) Add the events to the newly created derivates/final_all folder that is preprocessed #####
 
@@ -128,82 +141,93 @@ df_ = pd.DataFrame(df['onset'])
 
 df_['duration'] = df['offset'] - df['onset']
 
-df_['trial_type'] = [{"kind":"word",'word':df.loc[i,'word'].replace("'","")} for i in range(df_.shape[0])]
+df_['trial_type'] = [{"kind": "word",\
+    'word': df.loc[i, 'word'].replace("'", "")} \
+    for i in range(df_.shape[0])]
 
-df_.to_csv('./annotations/annotation_processed.tsv',sep='\t',index=False)
+df_.to_csv('./annotations/annotation_processed.tsv', sep='\t', index=False)
 
 ## Segmenting these annotations into different files for different runs
 
 df = pd.read_csv('./annotations/annotation_processed.tsv',sep='\t')
 
-df1 = df.iloc[0:1632,:]
-df1.to_csv('./annotations/annotation_processed1.tsv',sep='\t',index=False)
+df1 = df.iloc[0:1632, :]
+df1.to_csv('./annotations/annotation_processed1.tsv', sep='\t', index=False)
 
 # print(df1)
-df2 = df.iloc[1632:3419,:]
-df2.to_csv('./annotations/annotation_processed2.tsv',sep='\t',index=False)
+df2 = df.iloc[1632:3419, :]
+df2.to_csv('./annotations/annotation_processed2.tsv', sep='\t', index=False)
 
 # print(df2)
-df3 = df.iloc[3419:5295,:]
-df3.to_csv('./annotations/annotation_processed3.tsv',sep='\t',index=False)
+df3 = df.iloc[3419:5295, :]
+df3.to_csv('./annotations/annotation_processed3.tsv', sep='\t', index=False)
 
 # print(df3)
-df4 = df.iloc[5295:6945,:]
-df4.to_csv('./annotations/annotation_processed4.tsv',sep='\t',index=False)
+df4 = df.iloc[5295:6945, :]
+df4.to_csv('./annotations/annotation_processed4.tsv', sep='\t', index=False)
 
 # print(df4)
-df5 = df.iloc[6945:8472,:]
-df5.to_csv('./annotations/annotation_processed5.tsv',sep='\t',index=False)
+df5 = df.iloc[6945:8472, :]
+df5.to_csv('./annotations/annotation_processed5.tsv', sep='\t', index=False)
 
 # print(df5)
-df6 = df.iloc[8472:10330,:]
-df6.to_csv('./annotations/annotation_processed6.tsv',sep='\t',index=False)
+df6 = df.iloc[8472:10330, :]
+df6.to_csv('./annotations/annotation_processed6.tsv', sep='\t', index=False)
 
 # print(df6)
-df7 = df.iloc[10330:12042,:]
-df7.to_csv('./annotations/annotation_processed7.tsv',sep='\t',index=False)
+df7 = df.iloc[10330:12042, :]
+df7.to_csv('./annotations/annotation_processed7.tsv', sep='\t', index=False)
 
-# print/(d/f7)
-df8 = df.iloc[12042:13581,:]
-df8.to_csv('./annotations/annotation_processed8.tsv',sep='\t',index=False)
+# print(df7)
+df8 = df.iloc[12042:13581, :]
+df8.to_csv('./annotations/annotation_processed8.tsv', sep='\t', index=False)
 
 # print(df8)
-df9 = df.iloc[13581:15391,:]
-df9.to_csv('./annotations/annotation_processed9.tsv',sep='\t',index=False)
+df9 = df.iloc[13581:15391, :]
+df9.to_csv('./annotations/annotation_processed9.tsv', sep='\t', index=False)
 
 
 ## Putting the generated annotation files (one for each run) in the correct directories: the processed one and the regular one
 
-path_raw = '~/workspace_LPP/data/MEG/LPP/LPP_bids'
-path_proc = '~/workspace_LPP/data/MEG/LPP/derivatives/final_all'
+annot = f'~/workspace_LPP/code/neurospin-petit-prince/bids_formatting/annotations/annotation_processed{run}.tsv'
 
-
-
-for sub in os.listdir(path):
-    dir2 = os.path.join(path,f'{sub}/ses-01/meg')
-    try:
-        files = os.listdir(dir2)
-        #print(files)
+for sub in os.listdir(PROC_DATA_PATH):
+    if sub.__contains__('sub-'):
+        SUBJ_PATH_FILT = PROC_DATA_PATH / f'{sub}/ses-01/meg'
+        SUBJ_PATH_BIDS = BIDS_PATH / f'{sub}/ses-01/meg'
+        files = os.listdir(SUBJ_PATH_FILT)
+        files_bids =  os.listdir(SUBJ_PATH_BIDS)
         for file in files:
-            # run = re.search(r"_run-([^']*)_meg.fif", file).group(1)
+            try:
+                run = re.search(r"_run-0([^']*)_proc-filt_raw.fif", file).group(1)
+                print("File for which an events one will be created: "+file)
+            except:
+                continue
+            df = pd.read_csv(annot,sep='\t')
+            df.to_csv(f'{SUBJ_PATH_FILT}/{sub}_ses-01_task-{TASK}_run-0{run}_events.tsv',sep='\t')
+            print(f"File created:  + {sub}_ses-01_task-{TASK}_run-0{run}_events.tsv")
+            
+        for file in files_bids:
             try:
                 run = re.search(r"_run-0([^']*)_meg.fif", file).group(1)
                 print("File for which an events one will be created: "+file)
             except:
                 continue
-            annot = f'~/workspace_LPP/code/neurospin-petit-prince/bids_formatting/MEG/annotations/annotation_processed{run}.tsv'
             df = pd.read_csv(annot,sep='\t')
-            df.to_csv(f'{dir2}/{sub}_ses-01_task-{TASK}_run-0{run}_events.tsv',sep='\t')
+            df.to_csv(f'{SUBJ_PATH_BIDS}/{sub}_ses-01_task-{TASK}_run-0{run}_events.tsv',sep='\t')
             print(f"File created:  + {sub}_ses-01_task-{TASK}_run-0{run}_events.tsv")
             
-    except:
-        print(f'{dir2} skipped: not a dir')
-            
 
 
-# Bonus : Empty room:
+print(f"\n \n ***************************************************\
+\n Script finished!\n \
+***************************************************\
+\n Folder created: \n For bids: {BIDS_PATH} \n For Preproc: {PROC_DATA_PATH}")
 
 
+#### TODO 
+
+# Add the files like participants.tsv & co
 
 
 

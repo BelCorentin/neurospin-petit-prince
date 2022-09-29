@@ -20,11 +20,10 @@ import mne_bids
 # ML/Data
 import numpy as np
 import pandas as pd
-from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
 from sklearn.model_selection import KFold, cross_val_predict
 from sklearn.pipeline import make_pipeline
-from sklearn.preprocessing import StandardScaler, scale, RobustScaler
-from sklearn.linear_model import Ridge
+from sklearn.preprocessing import StandardScaler, RobustScaler
+from sklearn.linear_model import RidgeCV
 from wordfreq import zipf_frequency
 from Levenshtein import editops
 
@@ -36,8 +35,6 @@ import matplotlib
 from joblib import Parallel, delayed
 matplotlib.use("Agg")
 mne.set_log_level(False)
-
-
 
 
 ##########################################################################################################
@@ -54,6 +51,8 @@ PROC: the processed files that have undergone a Maxwell Filter (Elektra MEG data
 # PROC = "~/workspace_LPP/data/MEG/LPP/final_all"
 
 """
+
+
 class PATHS:
     path_file = Path("./data_path.txt")
     if not path_file.exists():
@@ -68,35 +67,45 @@ class PATHS:
             print("Processed data (Maxwell filtered) used")
         if str(data).__contains__('BIDS'):
             print("Raw data (no filtering) used")
-
     # assert data.exists()
 
-# To simplify for the time being
 
+# To simplify for the time being
 # To run on the Neurospin workstation
-PATHS.data = Path("/home/is153802/workspace_LPP/data/MEG/LPP/LPP_bids")
+PATHS.data = Path("/home/is153802/workspace_LPP/data/MEG/LPP/LPP_bids_old") # for raw data
+# PATHS.data = Path("/home/is153802/workspace_LPP/data/MEG/LPP/derivatives/final_all_old") # for filtered data
 # On the DELL
 # PATHS.data = Path("/home/co/workspace_LPP/data/MEG/LPP/LPP_bids")
-
-
 
 ##########################################################################################################
 # Functions
 ##########################################################################################################
 
 # Epoching and decoding
-
 def epoch_data(subject, run_id):
 
     # define path
-    bids_path = mne_bids.BIDSPath(
-        subject=subject,
-        session='01',
-        task='rest',
-        datatype="meg",
-        root=PATHS.data,
-        run=run_id,
-        #processing = 'sss' # Uncomment this line when working with preprocessed files (undergone Max Filter)
+    # Two cases: running on raw or filtered data
+    if str(PATHS.data).__contains__('derivatives'):
+        print("Running the script on FILTERED data")
+        bids_path = mne_bids.BIDSPath(
+            subject=subject,
+            session='01',
+            task='rest',
+            datatype="meg",
+            root=PATHS.data,
+            run=run_id,
+            processing='sss',
+        )
+    elif str(PATHS.data).__contains__('LPP_bids'):
+        print("Running the script on RAW data")
+        bids_path = mne_bids.BIDSPath(
+            subject=subject,
+            session='01',
+            task='rest',
+            datatype="meg",
+            root=PATHS.data,
+            run=run_id,
     )
 
     raw = mne_bids.read_raw_bids(bids_path)
@@ -111,29 +120,52 @@ def epoch_data(subject, run_id):
     event_file += f'_ses-{bids_path.session}'
     event_file += f'_task-{bids_path.task}'
     event_file += f'_run-{bids_path.run}_events.tsv'
-    Path(event_file).exists()
+    assert (Path(event_file).exists())
     
     # read events
     meta = pd.read_csv(event_file, sep='\t')
-    events = mne.find_events(raw, stim_channel='STI101')
-    
+    events = mne.find_events(raw, stim_channel='STI101', shortest_event=1)
+
     # match events and metadata
-    word_events = events[events[:, 2]==128]
+    word_events = events[events[:, 2] > 1]
     meg_delta = np.round(np.diff(word_events[:, 0]/raw.info['sfreq']))
     meta_delta = np.round(np.diff(meta.onset.values))
+
+    print(word_events)
+    print(meta.onset.values)
     i, j = match_list(meg_delta, meta_delta)
+    print(f'Len i : {len(i)} for run {run_id}')
     assert len(i) > 1000
-    events = events[i]
+    events = word_events[i]
+    # events = events[i]  # events = words_events[i]
     meta = meta.iloc[j].reset_index()
 
     epochs = mne.Epochs(raw, events, metadata=meta, tmin=-.3, tmax=.8, decim=10)
+
+    data = epochs.get_data()
+    epochs.load_data()
+
+    # Scaling the data
+    n_words, n_chans, n_times = data.shape 
+    vec = data.transpose(0, 2, 1).reshape(-1, n_chans)
+    scaler = RobustScaler()
+    idx = np.arange(len(vec))
+    np.random.shuffle(idx)
+    vec = scaler.fit(vec[idx[:20_000]]).transform(vec)
+    # To try: sigmas = 7 or 15
+    sigma = 7
+    vec = np.clip(vec, -sigma, sigma)
+    epochs._data[:, :, :] = scaler.inverse_transform(vec)\
+        .reshape(n_words, n_times, n_chans).transpose(0, 2, 1)
+
     return epochs
+
 
 def decod(X, y):
     assert len(X) == len(y)
     
     # define data
-    model = make_pipeline(StandardScaler(), Ridge())
+    model = make_pipeline(StandardScaler(), RidgeCV(alphas=np.logspace(-3,8,10)))
     cv = KFold(5, shuffle=True, random_state=0)
 
     # fit predict
@@ -144,6 +176,7 @@ def decod(X, y):
         y_pred = cross_val_predict(model, X[:, :, t], y, cv=cv)
         R[t] = correlate(y, y_pred)
     return R
+
 
 # Function to correlate 
 def correlate(X, Y):
@@ -159,30 +192,8 @@ def correlate(X, Y):
     SXY = (X * Y).sum(0)
     return SXY / (SX2 * SY2)
 
-# Scaling and clipping the noise that has an amplitude higher than 15 sigmas
-def scale_epochs(data,epochs):
-    n_words, n_chans, n_times = data.shape 
-    vec = data.transpose(0, 2, 1).reshape(-1, n_chans)
-    scaler = RobustScaler()
-    idx = np.arange(len(vec))
-    np.random.shuffle(idx)
-    vec = scaler.fit(vec[idx[:20_000]]).transform(vec)
-    vec = np.clip(vec, -15, 15)
-    epochs._data[:,:,:] = scaler.inverse_transform(vec).reshape(n_words, n_times, n_chans).transpose(0, 2, 1)
-    return epochs
-
 
 # Utils
-
-def plot(result):
-    fig, ax = plt.subplots(1, figsize=[6, 6])
-    print(result)
-    #sns.lineplot(data=result, ax=ax)
-    # sns.lineplot(x="time", y="score", data=result, hue="label", ax=ax)
-
-    ax.axhline(0, color="k")
-    return fig
-
 def match_list(A, B, on_replace="delete"):
     """Match two lists of different sizes and return corresponding indice
     Parameters
@@ -232,11 +243,10 @@ def match_list(A, B, on_replace="delete"):
     return A_sel.astype(int), B_sel.astype(int)
 
 
-
 def get_subjects():
     subjects = pd.read_csv(str(PATHS.data) + "/participants.tsv", sep="\t")
     subjects = subjects.participant_id.apply(lambda x: x.split("-")[1]).values
-    subjects = np.delete(subjects,subjects.shape[0]-1)
+    subjects = np.delete(subjects, subjects.shape[0]-1)
     print("\nSubjects for which the decoding will be tested: \n")
     print(subjects)
     return subjects
@@ -248,14 +258,14 @@ def get_subjects():
 
 if __name__ == "__main__":
 
-
     report = mne.Report()
     subjects = get_subjects()
 
-    for subject in subjects:
+    RUN = 9
+    for subject in subjects[3:]:
         print(f'Subject {subject}\'s decoding started')
         epochs = []
-        for run_id in range(1, 10):
+        for run_id in range(1, RUN+1):
             print('.', end='')
             epo = epoch_data(subject, '%.2i' % run_id)
             epo.metadata['label'] = f"run_{run_id}"
@@ -265,14 +275,7 @@ if __name__ == "__main__":
         for epo in epochs:
             epo.info['dev_head_t'] = epochs[0].info['dev_head_t']
 
-
         epochs = mne.concatenate_epochs(epochs) 
-
-        data = epochs.get_data()
-
-        epochs_proc = scale_epochs(data,epochs)
-
-
 
         # Get the evoked potential averaged on all epochs for each channel
         evo = epochs.average(method="median")
@@ -282,17 +285,23 @@ if __name__ == "__main__":
         epochs.metadata['kind'] = epochs.metadata.trial_type.apply(lambda s: eval(s)['kind'])
         epochs.metadata['word'] = epochs.metadata.trial_type.apply(lambda s: eval(s)['word'])
 
+
         # Run a linear regression between MEG signals and word frequency classification
-        X = epochs.get_data()
+        # X = epochs.get_data() # Regular data: mag & grad
+        # X = epochs.copy().pick_types(meg='mag').get_data()  # Only mag data
+        # X = epochs.copy().pick_types(meg='grad').get_data() # Only grad data
+        X = epochs.get_data() # Both mag and grad
         y = epochs.metadata.word.apply(lambda w: zipf_frequency(w, 'fr'))
         R = decod(X, y)
 
-        dec  = plt.fill_between(epochs.times, R)
+        fig, ax = plt.subplots(1, figsize=[6, 6])
+        dec = plt.fill_between(epochs.times, R)
         # plt.show()
-
-        report.add_evokeds(evo)
+        report.add_evokeds(evo, titles=f"Evoked for sub {subject}")
+        report.add_figure(fig, title=f"decoding for subject {subject}")
         #report.add_figure(dec, subject, tags="word")
-
-        report.save("decoding.html", open_browser=False, overwrite=True)
-
+        if str(PATHS.data).__contains__('LPP_bids'):
+            report.save(f"decoding_raw.html", open_browser=False, overwrite=True)
+        elif str(PATHS.data).__contains__('derivatives'):
+            report.save(f"decoding_filtered.html", open_browser=False, overwrite=True)
 

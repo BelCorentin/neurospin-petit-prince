@@ -113,7 +113,7 @@ The sessions to process. If ``'all'``, will process all sessions found in the
 BIDS dataset.
 """
 
-task: str = 'rest'
+task: str = 'listen'
 """
 The task to process.
 """
