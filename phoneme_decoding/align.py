@@ -1,9 +1,11 @@
 import grequests  # pip install grequests
 from pathlib import Path
 from tqdm import tqdm
-import textgrid # pip install git+https://github.com/kylerbrown/textgrid#egg=textgrid
+import textgrid  # pip install git+https://github.com/kylerbrown/textgrid#egg=textgrid
 import typing as tp
 import numpy as np
+import re 
+from urllib.request import urlopen
 
 
 def online_MAUS_aligner(
