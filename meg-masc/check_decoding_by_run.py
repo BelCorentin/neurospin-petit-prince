@@ -273,53 +273,54 @@ if __name__ == "__main__":
     subjects = get_subjects()
 
     RUN = 9
-
     for subject in subjects[3:]:
         print(f'Subject {subject}\'s decoding started')
-        epochs = []
         for run_id in range(1, RUN+1):
             print('.', end='')
             epo = epoch_data(subject, '%.2i' % run_id)
             epo.metadata['label'] = f"run_{run_id}"
-            epochs.append(epo)
+            epochs = epo
 
-        # Quick fix for the dev_head: has to be
-        # fixed before doing source reconstruction
-        for epo in epochs:
-            epo.info['dev_head_t'] = epochs[0].info['dev_head_t']
+            # Quick fix for the dev_head: has to be fixed
+            # before doing source reconstruction
+            for epo in epochs:
+                epo.info['dev_head_t'] = epochs[0].info['dev_head_t']
 
-        epochs = mne.concatenate_epochs(epochs)
+            # Get the evoked potential averaged on all epochs for each channel
+            evo = epochs.average(method="median")
+            evo.plot(spatial_colors=True)
 
-        # Get the evoked potential averaged on all epochs for each channel
-        evo = epochs.average(method="median")
-        evo.plot(spatial_colors=True)
+            # Handling the data structure
+            epochs.metadata['kind'] = epochs.metadata.\
+                trial_type.apply(lambda s: eval(s)['kind'])
+            epochs.metadata['word'] = epochs.metadata.\
+                trial_type.apply(lambda s: eval(s)['word'])
 
-        # Handling the data structure
-        epochs.metadata['kind'] = epochs.metadata.\
-            trial_type.apply(lambda s: eval(s)['kind'])
-        epochs.metadata['word'] = epochs.metadata.\
-            trial_type.apply(lambda s: eval(s)['word'])
+            # Run a linear regression between MEG signals
+            # and word frequency classification
+            # X = epochs.get_data() # Regular data: mag & grad
+            # X = epochs.copy().pick_types(meg='mag').get_data()
+            # # Only mag data
+            # X = epochs.copy().pick_types(meg='grad').get_data()
+            # # Only grad data
+            X = epochs.get_data()  # Both mag and grad
+            y = epochs.metadata.word.apply(lambda w: zipf_frequency(w, 'fr'))
+            R = decod(X, y)
 
-        # Run a linear regression between MEG signals
-        # and word frequency classification
-        # X = epochs.get_data() # Regular data: mag & grad
-        # X = epochs.copy().pick_types(meg='mag').get_data()  # Only mag data
-        # X = epochs.copy().pick_types(meg='grad').get_data() # Only grad data
-        X = epochs.get_data()  # Both mag and grad
-        y = epochs.metadata.word.apply(lambda w: zipf_frequency(w, 'fr'))
-        R = decod(X, y)
-
-        fig, ax = plt.subplots(1, figsize=[6, 6])
-        dec = plt.fill_between(epochs.times, R)
-        # plt.show()
-        report.add_evokeds(evo, titles=f"Evoked for sub {subject} ")
-        report.add_figure(fig, title=f"decoding for subject {subject}")
-        # report.add_figure(dec, subject, tags="word")
-        if str(PATHS.data).__contains__('LPP_bids'):
-            report.save("decoding_raw.html",
-                        open_browser=False, overwrite=True)
-        elif str(PATHS.data).__contains__('derivatives'):
-            report.save("decoding_filtered.html",
-                        open_browser=False, overwrite=True)
-
-        print('Finished!')
+            fig, ax = plt.subplots(1, figsize=[6, 6])
+            dec = plt.fill_between(epochs.times, R)
+            # plt.show()
+            report.add_evokeds(
+                            evo,
+                            titles=f"Evoked for sub {subject} run {run_id}")
+            report.add_figure(
+                            fig,
+                            title=f"decoding for subject \
+                                    {subject} run {run_id}")
+            # report.add_figure(dec, subject, tags="word")
+            if str(PATHS.data).__contains__('LPP_bids'):
+                report.save("decoding_raw_by_run.html",
+                            open_browser=False, overwrite=True)
+            elif str(PATHS.data).__contains__('derivatives'):
+                report.save("decoding_filtered.html",
+                            open_browser=False, overwrite=True)
