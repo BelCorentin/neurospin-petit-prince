@@ -149,7 +149,7 @@ def epoch_data(subject, run_id):
     meta = meta.iloc[j].reset_index()
 
     epochs = mne.Epochs(raw, events, metadata=meta,
-                        tmin=-.3, tmax=.8, decim=10)
+                        tmin=-.3, tmax=.8, decim=10, baseline=(-0.2, 0.0))
 
     data = epochs.get_data()
     epochs.load_data()

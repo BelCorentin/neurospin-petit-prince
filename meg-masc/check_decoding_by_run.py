@@ -139,17 +139,17 @@ def epoch_data(subject, run_id):
     meg_delta = np.round(np.diff(word_events[:, 0]/raw.info['sfreq']))
     meta_delta = np.round(np.diff(meta.onset.values))
 
-    print(word_events)
-    print(meta.onset.values)
+    # print(word_events)
+    # print(meta.onset.values)
     i, j = match_list(meg_delta, meta_delta)
-    print(f'Len i : {len(i)} for run {run_id}')
+    # print(f'Len i : {len(i)} for run {run_id}')
     assert len(i) > 1000
     events = word_events[i]
     # events = events[i]  # events = words_events[i]
     meta = meta.iloc[j].reset_index()
 
     epochs = mne.Epochs(raw, events, metadata=meta,
-                        tmin=-.3, tmax=.8, decim=10)
+                        tmin=-.3, tmax=.8, decim=10, baseline=(-0.2, 0.0))
 
     data = epochs.get_data()
     epochs.load_data()
@@ -182,6 +182,8 @@ def decod(X, y):
     R = np.zeros(n_times)
     for t in range(n_times):
         print('.', end='')
+        X = np.where(np.isfinite(X), X, 0)
+        print(X.shape)
         y_pred = cross_val_predict(model, X[:, :, t], y, cv=cv)
         R[t] = correlate(y, y_pred)
     return R
@@ -284,7 +286,11 @@ if __name__ == "__main__":
             # Quick fix for the dev_head: has to be fixed
             # before doing source reconstruction
             for epo in epochs:
-                epo.info['dev_head_t'] = epochs[0].info['dev_head_t']
+                try:
+                    epo.info['dev_head_t'] = epochs[0].info['dev_head_t']
+                except Exception:
+                    a = 0
+                    # print(f'No dev_head for epoch: {epo}')
 
             # Get the evoked potential averaged on all epochs for each channel
             evo = epochs.average(method="median")
