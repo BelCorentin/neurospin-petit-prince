@@ -32,6 +32,11 @@ import mne
 from pathlib import Path
 from mne_bids import BIDSPath, write_raw_bids
 
+# Copying the new files first to the raw directory:
+
+# cp -ru ~/neurospin/acquisition/neuromag/data/petit_prince
+# /home/is153802/workspace_LPP/data/MEG/LPP/raw
+
 # 1) Raw format to BIDS #####
 
 #  CONST ###
@@ -81,13 +86,13 @@ for folder in RAW_DATA_PATH.iterdir():
             # assert file.name.endswith('_raw')
             file = str(file)
             try:
-                run = re.search(r"_r([^']*)_raw.fif", file).group(1)
+                run = re.search(r"r([^']*)_raw.fif", file).group(1)
             # Two cases: filenames is sub_r{run_number}_raw
             # or sub_run{run_number}_raw
             # so it's we are in the second case, ignore the
             # first re and keep the 2nd result
                 if len(run) > 2:
-                    run = re.search(r"_run([^']*)_raw.fif", file).group(1)
+                    run = re.search(r"run([^']*)_raw.fif", file).group(1)
             except Exception:
                 print(f"No run found for file: {file}")
                 continue
@@ -133,10 +138,10 @@ else:
 
 # 2) Running the Maxwell filter #####
 
-output = os.popen('python ./mne_preproc/run.py \
-                    --config=./mne_preproc/custom_config_LPP.py \
-                    --steps=preprocessing/1').read()
-print(f'\n Output of BIDS pipeline is: {output}\n')
+# output = os.popen('python ./mne_preproc/run.py \
+#                     --config=./mne_preproc/custom_config_LPP.py \
+#                     --steps=preprocessing/1').read()
+# print(f'\n Output of BIDS pipeline is: {output}\n')
 
 # 3) Add the events to the newly created derivates/final_all
 # folder that is preprocessed #####
