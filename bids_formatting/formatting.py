@@ -78,7 +78,8 @@ for folder in RAW_DATA_PATH.iterdir():
     sub_dir = RAW_DATA_PATH / folder
     # for sub in sub_dir.iterdir():
     for sub in os.listdir(sub_dir):
-
+        if ((BIDS_PATH/f'sub-{sub}').exists()):
+            continue
         # Get the list of runs
         run_dir = sub_dir / sub
         for file in os.listdir(run_dir):
@@ -118,24 +119,25 @@ for folder in RAW_DATA_PATH.iterdir():
 
 
 # Do the same for the empty room:
-EMPTY_ROOM_PATH = BIDS_PATH / 'sub-emptyroom/' / 'ses-20220628'
 
-if not (EMPTY_ROOM_PATH).exists():
-    print(f'This folder : {EMPTY_ROOM_PATH} does not exist....')
-    raw_er = '/home/is153802/workspace_LPP/data/MEG\
-             /LPP/empty_room/220628/empty_raw.fif'
-    er_raw = mne.io.read_raw_fif(raw_er, allow_maxshield=True)
+# EMPTY_ROOM_PATH = BIDS_PATH / 'sub-emptyroom/' / 'ses-20220628'
 
-    er_raw.info['line_freq'] = 60
-    er_date = er_raw.info['meas_date'].strftime('%Y%m%d')
-    print(er_date)
+# if not (EMPTY_ROOM_PATH).exists():
+#     print(f'This folder : {EMPTY_ROOM_PATH} does not exist....')
+#     raw_er = '/home/is153802/workspace_LPP/data/MEG\
+#              /LPP/empty_room/220628/empty_raw.fif'
+#     er_raw = mne.io.read_raw_fif(raw_er, allow_maxshield=True)
 
-    er_bids_path = BIDSPath(subject='emptyroom', session=er_date,
-                            task='noise', root=BIDS_PATH)
-    write_raw_bids(er_raw, er_bids_path, overwrite=True)
+#     er_raw.info['line_freq'] = 60
+#     er_date = er_raw.info['meas_date'].strftime('%Y%m%d')
+#     print(er_date)
 
-else:
-    print("Empty room folder already existing !!!")
+#     er_bids_path = BIDSPath(subject='emptyroom', session=er_date,
+#                             task='noise', root=BIDS_PATH)
+#     write_raw_bids(er_raw, er_bids_path, overwrite=True)
+
+# else:
+#     print("Empty room folder already existing !!!")
 
 # 2) Running the Maxwell filter #####
 
@@ -208,10 +210,7 @@ df9.to_csv('./annotations/annotation_processed9.tsv', sep='\t', index=False)
 
 # Putting the generated annotation files (one for each run) in the correct
 # directories: the processed one and the regular one
-
-annot = f'~/workspace_LPP/code/neurospin-petit-prince/bids_formatting/\
-        annotations/annotation_processed{run}.tsv'
-
+annotation_folder = '~/workspace_LPP/code/neurospin-petit-prince/bids_formatting/annotations'
 
 for sub in os.listdir(PROC_DATA_PATH):
     if sub.__contains__('sub-'):
@@ -226,22 +225,23 @@ for sub in os.listdir(PROC_DATA_PATH):
                 print("File for which an events one will be created: "+file)
             except Exception:
                 continue
+
+            annot = f'{annotation_folder}/annotation_processed{run}.tsv'
             df = pd.read_csv(annot, sep='\t')
-            df.to_csv(f'{SUBJ_PATH_FILT}/{sub}_ses-01_task-{TASK}_\
-                        run-0{run}_events.tsv', sep='\t')
-            print(f"File created:  + {sub}_ses-01_task-{TASK}_\
-                        run-0{run}_events.tsv")
+            df.to_csv(f'{SUBJ_PATH_FILT}/{sub}_ses-01_task-{TASK}_run-0{run}_events.tsv', sep='\t')
+            print(f"File created:  + {sub}_ses-01_task-{TASK}_run-0{run}_events.tsv")
         for file in files_bids:
             try:
                 run = re.search(r"_run-0([^']*)_meg.fif", file).group(1)
                 print("File for which an events one will be created: "+file)
             except Exception:
                 continue
+
+            annot = f'{annotation_folder}/annotation_processed{run}.tsv'
+
             df = pd.read_csv(annot, sep='\t')
-            df.to_csv(f'{SUBJ_PATH_BIDS}/{sub}_ses-01_task-{TASK}_\
-                      run-0{run}_events.tsv', sep='\t')
-            print(f"File created:  + {sub}_ses-01_task-{TASK}_\
-                      run-0{run}_events.tsv")
+            df.to_csv(f'{SUBJ_PATH_BIDS}/{sub}_ses-01_task-{TASK}_run-0{run}_events.tsv', sep='\t')
+            print(f"File created:  + {sub}_ses-01_task-{TASK}_run-0{run}_events.tsv")
 
 print(f"\n \n ***************************************************\
 \n Script finished!\n \

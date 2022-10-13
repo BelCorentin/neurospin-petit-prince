@@ -5,7 +5,6 @@ to fit the LPP MEG Dataset and annotations
 -> No phonemes annotations / timestamps
 
 However the rest is the same, as we have all the words onset, durations & co
-
 Using a Ridge to decode the word frequency class (based off median)
 
 """
@@ -76,7 +75,7 @@ class PATHS:
 
 # To simplify for the time being
 # To run on the Neurospin workstation
-PATHS.data = Path("/home/is153802/workspace_LPP/data/MEG/LPP/LPP_bids_old")
+PATHS.data = Path("/home/is153802/workspace_LPP/data/MEG/LPP/BIDS")
 # for raw data
 # PATHS.data = Path("/home/is153802/workspace_LPP/
 # data/MEG/LPP/derivatives/final_all_old") # for filtered data
@@ -100,18 +99,18 @@ def epoch_data(subject, run_id):
         bids_path = mne_bids.BIDSPath(
             subject=subject,
             session='01',
-            task='rest',
+            task='listen',
             datatype="meg",
             root=PATHS.data,
             run=run_id,
             processing='sss',
         )
-    elif str(PATHS.data).__contains__('LPP_bids'):
+    elif str(PATHS.data).__contains__('BIDS'):
         print("Running the script on RAW data")
         bids_path = mne_bids.BIDSPath(
             subject=subject,
             session='01',
-            task='rest',
+            task='listen',
             datatype="meg",
             root=PATHS.data,
             run=run_id,
@@ -192,9 +191,9 @@ def decod(X, y):
 # Function to correlate
 def correlate(X, Y):
     if X.ndim == 1:
-        X = X[:, None]
+        X = X.to_numpy()[:, None]
     if Y.ndim == 1:
-        Y = Y[:, None]
+        Y = Y.to_numpy()[:, None]
     X = X - X.mean(0)
     Y = Y - Y.mean(0)
 
@@ -274,12 +273,27 @@ if __name__ == "__main__":
     report = mne.Report()
     subjects = get_subjects()
 
+    all_epochs = []
     RUN = 9
-    for subject in subjects[3:]:
+    for subject in subjects:
         print(f'Subject {subject}\'s decoding started')
+        epochs = []
+
+        # For each run, decoding the words
         for run_id in range(1, RUN+1):
             print('.', end='')
-            epo = epoch_data(subject, '%.2i' % run_id)
+
+            # Sometimes one run of a subject doesn't have the
+            # right length... (for older subjects)
+            try:
+                epo = epoch_data(subject, '%.2i' % run_id)
+                epo.metadata['label'] = f"run_{run_id}"
+                epochs.append(epo)
+                all_epochs.append(epo)
+            except Exception:
+                print(f'For run {run_id} and subject {subject},\
+                      epoching failed')
+                continue
             epo.metadata['label'] = f"run_{run_id}"
             epochs = epo
 
@@ -311,7 +325,14 @@ if __name__ == "__main__":
             # # Only grad data
             X = epochs.get_data()  # Both mag and grad
             y = epochs.metadata.word.apply(lambda w: zipf_frequency(w, 'fr'))
-            R = decod(X, y)
+
+            # Sometimes the decoding doesn't converge
+            try:
+                R = decod(X, y)
+            except Exception:
+                print(f'For run {run_id} and subject {subject},\
+                      decoding failed: did not converge')
+                continue
 
             fig, ax = plt.subplots(1, figsize=[6, 6])
             dec = plt.fill_between(epochs.times, R)
@@ -324,9 +345,96 @@ if __name__ == "__main__":
                             title=f"decoding for subject \
                                     {subject} run {run_id}")
             # report.add_figure(dec, subject, tags="word")
-            if str(PATHS.data).__contains__('LPP_bids'):
+            if str(PATHS.data).__contains__('BIDS'):
                 report.save("decoding_raw_by_run.html",
                             open_browser=False, overwrite=True)
             elif str(PATHS.data).__contains__('derivatives'):
-                report.save("decoding_filtered.html",
+                report.save("decoding_filtered_by_run.html",
                             open_browser=False, overwrite=True)
+
+        # For each subject, generate a subject-wide decoding as well
+        # and add it to the report
+
+        # Quick fix for the dev_head: has to be
+        # fixed before doing source reconstruction
+        for epo in epochs:
+            epo.info['dev_head_t'] = epochs[0].info['dev_head_t']
+
+        epochs = mne.concatenate_epochs(epochs)
+
+        # Get the evoked potential averaged on all epochs for each channel
+        evo = epochs.average(method="median")
+        evo.plot(spatial_colors=True)
+
+        # Handling the data structure
+        epochs.metadata['kind'] = epochs.metadata.\
+            trial_type.apply(lambda s: eval(s)['kind'])
+        epochs.metadata['word'] = epochs.metadata.\
+            trial_type.apply(lambda s: eval(s)['word'])
+
+        # Run a linear regression between MEG signals
+        # and word frequency classification
+        # X = epochs.get_data() # Regular data: mag & grad
+        # X = epochs.copy().pick_types(meg='mag').get_data()  # Only mag data
+        # X = epochs.copy().pick_types(meg='grad').get_data() # Only grad data
+        X = epochs.get_data()  # Both mag and grad
+        y = epochs.metadata.word.apply(lambda w: zipf_frequency(w, 'fr'))
+        R = decod(X, y)
+
+        fig, ax = plt.subplots(1, figsize=[6, 6])
+        dec = plt.fill_between(epochs.times, R)
+        # plt.show()
+        report.add_evokeds(evo, titles=f"Evoked for sub {subject} ")
+        report.add_figure(fig, title=f"decoding for subject {subject}")
+        # report.add_figure(dec, subject, tags="word")
+        if str(PATHS.data).__contains__('BIDS'):
+            report.save("decoding_raw_by_run.html",
+                        open_browser=False, overwrite=True)
+        elif str(PATHS.data).__contains__('derivatives'):
+            report.save("decoding_filtered.html",
+                        open_browser=False, overwrite=True)
+        print(f'Finished subject {subject}')
+
+    # For each subject, generate a subject-wide decoding as well
+    # and add it to the report
+
+    # Quick fix for the dev_head: has to be
+    # fixed before doing source reconstruction
+    for epo in all_epochs:
+        epo.info['dev_head_t'] = epochs[0].info['dev_head_t']
+
+    epochs = mne.concatenate_epochs(epochs)
+
+    # Get the evoked potential averaged on all epochs for each channel
+    evo = epochs.average(method="median")
+    evo.plot(spatial_colors=True)
+
+    # Handling the data structure
+    epochs.metadata['kind'] = epochs.metadata.\
+        trial_type.apply(lambda s: eval(s)['kind'])
+    epochs.metadata['word'] = epochs.metadata.\
+        trial_type.apply(lambda s: eval(s)['word'])
+
+    # Run a linear regression between MEG signals
+    # and word frequency classification
+    # X = epochs.get_data() # Regular data: mag & grad
+    # X = epochs.copy().pick_types(meg='mag').get_data()  # Only mag data
+    # X = epochs.copy().pick_types(meg='grad').get_data() # Only grad data
+    X = epochs.get_data()  # Both mag and grad
+    y = epochs.metadata.word.apply(lambda w: zipf_frequency(w, 'fr'))
+    R = decod(X, y)
+
+    fig, ax = plt.subplots(1, figsize=[6, 6])
+    dec = plt.fill_between(epochs.times, R)
+    # plt.show()
+    report.add_evokeds(evo, titles="Evoked for all subjects ")
+    report.add_figure(fig, title="decoding for all subjects")
+    # report.add_figure(dec, subject, tags="word")
+    if str(PATHS.data).__contains__('BIDS'):
+        report.save("decoding_raw_by_run.html",
+                    open_browser=False, overwrite=True)
+    elif str(PATHS.data).__contains__('derivatives'):
+        report.save("decoding_filtered.html",
+                    open_browser=False, overwrite=True)
+
+    print('Finished!')
