@@ -74,9 +74,12 @@ class PATHS:
     # assert data.exists()
 
 
+TASK = 'listen'
 # To simplify for the time being
 # To run on the Neurospin workstation
-PATHS.data = Path("/home/is153802/workspace_LPP/data/MEG/LPP/LPP_bids_old")
+PATHS.data = Path("/home/is153802/workspace_LPP/data/MEG/LPP/BIDS")
+# PATHS.data = Path("/home/is153802/workspace_LPP/data/MEG/LPP/LPP_bids_old")
+
 # for raw data
 # PATHS.data = Path("/home/is153802/workspace_LPP/
 # data/MEG/LPP/derivatives/final_all_old") # for filtered data
@@ -100,18 +103,19 @@ def epoch_data(subject, run_id):
         bids_path = mne_bids.BIDSPath(
             subject=subject,
             session='01',
-            task='rest',
+            task=TASK,
             datatype="meg",
             root=PATHS.data,
             run=run_id,
             processing='sss',
         )
-    elif str(PATHS.data).__contains__('LPP_bids'):
+    # elif str(PATHS.data).__contains__('BIDS'):
+    else:
         print("Running the script on RAW data")
         bids_path = mne_bids.BIDSPath(
             subject=subject,
             session='01',
-            task='rest',
+            task=TASK,
             datatype="meg",
             root=PATHS.data,
             run=run_id,
@@ -143,7 +147,7 @@ def epoch_data(subject, run_id):
     print(meta.onset.values)
     i, j = match_list(meg_delta, meta_delta)
     print(f'Len i : {len(i)} for run {run_id}')
-    assert len(i) > 1000
+    assert len(i) > 500
     events = word_events[i]
     # events = events[i]  # events = words_events[i]
     meta = meta.iloc[j].reset_index()
@@ -315,7 +319,7 @@ if __name__ == "__main__":
         report.add_evokeds(evo, titles=f"Evoked for sub {subject} ")
         report.add_figure(fig, title=f"decoding for subject {subject}")
         # report.add_figure(dec, subject, tags="word")
-        if str(PATHS.data).__contains__('LPP_bids'):
+        if str(PATHS.data).__contains__('BIDS'):
             report.save("decoding_raw.html",
                         open_browser=False, overwrite=True)
         elif str(PATHS.data).__contains__('derivatives'):
