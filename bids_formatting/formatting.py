@@ -212,24 +212,24 @@ df9.to_csv('./annotations/annotation_processed9.tsv', sep='\t', index=False)
 # directories: the processed one and the regular one
 annotation_folder = '~/workspace_LPP/code/neurospin-petit-prince/bids_formatting/annotations'
 
-for sub in os.listdir(PROC_DATA_PATH):
+for sub in os.listdir(BIDS_PATH):
     if sub.__contains__('sub-'):
-        SUBJ_PATH_FILT = PROC_DATA_PATH / f'{sub}/ses-01/meg'
+        # SUBJ_PATH_FILT = PROC_DATA_PATH / f'{sub}/ses-01/meg'
         SUBJ_PATH_BIDS = BIDS_PATH / f'{sub}/ses-01/meg'
-        files = os.listdir(SUBJ_PATH_FILT)
+        # files = os.listdir(SUBJ_PATH_FILT)
         files_bids = os.listdir(SUBJ_PATH_BIDS)
-        for file in files:
-            try:
-                run = re.search(r"_run-0([^']*)_proc-filt_raw.fif",
-                                file).group(1)
-                print("File for which an events one will be created: "+file)
-            except Exception:
-                continue
+        # for file in files:
+        #     try:
+        #         run = re.search(r"_run-0([^']*)_proc-filt_raw.fif",
+        #                         file).group(1)
+        #         print("File for which an events one will be created: "+file)
+        #     except Exception:
+        #         continue
 
-            annot = f'{annotation_folder}/annotation_processed{run}.tsv'
-            df = pd.read_csv(annot, sep='\t')
-            df.to_csv(f'{SUBJ_PATH_FILT}/{sub}_ses-01_task-{TASK}_run-0{run}_events.tsv', sep='\t')
-            print(f"File created:  + {sub}_ses-01_task-{TASK}_run-0{run}_events.tsv")
+        #     annot = f'{annotation_folder}/annotation_processed{run}.tsv'
+        #     df = pd.read_csv(annot, sep='\t')
+        #     df.to_csv(f'{SUBJ_PATH_FILT}/{sub}_ses-01_task-{TASK}_run-0{run}_events.tsv', sep='\t')
+        #     print(f"File created:  + {sub}_ses-01_task-{TASK}_run-0{run}_events.tsv")
         for file in files_bids:
             try:
                 run = re.search(r"_run-0([^']*)_meg.fif", file).group(1)

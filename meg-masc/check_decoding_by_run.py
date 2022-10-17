@@ -73,12 +73,12 @@ class PATHS:
     # assert data.exists()
 
 
-TASK = 'rest'
-# TASK = 'listen'
+# TASK = 'rest'
+TASK = 'listen'
 
 # To simplify for the time being
 # To run on the Neurospin workstation
-PATHS.data = Path("/home/is153802/workspace_LPP/data/MEG/LPP/LPP_bids_old")
+PATHS.data = Path("/home/is153802/workspace_LPP/data/MEG/LPP/BIDS")
 # for raw data
 # PATHS.data = Path("/home/is153802/workspace_LPP/
 # data/MEG/LPP/derivatives/final_all_old") # for filtered data
@@ -136,18 +136,18 @@ def epoch_data(subject, run_id):
     # read events
     meta = pd.read_csv(event_file, sep='\t')
     events = mne.find_events(raw, stim_channel='STI101', shortest_event=1)
-    print(events)
+    # print(events)
 
     # match events and metadata
     word_events = events[events[:, 2] > 1]
-    print(word_events)
+    # print(word_events)
     meg_delta = np.round(np.diff(word_events[:, 0]/raw.info['sfreq']))
     meta_delta = np.round(np.diff(meta.onset.values))
 
     # print(word_events)
     # print(meta.onset.values)
     i, j = match_list(meg_delta, meta_delta)
-    print(f'Len i : {len(i)} for run {run_id}')
+    # print(f'Len i : {len(i)} for run {run_id}')
     assert len(i) > 1000
     events = word_events[i]
     # events = events[i]  # events = words_events[i]
@@ -283,11 +283,12 @@ if __name__ == "__main__":
     RUN = 9
     for subject in subjects:
         # Problematic subjects
-        if subject in []:
+        if subject in ['180131']:
             continue
 
         print(f'Subject {subject}\'s decoding started')
         epochs_subj = []
+        epoch_zero = epoch_data(subject, '%.2i' % 1)
         # For each run, decoding the words
         for run_id in range(1, RUN+1):
             print('.', end='')
@@ -302,8 +303,7 @@ if __name__ == "__main__":
             #           epoching failed')
             #     continue
 
-            for epo in epochs:
-                epo.info['dev_head_t'] = epochs[0].info['dev_head_t']
+            epochs.info['dev_head_t'] = epoch_zero.info['dev_head_t']
 
             # Get the evoked potential averaged on all epochs for each channel
             evo = epochs.average(method="median")
