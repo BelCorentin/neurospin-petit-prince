@@ -283,7 +283,7 @@ if __name__ == "__main__":
     RUN = 9
     for subject in subjects:
         # Problematic subjects
-        if subject in ['180131', '181037', '181017']:
+        if subject in ['180131', '181037', '181017']:  # Broken
             continue
 
         print(f'Subject {subject}\'s decoding started')

@@ -51,7 +51,7 @@ RAW: the raw files organised under the BIDS format
 PROC: the processed files that have undergone
 a Maxwell Filter (Elektra MEG data)
 
-# RAW = "~/workspace_LPP/data/MEG/LPP/LPP_bids"
+# RAW = "~/workspace_LPP/data/MEG/LPP/BIDS"
 # PROC = "~/workspace_LPP/data/MEG/LPP/final_all"
 
 """
@@ -77,7 +77,7 @@ class PATHS:
 TASK = 'listen'
 # To simplify for the time being
 # To run on the Neurospin workstation
-PATHS.data = Path("/home/is153802/workspace_LPP/data/MEG/LPP/BIDS")
+PATHS.data = Path("/home/is153802/workspace_LPP/data/MEG/LPP/BIDS_final")
 # PATHS.data = Path("/home/is153802/workspace_LPP/data/MEG/LPP/LPP_bids_old")
 
 # for raw data
@@ -99,7 +99,7 @@ def epoch_data(subject, run_id):
     # define path
     # Two cases: running on raw or filtered data
     if str(PATHS.data).__contains__('derivatives'):
-        print("Running the script on FILTERED data")
+        print(f"Running the script on FILTERED data: run {run_id}, subject: {subject}")
         bids_path = mne_bids.BIDSPath(
             subject=subject,
             session='01',
@@ -111,7 +111,7 @@ def epoch_data(subject, run_id):
         )
     # elif str(PATHS.data).__contains__('BIDS'):
     else:
-        print("Running the script on RAW data")
+        print(f"Running the script on RAW data: run {run_id}, subject: {subject}")
         bids_path = mne_bids.BIDSPath(
             subject=subject,
             session='01',
@@ -143,7 +143,7 @@ def epoch_data(subject, run_id):
     meg_delta = np.round(np.diff(word_events[:, 0]/raw.info['sfreq']))
     meta_delta = np.round(np.diff(meta.onset.values))
 
-    print(word_events)
+    print(events)
     print(meta.onset.values)
     i, j = match_list(meg_delta, meta_delta)
     print(f'Len i : {len(i)} for run {run_id}')
@@ -260,8 +260,10 @@ def get_subjects():
     subjects = pd.read_csv(str(PATHS.data) + "/participants.tsv", sep="\t")
     subjects = subjects.participant_id.apply(lambda x: x.split("-")[1]).values
     subjects = np.delete(subjects, subjects.shape[0]-1)
-    print("\nSubjects for which the decoding will be tested: \n")
-    print(subjects)
+    # Let's sort this array before outputting it!
+    int_subjects = np.sort([int(subj) for subj in subjects])
+    subjects = [str(subj) for subj in int_subjects]
+
     return subjects
 
 
@@ -274,11 +276,20 @@ def get_subjects():
 if __name__ == "__main__":
 
     report = mne.Report()
+
     subjects = get_subjects()
 
     RUN = 9
 
-    for subject in subjects[3:]:
+    print("\nSubjects for which the decoding will be tested: \n")
+    print(subjects)
+
+    for subject in subjects:
+
+        # For testing purposes
+        # if subject not in ['220922']:
+        #     continue
+
         print(f'Subject {subject}\'s decoding started')
         epochs = []
         for run_id in range(1, RUN+1):
@@ -291,6 +302,7 @@ if __name__ == "__main__":
         # fixed before doing source reconstruction
         for epo in epochs:
             epo.info['dev_head_t'] = epochs[0].info['dev_head_t']
+            # epo.info['nchan'] = epochs[0].info['nchan']
 
         epochs = mne.concatenate_epochs(epochs)
 

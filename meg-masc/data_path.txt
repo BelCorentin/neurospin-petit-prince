@@ -1,1 +1,1 @@
-/home/co/workspace_LPP/data/MEG/LPP/LPP_bids
+/home/co/workspace_LPP/data/MEG/LPP/BIDS_final
