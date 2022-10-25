@@ -1,4 +1,5 @@
 """
+
 Check decoding scripts from JR King adapted
 to fit the LPP MEG Dataset and annotations
 
