@@ -198,9 +198,9 @@ def decod(X, y):
 # Function to correlate
 def correlate(X, Y):
     if X.ndim == 1:
-        X = X.to_numpy()[:, None]
+        X = X[:, None]
     if Y.ndim == 1:
-        Y = Y.to_numpy()[:, None]
+        Y = Y[:, None]
     X = X - X.mean(0)
     Y = Y - Y.mean(0)
 
@@ -263,7 +263,7 @@ def match_list(A, B, on_replace="delete"):
 def get_subjects():
     subjects = pd.read_csv(str(PATHS.data) + "/participants.tsv", sep="\t")
     subjects = subjects.participant_id.apply(lambda x: x.split("-")[1]).values
-    subjects = np.delete(subjects, subjects.shape[0]-1)
+    # subjects = np.delete(subjects, subjects.shape[0]-1)
     # Let's sort this array before outputting it!
     int_subjects = np.sort([int(subj) for subj in subjects])
     subjects = [str(subj) for subj in int_subjects]
