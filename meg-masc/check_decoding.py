@@ -198,9 +198,9 @@ def decod(X, y):
 # Function to correlate
 def correlate(X, Y):
     if X.ndim == 1:
-        X = X[:, None]
+        X = X.to_numpy()[:, None]
     if Y.ndim == 1:
-        Y = Y[:, None]
+        Y = Y.to_numpy()[:, None]
     X = X - X.mean(0)
     Y = Y - Y.mean(0)
 
