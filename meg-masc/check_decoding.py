@@ -30,6 +30,7 @@ from sklearn.preprocessing import StandardScaler, RobustScaler
 from sklearn.linear_model import RidgeCV
 from wordfreq import zipf_frequency
 from Levenshtein import editops
+from TO_EXCLUDE import to_exclude
 
 # Tools
 import matplotlib.pyplot as plt
@@ -100,7 +101,8 @@ def epoch_data(subject, run_id):
     # define path
     # Two cases: running on raw or filtered data
     if str(PATHS.data).__contains__('derivatives'):
-        print(f"Running the script on FILTERED data: run {run_id}, subject: {subject}")
+        print("Running the script on FILTERED data:")
+        print(f'run {run_id}, subject: {subject}')
         bids_path = mne_bids.BIDSPath(
             subject=subject,
             session='01',
@@ -112,7 +114,8 @@ def epoch_data(subject, run_id):
         )
     # elif str(PATHS.data).__contains__('BIDS'):
     else:
-        print(f"Running the script on RAW data: run {run_id}, subject: {subject}")
+        print("Running the script on RAW data:")
+        print(f'run {run_id}, subject: {subject}')
         bids_path = mne_bids.BIDSPath(
             subject=subject,
             session='01',
@@ -288,8 +291,8 @@ if __name__ == "__main__":
     for subject in subjects:
 
         # For testing purposes
-        # if subject not in ['220922']:
-        #     continue
+        if subject in to_exclude:
+            continue
 
         print(f'Subject {subject}\'s decoding started')
         epochs = []

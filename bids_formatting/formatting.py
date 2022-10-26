@@ -109,6 +109,8 @@ for folder in RAW_DATA_PATH.iterdir():
             # assert file.name.startswith('_r')
             # assert file.name.endswith('_raw')
             file = str(file)
+            print((file))
+            run = re.search(r"r([^']*)_raw.fif", file).group(1)
             try:
                 run = re.search(r"r([^']*)_raw.fif", file).group(1)
             # Two cases: filenames is sub_r{run_number}_raw
@@ -117,8 +119,11 @@ for folder in RAW_DATA_PATH.iterdir():
             # first re and keep the 2nd result
                 if len(run) > 2 and (not run.__contains__('_')):
                     run = re.search(r"run([^']*)_raw.fif", file).group(1)
-                else:
+                elif run.__contains__('_'):
                     run = re.search(r"_r([^']*)_raw.fif", file).group(1)
+                    if len(run) > 2:
+                        run = re.search(r"_run([^']*)_raw.fif", file).group(1)
+
             except Exception:
                 print(f"No run found for file: {file}")
                 continue
