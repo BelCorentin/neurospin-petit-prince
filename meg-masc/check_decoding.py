@@ -140,7 +140,8 @@ def epoch_data(subject, run_id):
     assert (Path(event_file).exists())
     # read events
     meta = pd.read_csv(event_file, sep='\t')
-    events = mne.find_events(raw, stim_channel='STI101', shortest_event=1)
+    events = mne.find_events(raw, stim_channel='STI101',
+                             shortest_event=1, min_duration=0.0010001)
 
     # match events and metadata
     word_events = events[events[:, 2] > 1]
@@ -289,11 +290,6 @@ if __name__ == "__main__":
     print(subjects)
 
     for subject in subjects:
-
-        # For testing purposes
-        if subject in to_exclude:
-            continue
-
         print(f'Subject {subject}\'s decoding started')
         epochs = []
         for run_id in range(1, RUN+1):
