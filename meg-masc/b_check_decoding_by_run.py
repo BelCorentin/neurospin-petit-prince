@@ -180,6 +180,10 @@ def epoch_data(subject, run_id):
 
 
 def decod(X, y):
+
+    # To make sure the algo converges:
+
+    print(f'\n \n \n X nan ?  {sum(np.isnan(X))} \n \n \n ')
     assert len(X) == len(y)
     # define data
     model = make_pipeline(StandardScaler(),
@@ -199,9 +203,9 @@ def decod(X, y):
 # Function to correlate
 def correlate(X, Y):
     if X.ndim == 1:
-        X = X[:, None]
+        X = np.array(X)[:, None]
     if Y.ndim == 1:
-        Y = Y[:, None]
+        Y = np.array(Y)[:, None]
     X = X - X.mean(0)
     Y = Y - Y.mean(0)
 
@@ -309,11 +313,11 @@ if __name__ == "__main__":
             print('.', end='')
             epo = epoch_data(subject, '%.2i' % run_id)
             epo.metadata['label'] = f"run_{run_id}"
-            epochs.append(epo) # For all runs
+            epochs.append(epo)  # For all runs
 
-            all_epochs.append(epo) # For all subjects
+            all_epochs.append(epo)  # For all subjects
 
-            epochs_run.append(epo) # For one run
+            epochs_run.append(epo)  # For one run
 
             for epo in epochs_run:
                 epo.info['dev_head_t'] = epochs_run[0].info['dev_head_t']
@@ -412,4 +416,4 @@ if __name__ == "__main__":
     report.add_evokeds(evo, titles=f"Evoked for all subjects ")
     report.add_figure(fig, title=f"decoding for all subjects")
 
-    
+
