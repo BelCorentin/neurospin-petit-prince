@@ -309,10 +309,11 @@ if __name__ == "__main__":
             print('.', end='')
             epo = epoch_data(subject, '%.2i' % run_id)
             epo.metadata['label'] = f"run_{run_id}"
-            epochs.append(epo)
+            epochs.append(epo) # For all runs
 
-            # Create viz for one run
-            epochs_run.append(epo)
+            all_epochs.append(epo) # For all subjects
+
+            epochs_run.append(epo) # For one run
 
             for epo in epochs_run:
                 epo.info['dev_head_t'] = epochs_run[0].info['dev_head_t']
@@ -342,7 +343,7 @@ if __name__ == "__main__":
             report.add_evokeds(evo, titles=f"Evoked for sub {subject} run {run_id}")
             report.add_figure(fig, title=f"decoding for subject {subject} run {run_id}")
 
-            report.save("decoding_raw.html",
+            report.save("decoding_raw_by_run.html",
                         open_browser=False, overwrite=True)
         # Quick fix for the dev_head: has to be
         # fixed before doing source reconstruction
@@ -378,10 +379,37 @@ if __name__ == "__main__":
         report.add_figure(fig, title=f"decoding for subject {subject}")
         # report.add_figure(dec, subject, tags="word")
         if str(PATHS.data).__contains__('BIDS'):
-            report.save("decoding_raw.html",
+            report.save("decoding_raw_by_run.html",
                         open_browser=False, overwrite=True)
         elif str(PATHS.data).__contains__('derivatives'):
-            report.save("decoding_filtered.html",
+            report.save("decoding_filtered_by_run.html",
                         open_browser=False, overwrite=True)
 
-        print('Finished!')
+        print(f'Finished for subject {subject}!')
+
+    for epo in all_epochs:
+        epo.info['dev_head_t'] = all_epochs[0].info['dev_head_t']
+        # epo.info['nchan'] = all_epochs[0].info['nchan']
+
+    all_epochs = mne.concatenate_epochs(all_epochs)
+
+    # Get the evoked potential averaged on all all_epochs for each channel
+    evo = all_epochs.average(method="median")
+    evo.plot(spatial_colors=True)
+
+    # Handling the data structure
+    all_epochs.metadata['kind'] = all_epochs.metadata.\
+        trial_type.apply(lambda s: eval(s)['kind'])
+    all_epochs.metadata['word'] = all_epochs.metadata.\
+        trial_type.apply(lambda s: eval(s)['word'])
+
+    y = all_epochs.metadata.word.apply(lambda w: zipf_frequency(w, 'fr'))
+    R = decod(X, y)
+
+    fig, ax = plt.subplots(1, figsize=[6, 6])
+    dec = plt.fill_between(all_epochs.times, R)
+    # plt.show()
+    report.add_evokeds(evo, titles=f"Evoked for all subjects ")
+    report.add_figure(fig, title=f"decoding for all subjects")
+
+    
