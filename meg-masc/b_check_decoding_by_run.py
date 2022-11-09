@@ -181,9 +181,6 @@ def epoch_data(subject, run_id):
 
 def decod(X, y):
 
-    # To make sure the algo converges:
-
-    print(f'\n \n \n X nan ?  {sum(np.isnan(X))} \n \n \n ')
     assert len(X) == len(y)
     # define data
     model = make_pipeline(StandardScaler(),
@@ -288,7 +285,7 @@ if __name__ == "__main__":
 
     subjects = get_subjects()
 
-    RUN = 2
+    RUN = 9
 
     print("\nSubjects for which the decoding will be tested: \n")
     print(subjects)
@@ -303,12 +300,13 @@ if __name__ == "__main__":
         if subject in to_exclude:
             continue
 
-        # if subject not in ['4']:
-        #     continue
+        if subject in ['2']:
+            continue
 
         print(f'Subject {subject}\'s decoding started')
         epochs = []
         for run_id in range(1, RUN+1):
+
             epochs_run = []
             print('.', end='')
             epo = epoch_data(subject, '%.2i' % run_id)
@@ -339,7 +337,17 @@ if __name__ == "__main__":
             X = epochs_run.get_data()  # Both mag and grad
             y = epochs_run.metadata.word.apply(lambda w: zipf_frequency(w,
                                                                         'fr'))
-            R = decod(X, y)
+
+            # To make sure the algo converges:
+
+            # print(f'\n \n \n X nan ? for run {run_id} and subject {subject} {sum(sum(np.isnan(X)))} \n \n \n ')
+            # plt.plot(np.mean(X, axis=0))
+            # plt.show()
+            try:
+                R = decod(X, y)
+            except Exception:
+                print(f'Run {run_id} subject {subject} did not converge')
+                continue
 
             fig, ax = plt.subplots(1, figsize=[6, 6])
             dec = plt.fill_between(epochs_run.times, R)
