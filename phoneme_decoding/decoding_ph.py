@@ -137,8 +137,10 @@ subject = "220628"
 # To run on the Neurospin workstation
 PATHS.data = Path("/home/co/workspace_LPP/data/MEG/LPP/LPP_bids")
 
+epochs_final = []
+ph_final = []
 
-for run_id in np.arange(1, 10):
+for run_id in np.arange(1, 2):
 
     bids_path = mne_bids.BIDSPath(
         subject=subject,
@@ -219,17 +221,23 @@ for run_id in np.arange(1, 10):
         .transpose(0, 2, 1)
     )
 
-    epo = epochs.copy()
-    epochs = []
-    epo.metadata["label"] = f"run_{run_id}"
-    epochs.append(epo)
+    epochs.metadata["label"] = f"run_{run_id}"
 
-    for epo in epochs:
-        epo.info["dev_head_t"] = epochs[0].info["dev_head_t"]
+    epochs_final.append(epochs)
+
+    for epo_ in epochs_final:
+        epo_.info["dev_head_t"] = epochs_final[0].info["dev_head_t"]
+
     # epo.info['nchan'] = epochs[0].info['nchan']
 
-epochs = mne.concatenate_epochs(epochs)
+    voiced_ph = np.array(
+        [str(tupl).__contains__("non-voiced") for tupl in phonemes.iterrows()]
+    )
 
+    ph_final.append(voiced_ph)
+
+
+epochs = mne.concatenate_epochs(epochs_final)
 
 # Get the evoked potential averaged on all epochs for each channel
 evo = epochs[0].average(method="median")
@@ -237,8 +245,10 @@ evo.plot(spatial_colors=True)
 
 plt.savefig("./fig_evoked.png")
 
-X = epochs[0].get_data()  # Both mag and grad
-y = np.array([str(tupl).__contains__("non-voiced") for tupl in phonemes.iterrows()])
+X = epochs.get_data()  # Both mag and grad
+
+phonemes = np.array(ph_final)
+y = phonemes
 R = decod(X, y)
 
 fig, ax = plt.subplots(1, figsize=[6, 6])
