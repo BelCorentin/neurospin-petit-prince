@@ -18,6 +18,9 @@ import matplotlib.pyplot as plt
 from pathlib import Path
 import matplotlib
 
+matplotlib.use("Agg")
+mne.set_log_level(False)
+
 
 mne.set_log_level(False)
 
@@ -123,7 +126,7 @@ class PATHS:
             f.write(str(data) + "\n")
     with open(path_file, "r") as f:
         data = Path(f.readlines()[0].strip("\n"))
-        print(f"File opened: {data}")
+        # print(f"File opened: {data}")
         if str(data).__contains__("final"):
             print("Processed data (Maxwell filtered) used")
         if str(data).__contains__("BIDS"):
@@ -140,7 +143,7 @@ PATHS.data = Path("/home/co/workspace_LPP/data/MEG/LPP/LPP_bids")
 epochs_final = []
 ph_final = []
 
-for run_id in np.arange(1, 2):
+for run_id in np.arange(1, 10):
 
     bids_path = mne_bids.BIDSPath(
         subject=subject,
@@ -190,7 +193,7 @@ for run_id in np.arange(1, 2):
     last_c = np.ones(events_ph.shape) * 128
     events_ph = np.stack((events_ph, zeros, last_c), axis=1)
     events_ph = events_ph.astype("int")
-    print(events_ph)
+    # print(events_ph)
 
     epochs = mne.Epochs(
         raw,
@@ -248,7 +251,7 @@ plt.savefig("./fig_evoked.png")
 X = epochs.get_data()  # Both mag and grad
 
 phonemes = np.array(ph_final)
-y = phonemes
+y = phonemes.reshape((6229, 1))
 R = decod(X, y)
 
 fig, ax = plt.subplots(1, figsize=[6, 6])
