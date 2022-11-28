@@ -134,11 +134,19 @@ class PATHS:
     # assert data.exists()
 
 
-TASK = "rest"
-subject = "220628"
+# For Dell ####
+# TASK = "rest"
+# subject = "220628"
 # To simplify for the time being
 # To run on the Neurospin workstation
-PATHS.data = Path("/home/co/workspace_LPP/data/MEG/LPP/LPP_bids")
+# PATHS.data = Path("/home/co/workspace_LPP/data/MEG/LPP/LPP_bids")
+
+# For NS ####
+TASK = "listen"
+subject = "1"
+# To simplify for the time being
+# To run on the Neurospin workstation
+PATHS.data = Path("/home/is153802/data/BIDS_final")
 
 epochs_final = []
 ph_final = []
@@ -166,6 +174,7 @@ for run_id in np.arange(1, 10):
     event_file += f"_ses-{bids_path.session}"
     event_file += f"_task-{bids_path.task}"
     event_file += f"_run-{bids_path.run}_events.tsv"
+    print(event_file)
     assert Path(event_file).exists()
     # read events
     meta = pd.read_csv(event_file, sep="\t")
