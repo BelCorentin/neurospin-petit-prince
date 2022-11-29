@@ -9,7 +9,6 @@ from sklearn.model_selection import KFold, cross_val_predict
 from sklearn.pipeline import make_pipeline
 from sklearn.preprocessing import StandardScaler, RobustScaler
 from sklearn.linear_model import RidgeCV
-from wordfreq import zipf_frequency
 from Levenshtein import editops
 
 
@@ -143,128 +142,141 @@ class PATHS:
 
 # For NS ####
 TASK = "listen"
-subject = "1"
 # To simplify for the time being
 # To run on the Neurospin workstation
 PATHS.data = Path("/home/is153802/data/BIDS_final")
 
-epochs_final = []
-ph_final = []
 
-for run_id in np.arange(1, 10):
+report = mne.Report()
 
-    bids_path = mne_bids.BIDSPath(
-        subject=subject,
-        session="01",
-        task=TASK,
-        datatype="meg",
-        root=PATHS.data,
-        run="0" + str(run_id),
-    )
+for subject in np.arange(1, 20):
+    subject = str(subject)
+    epochs_final = []
+    ph_final = []
 
-    raw = mne_bids.read_raw_bids(bids_path)
-    raw.pick_types(meg=True, stim=True)
-    raw.load_data()
-    raw = raw.filter(0.5, 20)
+    for run_id in np.arange(1, 10):
 
-    event_file = PATHS.data / f"sub-{bids_path.subject}"
-    event_file = event_file / f"ses-{bids_path.session}"
-    event_file = event_file / "meg"
-    event_file = str(event_file / f"sub-{bids_path.subject}")
-    event_file += f"_ses-{bids_path.session}"
-    event_file += f"_task-{bids_path.task}"
-    event_file += f"_run-{bids_path.run}_events.tsv"
-    print(event_file)
-    assert Path(event_file).exists()
-    # read events
-    meta = pd.read_csv(event_file, sep="\t")
-    events = mne.find_events(raw, stim_channel="STI101", shortest_event=1)
+        bids_path = mne_bids.BIDSPath(
+            subject=subject,
+            session="01",
+            task=TASK,
+            datatype="meg",
+            root=PATHS.data,
+            run="0" + str(run_id),
+        )
 
-    phonemes = meta[meta.trial_type.str.contains("phoneme")]
-    words = meta[meta.trial_type.str.contains("word")]
+        raw = mne_bids.read_raw_bids(bids_path)
+        raw.pick_types(meg=True, stim=True)
+        raw.load_data()
+        raw = raw.filter(0.5, 20)
 
-    # match events and metadata
-    word_events = events[events[:, 2] > 1]
-    meg_delta = np.round(np.diff(word_events[:, 0] / raw.info["sfreq"]))
-    meta_delta = np.round(np.diff(meta.onset.values))
+        event_file = PATHS.data / f"sub-{bids_path.subject}"
+        event_file = event_file / f"ses-{bids_path.session}"
+        event_file = event_file / "meg"
+        event_file = str(event_file / f"sub-{bids_path.subject}")
+        event_file += f"_ses-{bids_path.session}"
+        event_file += f"_task-{bids_path.task}"
+        event_file += f"_run-{bids_path.run}_events.tsv"
+        print(event_file)
+        assert Path(event_file).exists()
+        # read events
+        meta = pd.read_csv(event_file, sep="\t")
+        events = mne.find_events(raw, stim_channel="STI101", shortest_event=1)
 
-    i, j = match_list(meg_delta, meta_delta)
+        phonemes = meta[meta.trial_type.str.contains("phoneme")]
+        words = meta[meta.trial_type.str.contains("word")]
 
-    assert len(i) > 500
-    events = word_events[i]
-    # events = events[i]  # events = words_events[i]
-    meta = meta.iloc[j].reset_index()
+        # match events and metadata
+        word_events = events[events[:, 2] > 1]
+        meg_delta = np.round(np.diff(word_events[:, 0] / raw.info["sfreq"]))
+        meta_delta = np.round(np.diff(meta.onset.values))
 
-    x = (events[0][0] / raw.info["sfreq"]) - list(meta.onset)[0]
+        i, j = match_list(meg_delta, meta_delta)
 
-    events_ph = ((phonemes.onset + x) * raw.info["sfreq"]).to_numpy(dtype="int")
-    zeros = np.zeros(events_ph.shape)
-    last_c = np.ones(events_ph.shape) * 128
-    events_ph = np.stack((events_ph, zeros, last_c), axis=1)
-    events_ph = events_ph.astype("int")
-    # print(events_ph)
+        assert len(i) > 500
+        events = word_events[i]
+        # events = events[i]  # events = words_events[i]
+        meta = meta.iloc[j].reset_index()
 
-    epochs = mne.Epochs(
-        raw,
-        events_ph,
-        metadata=phonemes,
-        tmin=-0.1,
-        tmax=0.5,
-        decim=10,
-        baseline=(-0.1, 0.0),
-    )
+        x = (events[0][0] / raw.info["sfreq"]) - list(meta.onset)[0]
 
-    data = epochs.get_data()
-    epochs.load_data()
+        events_ph = ((phonemes.onset + x) * raw.info["sfreq"]).to_numpy(dtype="int")
+        zeros = np.zeros(events_ph.shape)
+        last_c = np.ones(events_ph.shape) * 128
+        events_ph = np.stack((events_ph, zeros, last_c), axis=1)
+        events_ph = events_ph.astype("int")
+        # print(events_ph)
 
-    # Scaling the data
-    n_words, n_chans, n_times = data.shape
-    vec = data.transpose(0, 2, 1).reshape(-1, n_chans)
-    scaler = RobustScaler()
-    idx = np.arange(len(vec))
-    np.random.shuffle(idx)
-    vec = scaler.fit(vec[idx[:20_000]]).transform(vec)
-    # To try: sigmas = 7 or 15
-    sigma = 7
-    vec = np.clip(vec, -sigma, sigma)
-    epochs._data[:, :, :] = (
-        scaler.inverse_transform(vec)
-        .reshape(n_words, n_times, n_chans)
-        .transpose(0, 2, 1)
-    )
+        epochs = mne.Epochs(
+            raw,
+            events_ph,
+            metadata=phonemes,
+            tmin=-0.1,
+            tmax=0.5,
+            decim=10,
+            baseline=(-0.1, 0.0),
+        )
 
-    epochs.metadata["label"] = f"run_{run_id}"
+        data = epochs.get_data()
+        epochs.load_data()
 
-    epochs_final.append(epochs)
+        # Scaling the data
+        n_words, n_chans, n_times = data.shape
+        vec = data.transpose(0, 2, 1).reshape(-1, n_chans)
+        scaler = RobustScaler()
+        idx = np.arange(len(vec))
+        np.random.shuffle(idx)
+        vec = scaler.fit(vec[idx[:20_000]]).transform(vec)
+        # To try: sigmas = 7 or 15
+        sigma = 7
+        vec = np.clip(vec, -sigma, sigma)
+        epochs._data[:, :, :] = (
+            scaler.inverse_transform(vec)
+            .reshape(n_words, n_times, n_chans)
+            .transpose(0, 2, 1)
+        )
 
-    for epo_ in epochs_final:
-        epo_.info["dev_head_t"] = epochs_final[0].info["dev_head_t"]
+        epochs.metadata["label"] = f"run_{run_id}"
 
-    # epo.info['nchan'] = epochs[0].info['nchan']
+        epochs_final.append(epochs)
 
-    voiced_ph = np.array(
-        [str(tupl).__contains__("non-voiced") for tupl in phonemes.iterrows()]
-    )
+        for epo_ in epochs_final:
+            epo_.info["dev_head_t"] = epochs_final[0].info["dev_head_t"]
 
-    ph_final.append(voiced_ph)
+        # epo.info['nchan'] = epochs[0].info['nchan']
 
+        voiced_ph = np.array(
+            [str(tupl).__contains__("non-voiced") for tupl in phonemes.iterrows()]
+        )
 
-epochs = mne.concatenate_epochs(epochs_final)
+        ph_final.append(voiced_ph)
 
-# Get the evoked potential averaged on all epochs for each channel
-evo = epochs[0].average(method="median")
-evo.plot(spatial_colors=True)
+    epochs = mne.concatenate_epochs(epochs_final)
 
-plt.savefig("./fig_evoked.png")
+    # Get the evoked potential averaged on all epochs for each channel
+    evo = epochs[0].average(method="median")
+    evo.plot(spatial_colors=True)
 
-X = epochs.get_data()  # Both mag and grad
+    report.add_evokeds(evo, titles=f"Evoked for sub {subject} ")
 
-phonemes = np.array(ph_final)
-y = phonemes.reshape((6229, 1))
-R = decod(X, y)
+    X = epochs.get_data()  # Both mag and grad
 
-fig, ax = plt.subplots(1, figsize=[6, 6])
-dec = plt.fill_between(epochs[0].times, R)
+    phonemes = np.array(ph_final)
 
+    ph_arr = phonemes[0]
 
-plt.savefig("./fig_decode.png")
+    for i in np.arange(1, 9):
+        ph_arr = np.append(ph_arr, phonemes[i])
+
+    y = ph_arr.reshape((X.shape[0], 1))
+    R = decod(X, y)
+
+    fig, ax = plt.subplots(1, figsize=[6, 6])
+    dec = plt.fill_between(epochs[0].times, R)
+
+    # plt.savefig(f"./fig_decode_sub-{subject}.png")
+
+    report.add_figure(fig, title=f"decoding for subject {subject}")
+    # report.add_figure(dec, subject, tags="word")
+    report.save("decoding_raw.html",
+                open_browser=False, overwrite=True)
