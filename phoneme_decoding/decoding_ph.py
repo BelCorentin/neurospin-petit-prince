@@ -34,7 +34,7 @@ def decod(X, y):
     n, n_chans, n_times = X.shape
     R = np.zeros(n_times)
     for t in range(n_times):
-        print(".", end="")
+        print(".", end=" \n \n")
         y_pred = cross_val_predict(model, X[:, :, t], y, cv=cv)
         R[t] = correlate(y, y_pred)
     return R
@@ -150,6 +150,8 @@ PATHS.data = Path("/home/is153802/data/BIDS_final")
 report = mne.Report()
 
 for subject in np.arange(1, 20):
+    if subject in [9]:
+        continue
     subject = str(subject)
     epochs_final = []
     ph_final = []
@@ -278,5 +280,7 @@ for subject in np.arange(1, 20):
 
     report.add_figure(fig, title=f"decoding for subject {subject}")
     # report.add_figure(dec, subject, tags="word")
-    report.save("decoding_raw.html",
+    report.save("./decoding_raw.html",
                 open_browser=False, overwrite=True)
+
+    print(f'\n ********** \n Finished for subject {subject} \n  ******** \n')
