@@ -9,6 +9,7 @@ from sklearn.pipeline import make_pipeline
 from sklearn.preprocessing import StandardScaler, RobustScaler
 from sklearn.linear_model import RidgeCV
 from Levenshtein import editops
+from transformers import GPT2Model, GPT2Tokenizer
 import torch
 
 # Tools
@@ -17,7 +18,6 @@ import matplotlib
 
 matplotlib.use("Agg")
 mne.set_log_level(False)
-from transformers import GPT2Model, GPT2Tokenizer
 
 # Utils
 def match_list(A, B, on_replace="delete"):
@@ -90,31 +90,35 @@ def correlate(X, Y):
     correlation = np.corrcoef(X, Y)
     return np.mean(correlation)
 
-# ## Initial textual data
-#
+
+# Initial textual data
+# 
 # The textual data that we'll use to compare GPT2 and MEG activations is from Le Petit Prince.
 # Let's build an array with each words.
 file = "~/Downloads/lpp.csv"
 df = pd.read_csv(file)
 list_words = df.iloc[:, 1]
-# Working only for run 1
+
+# Run 1
+run = str(1)
 run_start = 0
 run_limit = 1610
 
 # Run 2
+run = str(2)
 run_start = 1610
 run_limit = 3220
+
 list_words_run1 = list_words[run_start:run_limit]
 
 
 # ## MEG Activations
 
-# In[5]:
+# For the time being, we focus on an arbitrary subject and run
+sub = str(2)
 
-sub = 2
-sub = str(sub)
 # Read raw file
-raw_file = f"/home/is153802/data/BIDS_final/sub-{sub}/ses-01/meg/sub-{sub}_ses-01_task-listen_run-01_meg.fif"
+raw_file = f"/home/is153802/data/BIDS_final/sub-{sub}/ses-01/meg/sub-{sub}_ses-01_task-listen_run-0{run}_meg.fif"
 raw = mne.io.read_raw_fif(raw_file, allow_maxshield=True)
 
 # Load data, filter
@@ -123,7 +127,7 @@ raw.load_data()
 raw = raw.filter(0.5, 20)
 
 # Load events and realign them
-event_file = f"/home/is153802/data/BIDS_final/sub-{sub}/ses-01/meg/sub-{sub}_ses-01_task-listen_run-01_events.tsv"
+event_file = f"/home/is153802/data/BIDS_final/sub-{sub}/ses-01/meg/sub-{sub}_ses-01_task-listen_run-0{run}_events.tsv"
 meta = pd.read_csv(event_file, sep="\t")
 events = mne.find_events(
     raw, stim_channel="STI101", shortest_event=1, min_duration=0.0010001
@@ -158,6 +162,10 @@ vec = np.clip(vec, -sigma, sigma)
 epochs._data[:, :, :] = (
     scaler.inverse_transform(vec).reshape(n_words, n_times, n_chans).transpose(0, 2, 1)
 )
+# MEG data is now ready
+
+# ## For the GPT2 activations:
+
 # Initiate the model and its trained weights
 tokenizer = GPT2Tokenizer.from_pretrained("gpt2")
 model = GPT2Model.from_pretrained("gpt2")
@@ -175,19 +183,19 @@ for word in list_words_run1:
 
 # ## Correlation
 
-y = epochs.get_data()[0:run_limit]
+y = epochs.get_data()[run_start:run_limit]
 
 final_array = []
 final_dict = {}
 for tuple_ in embeddings_array:
-
-    tensor = torch.cat(tuple_)
+    tensor = torch.cat(tuple_) # Simplify the data structure
     tensor = tensor[:, 0, :]
     tensor.reshape(13, 1, 768)
-    tensor = tensor.detach().numpy()
+    tensor = tensor.detach().numpy() # Transform the tensor into a numpy array
     # Get the embeddings for each layer, and append them to a dict
     for layer in np.arange(1, 13):
         final_dict[layer] = tensor[layer, :]
+        # final_dict[layer] = tensor[layer, 1, :]?
     final_array.append(tensor)
 
 #  Decode for each layer:
@@ -202,20 +210,4 @@ for layer in np.arange(1, 13):
     fig, ax = plt.subplots(1, figsize=[6, 6])
     dec = plt.fill_between(epochs.times, R)
     plt.savefig(f"./dec_gpt_sub-{sub}_layer-{layer}.png")
-
-
-
-
-# final_array = np.reshape(final_array, (y.shape[0], -1))
-
-# X = final_array
-
-# R = decod(X, y)
-
-# # Plotting
-
-# fig, ax = plt.subplots(1, figsize=[6, 6])
-# dec = plt.fill_between(epochs.times, R)
-# plt.savefig(f"./dec_gpt_sub-{sub}_.png")
-
 
