@@ -183,7 +183,7 @@ for word in list_words_run1:
 
 # ## Correlation
 
-y = epochs.get_data()[run_start:run_limit]
+y = epochs.get_data()[:run_limit]
 
 final_array = []
 final_dict = {}
