@@ -1,12 +1,12 @@
 from psychopy import visual, core
 import numpy as np
-import textgrids
+import textgrids # pip install praat-textgrids
 
 # Open the text grid file
 grid = textgrids.TextGrid("./annot.TextGrid")
 
 win = visual.Window()
-msg = visual.TextStim(win, text="\u00A1Hola mundo!")
+msg = visual.TextStim(win, text="Starting")
 
 msg.draw()
 win.flip()
