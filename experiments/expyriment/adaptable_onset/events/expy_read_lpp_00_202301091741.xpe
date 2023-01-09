@@ -1,0 +1,64 @@
+#Expyriment 0.10.0 (Python 3.7.6), .xpe-file, coding: UTF-8
+#date: Mon Jan 09 2023 17:41:26
+#sha1: 675b27
+#modules: 
+#display: size=(800, 600), window_mode=True, open_gl=2
+#os: uname_result(system='Linux', node='is153802', release='5.15.0-48-generic', version='#54-Ubuntu SMP Fri Aug 26 13:26:29 UTC 2022', machine='x86_64', processor='x86_64')
+Time,Type,Event,Value,Detail,Detail2
+11801,design,log,
+#design: #exp: RSVP
+#design: block_cnt,block_id,trial_cnt,trial_id
+11801,design,logged,
+11801,Experiment,started
+14844,Stimulus,presented,1
+15214,Stimulus,presented,2
+15324,Stimulus,presented,3
+15724,Stimulus,presented,4
+15974,Stimulus,presented,5
+16194,Stimulus,presented,2
+16334,Stimulus,presented,6
+16654,Stimulus,presented,7
+16944,Stimulus,presented,8
+17294,Stimulus,presented,9
+17934,Stimulus,presented,8
+18395,Stimulus,presented,10
+19004,Stimulus,presented,11
+19654,Stimulus,presented,12
+19974,Stimulus,presented,13
+20174,Stimulus,presented,14
+20444,Stimulus,presented,15
+20644,Stimulus,presented,16
+20744,Stimulus,presented,17
+21124,Stimulus,presented,18
+21604,Stimulus,presented,19
+21784,Stimulus,presented,20
+21914,Stimulus,presented,21
+22604,Stimulus,presented,22
+23144,Stimulus,presented,23
+24434,Stimulus,presented,24
+24744,Stimulus,presented,25
+25334,Stimulus,presented,13
+25464,Stimulus,presented,26
+25954,Stimulus,presented,27
+26564,Stimulus,presented,19
+26744,Stimulus,presented,28
+27204,Stimulus,presented,13
+27344,Stimulus,presented,29
+28521,Stimulus,presented,30
+28926,Stimulus,presented,16
+29054,Stimulus,presented,31
+29444,Stimulus,presented,32
+29594,Stimulus,presented,33
+31264,Stimulus,presented,34
+31324,Stimulus,presented,35
+31734,Stimulus,presented,12
+31904,Stimulus,presented,36
+32054,Stimulus,presented,14
+32779,Stimulus,presented,37
+32964,Stimulus,presented,38
+33308,stderr,received,'Traceback (most recent call last):'
+33308,stderr,received,'  File "expy_read_lpp.py", line 183, in <module>'
+33308,stderr,received,'    a.wait(1)'
+33308,stderr,received,'  File "/home/is153802/.pyenv/versions/expyriment/lib/python3.7/site-packages/expyriment/misc/_clock.py", line 160, in wait'
+33308,stderr,received,'    while (self.time < start + waiting_time):'
+33308,stderr,received,'KeyboardInterrupt'

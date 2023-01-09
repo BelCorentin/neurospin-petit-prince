@@ -1,0 +1,2141 @@
+#Expyriment 0.10.0 (Python 3.7.6), .xpe-file, coding: UTF-8
+#date: Mon Jan 09 2023 18:17:51
+#sha1: 2ad48e
+#modules: 
+#display: size=(800, 600), window_mode=True, open_gl=2
+#os: uname_result(system='Linux', node='is153802', release='5.15.0-48-generic', version='#54-Ubuntu SMP Fri Aug 26 13:26:29 UTC 2022', machine='x86_64', processor='x86_64')
+Time,Type,Event,Value,Detail,Detail2
+3962,stdout,received,"Whats sent is timing : 3050.0, offset: (0, 'lorsque')   "
+3963,stdout,received,''
+3963,stdout,received,"Added 190.0000000000001 to the offset for the word j'"
+3963,stdout,received,'Whats sent is timing : 3420.0, offset: (0, "j\'")   '
+3963,stdout,received,''
+3963,stdout,received,"Whats sent is timing : 3530.0, offset: (190.0000000000001, 'avais')   "
+3963,stdout,received,''
+3963,stdout,received,"Whats sent is timing : 3930.0, offset: (190.0000000000001, 'six')   "
+3963,stdout,received,''
+3963,stdout,received,'Added 79.99999999999935 to the offset for the word ans'
+3964,stdout,received,"Whats sent is timing : 4180.0, offset: (190.0000000000001, 'ans')   "
+3964,stdout,received,''
+3964,stdout,received,'Whats sent is timing : 4400.0, offset: (269.99999999999943, "j\'")   '
+3964,stdout,received,''
+3964,stdout,received,"Whats sent is timing : 4540.0, offset: (269.99999999999943, 'ai')   "
+3964,stdout,received,''
+3964,stdout,received,"Whats sent is timing : 4859.433340089316, offset: (269.99999999999943, 'vu')   "
+3964,stdout,received,''
+3965,stdout,received,"Whats sent is timing : 5149.861864023844, offset: (269.99999999999943, 'une')   "
+3965,stdout,received,''
+3965,stdout,received,"Whats sent is timing : 5500.0, offset: (269.99999999999943, 'fois')   "
+3965,stdout,received,''
+3965,stdout,received,"Whats sent is timing : 6140.0, offset: (269.99999999999943, 'une')   "
+3965,stdout,received,''
+3965,stdout,received,"Whats sent is timing : 6600.0, offset: (269.99999999999943, 'magnifique')   "
+3965,stdout,received,''
+3965,stdout,received,"Whats sent is timing : 7210.0, offset: (269.99999999999943, 'image')   "
+3965,stdout,received,''
+3966,stdout,received,"Whats sent is timing : 7860.0, offset: (269.99999999999943, 'dans')   "
+3966,stdout,received,''
+3966,stdout,received,"Whats sent is timing : 8180.0, offset: (269.99999999999943, 'un')   "
+3966,stdout,received,''
+3966,stdout,received,"Whats sent is timing : 8380.0, offset: (269.99999999999943, 'livre')   "
+3966,stdout,received,''
+3967,stdout,received,'Added 1.0547118733938987e-12 to the offset for the word sur'
+3967,stdout,received,"Whats sent is timing : 8650.0, offset: (269.99999999999943, 'sur')   "
+3967,stdout,received,''
+3967,stdout,received,"Whats sent is timing : 8850.0, offset: (270.0000000000005, 'la')   "
+3967,stdout,received,''
+3967,stdout,received,"Whats sent is timing : 8950.0, offset: (270.0000000000005, 'forêt')   "
+3967,stdout,received,''
+3967,stdout,received,"Whats sent is timing : 9330.0, offset: (270.0000000000005, 'vierge')   "
+3967,stdout,received,''
+3967,stdout,received,"Whats sent is timing : 9810.0, offset: (270.0000000000005, 'qui')   "
+3967,stdout,received,''
+3968,stdout,received,'Whats sent is timing : 9990.0, offset: (270.0000000000005, "s\'")   '
+3968,stdout,received,''
+3968,stdout,received,"Whats sent is timing : 10120.0, offset: (270.0000000000005, 'appelait')   "
+3968,stdout,received,''
+3968,stdout,received,"Whats sent is timing : 10810.0, offset: (270.0000000000005, 'histoires')   "
+3968,stdout,received,''
+3968,stdout,received,"Whats sent is timing : 11350.0, offset: (270.0000000000005, 'vécues')   "
+3968,stdout,received,''
+3968,stdout,received,"Whats sent is timing : 12640.0, offset: (270.0000000000005, 'ça')   "
+3969,stdout,received,''
+3969,stdout,received,"Whats sent is timing : 12950.0, offset: (270.0000000000005, 'représentait')   "
+3969,stdout,received,''
+3969,stdout,received,"Whats sent is timing : 13540.0, offset: (270.0000000000005, 'un')   "
+3969,stdout,received,''
+3969,stdout,received,"Whats sent is timing : 13670.0, offset: (270.0000000000005, 'serpent')   "
+3969,stdout,received,''
+3969,stdout,received,"Whats sent is timing : 14160.0, offset: (270.0000000000005, 'boa')   "
+3969,stdout,received,''
+3969,stdout,received,"Whats sent is timing : 14770.0, offset: (270.0000000000005, 'qui')   "
+3969,stdout,received,''
+3969,stdout,received,"Whats sent is timing : 14950.0, offset: (270.0000000000005, 'avalait')   "
+3969,stdout,received,''
+3969,stdout,received,"Whats sent is timing : 15410.0, offset: (270.0000000000005, 'un')   "
+3970,stdout,received,''
+3970,stdout,received,"Whats sent is timing : 15550.0, offset: (270.0000000000005, 'fauve')   "
+3970,stdout,received,''
+3970,stdout,received,"Whats sent is timing : 16720.0, offset: (270.0000000000005, 'voilà')   "
+3970,stdout,received,''
+3970,stdout,received,"Whats sent is timing : 17130.0, offset: (270.0000000000005, 'la')   "
+3970,stdout,received,''
+3970,stdout,received,"Whats sent is timing : 17260.0, offset: (270.0000000000005, 'copie')   "
+3970,stdout,received,''
+3970,stdout,received,"Whats sent is timing : 17650.0, offset: (270.0000000000005, 'du')   "
+3971,stdout,received,''
+3971,stdout,received,"Whats sent is timing : 17800.0, offset: (270.0000000000005, 'dessin')   "
+3971,stdout,received,''
+3971,stdout,received,"Whats sent is timing : 19470.0, offset: (270.0000000000005, 'on')   "
+3971,stdout,received,''
+3971,stdout,received,"Whats sent is timing : 19530.0, offset: (270.0000000000005, 'disait')   "
+3971,stdout,received,''
+3971,stdout,received,"Whats sent is timing : 19940.0, offset: (270.0000000000005, 'dans')   "
+3971,stdout,received,''
+3971,stdout,received,"Whats sent is timing : 20110.0, offset: (270.0000000000005, 'le')   "
+3971,stdout,received,''
+3971,stdout,received,"Whats sent is timing : 20260.0, offset: (270.0000000000005, 'livre')   "
+3971,stdout,received,''
+3972,stdout,received,"Whats sent is timing : 20980.0, offset: (270.0000000000005, 'les')   "
+3972,stdout,received,''
+3972,stdout,received,"Whats sent is timing : 21170.0, offset: (270.0000000000005, 'serpents')   "
+3972,stdout,received,''
+3972,stdout,received,"Whats sent is timing : 21650.0, offset: (270.0000000000005, 'boas')   "
+3972,stdout,received,''
+3972,stdout,received,"Whats sent is timing : 22140.0, offset: (270.0000000000005, 'avalent')   "
+3972,stdout,received,''
+3972,stdout,received,"Whats sent is timing : 22690.0, offset: (270.0000000000005, 'leur')   "
+3972,stdout,received,''
+3973,stdout,received,"Whats sent is timing : 22880.0, offset: (270.0000000000005, 'proie')   "
+3973,stdout,received,''
+3973,stdout,received,"Whats sent is timing : 23400.0, offset: (270.0000000000005, 'tout')   "
+3973,stdout,received,''
+3973,stdout,received,"Whats sent is timing : 23650.0, offset: (270.0000000000005, 'entière')   "
+3973,stdout,received,''
+3973,stdout,received,"Whats sent is timing : 24310.0, offset: (270.0000000000005, 'sans')   "
+3973,stdout,received,''
+3973,stdout,received,"Whats sent is timing : 24660.0, offset: (270.0000000000005, 'la')   "
+3973,stdout,received,''
+3973,stdout,received,"Whats sent is timing : 24790.0, offset: (270.0000000000005, 'mâcher')   "
+3973,stdout,received,''
+3974,stdout,received,"Whats sent is timing : 25810.0, offset: (270.0000000000005, 'ensuite')   "
+3974,stdout,received,''
+3974,stdout,received,'Added 59.999999999997996 to the offset for the word ils'
+3974,stdout,received,"Whats sent is timing : 26330.0, offset: (270.0000000000005, 'ils')   "
+3974,stdout,received,''
+3974,stdout,received,"Whats sent is timing : 26430.0, offset: (329.9999999999985, 'ne')   "
+3974,stdout,received,''
+3974,stdout,received,"Whats sent is timing : 26570.0, offset: (329.9999999999985, 'peuvent')   "
+3974,stdout,received,''
+3975,stdout,received,"Whats sent is timing : 26800.0, offset: (329.9999999999985, 'plus')   "
+3975,stdout,received,''
+3975,stdout,received,"Whats sent is timing : 27060.0, offset: (329.9999999999985, 'bouger')   "
+3975,stdout,received,''
+3975,stdout,received,"Whats sent is timing : 27704.903162173436, offset: (329.9999999999985, 'et')   "
+3975,stdout,received,''
+3975,stdout,received,"Whats sent is timing : 27876.058176201106, offset: (329.9999999999985, 'ils')   "
+3975,stdout,received,''
+3975,stdout,received,"Whats sent is timing : 28020.0, offset: (329.9999999999985, 'dorment')   "
+3975,stdout,received,''
+3975,stdout,received,"Whats sent is timing : 28440.0, offset: (329.9999999999985, 'pendant')   "
+3975,stdout,received,''
+3975,stdout,received,"Whats sent is timing : 28770.0, offset: (329.9999999999985, 'les')   "
+3975,stdout,received,''
+3976,stdout,received,"Whats sent is timing : 28910.0, offset: (329.9999999999985, 'six')   "
+3976,stdout,received,''
+3976,stdout,received,"Whats sent is timing : 29230.0, offset: (329.9999999999985, 'mois')   "
+3976,stdout,received,''
+3976,stdout,received,'Added 30.000000000000416 to the offset for the word de'
+3976,stdout,received,"Whats sent is timing : 29510.0, offset: (329.9999999999985, 'de')   "
+3976,stdout,received,''
+3976,stdout,received,"Whats sent is timing : 29610.0, offset: (359.9999999999989, 'leur')   "
+3976,stdout,received,''
+3976,stdout,received,"Whats sent is timing : 29780.0, offset: (359.9999999999989, 'digestion')   "
+3976,stdout,received,''
+3976,stdout,received,"Added 52.776090848918486 to the offset for the word j'"
+3976,stdout,received,'Whats sent is timing : 32195.161337171732, offset: (359.9999999999989, "j\'")   '
+3976,stdout,received,''
+3976,stdout,received,"Whats sent is timing : 32340.960052824932, offset: (412.7760908489174, 'ai')   "
+3976,stdout,received,''
+3976,stdout,received,"Whats sent is timing : 32442.385246322814, offset: (412.7760908489174, 'alors')   "
+3977,stdout,received,''
+3977,stdout,received,"Whats sent is timing : 32800.0, offset: (412.7760908489174, 'beaucoup')   "
+3977,stdout,received,''
+3977,stdout,received,"Whats sent is timing : 33410.0, offset: (412.7760908489174, 'réfléchi')   "
+3977,stdout,received,''
+3977,stdout,received,"Whats sent is timing : 34080.0, offset: (412.7760908489174, 'sur')   "
+3977,stdout,received,''
+3977,stdout,received,"Whats sent is timing : 34250.0, offset: (412.7760908489174, 'les')   "
+3977,stdout,received,''
+3977,stdout,received,"Whats sent is timing : 34470.0, offset: (412.7760908489174, 'aventures')   "
+3977,stdout,received,''
+3977,stdout,received,'Added 40.000000000001975 to the offset for the word de'
+3977,stdout,received,"Whats sent is timing : 34970.0, offset: (412.7760908489174, 'de')   "
+3977,stdout,received,''
+3977,stdout,received,"Whats sent is timing : 35090.0, offset: (452.7760908489194, 'la')   "
+3977,stdout,received,''
+3978,stdout,received,"Whats sent is timing : 35230.0, offset: (452.7760908489194, 'jungle')   "
+3978,stdout,received,''
+3978,stdout,received,"Whats sent is timing : 36230.0, offset: (452.7760908489194, 'et')   "
+3978,stdout,received,''
+3978,stdout,received,"Whats sent is timing : 36600.0, offset: (452.7760908489194, 'à')   "
+3978,stdout,received,''
+3978,stdout,received,"Whats sent is timing : 36730.0, offset: (452.7760908489194, 'mon')   "
+3978,stdout,received,''
+3978,stdout,received,"Whats sent is timing : 36930.0, offset: (452.7760908489194, 'tour')   "
+3978,stdout,received,''
+3978,stdout,received,"Added 39.99999999999487 to the offset for the word j'"
+3978,stdout,received,'Whats sent is timing : 37480.0, offset: (452.7760908489194, "j\'")   '
+3978,stdout,received,''
+3978,stdout,received,"Whats sent is timing : 37620.0, offset: (492.7760908489143, 'ai')   "
+3978,stdout,received,''
+3979,stdout,received,"Whats sent is timing : 37740.0, offset: (492.7760908489143, 'réussi')   "
+3979,stdout,received,''
+3979,stdout,received,"Whats sent is timing : 38520.0, offset: (492.7760908489143, 'avec')   "
+3979,stdout,received,''
+3979,stdout,received,"Whats sent is timing : 38840.0, offset: (492.7760908489143, 'un')   "
+3979,stdout,received,''
+3979,stdout,received,"Whats sent is timing : 38940.0, offset: (492.7760908489143, 'crayon')   "
+3979,stdout,received,''
+3979,stdout,received,"Whats sent is timing : 39310.0, offset: (492.7760908489143, 'de')   "
+3979,stdout,received,''
+3979,stdout,received,"Whats sent is timing : 39440.0, offset: (492.7760908489143, 'couleur')   "
+3979,stdout,received,''
+3979,stdout,received,"Whats sent is timing : 40470.0, offset: (492.7760908489143, 'à')   "
+3979,stdout,received,''
+3979,stdout,received,"Whats sent is timing : 40600.0, offset: (492.7760908489143, 'tracer')   "
+3980,stdout,received,''
+3980,stdout,received,'Added 70.00000000000311 to the offset for the word mon'
+3980,stdout,received,"Whats sent is timing : 41130.0, offset: (492.7760908489143, 'mon')   "
+3980,stdout,received,''
+3980,stdout,received,"Whats sent is timing : 41360.0, offset: (562.7760908489174, 'premier')   "
+3980,stdout,received,''
+3980,stdout,received,"Whats sent is timing : 41850.0, offset: (562.7760908489174, 'dessin')   "
+3980,stdout,received,''
+3980,stdout,received,"Whats sent is timing : 42790.0, offset: (562.7760908489174, 'mon')   "
+3980,stdout,received,''
+3980,stdout,received,"Whats sent is timing : 43010.0, offset: (562.7760908489174, 'dessin')   "
+3980,stdout,received,''
+3980,stdout,received,"Whats sent is timing : 43430.0, offset: (562.7760908489174, 'numéro')   "
+3980,stdout,received,''
+3980,stdout,received,"Whats sent is timing : 44020.0, offset: (562.7760908489174, '1')   "
+3980,stdout,received,''
+3980,stdout,received,"Whats sent is timing : 44920.0, offset: (562.7760908489174, 'il')   "
+3980,stdout,received,''
+3981,stdout,received,"Whats sent is timing : 45080.0, offset: (562.7760908489174, 'était')   "
+3981,stdout,received,''
+3981,stdout,received,"Whats sent is timing : 45400.0, offset: (562.7760908489174, 'comme')   "
+3981,stdout,received,''
+3981,stdout,received,"Whats sent is timing : 45690.0, offset: (562.7760908489174, 'ça')   "
+3981,stdout,received,''
+3981,stdout,received,"Added 60.0000000000051 to the offset for the word j'"
+3981,stdout,received,'Whats sent is timing : 47490.0, offset: (562.7760908489174, "j\'")   '
+3981,stdout,received,''
+3981,stdout,received,"Whats sent is timing : 47580.0, offset: (622.7760908489225, 'ai')   "
+3981,stdout,received,''
+3981,stdout,received,"Whats sent is timing : 47730.0, offset: (622.7760908489225, 'montré')   "
+3981,stdout,received,''
+3981,stdout,received,"Whats sent is timing : 48100.0, offset: (622.7760908489225, 'mon')   "
+3981,stdout,received,''
+3981,stdout,received,"Whats sent is timing : 48210.0, offset: (622.7760908489225, 'chef')   "
+3981,stdout,received,''
+3982,stdout,received,'Whats sent is timing : 48510.0, offset: (622.7760908489225, "-d\'")   '
+3982,stdout,received,''
+3982,stdout,received,"Whats sent is timing : 48590.0, offset: (622.7760908489225, 'oeuvre')   "
+3982,stdout,received,''
+3982,stdout,received,"Whats sent is timing : 48910.0, offset: (622.7760908489225, 'aux')   "
+3982,stdout,received,''
+3982,stdout,received,"Whats sent is timing : 49030.0, offset: (622.7760908489225, 'grandes')   "
+3982,stdout,received,''
+3983,stdout,received,"Whats sent is timing : 49370.0, offset: (622.7760908489225, 'personnes')   "
+3983,stdout,received,''
+3983,stdout,received,'Added 129.9999999999983 to the offset for the word et'
+3983,stdout,received,"Whats sent is timing : 50330.0, offset: (622.7760908489225, 'et')   "
+3983,stdout,received,''
+3983,stdout,received,"Whats sent is timing : 50350.0, offset: (752.7760908489208, 'je')   "
+3983,stdout,received,''
+3983,stdout,received,"Whats sent is timing : 50500.0, offset: (752.7760908489208, 'leur')   "
+3983,stdout,received,''
+3983,stdout,received,"Whats sent is timing : 50760.0, offset: (752.7760908489208, 'ai')   "
+3983,stdout,received,''
+3983,stdout,received,"Whats sent is timing : 50830.0, offset: (752.7760908489208, 'demandé')   "
+3983,stdout,received,''
+3983,stdout,received,"Whats sent is timing : 51260.0, offset: (752.7760908489208, 'si')   "
+3983,stdout,received,''
+3983,stdout,received,"Whats sent is timing : 51430.0, offset: (752.7760908489208, 'mon')   "
+3983,stdout,received,''
+3983,stdout,received,"Whats sent is timing : 51570.0, offset: (752.7760908489208, 'dessin')   "
+3983,stdout,received,''
+3983,stdout,received,"Whats sent is timing : 51960.0, offset: (752.7760908489208, 'leur')   "
+3983,stdout,received,''
+3984,stdout,received,"Whats sent is timing : 52120.0, offset: (752.7760908489208, 'faisait')   "
+3984,stdout,received,''
+3984,stdout,received,"Whats sent is timing : 52480.0, offset: (752.7760908489208, 'peur')   "
+3984,stdout,received,''
+3984,stdout,received,'Added 59.999999999997996 to the offset for the word elles'
+3984,stdout,received,"Whats sent is timing : 54320.0, offset: (752.7760908489208, 'elles')   "
+3984,stdout,received,''
+3984,stdout,received,"Added 139.9999999999963 to the offset for the word m'"
+3984,stdout,received,'Whats sent is timing : 54510.0, offset: (812.7760908489188, "m\'")   '
+3984,stdout,received,''
+3984,stdout,received,"Whats sent is timing : 54670.0, offset: (952.7760908489151, 'ont')   "
+3984,stdout,received,''
+3985,stdout,received,"Whats sent is timing : 54690.0, offset: (952.7760908489151, 'répondu')   "
+3985,stdout,received,''
+3985,stdout,received,"Whats sent is timing : 55810.0, offset: (952.7760908489151, 'pourquoi')   "
+3985,stdout,received,''
+3985,stdout,received,"Whats sent is timing : 56300.0, offset: (952.7760908489151, 'un')   "
+3985,stdout,received,''
+3985,stdout,received,"Whats sent is timing : 56430.0, offset: (952.7760908489151, 'chapeau')   "
+3985,stdout,received,''
+3985,stdout,received,"Whats sent is timing : 56820.0, offset: (952.7760908489151, 'ferait')   "
+3985,stdout,received,''
+3985,stdout,received,"Whats sent is timing : 57200.0, offset: (952.7760908489151, '-il')   "
+3985,stdout,received,''
+3985,stdout,received,"Whats sent is timing : 57340.0, offset: (952.7760908489151, 'peur')   "
+3985,stdout,received,''
+3985,stdout,received,"Whats sent is timing : 58820.0, offset: (952.7760908489151, 'mon')   "
+3985,stdout,received,''
+3985,stdout,received,"Whats sent is timing : 58970.0, offset: (952.7760908489151, 'dessin')   "
+3985,stdout,received,''
+3986,stdout,received,"Whats sent is timing : 59350.0, offset: (952.7760908489151, 'ne')   "
+3986,stdout,received,''
+3986,stdout,received,"Whats sent is timing : 59460.0, offset: (952.7760908489151, 'représentait')   "
+3986,stdout,received,''
+3986,stdout,received,"Whats sent is timing : 60080.0, offset: (952.7760908489151, 'pas')   "
+3986,stdout,received,''
+3986,stdout,received,"Whats sent is timing : 60320.0, offset: (952.7760908489151, 'un')   "
+3986,stdout,received,''
+3986,stdout,received,"Whats sent is timing : 60410.0, offset: (952.7760908489151, 'chapeau')   "
+3986,stdout,received,''
+3986,stdout,received,"Whats sent is timing : 61360.0, offset: (952.7760908489151, 'il')   "
+3986,stdout,received,''
+3986,stdout,received,"Whats sent is timing : 61500.0, offset: (952.7760908489151, 'représentait')   "
+3986,stdout,received,''
+3986,stdout,received,"Whats sent is timing : 62180.0, offset: (952.7760908489151, 'un')   "
+3986,stdout,received,''
+3986,stdout,received,"Whats sent is timing : 62270.0, offset: (952.7760908489151, 'serpent')   "
+3986,stdout,received,''
+3986,stdout,received,"Whats sent is timing : 62690.0, offset: (952.7760908489151, 'boa')   "
+3986,stdout,received,''
+3986,stdout,received,"Whats sent is timing : 63090.0, offset: (952.7760908489151, 'qui')   "
+3986,stdout,received,''
+3986,stdout,received,"Whats sent is timing : 63300.0, offset: (952.7760908489151, 'digérait')   "
+3986,stdout,received,''
+3986,stdout,received,"Whats sent is timing : 63940.0, offset: (952.7760908489151, 'un')   "
+3986,stdout,received,''
+3987,stdout,received,"Whats sent is timing : 64099.99999999999, offset: (952.7760908489151, 'éléphant')   "
+3987,stdout,received,''
+3987,stdout,received,"Added 2.831068712794149e-12 to the offset for the word j'"
+3987,stdout,received,'Whats sent is timing : 65530.0, offset: (952.7760908489151, "j\'")   '
+3987,stdout,received,''
+3987,stdout,received,"Whats sent is timing : 65660.0, offset: (952.776090848918, 'ai')   "
+3987,stdout,received,''
+3987,stdout,received,"Whats sent is timing : 65830.0, offset: (952.776090848918, 'alors')   "
+3987,stdout,received,''
+3987,stdout,received,"Whats sent is timing : 66170.0, offset: (952.776090848918, 'dessiné')   "
+3987,stdout,received,''
+3987,stdout,received,'Whats sent is timing : 66690.0, offset: (952.776090848918, "l\'")   '
+3987,stdout,received,''
+3987,stdout,received,"Whats sent is timing : 66750.0, offset: (952.776090848918, 'intérieur')   "
+3987,stdout,received,''
+3987,stdout,received,"Whats sent is timing : 67290.0, offset: (952.776090848918, 'du')   "
+3987,stdout,received,''
+3987,stdout,received,"Whats sent is timing : 67400.0, offset: (952.776090848918, 'serpent')   "
+3987,stdout,received,''
+3987,stdout,received,"Whats sent is timing : 67800.0, offset: (952.776090848918, 'boa')   "
+3987,stdout,received,''
+3988,stdout,received,"Whats sent is timing : 68470.0, offset: (952.776090848918, 'afin')   "
+3988,stdout,received,''
+3988,stdout,received,'Added 69.999999999996 to the offset for the word que'
+3988,stdout,received,"Whats sent is timing : 68780.0, offset: (952.776090848918, 'que')   "
+3988,stdout,received,''
+3988,stdout,received,"Whats sent is timing : 68890.0, offset: (1022.776090848914, 'les')   "
+3988,stdout,received,''
+3988,stdout,received,"Whats sent is timing : 69010.0, offset: (1022.776090848914, 'grandes')   "
+3988,stdout,received,''
+3988,stdout,received,"Whats sent is timing : 69260.0, offset: (1022.776090848914, 'personnes')   "
+3988,stdout,received,''
+3988,stdout,received,"Whats sent is timing : 69660.0, offset: (1022.776090848914, 'puissent')   "
+3988,stdout,received,''
+3988,stdout,received,"Whats sent is timing : 69880.0, offset: (1022.776090848914, 'comprendre')   "
+3988,stdout,received,''
+3988,stdout,received,"Whats sent is timing : 71140.0, offset: (1022.776090848914, 'elles')   "
+3988,stdout,received,''
+3988,stdout,received,"Whats sent is timing : 71490.0, offset: (1022.776090848914, 'ont')   "
+3988,stdout,received,''
+3989,stdout,received,"Whats sent is timing : 71830.0, offset: (1022.776090848914, 'toujours')   "
+3989,stdout,received,''
+3989,stdout,received,"Whats sent is timing : 72490.0, offset: (1022.776090848914, 'besoin')   "
+3989,stdout,received,''
+3989,stdout,received,'Whats sent is timing : 72850.0, offset: (1022.776090848914, "d\'")   '
+3989,stdout,received,''
+3989,stdout,received,"Whats sent is timing : 72910.0, offset: (1022.776090848914, 'explications')   "
+3989,stdout,received,''
+3989,stdout,received,"Whats sent is timing : 74430.0, offset: (1022.776090848914, 'mon')   "
+3989,stdout,received,''
+3989,stdout,received,"Whats sent is timing : 74650.0, offset: (1022.776090848914, 'dessin')   "
+3989,stdout,received,''
+3989,stdout,received,"Whats sent is timing : 75040.0, offset: (1022.776090848914, 'numéro')   "
+3989,stdout,received,''
+3990,stdout,received,"Whats sent is timing : 75520.0, offset: (1022.776090848914, '2')   "
+3990,stdout,received,''
+3990,stdout,received,"Whats sent is timing : 75970.0, offset: (1022.776090848914, 'était')   "
+3990,stdout,received,''
+3990,stdout,received,"Whats sent is timing : 76230.0, offset: (1022.776090848914, 'comme')   "
+3990,stdout,received,''
+3990,stdout,received,"Whats sent is timing : 76470.0, offset: (1022.776090848914, 'ça')   "
+3990,stdout,received,''
+3990,stdout,received,"Whats sent is timing : 78110.0, offset: (1022.776090848914, 'les')   "
+3990,stdout,received,''
+3990,stdout,received,"Whats sent is timing : 78300.0, offset: (1022.776090848914, 'grandes')   "
+3990,stdout,received,''
+3990,stdout,received,"Whats sent is timing : 78600.0, offset: (1022.776090848914, 'personnes')   "
+3990,stdout,received,''
+3990,stdout,received,"Added 169.99999999999034 to the offset for the word m'"
+3990,stdout,received,'Whats sent is timing : 79100.0, offset: (1022.776090848914, "m\'")   '
+3990,stdout,received,''
+3990,stdout,received,"Whats sent is timing : 79130.0, offset: (1192.7760908489045, 'ont')   "
+3990,stdout,received,''
+3990,stdout,received,"Whats sent is timing : 79230.0, offset: (1192.7760908489045, 'conseillé')   "
+3990,stdout,received,''
+3990,stdout,received,"Whats sent is timing : 79850.0, offset: (1192.7760908489045, 'de')   "
+3990,stdout,received,''
+3990,stdout,received,"Whats sent is timing : 80040.0, offset: (1192.7760908489045, 'laisser')   "
+3990,stdout,received,''
+3990,stdout,received,"Whats sent is timing : 80430.0, offset: (1192.7760908489045, 'de')   "
+3990,stdout,received,''
+3991,stdout,received,"Whats sent is timing : 80560.0, offset: (1192.7760908489045, 'côté')   "
+3991,stdout,received,''
+3991,stdout,received,"Whats sent is timing : 81080.0, offset: (1192.7760908489045, 'les')   "
+3991,stdout,received,''
+3991,stdout,received,"Whats sent is timing : 81270.0, offset: (1192.7760908489045, 'dessins')   "
+3991,stdout,received,''
+3991,stdout,received,"Whats sent is timing : 81690.0, offset: (1192.7760908489045, 'de')   "
+3991,stdout,received,''
+3991,stdout,received,"Whats sent is timing : 81800.0, offset: (1192.7760908489045, 'serpents')   "
+3991,stdout,received,''
+3991,stdout,received,"Whats sent is timing : 82270.0, offset: (1192.7760908489045, 'boas')   "
+3991,stdout,received,''
+3991,stdout,received,"Whats sent is timing : 82800.0, offset: (1192.7760908489045, 'ouverts')   "
+3991,stdout,received,''
+3991,stdout,received,'Added 220.0000000000017 to the offset for the word ou'
+3991,stdout,received,"Whats sent is timing : 83430.0, offset: (1192.7760908489045, 'ou')   "
+3991,stdout,received,''
+3991,stdout,received,"Whats sent is timing : 83510.0, offset: (1412.7760908489063, 'fermés')   "
+3991,stdout,received,''
+3991,stdout,received,'Added 139.9999999999892 to the offset for the word et'
+3992,stdout,received,"Whats sent is timing : 84320.0, offset: (1412.7760908489063, 'et')   "
+3992,stdout,received,''
+3992,stdout,received,'Added 129.9999999999983 to the offset for the word de'
+3992,stdout,received,"Whats sent is timing : 84380.0, offset: (1552.7760908488954, 'de')   "
+3992,stdout,received,''
+3992,stdout,received,'Whats sent is timing : 84480.0, offset: (1682.7760908488935, "m\'")   '
+3992,stdout,received,''
+3992,stdout,received,"Whats sent is timing : 84550.0, offset: (1682.7760908488935, 'intéresser')   "
+3992,stdout,received,''
+3992,stdout,received,"Whats sent is timing : 85130.0, offset: (1682.7760908488935, 'plutôt')   "
+3992,stdout,received,''
+3992,stdout,received,'Added 80.00000000000112 to the offset for the word à'
+3992,stdout,received,"Whats sent is timing : 85540.0, offset: (1682.7760908488935, 'à')   "
+3992,stdout,received,''
+3992,stdout,received,"Whats sent is timing : 85630.0, offset: (1762.7760908488947, 'la')   "
+3992,stdout,received,''
+3992,stdout,received,"Whats sent is timing : 85760.0, offset: (1762.7760908488947, 'géographie')   "
+3992,stdout,received,''
+3992,stdout,received,'Added 170.00000000000455 to the offset for the word à'
+3992,stdout,received,"Whats sent is timing : 86790.0, offset: (1762.7760908488947, 'à')   "
+3992,stdout,received,''
+3992,stdout,received,'Whats sent is timing : 86870.0, offset: (1932.7760908488992, "l\'")   '
+3992,stdout,received,''
+3993,stdout,received,"Whats sent is timing : 86920.0, offset: (1932.7760908488992, 'histoire')   "
+3993,stdout,received,''
+3993,stdout,received,"Whats sent is timing : 87610.0, offset: (1932.7760908488992, 'au')   "
+3993,stdout,received,''
+3993,stdout,received,"Whats sent is timing : 87710.0, offset: (1932.7760908488992, 'calcul')   "
+3993,stdout,received,''
+3993,stdout,received,'Added 129.9999999999983 to the offset for the word et'
+3993,stdout,received,"Whats sent is timing : 88560.0, offset: (1932.7760908488992, 'et')   "
+3993,stdout,received,''
+3993,stdout,received,'Added 80.00000000000112 to the offset for the word à'
+3993,stdout,received,"Whats sent is timing : 88660.0, offset: (2062.7760908488976, 'à')   "
+3993,stdout,received,''
+3993,stdout,received,"Whats sent is timing : 88730.0, offset: (2142.7760908488985, 'la')   "
+3993,stdout,received,''
+3993,stdout,received,"Whats sent is timing : 88880.0, offset: (2142.7760908488985, 'grammaire')   "
+3993,stdout,received,''
+3994,stdout,received,'Whats sent is timing : 90520.0, offset: (2142.7760908488985, "c\'")   '
+3994,stdout,received,''
+3994,stdout,received,"Whats sent is timing : 90650.0, offset: (2142.7760908488985, 'est')   "
+3994,stdout,received,''
+3994,stdout,received,"Whats sent is timing : 90840.0, offset: (2142.7760908488985, 'ainsi')   "
+3994,stdout,received,''
+3994,stdout,received,'Added 49.999999999999986 to the offset for the word que'
+3994,stdout,received,"Whats sent is timing : 91250.0, offset: (2142.7760908488985, 'que')   "
+3994,stdout,received,''
+3994,stdout,received,"Added 129.9999999999983 to the offset for the word j'"
+3994,stdout,received,'Whats sent is timing : 91370.0, offset: (2192.7760908488985, "j\'")   '
+3994,stdout,received,''
+3994,stdout,received,"Whats sent is timing : 91500.0, offset: (2322.7760908488967, 'ai')   "
+3994,stdout,received,''
+3995,stdout,received,"Whats sent is timing : 91540.0, offset: (2322.7760908488967, 'abandonné')   "
+3995,stdout,received,''
+3995,stdout,received,'Added 99.99999999999714 to the offset for the word à'
+3995,stdout,received,"Whats sent is timing : 92420.0, offset: (2322.7760908488967, 'à')   "
+3995,stdout,received,''
+3995,stdout,received,'Whats sent is timing : 92540.0, offset: (2422.776090848894, "l\'")   '
+3995,stdout,received,''
+3995,stdout,received,"Whats sent is timing : 92620.0, offset: (2422.776090848894, 'âge')   "
+3995,stdout,received,''
+3995,stdout,received,"Whats sent is timing : 92870.0, offset: (2422.776090848894, 'de')   "
+3995,stdout,received,''
+3995,stdout,received,"Whats sent is timing : 92980.0, offset: (2422.776090848894, 'six')   "
+3995,stdout,received,''
+3995,stdout,received,"Whats sent is timing : 93420.0, offset: (2422.776090848894, 'ans')   "
+3995,stdout,received,''
+3995,stdout,received,"Whats sent is timing : 93960.0, offset: (2422.776090848894, 'une')   "
+3995,stdout,received,''
+3995,stdout,received,"Whats sent is timing : 94230.0, offset: (2422.776090848894, 'magnifique')   "
+3995,stdout,received,''
+3995,stdout,received,"Whats sent is timing : 95110.0, offset: (2422.776090848894, 'carrière')   "
+3996,stdout,received,''
+3996,stdout,received,"Whats sent is timing : 95480.0, offset: (2422.776090848894, 'de')   "
+3996,stdout,received,''
+3996,stdout,received,"Whats sent is timing : 95650.0, offset: (2422.776090848894, 'peintre')   "
+3996,stdout,received,''
+3996,stdout,received,"Added 80.00000000000112 to the offset for the word j'"
+3996,stdout,received,'Whats sent is timing : 96740.0, offset: (2422.776090848894, "j\'")   '
+3996,stdout,received,''
+3996,stdout,received,"Whats sent is timing : 96960.0, offset: (2502.776090848895, 'avais')   "
+3996,stdout,received,''
+3996,stdout,received,"Whats sent is timing : 97230.0, offset: (2502.776090848895, 'été')   "
+3996,stdout,received,''
+3996,stdout,received,"Whats sent is timing : 97460.0, offset: (2502.776090848895, 'découragé')   "
+3996,stdout,received,''
+3997,stdout,received,'Added 2.831068712794149e-12 to the offset for the word par'
+3997,stdout,received,"Whats sent is timing : 98390.0, offset: (2502.776090848895, 'par')   "
+3997,stdout,received,''
+3997,stdout,received,'Whats sent is timing : 98590.0, offset: (2502.7760908488976, "l\'")   '
+3997,stdout,received,''
+3997,stdout,received,"Whats sent is timing : 98690.0, offset: (2502.7760908488976, 'insuccès')   "
+3997,stdout,received,''
+3997,stdout,received,'Added 19.999999999998852 to the offset for the word de'
+3997,stdout,received,"Whats sent is timing : 99310.0, offset: (2502.7760908488976, 'de')   "
+3997,stdout,received,''
+3997,stdout,received,"Whats sent is timing : 99420.0, offset: (2522.7760908488963, 'mon')   "
+3997,stdout,received,''
+3997,stdout,received,"Whats sent is timing : 99590.0, offset: (2522.7760908488963, 'dessin')   "
+3997,stdout,received,''
+3997,stdout,received,"Whats sent is timing : 99960.0, offset: (2522.7760908488963, 'numéro')   "
+3997,stdout,received,''
+3997,stdout,received,"Whats sent is timing : 100460.0, offset: (2522.7760908488963, '1')   "
+3997,stdout,received,''
+3997,stdout,received,'Added 69.999999999996 to the offset for the word et'
+3997,stdout,received,"Whats sent is timing : 101080.0, offset: (2522.7760908488963, 'et')   "
+3997,stdout,received,''
+3997,stdout,received,'Added 2.831068712794149e-12 to the offset for the word de'
+3997,stdout,received,"Whats sent is timing : 101170.0, offset: (2592.776090848892, 'de')   "
+3997,stdout,received,''
+3997,stdout,received,"Whats sent is timing : 101310.0, offset: (2592.776090848895, 'mon')   "
+3997,stdout,received,''
+3997,stdout,received,"Whats sent is timing : 101470.0, offset: (2592.776090848895, 'dessin')   "
+3997,stdout,received,''
+3997,stdout,received,"Whats sent is timing : 101820.0, offset: (2592.776090848895, 'numéro')   "
+3997,stdout,received,''
+3997,stdout,received,"Whats sent is timing : 102360.0, offset: (2592.776090848895, '2')   "
+3997,stdout,received,''
+3997,stdout,received,"Whats sent is timing : 103580.0, offset: (2592.776090848895, 'les')   "
+3998,stdout,received,''
+3998,stdout,received,"Whats sent is timing : 103740.0, offset: (2592.776090848895, 'grandes')   "
+3998,stdout,received,''
+3998,stdout,received,"Whats sent is timing : 104030.0, offset: (2592.776090848895, 'personnes')   "
+3998,stdout,received,''
+3998,stdout,received,"Whats sent is timing : 104650.0, offset: (2592.776090848895, 'ne')   "
+3998,stdout,received,''
+3998,stdout,received,"Whats sent is timing : 104710.0, offset: (2592.776090848895, 'comprennent')   "
+3998,stdout,received,''
+3998,stdout,received,"Whats sent is timing : 105190.0, offset: (2592.776090848895, 'jamais')   "
+3998,stdout,received,''
+3998,stdout,received,"Whats sent is timing : 105680.0, offset: (2592.776090848895, 'rien')   "
+3998,stdout,received,''
+3998,stdout,received,"Whats sent is timing : 105910.0, offset: (2592.776090848895, 'toutes')   "
+3998,stdout,received,''
+3999,stdout,received,"Whats sent is timing : 106130.0, offset: (2592.776090848895, 'seules')   "
+3999,stdout,received,''
+3999,stdout,received,'Added 129.9999999999983 to the offset for the word et'
+3999,stdout,received,"Whats sent is timing : 106850.0, offset: (2592.776090848895, 'et')   "
+3999,stdout,received,''
+3999,stdout,received,"Added 110.00000000000226 to the offset for the word c'"
+3999,stdout,received,'Whats sent is timing : 106900.0, offset: (2722.776090848893, "c\'")   '
+3999,stdout,received,''
+3999,stdout,received,"Whats sent is timing : 107020.0, offset: (2832.7760908488954, 'est')   "
+3999,stdout,received,''
+3999,stdout,received,"Whats sent is timing : 107090.0, offset: (2832.7760908488954, 'fatigant')   "
+3999,stdout,received,''
+3999,stdout,received,"Whats sent is timing : 107860.0, offset: (2832.7760908488954, 'pour')   "
+3999,stdout,received,''
+3999,stdout,received,"Whats sent is timing : 108030.0, offset: (2832.7760908488954, 'les')   "
+3999,stdout,received,''
+3999,stdout,received,"Whats sent is timing : 108270.0, offset: (2832.7760908488954, 'enfants')   "
+3999,stdout,received,''
+3999,stdout,received,"Whats sent is timing : 108970.0, offset: (2832.7760908488954, 'de')   "
+3999,stdout,received,''
+3999,stdout,received,"Whats sent is timing : 109160.0, offset: (2832.7760908488954, 'toujours')   "
+3999,stdout,received,''
+3999,stdout,received,"Whats sent is timing : 109790.0, offset: (2832.7760908488954, 'et')   "
+3999,stdout,received,''
+3999,stdout,received,"Whats sent is timing : 109920.0, offset: (2832.7760908488954, 'toujours')   "
+3999,stdout,received,''
+3999,stdout,received,"Whats sent is timing : 110600.0, offset: (2832.7760908488954, 'leur')   "
+4000,stdout,received,''
+4000,stdout,received,"Whats sent is timing : 110830.0, offset: (2832.7760908488954, 'donner')   "
+4000,stdout,received,''
+4000,stdout,received,"Whats sent is timing : 111120.0, offset: (2832.7760908488954, 'des')   "
+4000,stdout,received,''
+4000,stdout,received,"Whats sent is timing : 111320.0, offset: (2832.7760908488954, 'explications')   "
+4000,stdout,received,''
+4000,stdout,received,"Added 60.0000000000051 to the offset for the word j'"
+4000,stdout,received,'Whats sent is timing : 113170.0, offset: (2832.7760908488954, "j\'")   '
+4000,stdout,received,''
+4000,stdout,received,"Whats sent is timing : 113290.0, offset: (2892.7760908489004, 'ai')   "
+4000,stdout,received,''
+4000,stdout,received,"Whats sent is timing : 113410.0, offset: (2892.7760908489004, 'donc')   "
+4000,stdout,received,''
+4000,stdout,received,'Added 140.0000000000034 to the offset for the word dû'
+4000,stdout,received,"Whats sent is timing : 113620.0, offset: (2892.7760908489004, 'dû')   "
+4000,stdout,received,''
+4001,stdout,received,"Whats sent is timing : 113780.0, offset: (3032.7760908489036, 'choisir')   "
+4001,stdout,received,''
+4001,stdout,received,"Whats sent is timing : 114270.0, offset: (3032.7760908489036, 'un')   "
+4001,stdout,received,''
+4001,stdout,received,"Whats sent is timing : 114460.0, offset: (3032.7760908489036, 'autre')   "
+4001,stdout,received,''
+4001,stdout,received,"Whats sent is timing : 114740.0, offset: (3032.7760908489036, 'métier')   "
+4001,stdout,received,''
+4001,stdout,received,'Added 140.0000000000034 to the offset for the word et'
+4001,stdout,received,"Whats sent is timing : 115580.0, offset: (3032.7760908489036, 'et')   "
+4001,stdout,received,''
+4001,stdout,received,"Added 90.00000000000624 to the offset for the word j'"
+4001,stdout,received,'Whats sent is timing : 115620.0, offset: (3172.776090848907, "j\'")   '
+4001,stdout,received,''
+4001,stdout,received,"Whats sent is timing : 115740.0, offset: (3262.7760908489136, 'ai')   "
+4001,stdout,received,''
+4001,stdout,received,"Whats sent is timing : 115830.0, offset: (3262.7760908489136, 'appris')   "
+4001,stdout,received,''
+4001,stdout,received,'Added 170.00000000000455 to the offset for the word à'
+4001,stdout,received,"Whats sent is timing : 116190.0, offset: (3262.7760908489136, 'à')   "
+4001,stdout,received,''
+4002,stdout,received,"Whats sent is timing : 116320.0, offset: (3432.776090848918, 'piloter')   "
+4002,stdout,received,''
+4002,stdout,received,"Whats sent is timing : 116760.0, offset: (3432.776090848918, 'des')   "
+4002,stdout,received,''
+4002,stdout,received,"Whats sent is timing : 116970.0, offset: (3432.776090848918, 'avions')   "
+4002,stdout,received,''
+4002,stdout,received,"Added 60.0000000000051 to the offset for the word j'"
+4002,stdout,received,'Whats sent is timing : 118310.0, offset: (3432.776090848918, "j\'")   '
+4002,stdout,received,''
+4002,stdout,received,"Whats sent is timing : 118400.0, offset: (3492.776090848923, 'ai')   "
+4002,stdout,received,''
+4002,stdout,received,"Whats sent is timing : 118550.0, offset: (3492.776090848923, 'volé')   "
+4002,stdout,received,''
+4002,stdout,received,'Added 30.00000000000397 to the offset for the word un'
+4002,stdout,received,"Whats sent is timing : 118860.0, offset: (3492.776090848923, 'un')   "
+4002,stdout,received,''
+4002,stdout,received,"Whats sent is timing : 119000.0, offset: (3522.776090848927, 'peu')   "
+4002,stdout,received,''
+4003,stdout,received,"Whats sent is timing : 119130.0, offset: (3522.776090848927, 'partout')   "
+4003,stdout,received,''
+4003,stdout,received,'Added 39.99999999999487 to the offset for the word dans'
+4003,stdout,received,"Whats sent is timing : 119490.0, offset: (3522.776090848927, 'dans')   "
+4003,stdout,received,''
+4003,stdout,received,"Whats sent is timing : 119650.0, offset: (3562.776090848922, 'le')   "
+4003,stdout,received,''
+4003,stdout,received,"Whats sent is timing : 119750.0, offset: (3562.776090848922, 'monde')   "
+4003,stdout,received,''
+4003,stdout,received,'Added 120.00000000000738 to the offset for the word et'
+4003,stdout,received,"Whats sent is timing : 120670.0, offset: (3562.776090848922, 'et')   "
+4003,stdout,received,''
+4003,stdout,received,"Whats sent is timing : 120700.0, offset: (3682.7760908489295, 'la')   "
+4003,stdout,received,''
+4003,stdout,received,"Whats sent is timing : 120850.0, offset: (3682.7760908489295, 'géographie')   "
+4003,stdout,received,''
+4003,stdout,received,"Added 39.99999999999487 to the offset for the word c'"
+4003,stdout,received,'Whats sent is timing : 121720.0, offset: (3682.7760908489295, "c\'")   '
+4003,stdout,received,''
+4003,stdout,received,"Whats sent is timing : 121840.0, offset: (3722.7760908489245, 'est')   "
+4003,stdout,received,''
+4003,stdout,received,"Whats sent is timing : 121980.0, offset: (3722.7760908489245, 'exact')   "
+4003,stdout,received,''
+4003,stdout,received,"Added 110.00000000000226 to the offset for the word m'"
+4003,stdout,received,'Whats sent is timing : 122670.0, offset: (3722.7760908489245, "m\'")   '
+4003,stdout,received,''
+4003,stdout,received,"Whats sent is timing : 122800.0, offset: (3832.7760908489267, 'a')   "
+4004,stdout,received,''
+4004,stdout,received,"Whats sent is timing : 122860.0, offset: (3832.7760908489267, 'beaucoup')   "
+4004,stdout,received,''
+4004,stdout,received,"Whats sent is timing : 123260.0, offset: (3832.7760908489267, 'servi')   "
+4004,stdout,received,''
+4004,stdout,received,"Whats sent is timing : 124320.0, offset: (3832.7760908489267, 'je')   "
+4004,stdout,received,''
+4004,stdout,received,"Whats sent is timing : 124450.0, offset: (3832.7760908489267, 'savais')   "
+4004,stdout,received,''
+4004,stdout,received,"Whats sent is timing : 124820.0, offset: (3832.7760908489267, 'reconnaître')   "
+4004,stdout,received,''
+4004,stdout,received,"Whats sent is timing : 125500.0, offset: (3832.7760908489267, 'du')   "
+4004,stdout,received,''
+4004,stdout,received,"Whats sent is timing : 125650.0, offset: (3832.7760908489267, 'premier')   "
+4004,stdout,received,''
+4004,stdout,received,'Added 69.999999999996 to the offset for the word coup'
+4004,stdout,received,"Whats sent is timing : 126210.0, offset: (3832.7760908489267, 'coup')   "
+4004,stdout,received,''
+4004,stdout,received,'Whats sent is timing : 126390.0, offset: (3902.7760908489226, "d\'")   '
+4004,stdout,received,''
+4005,stdout,received,"Whats sent is timing : 126440.0, offset: (3902.7760908489226, 'oeil')   "
+4005,stdout,received,''
+4005,stdout,received,"Whats sent is timing : 127030.0, offset: (3902.7760908489226, 'la')   "
+4005,stdout,received,''
+4005,stdout,received,"Whats sent is timing : 127160.0, offset: (3902.7760908489226, 'chine')   "
+4005,stdout,received,''
+4005,stdout,received,'Added 99.99999999999714 to the offset for the word de'
+4005,stdout,received,"Whats sent is timing : 127630.0, offset: (3902.7760908489226, 'de')   "
+4005,stdout,received,''
+4005,stdout,received,'Whats sent is timing : 127770.0, offset: (4002.77609084892, "l\'")   '
+4005,stdout,received,''
+4005,stdout,received,"Whats sent is timing : 127830.0, offset: (4002.77609084892, 'arizona')   "
+4005,stdout,received,''
+4005,stdout,received,"Added 110.00000000000226 to the offset for the word c'"
+4005,stdout,received,'Whats sent is timing : 128979.99999999999, offset: (4002.77609084892, "c\'")   '
+4005,stdout,received,''
+4005,stdout,received,"Whats sent is timing : 129100.0, offset: (4112.776090848922, 'est')   "
+4005,stdout,received,''
+4005,stdout,received,"Whats sent is timing : 129169.99999999999, offset: (4112.776090848922, 'très')   "
+4005,stdout,received,''
+4006,stdout,received,"Whats sent is timing : 129570.0, offset: (4112.776090848922, 'utile')   "
+4006,stdout,received,''
+4006,stdout,received,'Added 19.999999999998852 to the offset for the word si'
+4006,stdout,received,"Whats sent is timing : 130100.0, offset: (4112.776090848922, 'si')   "
+4006,stdout,received,''
+4006,stdout,received,"Added 179.99999999999545 to the offset for the word l'"
+4006,stdout,received,'Whats sent is timing : 130340.0, offset: (4132.776090848921, "l\'")   '
+4006,stdout,received,''
+4006,stdout,received,'Added 189.99999999998636 to the offset for the word on'
+4006,stdout,received,"Whats sent is timing : 130380.0, offset: (4312.776090848916, 'on')   "
+4006,stdout,received,''
+4006,stdout,received,"Added 110.00000000000226 to the offset for the word s'"
+4006,stdout,received,'Whats sent is timing : 130460.00000000001, offset: (4502.776090848903, "s\'")   '
+4006,stdout,received,''
+4006,stdout,received,"Whats sent is timing : 130490.00000000001, offset: (4612.7760908489045, 'est')   "
+4006,stdout,received,''
+4006,stdout,received,"Whats sent is timing : 130650.0, offset: (4612.7760908489045, 'égaré')   "
+4006,stdout,received,''
+4006,stdout,received,"Whats sent is timing : 131050.00000000001, offset: (4612.7760908489045, 'pendant')   "
+4006,stdout,received,''
+4006,stdout,received,"Whats sent is timing : 131320.0, offset: (4612.7760908489045, 'la')   "
+4006,stdout,received,''
+4006,stdout,received,"Whats sent is timing : 131450.0, offset: (4612.7760908489045, 'nuit')   "
+4006,stdout,received,''
+4006,stdout,received,"Added 80.00000000000112 to the offset for the word j'"
+4006,stdout,received,'Whats sent is timing : 132870.0, offset: (4612.7760908489045, "j\'")   '
+4006,stdout,received,''
+4006,stdout,received,"Whats sent is timing : 132960.0, offset: (4692.776090848905, 'ai')   "
+4006,stdout,received,''
+4007,stdout,received,"Whats sent is timing : 133090.0, offset: (4692.776090848905, 'ainsi')   "
+4007,stdout,received,''
+4007,stdout,received,"Whats sent is timing : 133530.0, offset: (4692.776090848905, 'eu')   "
+4007,stdout,received,''
+4007,stdout,received,"Whats sent is timing : 133890.0, offset: (4692.776090848905, 'au')   "
+4007,stdout,received,''
+4007,stdout,received,"Whats sent is timing : 134020.0, offset: (4692.776090848905, 'cours')   "
+4007,stdout,received,''
+4007,stdout,received,"Whats sent is timing : 134260.0, offset: (4692.776090848905, 'de')   "
+4007,stdout,received,''
+4007,stdout,received,"Whats sent is timing : 134370.0, offset: (4692.776090848905, 'ma')   "
+4007,stdout,received,''
+4007,stdout,received,"Whats sent is timing : 134570.0, offset: (4692.776090848905, 'vie')   "
+4007,stdout,received,''
+4007,stdout,received,'Added 1.7041923427996153e-11 to the offset for the word des'
+4007,stdout,received,"Whats sent is timing : 135090.0, offset: (4692.776090848905, 'des')   "
+4007,stdout,received,''
+4008,stdout,received,"Whats sent is timing : 135390.0, offset: (4692.776090848923, 'tas')   "
+4008,stdout,received,''
+4008,stdout,received,"Whats sent is timing : 135650.0, offset: (4692.776090848923, 'de')   "
+4008,stdout,received,''
+4008,stdout,received,"Whats sent is timing : 135780.0, offset: (4692.776090848923, 'contacts')   "
+4008,stdout,received,''
+4008,stdout,received,"Whats sent is timing : 136320.0, offset: (4692.776090848923, 'avec')   "
+4008,stdout,received,''
+4008,stdout,received,"Whats sent is timing : 136610.0, offset: (4692.776090848923, 'des')   "
+4008,stdout,received,''
+4008,stdout,received,"Whats sent is timing : 136820.0, offset: (4692.776090848923, 'tas')   "
+4008,stdout,received,''
+4008,stdout,received,"Whats sent is timing : 137110.0, offset: (4692.776090848923, 'de')   "
+4008,stdout,received,''
+4008,stdout,received,"Whats sent is timing : 137210.0, offset: (4692.776090848923, 'gens')   "
+4008,stdout,received,''
+4008,stdout,received,"Whats sent is timing : 137420.0, offset: (4692.776090848923, 'sérieux')   "
+4008,stdout,received,''
+4008,stdout,received,"Added 39.99999999998066 to the offset for the word j'"
+4008,stdout,received,'Whats sent is timing : 138450.0, offset: (4692.776090848923, "j\'")   '
+4008,stdout,received,''
+4008,stdout,received,"Whats sent is timing : 138650.0, offset: (4732.776090848904, 'ai')   "
+4008,stdout,received,''
+4008,stdout,received,"Whats sent is timing : 138710.0, offset: (4732.776090848904, 'beaucoup')   "
+4008,stdout,received,''
+4009,stdout,received,"Whats sent is timing : 139310.0, offset: (4732.776090848904, 'vécu')   "
+4009,stdout,received,''
+4009,stdout,received,'Added 1.7041923427996153e-11 to the offset for the word chez'
+4009,stdout,received,"Whats sent is timing : 139620.0, offset: (4732.776090848904, 'chez')   "
+4009,stdout,received,''
+4009,stdout,received,"Whats sent is timing : 139810.0, offset: (4732.776090848921, 'les')   "
+4009,stdout,received,''
+4009,stdout,received,"Whats sent is timing : 139920.0, offset: (4732.776090848921, 'grandes')   "
+4009,stdout,received,''
+4009,stdout,received,"Whats sent is timing : 140200.0, offset: (4732.776090848921, 'personnes')   "
+4009,stdout,received,''
+4009,stdout,received,"Whats sent is timing : 141010.0, offset: (4732.776090848921, 'je')   "
+4009,stdout,received,''
+4009,stdout,received,"Whats sent is timing : 141210.0, offset: (4732.776090848921, 'les')   "
+4009,stdout,received,''
+4009,stdout,received,'Added 30.00000000001818 to the offset for the word ai'
+4009,stdout,received,"Whats sent is timing : 141430.0, offset: (4732.776090848921, 'ai')   "
+4009,stdout,received,''
+4009,stdout,received,"Whats sent is timing : 141530.0, offset: (4762.776090848939, 'vues')   "
+4009,stdout,received,''
+4009,stdout,received,"Whats sent is timing : 141700.0, offset: (4762.776090848939, 'de')   "
+4009,stdout,received,''
+4009,stdout,received,"Whats sent is timing : 141870.0, offset: (4762.776090848939, 'très')   "
+4009,stdout,received,''
+4010,stdout,received,"Whats sent is timing : 142220.0, offset: (4762.776090848939, 'près')   "
+4010,stdout,received,''
+4010,stdout,received,'Added 29.999999999989758 to the offset for the word ça'
+4010,stdout,received,"Whats sent is timing : 143220.0, offset: (4762.776090848939, 'ça')   "
+4010,stdout,received,''
+4010,stdout,received,"Added 80.00000000000112 to the offset for the word n'"
+4010,stdout,received,'Whats sent is timing : 143420.0, offset: (4792.776090848929, "n\'")   '
+4010,stdout,received,''
+4010,stdout,received,'Added 40.00000000000908 to the offset for the word a'
+4010,stdout,received,"Whats sent is timing : 143490.0, offset: (4872.77609084893, 'a')   "
+4010,stdout,received,''
+4010,stdout,received,"Whats sent is timing : 143750.0, offset: (4912.776090848939, 'pas')   "
+4010,stdout,received,''
+4010,stdout,received,"Whats sent is timing : 143910.0, offset: (4912.776090848939, 'trop')   "
+4010,stdout,received,''
+4010,stdout,received,"Whats sent is timing : 144200.0, offset: (4912.776090848939, 'amélioré')   "
+4010,stdout,received,''
+4010,stdout,received,"Whats sent is timing : 144720.0, offset: (4912.776090848939, 'mon')   "
+4011,stdout,received,''
+4011,stdout,received,"Whats sent is timing : 144910.0, offset: (4912.776090848939, 'opinion')   "
+4011,stdout,received,''
+4011,stdout,received,'Added 29.999999999989758 to the offset for the word quand'
+4011,stdout,received,"Whats sent is timing : 146510.0, offset: (4912.776090848939, 'quand')   "
+4011,stdout,received,''
+4011,stdout,received,"Added 70.00000000001022 to the offset for the word j'"
+4011,stdout,received,'Whats sent is timing : 146690.0, offset: (4942.776090848929, "j\'")   '
+4011,stdout,received,''
+4011,stdout,received,"Whats sent is timing : 146780.0, offset: (5012.776090848939, 'en')   "
+4011,stdout,received,''
+4011,stdout,received,"Whats sent is timing : 146920.0, offset: (5012.776090848939, 'rencontrais')   "
+4011,stdout,received,''
+4011,stdout,received,"Whats sent is timing : 147790.0, offset: (5012.776090848939, 'une')   "
+4011,stdout,received,''
+4011,stdout,received,"Whats sent is timing : 147980.0, offset: (5012.776090848939, 'qui')   "
+4011,stdout,received,''
+4012,stdout,received,"Whats sent is timing : 148180.0, offset: (5012.776090848939, 'me')   "
+4012,stdout,received,''
+4012,stdout,received,"Whats sent is timing : 148340.0, offset: (5012.776090848939, 'paraissait')   "
+4012,stdout,received,''
+4012,stdout,received,"Whats sent is timing : 148920.0, offset: (5012.776090848939, 'un')   "
+4012,stdout,received,''
+4012,stdout,received,"Whats sent is timing : 149140.0, offset: (5012.776090848939, 'peu')   "
+4012,stdout,received,''
+4012,stdout,received,"Whats sent is timing : 149350.0, offset: (5012.776090848939, 'lucide')   "
+4012,stdout,received,''
+4012,stdout,received,"Whats sent is timing : 150270.0, offset: (5012.776090848939, 'je')   "
+4012,stdout,received,''
+4012,stdout,received,"Whats sent is timing : 150470.0, offset: (5012.776090848939, 'faisais')   "
+4012,stdout,received,''
+4012,stdout,received,'Whats sent is timing : 150830.0, offset: (5012.776090848939, "l\'")   '
+4012,stdout,received,''
+4012,stdout,received,"Whats sent is timing : 150900.0, offset: (5012.776090848939, 'expérience')   "
+4012,stdout,received,''
+4012,stdout,received,"Whats sent is timing : 151630.0, offset: (5012.776090848939, 'sur')   "
+4012,stdout,received,''
+4013,stdout,received,"Whats sent is timing : 151800.0, offset: (5012.776090848939, 'elle')   "
+4013,stdout,received,''
+4013,stdout,received,'Added 40.00000000000908 to the offset for the word de'
+4013,stdout,received,"Whats sent is timing : 152030.0, offset: (5012.776090848939, 'de')   "
+4013,stdout,received,''
+4013,stdout,received,"Whats sent is timing : 152140.0, offset: (5052.776090848948, 'mon')   "
+4013,stdout,received,''
+4013,stdout,received,"Whats sent is timing : 152290.0, offset: (5052.776090848948, 'dessin')   "
+4013,stdout,received,''
+4013,stdout,received,"Whats sent is timing : 152630.0, offset: (5052.776090848948, 'numéro')   "
+4013,stdout,received,''
+4013,stdout,received,"Whats sent is timing : 153120.0, offset: (5052.776090848948, '1')   "
+4013,stdout,received,''
+4013,stdout,received,'Added 29.999999999989758 to the offset for the word que'
+4013,stdout,received,"Whats sent is timing : 153690.0, offset: (5052.776090848948, 'que')   "
+4013,stdout,received,''
+4013,stdout,received,"Added 10.000000000007947 to the offset for the word j'"
+4013,stdout,received,'Whats sent is timing : 153800.0, offset: (5082.776090848938, "j\'")   '
+4013,stdout,received,''
+4013,stdout,received,'Added 40.00000000000908 to the offset for the word ai'
+4013,stdout,received,"Whats sent is timing : 153960.0, offset: (5092.776090848946, 'ai')   "
+4013,stdout,received,''
+4013,stdout,received,"Whats sent is timing : 154220.0, offset: (5132.776090848955, 'toujours')   "
+4013,stdout,received,''
+4013,stdout,received,"Whats sent is timing : 154800.0, offset: (5132.776090848955, 'conservé')   "
+4013,stdout,received,''
+4013,stdout,received,"Whats sent is timing : 156110.0, offset: (5132.776090848955, 'je')   "
+4013,stdout,received,''
+4014,stdout,received,"Whats sent is timing : 156310.0, offset: (5132.776090848955, 'voulais')   "
+4014,stdout,received,''
+4014,stdout,received,"Whats sent is timing : 156560.0, offset: (5132.776090848955, 'savoir')   "
+4014,stdout,received,''
+4014,stdout,received,'Added 9.999999999979526 to the offset for the word si'
+4014,stdout,received,"Whats sent is timing : 157010.0, offset: (5132.776090848955, 'si')   "
+4014,stdout,received,''
+4014,stdout,received,"Whats sent is timing : 157180.0, offset: (5142.7760908489345, 'elle')   "
+4014,stdout,received,''
+4014,stdout,received,"Whats sent is timing : 157300.0, offset: (5142.7760908489345, 'était')   "
+4014,stdout,received,''
+4014,stdout,received,"Whats sent is timing : 157570.0, offset: (5142.7760908489345, 'vraiment')   "
+4014,stdout,received,''
+4014,stdout,received,"Whats sent is timing : 158080.0, offset: (5142.7760908489345, 'compréhensive')   "
+4014,stdout,received,''
+4014,stdout,received,"Whats sent is timing : 159840.0, offset: (5142.7760908489345, 'mais')   "
+4014,stdout,received,''
+4015,stdout,received,"Whats sent is timing : 160160.0, offset: (5142.7760908489345, 'toujours')   "
+4015,stdout,received,''
+4015,stdout,received,'Added 30.00000000001818 to the offset for the word elle'
+4015,stdout,received,"Whats sent is timing : 160930.0, offset: (5142.7760908489345, 'elle')   "
+4015,stdout,received,''
+4015,stdout,received,"Whats sent is timing : 161090.0, offset: (5172.776090848953, 'me')   "
+4015,stdout,received,''
+4015,stdout,received,"Whats sent is timing : 161200.0, offset: (5172.776090848953, 'répondait')   "
+4015,stdout,received,''
+4015,stdout,received,"Added 40.00000000000908 to the offset for the word c'"
+4015,stdout,received,'Whats sent is timing : 162400.0, offset: (5172.776090848953, "c\'")   '
+4015,stdout,received,''
+4015,stdout,received,'Added 99.99999999998293 to the offset for the word est'
+4015,stdout,received,"Whats sent is timing : 162510.0, offset: (5212.776090848962, 'est')   "
+4015,stdout,received,''
+4015,stdout,received,"Whats sent is timing : 162660.0, offset: (5312.7760908489445, 'un')   "
+4015,stdout,received,''
+4015,stdout,received,"Whats sent is timing : 162710.0, offset: (5312.7760908489445, 'chapeau')   "
+4015,stdout,received,''
+4015,stdout,received,"Whats sent is timing : 164370.0, offset: (5312.7760908489445, 'alors')   "
+4015,stdout,received,''
+4015,stdout,received,'Added 240.00000000002615 to the offset for the word je'
+4015,stdout,received,"Whats sent is timing : 165110.0, offset: (5312.7760908489445, 'je')   "
+4015,stdout,received,''
+4015,stdout,received,'Added 39.99999999998066 to the offset for the word ne'
+4015,stdout,received,"Whats sent is timing : 165140.0, offset: (5552.776090848971, 'ne')   "
+4015,stdout,received,''
+4015,stdout,received,"Whats sent is timing : 165170.0, offset: (5592.776090848952, 'lui')   "
+4015,stdout,received,''
+4016,stdout,received,"Whats sent is timing : 165400.0, offset: (5592.776090848952, 'parlais')   "
+4016,stdout,received,''
+4016,stdout,received,"Whats sent is timing : 165760.0, offset: (5592.776090848952, 'ni')   "
+4016,stdout,received,''
+4016,stdout,received,"Whats sent is timing : 166040.0, offset: (5592.776090848952, 'de')   "
+4016,stdout,received,''
+4016,stdout,received,"Whats sent is timing : 166160.0, offset: (5592.776090848952, 'serpents')   "
+4016,stdout,received,''
+4016,stdout,received,"Whats sent is timing : 166570.0, offset: (5592.776090848952, 'boas')   "
+4016,stdout,received,''
+4016,stdout,received,"Whats sent is timing : 167290.0, offset: (5592.776090848952, 'ni')   "
+4016,stdout,received,''
+4016,stdout,received,"Whats sent is timing : 167510.0, offset: (5592.776090848952, 'de')   "
+4016,stdout,received,''
+4016,stdout,received,"Whats sent is timing : 167620.0, offset: (5592.776090848952, 'forêts')   "
+4016,stdout,received,''
+4016,stdout,received,"Whats sent is timing : 167960.0, offset: (5592.776090848952, 'vierges')   "
+4016,stdout,received,''
+4016,stdout,received,'Added 29.999999999989758 to the offset for the word ni'
+4016,stdout,received,"Whats sent is timing : 168730.0, offset: (5592.776090848952, 'ni')   "
+4016,stdout,received,''
+4016,stdout,received,'Whats sent is timing : 168950.0, offset: (5622.776090848942, "d\'")   '
+4016,stdout,received,''
+4017,stdout,received,"Whats sent is timing : 169000.0, offset: (5622.776090848942, 'étoiles')   "
+4017,stdout,received,''
+4017,stdout,received,"Whats sent is timing : 170180.0, offset: (5622.776090848942, 'je')   "
+4017,stdout,received,''
+4017,stdout,received,"Whats sent is timing : 170380.0, offset: (5622.776090848942, 'me')   "
+4017,stdout,received,''
+4017,stdout,received,"Whats sent is timing : 170610.0, offset: (5622.776090848942, 'mettais')   "
+4017,stdout,received,''
+4017,stdout,received,'Added 40.00000000000908 to the offset for the word à'
+4017,stdout,received,"Whats sent is timing : 170940.0, offset: (5622.776090848942, 'à')   "
+4017,stdout,received,''
+4017,stdout,received,"Whats sent is timing : 171010.0, offset: (5662.776090848951, 'sa')   "
+4017,stdout,received,''
+4017,stdout,received,"Whats sent is timing : 171200.0, offset: (5662.776090848951, 'portée')   "
+4017,stdout,received,''
+4017,stdout,received,"Whats sent is timing : 172170.0, offset: (5662.776090848951, 'je')   "
+4017,stdout,received,''
+4017,stdout,received,"Whats sent is timing : 172350.0, offset: (5662.776090848951, 'lui')   "
+4017,stdout,received,''
+4018,stdout,received,"Whats sent is timing : 172490.0, offset: (5662.776090848951, 'parlais')   "
+4018,stdout,received,''
+4018,stdout,received,"Whats sent is timing : 172770.0, offset: (5662.776090848951, 'de')   "
+4018,stdout,received,''
+4018,stdout,received,"Whats sent is timing : 172890.0, offset: (5662.776090848951, 'bridge')   "
+4018,stdout,received,''
+4018,stdout,received,"Whats sent is timing : 173620.0, offset: (5662.776090848951, 'de')   "
+4018,stdout,received,''
+4018,stdout,received,"Whats sent is timing : 173800.0, offset: (5662.776090848951, 'golf')   "
+4018,stdout,received,''
+4018,stdout,received,"Whats sent is timing : 174470.0, offset: (5662.776090848951, 'de')   "
+4018,stdout,received,''
+4018,stdout,received,"Whats sent is timing : 174600.0, offset: (5662.776090848951, 'politique')   "
+4018,stdout,received,''
+4018,stdout,received,'Added 130.0000000000125 to the offset for the word et'
+4018,stdout,received,"Whats sent is timing : 175430.0, offset: (5662.776090848951, 'et')   "
+4018,stdout,received,''
+4018,stdout,received,"Whats sent is timing : 175470.0, offset: (5792.776090848964, 'de')   "
+4018,stdout,received,''
+4019,stdout,received,"Whats sent is timing : 175600.0, offset: (5792.776090848964, 'cravates')   "
+4019,stdout,received,''
+4019,stdout,received,'Added 110.00000000000226 to the offset for the word et'
+4019,stdout,received,"Whats sent is timing : 177090.0, offset: (5792.776090848964, 'et')   "
+4019,stdout,received,''
+4019,stdout,received,"Whats sent is timing : 177140.0, offset: (5902.776090848965, 'la')   "
+4019,stdout,received,''
+4019,stdout,received,"Whats sent is timing : 177280.0, offset: (5902.776090848965, 'grande')   "
+4019,stdout,received,''
+4019,stdout,received,"Whats sent is timing : 177550.0, offset: (5902.776090848965, 'personne')   "
+4019,stdout,received,''
+4019,stdout,received,"Whats sent is timing : 178150.0, offset: (5902.776090848965, 'était')   "
+4019,stdout,received,''
+4019,stdout,received,"Whats sent is timing : 178350.0, offset: (5902.776090848965, 'bien')   "
+4019,stdout,received,''
+4019,stdout,received,"Whats sent is timing : 178650.0, offset: (5902.776090848965, 'contente')   "
+4019,stdout,received,''
+4019,stdout,received,"Whats sent is timing : 179210.0, offset: (5902.776090848965, 'de')   "
+4019,stdout,received,''
+4020,stdout,received,"Whats sent is timing : 179240.0, offset: (5902.776090848965, 'connaître')   "
+4020,stdout,received,''
+4020,stdout,received,"Whats sent is timing : 179640.0, offset: (5902.776090848965, 'un')   "
+4020,stdout,received,''
+4020,stdout,received,"Whats sent is timing : 179780.0, offset: (5902.776090848965, 'homme')   "
+4020,stdout,received,''
+4020,stdout,received,"Whats sent is timing : 180150.0, offset: (5902.776090848965, 'aussi')   "
+4020,stdout,received,''
+4020,stdout,received,"Whats sent is timing : 180660.0, offset: (5902.776090848965, 'raisonnable')   "
+4020,stdout,received,''
+4020,stdout,received,"Added 130.0000000000125 to the offset for the word j'"
+4020,stdout,received,'Whats sent is timing : 184590.0, offset: (5902.776090848965, "j\'")   '
+4020,stdout,received,''
+4020,stdout,received,'Added 129.99999999998408 to the offset for the word ai'
+4020,stdout,received,"Whats sent is timing : 184760.0, offset: (6032.776090848978, 'ai')   "
+4020,stdout,received,''
+4020,stdout,received,"Whats sent is timing : 184930.0, offset: (6162.776090848962, 'ainsi')   "
+4020,stdout,received,''
+4020,stdout,received,"Whats sent is timing : 185310.0, offset: (6162.776090848962, 'vécu')   "
+4020,stdout,received,''
+4021,stdout,received,"Whats sent is timing : 185780.0, offset: (6162.776090848962, 'seul')   "
+4021,stdout,received,''
+4021,stdout,received,"Whats sent is timing : 186400.0, offset: (6162.776090848962, 'sans')   "
+4021,stdout,received,''
+4021,stdout,received,"Whats sent is timing : 186720.0, offset: (6162.776090848962, 'personne')   "
+4021,stdout,received,''
+4021,stdout,received,"Whats sent is timing : 187300.0, offset: (6162.776090848962, 'avec')   "
+4021,stdout,received,''
+4021,stdout,received,"Whats sent is timing : 187620.0, offset: (6162.776090848962, 'qui')   "
+4021,stdout,received,''
+4021,stdout,received,"Whats sent is timing : 187700.0, offset: (6162.776090848962, 'parler')   "
+4021,stdout,received,''
+4021,stdout,received,"Whats sent is timing : 188080.0, offset: (6162.776090848962, 'véritablement')   "
+4021,stdout,received,''
+4021,stdout,received,'Whats sent is timing : 189280.0, offset: (6162.776090848962, "jusqu\'")   '
+4021,stdout,received,''
+4021,stdout,received,"Whats sent is timing : 189880.0, offset: (6162.776090848962, 'à')   "
+4021,stdout,received,''
+4021,stdout,received,"Whats sent is timing : 189980.0, offset: (6162.776090848962, 'une')   "
+4021,stdout,received,''
+4022,stdout,received,"Whats sent is timing : 190220.0, offset: (6162.776090848962, 'panne')   "
+4022,stdout,received,''
+4022,stdout,received,"Whats sent is timing : 190500.0, offset: (6162.776090848962, 'dans')   "
+4022,stdout,received,''
+4022,stdout,received,"Whats sent is timing : 190690.0, offset: (6162.776090848962, 'le')   "
+4022,stdout,received,''
+4022,stdout,received,"Whats sent is timing : 190810.0, offset: (6162.776090848962, 'désert')   "
+4022,stdout,received,''
+4022,stdout,received,"Whats sent is timing : 191240.0, offset: (6162.776090848962, 'du')   "
+4022,stdout,received,''
+4022,stdout,received,"Whats sent is timing : 191350.0, offset: (6162.776090848962, 'sahara')   "
+4022,stdout,received,''
+4022,stdout,received,'Added 1.7041923427996153e-11 to the offset for the word il'
+4022,stdout,received,"Whats sent is timing : 192210.0, offset: (6162.776090848962, 'il')   "
+4022,stdout,received,''
+4022,stdout,received,'Added 30.00000000001818 to the offset for the word y'
+4022,stdout,received,"Whats sent is timing : 192330.0, offset: (6162.776090848979, 'y')   "
+4022,stdout,received,''
+4023,stdout,received,"Whats sent is timing : 192510.0, offset: (6192.776090848997, 'a')   "
+4023,stdout,received,''
+4023,stdout,received,"Whats sent is timing : 192600.0, offset: (6192.776090848997, 'six')   "
+4023,stdout,received,''
+4023,stdout,received,"Whats sent is timing : 193030.0, offset: (6192.776090848997, 'ans')   "
+4023,stdout,received,''
+4023,stdout,received,"Whats sent is timing : 194070.0, offset: (6192.776090848997, 'quelque')   "
+4023,stdout,received,''
+4023,stdout,received,"Whats sent is timing : 194390.0, offset: (6192.776090848997, 'chose')   "
+4023,stdout,received,''
+4023,stdout,received,"Added 189.99999999998636 to the offset for the word s'"
+4023,stdout,received,'Whats sent is timing : 194700.0, offset: (6192.776090848997, "s\'")   '
+4023,stdout,received,''
+4023,stdout,received,"Whats sent is timing : 194810.0, offset: (6382.776090848984, 'était')   "
+4023,stdout,received,''
+4023,stdout,received,"Whats sent is timing : 195040.0, offset: (6382.776090848984, 'cassé')   "
+4023,stdout,received,''
+4023,stdout,received,'Added 40.00000000000908 to the offset for the word dans'
+4023,stdout,received,"Whats sent is timing : 195460.0, offset: (6382.776090848984, 'dans')   "
+4023,stdout,received,''
+4023,stdout,received,"Whats sent is timing : 195590.0, offset: (6422.776090848993, 'mon')   "
+4023,stdout,received,''
+4024,stdout,received,"Whats sent is timing : 195720.0, offset: (6422.776090848993, 'moteur')   "
+4024,stdout,received,''
+4024,stdout,received,"Whats sent is timing : 196850.0, offset: (6422.776090848993, 'et')   "
+4024,stdout,received,''
+4024,stdout,received,"Whats sent is timing : 196970.0, offset: (6422.776090848993, 'comme')   "
+4024,stdout,received,''
+4024,stdout,received,'Added 99.99999999998293 to the offset for the word je'
+4024,stdout,received,"Whats sent is timing : 197230.0, offset: (6422.776090848993, 'je')   "
+4024,stdout,received,''
+4024,stdout,received,'Whats sent is timing : 197370.0, offset: (6522.776090848975, "n\'")   '
+4024,stdout,received,''
+4024,stdout,received,"Whats sent is timing : 197430.0, offset: (6522.776090848975, 'avais')   "
+4024,stdout,received,''
+4024,stdout,received,"Whats sent is timing : 197710.0, offset: (6522.776090848975, 'avec')   "
+4024,stdout,received,''
+4024,stdout,received,"Whats sent is timing : 198000.0, offset: (6522.776090848975, 'moi')   "
+4024,stdout,received,''
+4024,stdout,received,"Whats sent is timing : 198250.0, offset: (6522.776090848975, 'ni')   "
+4024,stdout,received,''
+4024,stdout,received,"Whats sent is timing : 198540.0, offset: (6522.776090848975, 'mécanicien')   "
+4024,stdout,received,''
+4024,stdout,received,"Whats sent is timing : 199730.0, offset: (6522.776090848975, 'ni')   "
+4024,stdout,received,''
+4025,stdout,received,"Whats sent is timing : 200020.0, offset: (6522.776090848975, 'passagers')   "
+4025,stdout,received,''
+4025,stdout,received,'Added 19.999999999998852 to the offset for the word je'
+4025,stdout,received,"Whats sent is timing : 201080.0, offset: (6522.776090848975, 'je')   "
+4025,stdout,received,''
+4025,stdout,received,'Added 130.0000000000125 to the offset for the word me'
+4025,stdout,received,"Whats sent is timing : 201250.0, offset: (6542.7760908489745, 'me')   "
+4025,stdout,received,''
+4025,stdout,received,"Whats sent is timing : 201420.0, offset: (6672.776090848987, 'préparai')   "
+4025,stdout,received,''
+4025,stdout,received,"Whats sent is timing : 201940.0, offset: (6672.776090848987, 'à')   "
+4025,stdout,received,''
+4025,stdout,received,"Whats sent is timing : 202030.0, offset: (6672.776090848987, 'essayer')   "
+4025,stdout,received,''
+4025,stdout,received,"Whats sent is timing : 202500.0, offset: (6672.776090848987, 'de')   "
+4025,stdout,received,''
+4025,stdout,received,"Whats sent is timing : 202660.0, offset: (6672.776090848987, 'réussir')   "
+4025,stdout,received,''
+4025,stdout,received,"Whats sent is timing : 203590.0, offset: (6672.776090848987, 'tout')   "
+4025,stdout,received,''
+4026,stdout,received,"Whats sent is timing : 203750.0, offset: (6672.776090848987, 'seul')   "
+4026,stdout,received,''
+4026,stdout,received,"Whats sent is timing : 204600.0, offset: (6672.776090848987, 'une')   "
+4026,stdout,received,''
+4026,stdout,received,"Whats sent is timing : 204800.0, offset: (6672.776090848987, 'réparation')   "
+4026,stdout,received,''
+4026,stdout,received,"Whats sent is timing : 205630.0, offset: (6672.776090848987, 'difficile')   "
+4026,stdout,received,''
+4026,stdout,received,'Whats sent is timing : 207210.0, offset: (6672.776090848987, "c\'")   '
+4026,stdout,received,''
+4026,stdout,received,"Whats sent is timing : 207280.0, offset: (6672.776090848987, 'était')   "
+4026,stdout,received,''
+4026,stdout,received,"Whats sent is timing : 207620.0, offset: (6672.776090848987, 'pour')   "
+4026,stdout,received,''
+4026,stdout,received,"Whats sent is timing : 207800.0, offset: (6672.776090848987, 'moi')   "
+4026,stdout,received,''
+4026,stdout,received,"Whats sent is timing : 208060.0, offset: (6672.776090848987, 'une')   "
+4026,stdout,received,''
+4026,stdout,received,"Whats sent is timing : 208260.0, offset: (6672.776090848987, 'question')   "
+4026,stdout,received,''
+4026,stdout,received,"Whats sent is timing : 208750.0, offset: (6672.776090848987, 'de')   "
+4026,stdout,received,''
+4026,stdout,received,"Whats sent is timing : 209080.0, offset: (6672.776090848987, 'vie')   "
+4026,stdout,received,''
+4027,stdout,received,'Added 30.00000000001818 to the offset for the word ou'
+4027,stdout,received,"Whats sent is timing : 209270.0, offset: (6672.776090848987, 'ou')   "
+4027,stdout,received,''
+4027,stdout,received,"Whats sent is timing : 209390.0, offset: (6702.776090849005, 'de')   "
+4027,stdout,received,''
+4027,stdout,received,"Whats sent is timing : 209540.0, offset: (6702.776090849005, 'mort')   "
+4027,stdout,received,''
+4027,stdout,received,'Whats sent is timing : 210400.0, offset: (6702.776090849005, "j\'")   '
+4027,stdout,received,''
+4027,stdout,received,"Whats sent is timing : 210530.0, offset: (6702.776090849005, 'avais')   "
+4027,stdout,received,''
+4027,stdout,received,"Whats sent is timing : 210850.0, offset: (6702.776090849005, 'à')   "
+4027,stdout,received,''
+4027,stdout,received,"Whats sent is timing : 211010.0, offset: (6702.776090849005, 'peine')   "
+4027,stdout,received,''
+4027,stdout,received,'Added 100.00000000001135 to the offset for the word de'
+4027,stdout,received,"Whats sent is timing : 211360.0, offset: (6702.776090849005, 'de')   "
+4027,stdout,received,''
+4028,stdout,received,"Added 90.00000000002045 to the offset for the word l'"
+4028,stdout,received,'Whats sent is timing : 211490.0, offset: (6802.776090849016, "l\'")   '
+4028,stdout,received,''
+4028,stdout,received,'Added 59.99999999999089 to the offset for the word eau'
+4028,stdout,received,"Whats sent is timing : 211560.0, offset: (6892.776090849036, 'eau')   "
+4028,stdout,received,''
+4028,stdout,received,"Whats sent is timing : 211700.0, offset: (6952.776090849027, 'à')   "
+4028,stdout,received,''
+4028,stdout,received,"Whats sent is timing : 211800.0, offset: (6952.776090849027, 'boire')   "
+4028,stdout,received,''
+4028,stdout,received,"Whats sent is timing : 212220.0, offset: (6952.776090849027, 'pour')   "
+4028,stdout,received,''
+4028,stdout,received,"Whats sent is timing : 212470.0, offset: (6952.776090849027, 'huit')   "
+4028,stdout,received,''
+4029,stdout,received,"Whats sent is timing : 212780.0, offset: (6952.776090849027, 'jours')   "
+4029,stdout,received,''
+4029,stdout,received,"Whats sent is timing : 214170.0, offset: (6952.776090849027, 'le')   "
+4029,stdout,received,''
+4029,stdout,received,"Whats sent is timing : 214340.0, offset: (6952.776090849027, 'premier')   "
+4029,stdout,received,''
+4029,stdout,received,"Whats sent is timing : 214690.0, offset: (6952.776090849027, 'soir')   "
+4029,stdout,received,''
+4029,stdout,received,'Added 39.99999999998066 to the offset for the word je'
+4029,stdout,received,"Whats sent is timing : 215170.0, offset: (6952.776090849027, 'je')   "
+4029,stdout,received,''
+4029,stdout,received,"Whats sent is timing : 215330.0, offset: (6992.776090849008, 'me')   "
+4029,stdout,received,''
+4029,stdout,received,"Whats sent is timing : 215430.0, offset: (6992.776090849008, 'suis')   "
+4029,stdout,received,''
+4029,stdout,received,"Whats sent is timing : 215660.0, offset: (6992.776090849008, 'donc')   "
+4029,stdout,received,''
+4030,stdout,received,"Whats sent is timing : 215950.0, offset: (6992.776090849008, 'endormi')   "
+4030,stdout,received,''
+4030,stdout,received,"Whats sent is timing : 216510.0, offset: (6992.776090849008, 'sur')   "
+4030,stdout,received,''
+4030,stdout,received,"Whats sent is timing : 216730.0, offset: (6992.776090849008, 'le')   "
+4030,stdout,received,''
+4030,stdout,received,"Whats sent is timing : 216850.0, offset: (6992.776090849008, 'sable')   "
+4030,stdout,received,''
+4030,stdout,received,"Whats sent is timing : 217540.0, offset: (6992.776090849008, 'à')   "
+4030,stdout,received,''
+4030,stdout,received,"Whats sent is timing : 217680.0, offset: (6992.776090849008, 'mille')   "
+4030,stdout,received,''
+4030,stdout,received,"Whats sent is timing : 218070.0, offset: (6992.776090849008, 'milles')   "
+4030,stdout,received,''
+4030,stdout,received,"Whats sent is timing : 218510.0, offset: (6992.776090849008, 'de')   "
+4030,stdout,received,''
+4030,stdout,received,"Whats sent is timing : 218650.0, offset: (6992.776090849008, 'toute')   "
+4030,stdout,received,''
+4031,stdout,received,"Whats sent is timing : 219010.0, offset: (6992.776090849008, 'terre')   "
+4031,stdout,received,''
+4031,stdout,received,"Whats sent is timing : 219340.0, offset: (6992.776090849008, 'habitée')   "
+4031,stdout,received,''
+4031,stdout,received,'Whats sent is timing : 220530.0, offset: (6992.776090849008, "j\'")   '
+4031,stdout,received,''
+4031,stdout,received,"Whats sent is timing : 220590.0, offset: (6992.776090849008, 'étais')   "
+4031,stdout,received,''
+4031,stdout,received,"Whats sent is timing : 220970.0, offset: (6992.776090849008, 'bien')   "
+4031,stdout,received,''
+4031,stdout,received,"Whats sent is timing : 221360.0, offset: (6992.776090849008, 'plus')   "
+4031,stdout,received,''
+4031,stdout,received,"Whats sent is timing : 221620.0, offset: (6992.776090849008, 'isolé')   "
+4031,stdout,received,''
+4031,stdout,received,"Added 119.99999999999316 to the offset for the word qu'"
+4031,stdout,received,'Whats sent is timing : 222070.0, offset: (6992.776090849008, "qu\'")   '
+4031,stdout,received,''
+4032,stdout,received,"Whats sent is timing : 222170.0, offset: (7112.776090849001, 'un')   "
+4032,stdout,received,''
+4032,stdout,received,"Whats sent is timing : 222250.0, offset: (7112.776090849001, 'naufragé')   "
+4032,stdout,received,''
+4032,stdout,received,"Whats sent is timing : 222860.0, offset: (7112.776090849001, 'sur')   "
+4032,stdout,received,''
+4032,stdout,received,"Whats sent is timing : 223080.0, offset: (7112.776090849001, 'un')   "
+4032,stdout,received,''
+4032,stdout,received,"Whats sent is timing : 223220.0, offset: (7112.776090849001, 'radeau')   "
+4032,stdout,received,''
+4032,stdout,received,"Whats sent is timing : 223680.0, offset: (7112.776090849001, 'au')   "
+4032,stdout,received,''
+4032,stdout,received,"Whats sent is timing : 223700.0, offset: (7112.776090849001, 'milieu')   "
+4032,stdout,received,''
+4032,stdout,received,'Added 149.99999999999432 to the offset for the word de'
+4032,stdout,received,"Whats sent is timing : 224000.0, offset: (7112.776090849001, 'de')   "
+4032,stdout,received,''
+4032,stdout,received,'Whats sent is timing : 224110.0, offset: (7262.776090848995, "l\'")   '
+4032,stdout,received,''
+4032,stdout,received,"Whats sent is timing : 224150.0, offset: (7262.776090848995, 'océan')   "
+4032,stdout,received,''
+4032,stdout,received,"Whats sent is timing : 225440.0, offset: (7262.776090848995, 'alors')   "
+4032,stdout,received,''
+4033,stdout,received,"Whats sent is timing : 226060.0, offset: (7262.776090848995, 'vous')   "
+4033,stdout,received,''
+4033,stdout,received,"Whats sent is timing : 226240.0, offset: (7262.776090848995, 'imaginez')   "
+4033,stdout,received,''
+4033,stdout,received,"Whats sent is timing : 226830.0, offset: (7262.776090848995, 'ma')   "
+4033,stdout,received,''
+4033,stdout,received,"Whats sent is timing : 226990.0, offset: (7262.776090848995, 'surprise')   "
+4033,stdout,received,''
+4033,stdout,received,"Whats sent is timing : 228170.0, offset: (7262.776090848995, 'au')   "
+4033,stdout,received,''
+4033,stdout,received,"Whats sent is timing : 228320.0, offset: (7262.776090848995, 'lever')   "
+4033,stdout,received,''
+4033,stdout,received,"Whats sent is timing : 228640.0, offset: (7262.776090848995, 'du')   "
+4033,stdout,received,''
+4034,stdout,received,"Whats sent is timing : 228770.0, offset: (7262.776090848995, 'jour')   "
+4034,stdout,received,''
+4034,stdout,received,"Whats sent is timing : 229670.0, offset: (7262.776090848995, 'quand')   "
+4034,stdout,received,''
+4034,stdout,received,"Whats sent is timing : 229890.0, offset: (7262.776090848995, 'une')   "
+4034,stdout,received,''
+4034,stdout,received,"Whats sent is timing : 230100.0, offset: (7262.776090848995, 'drôle')   "
+4034,stdout,received,''
+4034,stdout,received,"Whats sent is timing : 230530.0, offset: (7262.776090848995, 'de')   "
+4034,stdout,received,''
+4034,stdout,received,"Whats sent is timing : 230680.0, offset: (7262.776090848995, 'petite')   "
+4034,stdout,received,''
+4034,stdout,received,"Whats sent is timing : 231060.0, offset: (7262.776090848995, 'voix')   "
+4034,stdout,received,''
+4034,stdout,received,"Added 110.00000000000226 to the offset for the word m'"
+4034,stdout,received,'Whats sent is timing : 231490.0, offset: (7262.776090848995, "m\'")   '
+4034,stdout,received,''
+4034,stdout,received,"Whats sent is timing : 231590.0, offset: (7372.776090848997, 'a')   "
+4034,stdout,received,''
+4035,stdout,received,"Whats sent is timing : 231680.0, offset: (7372.776090848997, 'réveillé')   "
+4035,stdout,received,''
+4035,stdout,received,"Whats sent is timing : 233200.0, offset: (7372.776090848997, 'elle')   "
+4035,stdout,received,''
+4035,stdout,received,"Whats sent is timing : 233420.0, offset: (7372.776090848997, 'disait')   "
+4035,stdout,received,''
+4035,stdout,received,'Whats sent is timing : 234590.0, offset: (7372.776090848997, "s\'")   '
+4035,stdout,received,''
+4035,stdout,received,'Added 130.0000000000125 to the offset for the word il'
+4035,stdout,received,"Whats sent is timing : 234770.0, offset: (7372.776090848997, 'il')   "
+4035,stdout,received,''
+4035,stdout,received,"Whats sent is timing : 234940.0, offset: (7502.77609084901, 'vous')   "
+4035,stdout,received,''
+4035,stdout,received,"Whats sent is timing : 235080.0, offset: (7502.77609084901, 'plaît')   "
+4035,stdout,received,''
+4035,stdout,received,"Whats sent is timing : 235860.0, offset: (7502.77609084901, 'dessine')   "
+4035,stdout,received,''
+4035,stdout,received,'Added 19.999999999998852 to the offset for the word -moi'
+4035,stdout,received,"Whats sent is timing : 236270.0, offset: (7502.77609084901, '-moi')   "
+4035,stdout,received,''
+4035,stdout,received,"Whats sent is timing : 236380.0, offset: (7522.776090849009, 'un')   "
+4035,stdout,received,''
+4036,stdout,received,"Whats sent is timing : 236550.0, offset: (7522.776090849009, 'mouton')   "
+4036,stdout,received,''
+4036,stdout,received,"Whats sent is timing : 238010.0, offset: (7522.776090849009, 'hein')   "
+4036,stdout,received,''
+4036,stdout,received,"Whats sent is timing : 239600.0, offset: (7522.776090849009, 'dessine')   "
+4036,stdout,received,''
+4036,stdout,received,"Whats sent is timing : 240050.0, offset: (7522.776090849009, '-moi')   "
+4036,stdout,received,''
+4036,stdout,received,"Whats sent is timing : 240390.0, offset: (7522.776090849009, 'un')   "
+4036,stdout,received,''
+4036,stdout,received,"Whats sent is timing : 240440.0, offset: (7522.776090849009, 'mouton')   "
+4036,stdout,received,''
+4036,stdout,received,"Added 90.00000000002045 to the offset for the word j'"
+4036,stdout,received,'Whats sent is timing : 242020.0, offset: (7522.776090849009, "j\'")   '
+4036,stdout,received,''
+4036,stdout,received,"Whats sent is timing : 242110.0, offset: (7612.776090849029, 'ai')   "
+4036,stdout,received,''
+4036,stdout,received,"Whats sent is timing : 242230.0, offset: (7612.776090849029, 'sauté')   "
+4036,stdout,received,''
+4036,stdout,received,"Whats sent is timing : 242730.0, offset: (7612.776090849029, 'sur')   "
+4036,stdout,received,''
+4036,stdout,received,"Whats sent is timing : 242960.0, offset: (7612.776090849029, 'mes')   "
+4036,stdout,received,''
+4036,stdout,received,"Whats sent is timing : 243100.0, offset: (7612.776090849029, 'pieds')   "
+4037,stdout,received,''
+4037,stdout,received,"Whats sent is timing : 243290.0, offset: (7612.776090849029, 'comme')   "
+4037,stdout,received,''
+4037,stdout,received,'Added 69.9999999999818 to the offset for the word si'
+4037,stdout,received,"Whats sent is timing : 243510.0, offset: (7612.776090849029, 'si')   "
+4037,stdout,received,''
+4037,stdout,received,"Added 9.999999999979526 to the offset for the word j'"
+4037,stdout,received,'Whats sent is timing : 243640.0, offset: (7682.776090849011, "j\'")   '
+4037,stdout,received,''
+4037,stdout,received,"Whats sent is timing : 243740.0, offset: (7692.77609084899, 'avais')   "
+4037,stdout,received,''
+4037,stdout,received,"Whats sent is timing : 243930.0, offset: (7692.77609084899, 'été')   "
+4037,stdout,received,''
+4037,stdout,received,"Whats sent is timing : 244230.0, offset: (7692.77609084899, 'frappé')   "
+4037,stdout,received,''
+4037,stdout,received,'Added 19.999999999998852 to the offset for the word par'
+4037,stdout,received,"Whats sent is timing : 244850.0, offset: (7692.77609084899, 'par')   "
+4037,stdout,received,''
+4037,stdout,received,"Whats sent is timing : 244980.0, offset: (7712.776090848989, 'la')   "
+4037,stdout,received,''
+4037,stdout,received,"Whats sent is timing : 245130.0, offset: (7712.776090848989, 'foudre')   "
+4037,stdout,received,''
+4037,stdout,received,"Added 10.000000000007947 to the offset for the word j'"
+4037,stdout,received,'Whats sent is timing : 246100.0, offset: (7712.776090848989, "j\'")   '
+4037,stdout,received,''
+4037,stdout,received,"Whats sent is timing : 246230.0, offset: (7722.776090848997, 'ai')   "
+4037,stdout,received,''
+4037,stdout,received,"Whats sent is timing : 246390.0, offset: (7722.776090848997, 'bien')   "
+4037,stdout,received,''
+4038,stdout,received,"Whats sent is timing : 246730.0, offset: (7722.776090848997, 'frotté')   "
+4038,stdout,received,''
+4038,stdout,received,"Whats sent is timing : 247140.0, offset: (7722.776090848997, 'mes')   "
+4038,stdout,received,''
+4038,stdout,received,"Whats sent is timing : 247420.0, offset: (7722.776090848997, 'yeux')   "
+4038,stdout,received,''
+4038,stdout,received,"Added 29.999999999989758 to the offset for the word j'"
+4038,stdout,received,'Whats sent is timing : 247920.0, offset: (7722.776090848997, "j\'")   '
+4038,stdout,received,''
+4038,stdout,received,"Whats sent is timing : 248060.0, offset: (7752.776090848987, 'ai')   "
+4038,stdout,received,''
+4038,stdout,received,"Whats sent is timing : 248190.0, offset: (7752.776090848987, 'bien')   "
+4038,stdout,received,''
+4038,stdout,received,"Whats sent is timing : 248570.0, offset: (7752.776090848987, 'regardé')   "
+4038,stdout,received,''
+4038,stdout,received,'Added 9.999999999979526 to the offset for the word et'
+4038,stdout,received,"Whats sent is timing : 249730.0, offset: (7752.776090848987, 'et')   "
+4038,stdout,received,''
+4038,stdout,received,'Whats sent is timing : 249820.0, offset: (7762.776090848966, "j\'")   '
+4038,stdout,received,''
+4038,stdout,received,"Whats sent is timing : 250020.0, offset: (7762.776090848966, 'ai')   "
+4038,stdout,received,''
+4038,stdout,received,"Whats sent is timing : 250140.0, offset: (7762.776090848966, 'vu')   "
+4038,stdout,received,''
+4038,stdout,received,"Whats sent is timing : 250560.0, offset: (7762.776090848966, 'un')   "
+4038,stdout,received,''
+4038,stdout,received,"Whats sent is timing : 250770.0, offset: (7762.776090848966, 'petit')   "
+4038,stdout,received,''
+4039,stdout,received,"Whats sent is timing : 251230.0, offset: (7762.776090848966, 'bonhomme')   "
+4039,stdout,received,''
+4039,stdout,received,"Whats sent is timing : 251870.0, offset: (7762.776090848966, 'tout')   "
+4039,stdout,received,''
+4039,stdout,received,"Whats sent is timing : 252180.0, offset: (7762.776090848966, 'à')   "
+4039,stdout,received,''
+4039,stdout,received,"Whats sent is timing : 252280.0, offset: (7762.776090848966, 'fait')   "
+4039,stdout,received,''
+4039,stdout,received,"Whats sent is timing : 252610.0, offset: (7762.776090848966, 'extraordinaire')   "
+4039,stdout,received,''
+4039,stdout,received,"Whats sent is timing : 254000.0, offset: (7762.776090848966, 'qui')   "
+4039,stdout,received,''
+4039,stdout,received,"Whats sent is timing : 254150.0, offset: (7762.776090848966, 'me')   "
+4039,stdout,received,''
+4039,stdout,received,"Whats sent is timing : 254320.0, offset: (7762.776090848966, 'considérait')   "
+4039,stdout,received,''
+4040,stdout,received,"Whats sent is timing : 255030.0, offset: (7762.776090848966, 'gravement')   "
+4040,stdout,received,''
+4040,stdout,received,"Whats sent is timing : 256529.99999999997, offset: (7762.776090848966, 'voilà')   "
+4040,stdout,received,''
+4040,stdout,received,"Whats sent is timing : 257010.0, offset: (7762.776090848966, 'le')   "
+4040,stdout,received,''
+4040,stdout,received,"Whats sent is timing : 257230.00000000003, offset: (7762.776090848966, 'meilleur')   "
+4040,stdout,received,''
+4040,stdout,received,"Whats sent is timing : 257649.99999999997, offset: (7762.776090848966, 'portrait')   "
+4040,stdout,received,''
+4040,stdout,received,"Whats sent is timing : 258120.0, offset: (7762.776090848966, 'que')   "
+4040,stdout,received,''
+4040,stdout,received,"Whats sent is timing : 258670.00000000003, offset: (7762.776090848966, 'plus')   "
+4040,stdout,received,''
+4040,stdout,received,"Whats sent is timing : 258899.99999999997, offset: (7762.776090848966, 'tard')   "
+4040,stdout,received,''
+4040,stdout,received,"Added 100.00000000001135 to the offset for the word j'"
+4040,stdout,received,'Whats sent is timing : 259480.00000000003, offset: (7762.776090848966, "j\'")   '
+4040,stdout,received,''
+4040,stdout,received,"Whats sent is timing : 259589.99999999997, offset: (7862.776090848977, 'ai')   "
+4040,stdout,received,''
+4040,stdout,received,"Whats sent is timing : 259680.0, offset: (7862.776090848977, 'réussi')   "
+4040,stdout,received,''
+4040,stdout,received,'Added 30.00000000001818 to the offset for the word à'
+4040,stdout,received,"Whats sent is timing : 260190.0, offset: (7862.776090848977, 'à')   "
+4040,stdout,received,''
+4041,stdout,received,"Whats sent is timing : 260260.0, offset: (7892.776090848995, 'faire')   "
+4041,stdout,received,''
+4041,stdout,received,"Whats sent is timing : 260459.99999999997, offset: (7892.776090848995, 'de')   "
+4041,stdout,received,''
+4041,stdout,received,"Whats sent is timing : 260589.99999999997, offset: (7892.776090848995, 'lui')   "
+4041,stdout,received,''
+4041,stdout,received,"Whats sent is timing : 261550.0, offset: (7892.776090848995, 'mais')   "
+4041,stdout,received,''
+4041,stdout,received,"Whats sent is timing : 261750.0, offset: (7892.776090848995, 'mon')   "
+4041,stdout,received,''
+4041,stdout,received,"Whats sent is timing : 261910.00000000003, offset: (7892.776090848995, 'dessin')   "
+4041,stdout,received,''
+4041,stdout,received,"Whats sent is timing : 262310.0, offset: (7892.776090848995, 'bien')   "
+4041,stdout,received,''
+4041,stdout,received,"Whats sent is timing : 262530.0, offset: (7892.776090848995, 'sûr')   "
+4041,stdout,received,''
+4041,stdout,received,"Whats sent is timing : 263280.0, offset: (7892.776090848995, 'est')   "
+4041,stdout,received,''
+4041,stdout,received,"Whats sent is timing : 263430.0, offset: (7892.776090848995, 'beaucoup')   "
+4041,stdout,received,''
+4041,stdout,received,"Whats sent is timing : 263890.0, offset: (7892.776090848995, 'moins')   "
+4041,stdout,received,''
+4042,stdout,received,"Whats sent is timing : 264130.0, offset: (7892.776090848995, 'ravissant')   "
+4042,stdout,received,''
+4042,stdout,received,'Added 59.99999999999089 to the offset for the word que'
+4042,stdout,received,"Whats sent is timing : 264750.0, offset: (7892.776090848995, 'que')   "
+4042,stdout,received,''
+4042,stdout,received,"Whats sent is timing : 264850.0, offset: (7952.776090848986, 'le')   "
+4042,stdout,received,''
+4042,stdout,received,"Whats sent is timing : 264990.0, offset: (7952.776090848986, 'modèle')   "
+4042,stdout,received,''
+4042,stdout,received,'Added 170.00000000000455 to the offset for the word ce'
+4042,stdout,received,"Whats sent is timing : 266440.0, offset: (7952.776090848986, 'ce')   "
+4042,stdout,received,''
+4042,stdout,received,"Added 170.00000000000455 to the offset for the word n'"
+4042,stdout,received,'Whats sent is timing : 266570.0, offset: (8122.776090848991, "n\'")   '
+4042,stdout,received,''
+4042,stdout,received,'Added 70.00000000003864 to the offset for the word est'
+4042,stdout,received,"Whats sent is timing : 266600.0, offset: (8292.776090848994, 'est')   "
+4042,stdout,received,''
+4042,stdout,received,'Added 19.99999999997043 to the offset for the word pas'
+4042,stdout,received,"Whats sent is timing : 266700.0, offset: (8362.776090849033, 'pas')   "
+4042,stdout,received,''
+4042,stdout,received,"Whats sent is timing : 266830.0, offset: (8382.776090849004, 'ma')   "
+4042,stdout,received,''
+4042,stdout,received,"Whats sent is timing : 266980.0, offset: (8382.776090849004, 'faute')   "
+4042,stdout,received,''
+4042,stdout,received,"Added 9.999999999979526 to the offset for the word j'"
+4042,stdout,received,'Whats sent is timing : 267870.0, offset: (8382.776090849004, "j\'")   '
+4043,stdout,received,''
+4043,stdout,received,"Whats sent is timing : 267980.0, offset: (8392.776090848984, 'avais')   "
+4043,stdout,received,''
+4043,stdout,received,"Whats sent is timing : 268160.0, offset: (8392.776090848984, 'été')   "
+4043,stdout,received,''
+4043,stdout,received,"Whats sent is timing : 268440.0, offset: (8392.776090848984, 'découragé')   "
+4043,stdout,received,''
+4043,stdout,received,'Added 39.99999999995224 to the offset for the word dans'
+4043,stdout,received,"Whats sent is timing : 269090.0, offset: (8392.776090848984, 'dans')   "
+4043,stdout,received,''
+4043,stdout,received,"Whats sent is timing : 269250.0, offset: (8432.776090848936, 'ma')   "
+4043,stdout,received,''
+4043,stdout,received,"Whats sent is timing : 269350.0, offset: (8432.776090848936, 'carrière')   "
+4043,stdout,received,''
+4043,stdout,received,"Whats sent is timing : 269800.0, offset: (8432.776090848936, 'de')   "
+4043,stdout,received,''
+4043,stdout,received,"Whats sent is timing : 269970.0, offset: (8432.776090848936, 'peintre')   "
+4043,stdout,received,''
+4043,stdout,received,'Added 49.999999999999986 to the offset for the word par'
+4043,stdout,received,"Whats sent is timing : 270350.0, offset: (8432.776090848936, 'par')   "
+4043,stdout,received,''
+4043,stdout,received,"Whats sent is timing : 270520.0, offset: (8482.776090848936, 'les')   "
+4043,stdout,received,''
+4043,stdout,received,"Whats sent is timing : 270600.0, offset: (8482.776090848936, 'grandes')   "
+4043,stdout,received,''
+4043,stdout,received,"Whats sent is timing : 270860.0, offset: (8482.776090848936, 'personnes')   "
+4043,stdout,received,''
+4043,stdout,received,'Added 120.00000000005001 to the offset for the word à'
+4043,stdout,received,"Whats sent is timing : 271660.0, offset: (8482.776090848936, 'à')   "
+4043,stdout,received,''
+4043,stdout,received,"Added 29.999999999961336 to the offset for the word l'"
+4043,stdout,received,'Whats sent is timing : 271770.0, offset: (8602.776090848985, "l\'")   '
+4043,stdout,received,''
+4043,stdout,received,"Whats sent is timing : 271840.0, offset: (8632.776090848947, 'âge')   "
+4043,stdout,received,''
+4043,stdout,received,"Whats sent is timing : 272040.0, offset: (8632.776090848947, 'de')   "
+4043,stdout,received,''
+4043,stdout,received,"Whats sent is timing : 272150.0, offset: (8632.776090848947, 'six')   "
+4043,stdout,received,''
+4043,stdout,received,"Whats sent is timing : 272520.0, offset: (8632.776090848947, 'ans')   "
+4043,stdout,received,''
+4043,stdout,received,'Added 110.00000000000226 to the offset for the word et'
+4043,stdout,received,"Whats sent is timing : 273110.0, offset: (8632.776090848947, 'et')   "
+4043,stdout,received,''
+4043,stdout,received,'Added 89.9999999999636 to the offset for the word je'
+4043,stdout,received,"Whats sent is timing : 273150.0, offset: (8742.776090848949, 'je')   "
+4043,stdout,received,''
+4043,stdout,received,'Whats sent is timing : 273300.0, offset: (8832.776090848913, "n\'")   '
+4043,stdout,received,''
+4043,stdout,received,"Whats sent is timing : 273360.0, offset: (8832.776090848913, 'avais')   "
+4043,stdout,received,''
+4043,stdout,received,"Whats sent is timing : 273610.0, offset: (8832.776090848913, 'rien')   "
+4043,stdout,received,''
+4043,stdout,received,"Whats sent is timing : 274060.0, offset: (8832.776090848913, 'appris')   "
+4043,stdout,received,''
+4043,stdout,received,"Whats sent is timing : 274420.0, offset: (8832.776090848913, 'à')   "
+4043,stdout,received,''
+4044,stdout,received,"Whats sent is timing : 274490.0, offset: (8832.776090848913, 'dessiner')   "
+4044,stdout,received,''
+4044,stdout,received,"Whats sent is timing : 275380.0, offset: (8832.776090848913, 'sauf')   "
+4044,stdout,received,''
+4044,stdout,received,"Whats sent is timing : 275790.0, offset: (8832.776090848913, 'les')   "
+4044,stdout,received,''
+4044,stdout,received,"Whats sent is timing : 275940.0, offset: (8832.776090848913, 'boas')   "
+4044,stdout,received,''
+4044,stdout,received,"Whats sent is timing : 276210.0, offset: (8832.776090848913, 'fermés')   "
+4044,stdout,received,''
+4044,stdout,received,'Added 130.00000000004093 to the offset for the word et'
+4044,stdout,received,"Whats sent is timing : 276850.0, offset: (8832.776090848913, 'et')   "
+4044,stdout,received,''
+4044,stdout,received,"Whats sent is timing : 276900.0, offset: (8962.776090848954, 'les')   "
+4044,stdout,received,''
+4044,stdout,received,"Whats sent is timing : 277020.0, offset: (8962.776090848954, 'boas')   "
+4044,stdout,received,''
+4044,stdout,received,"Whats sent is timing : 277320.0, offset: (8962.776090848954, 'ouverts')   "
+4044,stdout,received,''
+4044,stdout,received,"Whats sent is timing : 279160.0, offset: (8962.776090848954, 'je')   "
+4044,stdout,received,''
+4044,stdout,received,"Whats sent is timing : 279350.0, offset: (8962.776090848954, 'regardai')   "
+4044,stdout,received,''
+4044,stdout,received,"Whats sent is timing : 279880.0, offset: (8962.776090848954, 'donc')   "
+4044,stdout,received,''
+4045,stdout,received,"Whats sent is timing : 280180.0, offset: (8962.776090848954, 'cette')   "
+4045,stdout,received,''
+4045,stdout,received,"Whats sent is timing : 280420.0, offset: (8962.776090848954, 'apparition')   "
+4045,stdout,received,''
+4045,stdout,received,"Whats sent is timing : 281310.0, offset: (8962.776090848954, 'avec')   "
+4045,stdout,received,''
+4045,stdout,received,"Whats sent is timing : 281610.0, offset: (8962.776090848954, 'des')   "
+4045,stdout,received,''
+4045,stdout,received,"Whats sent is timing : 281910.0, offset: (8962.776090848954, 'yeux')   "
+4045,stdout,received,''
+4045,stdout,received,"Whats sent is timing : 282120.0, offset: (8962.776090848954, 'tout')   "
+4045,stdout,received,''
+4045,stdout,received,"Whats sent is timing : 282470.0, offset: (8962.776090848954, 'ronds')   "
+4045,stdout,received,''
+4045,stdout,received,'Whats sent is timing : 282870.0, offset: (8962.776090848954, "d\'")   '
+4045,stdout,received,''
+4045,stdout,received,"Whats sent is timing : 282950.0, offset: (8962.776090848954, 'étonnement')   "
+4045,stdout,received,''
+4045,stdout,received,'Whats sent is timing : 284130.0, offset: (8962.776090848954, "n\'")   '
+4045,stdout,received,''
+4046,stdout,received,"Whats sent is timing : 284290.0, offset: (8962.776090848954, 'oubliez')   "
+4046,stdout,received,''
+4046,stdout,received,'Added 10.00000000003637 to the offset for the word pas'
+4046,stdout,received,"Whats sent is timing : 284660.0, offset: (8962.776090848954, 'pas')   "
+4046,stdout,received,''
+4046,stdout,received,'Added 19.99999999997043 to the offset for the word que'
+4046,stdout,received,"Whats sent is timing : 284840.0, offset: (8972.77609084899, 'que')   "
+4046,stdout,received,''
+4046,stdout,received,'Added 19.99999999997043 to the offset for the word je'
+4046,stdout,received,"Whats sent is timing : 284950.0, offset: (8992.776090848962, 'je')   "
+4046,stdout,received,''
+4046,stdout,received,"Whats sent is timing : 285120.0, offset: (9012.776090848933, 'me')   "
+4046,stdout,received,''
+4046,stdout,received,"Whats sent is timing : 285230.0, offset: (9012.776090848933, 'trouvais')   "
+4046,stdout,received,''
+4046,stdout,received,"Whats sent is timing : 285680.0, offset: (9012.776090848933, 'à')   "
+4046,stdout,received,''
+4046,stdout,received,"Whats sent is timing : 285750.0, offset: (9012.776090848933, 'mille')   "
+4046,stdout,received,''
+4046,stdout,received,"Whats sent is timing : 286080.0, offset: (9012.776090848933, 'milles')   "
+4046,stdout,received,''
+4046,stdout,received,"Whats sent is timing : 286380.0, offset: (9012.776090848933, 'de')   "
+4046,stdout,received,''
+4046,stdout,received,"Whats sent is timing : 286510.0, offset: (9012.776090848933, 'toute')   "
+4046,stdout,received,''
+4046,stdout,received,"Whats sent is timing : 286860.0, offset: (9012.776090848933, 'région')   "
+4046,stdout,received,''
+4046,stdout,received,"Whats sent is timing : 287260.0, offset: (9012.776090848933, 'habitée')   "
+4046,stdout,received,''
+4047,stdout,received,"Whats sent is timing : 288770.0, offset: (9012.776090848933, 'or')   "
+4047,stdout,received,''
+4047,stdout,received,"Whats sent is timing : 289100.0, offset: (9012.776090848933, 'mon')   "
+4047,stdout,received,''
+4047,stdout,received,"Whats sent is timing : 289280.0, offset: (9012.776090848933, 'petit')   "
+4047,stdout,received,''
+4047,stdout,received,"Whats sent is timing : 289620.0, offset: (9012.776090848933, 'bonhomme')   "
+4047,stdout,received,''
+4047,stdout,received,'Added 30.00000000001818 to the offset for the word ne'
+4047,stdout,received,"Whats sent is timing : 290070.0, offset: (9012.776090848933, 'ne')   "
+4047,stdout,received,''
+4047,stdout,received,"Whats sent is timing : 290200.0, offset: (9042.77609084895, 'me')   "
+4047,stdout,received,''
+4047,stdout,received,"Whats sent is timing : 290340.0, offset: (9042.77609084895, 'semblait')   "
+4047,stdout,received,''
+4047,stdout,received,"Whats sent is timing : 290850.0, offset: (9042.77609084895, 'ni')   "
+4047,stdout,received,''
+4047,stdout,received,"Whats sent is timing : 291220.0, offset: (9042.77609084895, 'égaré')   "
+4047,stdout,received,''
+4047,stdout,received,"Whats sent is timing : 292030.0, offset: (9042.77609084895, 'ni')   "
+4047,stdout,received,''
+4047,stdout,received,"Whats sent is timing : 292250.0, offset: (9042.77609084895, 'mort')   "
+4047,stdout,received,''
+4047,stdout,received,"Whats sent is timing : 292490.0, offset: (9042.77609084895, 'de')   "
+4047,stdout,received,''
+4047,stdout,received,"Whats sent is timing : 292600.0, offset: (9042.77609084895, 'fatigue')   "
+4047,stdout,received,''
+4047,stdout,received,"Whats sent is timing : 293440.0, offset: (9042.77609084895, 'ni')   "
+4047,stdout,received,''
+4047,stdout,received,"Whats sent is timing : 293650.0, offset: (9042.77609084895, 'mort')   "
+4047,stdout,received,''
+4047,stdout,received,"Whats sent is timing : 293870.0, offset: (9042.77609084895, 'de')   "
+4047,stdout,received,''
+4048,stdout,received,"Whats sent is timing : 293990.0, offset: (9042.77609084895, 'faim')   "
+4048,stdout,received,''
+4048,stdout,received,"Whats sent is timing : 294660.0, offset: (9042.77609084895, 'ni')   "
+4048,stdout,received,''
+4048,stdout,received,"Whats sent is timing : 294860.0, offset: (9042.77609084895, 'mort')   "
+4048,stdout,received,''
+4048,stdout,received,"Whats sent is timing : 295060.0, offset: (9042.77609084895, 'de')   "
+4048,stdout,received,''
+4048,stdout,received,"Whats sent is timing : 295190.0, offset: (9042.77609084895, 'soif')   "
+4048,stdout,received,''
+4048,stdout,received,"Whats sent is timing : 295900.0, offset: (9042.77609084895, 'ni')   "
+4048,stdout,received,''
+4048,stdout,received,"Whats sent is timing : 296180.0, offset: (9042.77609084895, 'mort')   "
+4048,stdout,received,''
+4048,stdout,received,"Whats sent is timing : 296390.0, offset: (9042.77609084895, 'de')   "
+4048,stdout,received,''
+4048,stdout,received,"Whats sent is timing : 296550.0, offset: (9042.77609084895, 'peur')   "
+4048,stdout,received,''
+4048,stdout,received,'Added 29.999999999961336 to the offset for the word il'
+4048,stdout,received,"Whats sent is timing : 297770.0, offset: (9042.77609084895, 'il')   "
+4048,stdout,received,''
+4048,stdout,received,'Whats sent is timing : 297980.0, offset: (9072.776090848913, "n\'")   '
+4048,stdout,received,''
+4048,stdout,received,"Whats sent is timing : 298040.0, offset: (9072.776090848913, 'avait')   "
+4048,stdout,received,''
+4048,stdout,received,"Whats sent is timing : 298410.0, offset: (9072.776090848913, 'en')   "
+4048,stdout,received,''
+4048,stdout,received,"Whats sent is timing : 298580.0, offset: (9072.776090848913, 'rien')   "
+4048,stdout,received,''
+4048,stdout,received,'Whats sent is timing : 298940.0, offset: (9072.776090848913, "l\'")   '
+4048,stdout,received,''
+4049,stdout,received,"Whats sent is timing : 299050.0, offset: (9072.776090848913, 'apparence')   "
+4049,stdout,received,''
+4049,stdout,received,"Added 110.00000000000226 to the offset for the word d'"
+4049,stdout,received,'Whats sent is timing : 299650.0, offset: (9072.776090848913, "d\'")   '
+4049,stdout,received,''
+4049,stdout,received,'Added 119.99999999999316 to the offset for the word un'
+4049,stdout,received,"Whats sent is timing : 299710.0, offset: (9182.776090848914, 'un')   "
+4049,stdout,received,''
+4049,stdout,received,"Whats sent is timing : 299890.0, offset: (9302.776090848907, 'enfant')   "
+4049,stdout,received,''
+4049,stdout,received,"Whats sent is timing : 300320.0, offset: (9302.776090848907, 'perdu')   "
+4049,stdout,received,''
+4049,stdout,received,"Whats sent is timing : 300760.0, offset: (9302.776090848907, 'au')   "
+4049,stdout,received,''
+4049,stdout,received,"Whats sent is timing : 300820.0, offset: (9302.776090848907, 'milieu')   "
+4049,stdout,received,''
+4049,stdout,received,"Whats sent is timing : 301230.0, offset: (9302.776090848907, 'du')   "
+4049,stdout,received,''
+4049,stdout,received,"Whats sent is timing : 301370.0, offset: (9302.776090848907, 'désert')   "
+4049,stdout,received,''
+4049,stdout,received,"Whats sent is timing : 302090.0, offset: (9302.776090848907, 'à')   "
+4049,stdout,received,''
+4050,stdout,received,"Whats sent is timing : 302240.0, offset: (9302.776090848907, 'mille')   "
+4050,stdout,received,''
+4050,stdout,received,"Whats sent is timing : 302520.0, offset: (9302.776090848907, 'milles')   "
+4050,stdout,received,''
+4050,stdout,received,"Whats sent is timing : 302800.0, offset: (9302.776090848907, 'de')   "
+4050,stdout,received,''
+4050,stdout,received,"Whats sent is timing : 302920.0, offset: (9302.776090848907, 'toute')   "
+4050,stdout,received,''
+4050,stdout,received,"Whats sent is timing : 303160.0, offset: (9302.776090848907, 'région')   "
+4050,stdout,received,''
+4050,stdout,received,"Whats sent is timing : 303500.0, offset: (9302.776090848907, 'habitée')   "
+4050,stdout,received,''
+4050,stdout,received,"Whats sent is timing : 304930.0, offset: (9302.776090848907, 'quand')   "
+4050,stdout,received,''
+4050,stdout,received,"Whats sent is timing : 305100.0, offset: (9302.776090848907, 'je')   "
+4050,stdout,received,''
+4050,stdout,received,"Whats sent is timing : 305270.0, offset: (9302.776090848907, 'réussis')   "
+4050,stdout,received,''
+4050,stdout,received,"Whats sent is timing : 305810.0, offset: (9302.776090848907, 'enfin')   "
+4050,stdout,received,''
+4050,stdout,received,"Whats sent is timing : 306430.0, offset: (9302.776090848907, 'à')   "
+4050,stdout,received,''
+4050,stdout,received,"Whats sent is timing : 306460.0, offset: (9302.776090848907, 'parler')   "
+4050,stdout,received,''
+4050,stdout,received,"Whats sent is timing : 307090.0, offset: (9302.776090848907, 'je')   "
+4050,stdout,received,''
+4050,stdout,received,"Whats sent is timing : 307240.0, offset: (9302.776090848907, 'lui')   "
+4050,stdout,received,''
+4051,stdout,received,"Whats sent is timing : 307470.0, offset: (9302.776090848907, 'dis')   "
+4051,stdout,received,''
+4051,stdout,received,"Whats sent is timing : 308410.0, offset: (9302.776090848907, 'mais')   "
+4051,stdout,received,''
+4051,stdout,received,"Added 69.9999999999818 to the offset for the word qu'"
+4051,stdout,received,'Whats sent is timing : 309310.0, offset: (9302.776090848907, "qu\'")   '
+4051,stdout,received,''
+4051,stdout,received,'Added 9.999999999979526 to the offset for the word est'
+4051,stdout,received,"Whats sent is timing : 309400.0, offset: (9372.776090848889, 'est')   "
+4051,stdout,received,''
+4051,stdout,received,'Added 4.546363285840016e-11 to the offset for the word -ce'
+4051,stdout,received,"Whats sent is timing : 309540.0, offset: (9382.776090848869, '-ce')   "
+4051,stdout,received,''
+4051,stdout,received,"Whats sent is timing : 309690.0, offset: (9382.776090848914, 'que')   "
+4051,stdout,received,''
+4051,stdout,received,"Whats sent is timing : 309840.0, offset: (9382.776090848914, 'tu')   "
+4051,stdout,received,''
+4051,stdout,received,"Whats sent is timing : 310100.0, offset: (9382.776090848914, 'fais')   "
+4051,stdout,received,''
+4051,stdout,received,"Whats sent is timing : 310320.0, offset: (9382.776090848914, 'là')   "
+4051,stdout,received,''
+4052,stdout,received,'Added 69.9999999999818 to the offset for the word et'
+4052,stdout,received,"Whats sent is timing : 311650.0, offset: (9382.776090848914, 'et')   "
+4052,stdout,received,''
+4052,stdout,received,'Added 139.999999999975 to the offset for the word il'
+4052,stdout,received,"Whats sent is timing : 311810.0, offset: (9452.776090848896, 'il')   "
+4052,stdout,received,''
+4052,stdout,received,"Whats sent is timing : 311880.0, offset: (9592.77609084887, 'me')   "
+4052,stdout,received,''
+4052,stdout,received,"Whats sent is timing : 311970.0, offset: (9592.77609084887, 'répéta')   "
+4052,stdout,received,''
+4052,stdout,received,"Whats sent is timing : 312560.0, offset: (9592.77609084887, 'alors')   "
+4052,stdout,received,''
+4052,stdout,received,"Whats sent is timing : 313160.0, offset: (9592.77609084887, 'tout')   "
+4052,stdout,received,''
+4052,stdout,received,"Whats sent is timing : 313320.0, offset: (9592.77609084887, 'doucement')   "
+4052,stdout,received,''
+4052,stdout,received,"Whats sent is timing : 314260.0, offset: (9592.77609084887, 'comme')   "
+4052,stdout,received,''
+4052,stdout,received,"Whats sent is timing : 314540.0, offset: (9592.77609084887, 'une')   "
+4052,stdout,received,''
+4052,stdout,received,"Whats sent is timing : 314700.0, offset: (9592.77609084887, 'chose')   "
+4052,stdout,received,''
+4052,stdout,received,"Whats sent is timing : 315160.0, offset: (9592.77609084887, 'très')   "
+4052,stdout,received,''
+4052,stdout,received,"Whats sent is timing : 315420.0, offset: (9592.77609084887, 'sérieuse')   "
+4052,stdout,received,''
+4052,stdout,received,'Whats sent is timing : 316790.0, offset: (9592.77609084887, "s\'")   '
+4052,stdout,received,''
+4052,stdout,received,"Whats sent is timing : 317010.0, offset: (9592.77609084887, 'il')   "
+4052,stdout,received,''
+4053,stdout,received,"Whats sent is timing : 317170.0, offset: (9592.77609084887, 'vous')   "
+4053,stdout,received,''
+4053,stdout,received,"Whats sent is timing : 317340.0, offset: (9592.77609084887, 'plaît')   "
+4053,stdout,received,''
+4053,stdout,received,"Whats sent is timing : 318420.0, offset: (9592.77609084887, 'dessine')   "
+4053,stdout,received,''
+4053,stdout,received,"Whats sent is timing : 318870.0, offset: (9592.77609084887, '-moi')   "
+4053,stdout,received,''
+4053,stdout,received,"Whats sent is timing : 319080.0, offset: (9592.77609084887, 'un')   "
+4053,stdout,received,''
+4053,stdout,received,"Whats sent is timing : 319230.0, offset: (9592.77609084887, 'mouton')   "
+4053,stdout,received,''
+4053,stdout,received,'Added 9.999999999979526 to the offset for the word quand'
+4053,stdout,received,"Whats sent is timing : 321310.0, offset: (9592.77609084887, 'quand')   "
+4053,stdout,received,''
+4053,stdout,received,'Added 189.99999999998636 to the offset for the word le'
+4053,stdout,received,"Whats sent is timing : 321570.0, offset: (9602.77609084885, 'le')   "
+4053,stdout,received,''
+4053,stdout,received,"Whats sent is timing : 321680.0, offset: (9792.776090848838, 'mystère')   "
+4053,stdout,received,''
+4053,stdout,received,"Whats sent is timing : 322100.0, offset: (9792.776090848838, 'est')   "
+4053,stdout,received,''
+4053,stdout,received,'Added 29.999999999961336 to the offset for the word trop'
+4053,stdout,received,"Whats sent is timing : 322210.0, offset: (9792.776090848838, 'trop')   "
+4053,stdout,received,''
+4054,stdout,received,"Whats sent is timing : 322480.0, offset: (9822.7760908488, 'impressionnant')   "
+4054,stdout,received,''
+4054,stdout,received,'Added 160.00000000001364 to the offset for the word on'
+4054,stdout,received,"Whats sent is timing : 323430.0, offset: (9822.7760908488, 'on')   "
+4054,stdout,received,''
+4054,stdout,received,"Added 100.00000000001135 to the offset for the word n'"
+4054,stdout,received,'Whats sent is timing : 323540.0, offset: (9982.776090848813, "n\'")   '
+4054,stdout,received,''
+4054,stdout,received,"Whats sent is timing : 323570.0, offset: (10082.776090848824, 'ose')   "
+4054,stdout,received,''
+4054,stdout,received,"Whats sent is timing : 323740.0, offset: (10082.776090848824, 'pas')   "
+4054,stdout,received,''
+4054,stdout,received,"Whats sent is timing : 323930.0, offset: (10082.776090848824, 'désobéir')   "
+4054,stdout,received,''
+4054,stdout,received,"Whats sent is timing : 325800.0, offset: (10082.776090848824, 'aussi')   "
+4054,stdout,received,''
+4054,stdout,received,"Whats sent is timing : 326280.0, offset: (10082.776090848824, 'absurde')   "
+4054,stdout,received,''
+4054,stdout,received,"Whats sent is timing : 326970.0, offset: (10082.776090848824, 'que')   "
+4054,stdout,received,''
+4055,stdout,received,"Whats sent is timing : 327080.0, offset: (10082.776090848824, 'cela')   "
+4055,stdout,received,''
+4055,stdout,received,"Whats sent is timing : 327410.0, offset: (10082.776090848824, 'me')   "
+4055,stdout,received,''
+4055,stdout,received,"Whats sent is timing : 327550.0, offset: (10082.776090848824, 'semblât')   "
+4055,stdout,received,''
+4055,stdout,received,"Whats sent is timing : 328320.0, offset: (10082.776090848824, 'à')   "
+4055,stdout,received,''
+4055,stdout,received,"Whats sent is timing : 328470.0, offset: (10082.776090848824, 'mille')   "
+4055,stdout,received,''
+4055,stdout,received,"Whats sent is timing : 328940.0, offset: (10082.776090848824, 'milles')   "
+4055,stdout,received,''
+4055,stdout,received,"Whats sent is timing : 329250.0, offset: (10082.776090848824, 'de')   "
+4055,stdout,received,''
+4055,stdout,received,"Whats sent is timing : 329550.0, offset: (10082.776090848824, 'tous')   "
+4055,stdout,received,''
+4055,stdout,received,"Whats sent is timing : 329780.0, offset: (10082.776090848824, 'les')   "
+4055,stdout,received,''
+4055,stdout,received,"Whats sent is timing : 330020.0, offset: (10082.776090848824, 'endroits')   "
+4055,stdout,received,''
+4056,stdout,received,"Whats sent is timing : 330430.0, offset: (10082.776090848824, 'habités')   "
+4056,stdout,received,''
+4056,stdout,received,'Added 100.00000000001135 to the offset for the word et'
+4056,stdout,received,"Whats sent is timing : 331290.0, offset: (10082.776090848824, 'et')   "
+4056,stdout,received,''
+4056,stdout,received,"Whats sent is timing : 331350.0, offset: (10182.776090848834, 'en')   "
+4056,stdout,received,''
+4056,stdout,received,"Whats sent is timing : 331490.0, offset: (10182.776090848834, 'danger')   "
+4056,stdout,received,''
+4056,stdout,received,"Whats sent is timing : 331970.0, offset: (10182.776090848834, 'de')   "
+4056,stdout,received,''
+4056,stdout,received,"Whats sent is timing : 332170.0, offset: (10182.776090848834, 'mort')   "
+4056,stdout,received,''
+4056,stdout,received,"Whats sent is timing : 333060.0, offset: (10182.776090848834, 'je')   "
+4056,stdout,received,''
+4056,stdout,received,"Whats sent is timing : 333230.0, offset: (10182.776090848834, 'sortis')   "
+4056,stdout,received,''
+4056,stdout,received,'Added 20.000000000027274 to the offset for the word de'
+4056,stdout,received,"Whats sent is timing : 333670.0, offset: (10182.776090848834, 'de')   "
+4056,stdout,received,''
+4056,stdout,received,"Whats sent is timing : 333770.0, offset: (10202.776090848862, 'ma')   "
+4056,stdout,received,''
+4056,stdout,received,"Whats sent is timing : 333950.0, offset: (10202.776090848862, 'poche')   "
+4056,stdout,received,''
+4057,stdout,received,"Whats sent is timing : 334440.0, offset: (10202.776090848862, 'une')   "
+4057,stdout,received,''
+4057,stdout,received,"Whats sent is timing : 334670.0, offset: (10202.776090848862, 'feuille')   "
+4057,stdout,received,''
+4057,stdout,received,"Whats sent is timing : 334920.0, offset: (10202.776090848862, 'de')   "
+4057,stdout,received,''
+4057,stdout,received,"Whats sent is timing : 335050.0, offset: (10202.776090848862, 'papier')   "
+4057,stdout,received,''
+4057,stdout,received,'Added 100.00000000001135 to the offset for the word et'
+4057,stdout,received,"Whats sent is timing : 335850.0, offset: (10202.776090848862, 'et')   "
+4057,stdout,received,''
+4057,stdout,received,"Whats sent is timing : 335930.0, offset: (10302.776090848873, 'un')   "
+4057,stdout,received,''
+4060,stdout,received,"Whats sent is timing : 336050.0, offset: (10302.776090848873, 'stylographe')   "
+4060,stdout,received,''
+4060,stdout,received,"Whats sent is timing : 337900.0, offset: (10302.776090848873, 'mais')   "
+4060,stdout,received,''
+4060,stdout,received,'Added 100.00000000001135 to the offset for the word je'
+4060,stdout,received,"Whats sent is timing : 338080.0, offset: (10302.776090848873, 'je')   "
+4060,stdout,received,''
+4060,stdout,received,"Whats sent is timing : 338220.0, offset: (10402.776090848884, 'me')   "
+4060,stdout,received,''
+4060,stdout,received,"Whats sent is timing : 338280.0, offset: (10402.776090848884, 'rappelai')   "
+4060,stdout,received,''
+4060,stdout,received,"Whats sent is timing : 338770.0, offset: (10402.776090848884, 'alors')   "
+4060,stdout,received,''
+4060,stdout,received,'Added 90.00000000002045 to the offset for the word que'
+4060,stdout,received,"Whats sent is timing : 339160.0, offset: (10402.776090848884, 'que')   "
+4060,stdout,received,''
+4060,stdout,received,"Added 9.999999999979526 to the offset for the word j'"
+4060,stdout,received,'Whats sent is timing : 339260.0, offset: (10492.776090848904, "j\'")   '
+4060,stdout,received,''
+4060,stdout,received,"Whats sent is timing : 339370.0, offset: (10502.776090848884, 'avais')   "
+4060,stdout,received,''
+4061,stdout,received,"Whats sent is timing : 339550.0, offset: (10502.776090848884, 'surtout')   "
+4061,stdout,received,''
+4061,stdout,received,"Whats sent is timing : 340010.0, offset: (10502.776090848884, 'étudié')   "
+4061,stdout,received,''
+4061,stdout,received,"Whats sent is timing : 340420.0, offset: (10502.776090848884, 'la')   "
+4061,stdout,received,''
+4061,stdout,received,"Whats sent is timing : 340520.0, offset: (10502.776090848884, 'géographie')   "
+4061,stdout,received,''
+4061,stdout,received,'Whats sent is timing : 341550.0, offset: (10502.776090848884, "l\'")   '
+4061,stdout,received,''
+4061,stdout,received,"Whats sent is timing : 341620.0, offset: (10502.776090848884, 'histoire')   "
+4061,stdout,received,''
+4061,stdout,received,"Whats sent is timing : 342310.0, offset: (10502.776090848884, 'le')   "
+4061,stdout,received,''
+4061,stdout,received,"Whats sent is timing : 342490.0, offset: (10502.776090848884, 'calcul')   "
+4061,stdout,received,''
+4061,stdout,received,'Added 89.9999999999636 to the offset for the word et'
+4061,stdout,received,"Whats sent is timing : 343260.0, offset: (10502.776090848884, 'et')   "
+4061,stdout,received,''
+4061,stdout,received,"Whats sent is timing : 343330.0, offset: (10592.776090848847, 'la')   "
+4061,stdout,received,''
+4061,stdout,received,"Whats sent is timing : 343470.0, offset: (10592.776090848847, 'grammaire')   "
+4061,stdout,received,''
+4062,stdout,received,'Added 80.00000000002954 to the offset for the word et'
+4062,stdout,received,"Whats sent is timing : 344560.0, offset: (10592.776090848847, 'et')   "
+4062,stdout,received,''
+4062,stdout,received,"Whats sent is timing : 344610.0, offset: (10672.776090848876, 'je')   "
+4062,stdout,received,''
+4062,stdout,received,"Whats sent is timing : 344780.0, offset: (10672.776090848876, 'dis')   "
+4062,stdout,received,''
+4062,stdout,received,"Whats sent is timing : 345010.0, offset: (10672.776090848876, 'au')   "
+4062,stdout,received,''
+4062,stdout,received,"Whats sent is timing : 345090.0, offset: (10672.776090848876, 'petit')   "
+4062,stdout,received,''
+4062,stdout,received,"Whats sent is timing : 345380.0, offset: (10672.776090848876, 'bonhomme')   "
+4062,stdout,received,''
+4062,stdout,received,"Whats sent is timing : 346220.0, offset: (10672.776090848876, 'avec')   "
+4062,stdout,received,''
+4062,stdout,received,'Added 29.999999999961336 to the offset for the word un'
+4062,stdout,received,"Whats sent is timing : 346520.0, offset: (10672.776090848876, 'un')   "
+4062,stdout,received,''
+4062,stdout,received,'Added 59.99999999999089 to the offset for the word peu'
+4062,stdout,received,"Whats sent is timing : 346640.0, offset: (10702.776090848838, 'peu')   "
+4062,stdout,received,''
+4062,stdout,received,"Whats sent is timing : 346790.0, offset: (10762.776090848829, 'de')   "
+4062,stdout,received,''
+4062,stdout,received,"Whats sent is timing : 346880.0, offset: (10762.776090848829, 'mauvaise')   "
+4062,stdout,received,''
+4062,stdout,received,"Whats sent is timing : 347270.0, offset: (10762.776090848829, 'humeur')   "
+4062,stdout,received,''
+4062,stdout,received,'Added 70.00000000003864 to the offset for the word que'
+4062,stdout,received,"Whats sent is timing : 348160.0, offset: (10762.776090848829, 'que')   "
+4063,stdout,received,''
+4063,stdout,received,'Added 69.9999999999818 to the offset for the word je'
+4063,stdout,received,"Whats sent is timing : 348270.0, offset: (10832.776090848867, 'je')   "
+4063,stdout,received,''
+4063,stdout,received,"Whats sent is timing : 348390.0, offset: (10902.776090848849, 'ne')   "
+4063,stdout,received,''
+4063,stdout,received,"Whats sent is timing : 348500.0, offset: (10902.776090848849, 'savais')   "
+4063,stdout,received,''
+4063,stdout,received,"Whats sent is timing : 348870.0, offset: (10902.776090848849, 'pas')   "
+4063,stdout,received,''
+4063,stdout,received,"Whats sent is timing : 349030.0, offset: (10902.776090848849, 'dessiner')   "
+4063,stdout,received,''
+4063,stdout,received,'Added 60.000000000047734 to the offset for the word il'
+4063,stdout,received,"Whats sent is timing : 350540.0, offset: (10902.776090848849, 'il')   "
+4063,stdout,received,''
+4063,stdout,received,"Whats sent is timing : 350700.0, offset: (10962.776090848896, 'me')   "
+4063,stdout,received,''
+4063,stdout,received,"Whats sent is timing : 350780.0, offset: (10962.776090848896, 'répondit')   "
+4063,stdout,received,''
+4063,stdout,received,'Added 49.999999999999986 to the offset for the word ça'
+4063,stdout,received,"Whats sent is timing : 351870.0, offset: (10962.776090848896, 'ça')   "
+4063,stdout,received,''
+4063,stdout,received,'Added 80.00000000002954 to the offset for the word ne'
+4063,stdout,received,"Whats sent is timing : 352060.0, offset: (11012.776090848896, 'ne')   "
+4063,stdout,received,''
+4063,stdout,received,"Whats sent is timing : 352120.0, offset: (11092.776090848925, 'fait')   "
+4063,stdout,received,''
+4063,stdout,received,"Whats sent is timing : 352280.0, offset: (11092.776090848925, 'rien')   "
+4063,stdout,received,''
+4063,stdout,received,"Whats sent is timing : 353130.0, offset: (11092.776090848925, 'dessine')   "
+4063,stdout,received,''
+4063,stdout,received,"Whats sent is timing : 353500.0, offset: (11092.776090848925, '-moi')   "
+4063,stdout,received,''
+4063,stdout,received,"Whats sent is timing : 353720.0, offset: (11092.776090848925, 'un')   "
+4063,stdout,received,''
+4063,stdout,received,"Whats sent is timing : 353810.0, offset: (11092.776090848925, 'mouton')   "
+4063,stdout,received,''
+4063,stdout,received,"Whats sent is timing : 355340.0, offset: (11092.776090848925, 'comme')   "
+4063,stdout,received,''
+4063,stdout,received,'Added 59.99999999999089 to the offset for the word je'
+4063,stdout,received,"Whats sent is timing : 355570.0, offset: (11092.776090848925, 'je')   "
+4063,stdout,received,''
+4063,stdout,received,'Whats sent is timing : 355780.0, offset: (11152.776090848916, "n\'")   '
+4063,stdout,received,''
+4063,stdout,received,"Whats sent is timing : 355810.0, offset: (11152.776090848916, 'avais')   "
+4063,stdout,received,''
+4063,stdout,received,"Whats sent is timing : 356190.0, offset: (11152.776090848916, 'jamais')   "
+4063,stdout,received,''
+4064,stdout,received,"Whats sent is timing : 356660.0, offset: (11152.776090848916, 'dessiné')   "
+4064,stdout,received,''
+4064,stdout,received,"Whats sent is timing : 357090.0, offset: (11152.776090848916, 'un')   "
+4064,stdout,received,''
+4064,stdout,received,"Whats sent is timing : 357290.0, offset: (11152.776090848916, 'mouton')   "
+4064,stdout,received,''
+4064,stdout,received,"Whats sent is timing : 357900.0, offset: (11152.776090848916, 'je')   "
+4064,stdout,received,''
+4064,stdout,received,"Whats sent is timing : 358080.0, offset: (11152.776090848916, 'refis')   "
+4064,stdout,received,''
+4064,stdout,received,"Whats sent is timing : 358780.0, offset: (11152.776090848916, 'pour')   "
+4064,stdout,received,''
+4064,stdout,received,"Whats sent is timing : 359020.0, offset: (11152.776090848916, 'lui')   "
+4064,stdout,received,''
+4064,stdout,received,"Added 69.9999999999818 to the offset for the word l'"
+4064,stdout,received,'Whats sent is timing : 359520.0, offset: (11152.776090848916, "l\'")   '
+4064,stdout,received,''
+4064,stdout,received,'Added 30.00000000001818 to the offset for the word un'
+4064,stdout,received,"Whats sent is timing : 359630.0, offset: (11222.776090848898, 'un')   "
+4064,stdout,received,''
+4064,stdout,received,"Whats sent is timing : 359750.0, offset: (11252.776090848916, 'des')   "
+4064,stdout,received,''
+4064,stdout,received,"Whats sent is timing : 359900.0, offset: (11252.776090848916, 'deux')   "
+4064,stdout,received,''
+4064,stdout,received,"Whats sent is timing : 360190.0, offset: (11252.776090848916, 'seuls')   "
+4064,stdout,received,''
+4065,stdout,received,"Whats sent is timing : 360540.0, offset: (11252.776090848916, 'dessins')   "
+4065,stdout,received,''
+4065,stdout,received,'Added 79.9999999999727 to the offset for the word dont'
+4065,stdout,received,"Whats sent is timing : 360900.0, offset: (11252.776090848916, 'dont')   "
+4065,stdout,received,''
+4065,stdout,received,'Whats sent is timing : 361010.0, offset: (11332.776090848889, "j\'")   '
+4065,stdout,received,''
+4065,stdout,received,"Whats sent is timing : 361120.0, offset: (11332.776090848889, 'étais')   "
+4065,stdout,received,''
+4065,stdout,received,"Whats sent is timing : 361330.0, offset: (11332.776090848889, 'capable')   "
+4065,stdout,received,''
+4065,stdout,received,"Whats sent is timing : 362540.0, offset: (11332.776090848889, 'celui')   "
+4065,stdout,received,''
+4065,stdout,received,"Whats sent is timing : 362960.0, offset: (11332.776090848889, 'du')   "
+4065,stdout,received,''
+4065,stdout,received,"Whats sent is timing : 363090.0, offset: (11332.776090848889, 'boa')   "
+4065,stdout,received,''
+4066,stdout,received,"Whats sent is timing : 363350.0, offset: (11332.776090848889, 'fermé')   "
+4066,stdout,received,''
+4066,stdout,received,"Whats sent is timing : 364780.0, offset: (11332.776090848889, 'et')   "
+4066,stdout,received,''
+4066,stdout,received,"Whats sent is timing : 364860.0, offset: (11332.776090848889, 'je')   "
+4066,stdout,received,''
+4066,stdout,received,"Whats sent is timing : 365080.0, offset: (11332.776090848889, 'fus')   "
+4066,stdout,received,''
+4066,stdout,received,"Whats sent is timing : 365360.0, offset: (11332.776090848889, 'stupéfait')   "
+4066,stdout,received,''
+4066,stdout,received,"Added 170.00000000000455 to the offset for the word d'"
+4066,stdout,received,'Whats sent is timing : 366570.0, offset: (11332.776090848889, "d\'")   '
+4066,stdout,received,''
+4066,stdout,received,"Whats sent is timing : 366700.0, offset: (11502.776090848893, 'entendre')   "
+4066,stdout,received,''
+4066,stdout,received,"Whats sent is timing : 367200.0, offset: (11502.776090848893, 'le')   "
+4066,stdout,received,''
+4066,stdout,received,"Whats sent is timing : 367330.0, offset: (11502.776090848893, 'petit')   "
+4066,stdout,received,''
+4066,stdout,received,"Whats sent is timing : 367630.0, offset: (11502.776090848893, 'bonhomme')   "
+4066,stdout,received,''
+4066,stdout,received,"Whats sent is timing : 368140.0, offset: (11502.776090848893, 'me')   "
+4066,stdout,received,''
+4067,stdout,received,"Whats sent is timing : 368180.0, offset: (11502.776090848893, 'répondre')   "
+4067,stdout,received,''
+4067,stdout,received,"Whats sent is timing : 369400.0, offset: (11502.776090848893, 'non')   "
+4067,stdout,received,''
+4067,stdout,received,"Whats sent is timing : 369980.0, offset: (11502.776090848893, 'non')   "
+4067,stdout,received,''
+4067,stdout,received,'Added 110.00000000000226 to the offset for the word je'
+4067,stdout,received,"Whats sent is timing : 370540.0, offset: (11502.776090848893, 'je')   "
+4067,stdout,received,''
+4067,stdout,received,'Added 49.999999999999986 to the offset for the word ne'
+4067,stdout,received,"Whats sent is timing : 370690.0, offset: (11612.776090848894, 'ne')   "
+4067,stdout,received,''
+4067,stdout,received,"Whats sent is timing : 370730.0, offset: (11662.776090848894, 'veux')   "
+4067,stdout,received,''
+4067,stdout,received,'Added 129.99999999998408 to the offset for the word pas'
+4067,stdout,received,"Whats sent is timing : 370940.0, offset: (11662.776090848894, 'pas')   "
+4067,stdout,received,''
+4067,stdout,received,"Added 129.99999999998408 to the offset for the word d'"
+4067,stdout,received,'Whats sent is timing : 371080.0, offset: (11792.776090848878, "d\'")   '
+4067,stdout,received,''
+4067,stdout,received,"Whats sent is timing : 371110.0, offset: (11922.776090848862, 'un')   "
+4067,stdout,received,''
+4067,stdout,received,"Whats sent is timing : 371250.0, offset: (11922.776090848862, 'éléphant')   "
+4067,stdout,received,''
+4067,stdout,received,"Whats sent is timing : 371610.0, offset: (11922.776090848862, 'dans')   "
+4067,stdout,received,''
+4067,stdout,received,"Whats sent is timing : 371830.0, offset: (11922.776090848862, 'un')   "
+4067,stdout,received,''
+4067,stdout,received,"Whats sent is timing : 371940.0, offset: (11922.776090848862, 'boa')   "
+4067,stdout,received,''
+4067,stdout,received,"Whats sent is timing : 372780.0, offset: (11922.776090848862, 'un')   "
+4068,stdout,received,''
+4068,stdout,received,"Whats sent is timing : 372970.0, offset: (11922.776090848862, 'boa')   "
+4068,stdout,received,''
+4068,stdout,received,"Added 140.00000000003183 to the offset for the word c'"
+4068,stdout,received,'Whats sent is timing : 373230.0, offset: (11922.776090848862, "c\'")   '
+4068,stdout,received,''
+4068,stdout,received,'Added 89.9999999999636 to the offset for the word est'
+4068,stdout,received,"Whats sent is timing : 373340.0, offset: (12062.776090848893, 'est')   "
+4068,stdout,received,''
+4068,stdout,received,"Whats sent is timing : 373390.0, offset: (12152.776090848856, 'très')   "
+4068,stdout,received,''
+4068,stdout,received,"Whats sent is timing : 373550.0, offset: (12152.776090848856, 'dangereux')   "
+4068,stdout,received,''
+4068,stdout,received,'Added 89.9999999999636 to the offset for the word et'
+4068,stdout,received,"Whats sent is timing : 374330.0, offset: (12152.776090848856, 'et')   "
+4068,stdout,received,''
+4068,stdout,received,"Whats sent is timing : 374400.0, offset: (12242.77609084882, 'un')   "
+4068,stdout,received,''
+4068,stdout,received,"Whats sent is timing : 374540.0, offset: (12242.77609084882, 'éléphant')   "
+4068,stdout,received,''
+4278,stderr,received,'Traceback (most recent call last):'
+4278,stderr,received,'  File "expy_read_lpp.py", line 185, in <module>'
+4278,stderr,received,'    expyriment.control.start(subject_id=0)'
+4278,stderr,received,'  File "/home/is153802/.pyenv/versions/expyriment/lib/python3.7/site-packages/expyriment/control/_experiment_control.py", line 203, in start'
+4278,stderr,received,'    process_control_events=False)'
+4278,stderr,received,'  File "/home/is153802/.pyenv/versions/expyriment/lib/python3.7/site-packages/expyriment/io/_keyboard.py", line 343, in wait'
+4279,stderr,received,'    time.sleep(0.0005)'
+4279,stderr,received,'KeyboardInterrupt'

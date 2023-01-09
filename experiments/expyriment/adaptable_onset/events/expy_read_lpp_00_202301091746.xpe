@@ -1,0 +1,216 @@
+#Expyriment 0.10.0 (Python 3.7.6), .xpe-file, coding: UTF-8
+#date: Mon Jan 09 2023 17:46:19
+#sha1: cbaeef
+#modules: 
+#display: size=(800, 600), window_mode=True, open_gl=2
+#os: uname_result(system='Linux', node='is153802', release='5.15.0-48-generic', version='#54-Ubuntu SMP Fri Aug 26 13:26:29 UTC 2022', machine='x86_64', processor='x86_64')
+Time,Type,Event,Value,Detail,Detail2
+11518,design,log,
+#design: #exp: RSVP
+#design: block_cnt,block_id,trial_cnt,trial_id
+11518,design,logged,
+11518,Experiment,started
+14565,Stimulus,presented,1
+14566,stdout,received,'Duration = 3050.0'
+14566,stdout,received,''
+14842,Stimulus,presented,2
+14842,stdout,received,'Duration = 280.0'
+14842,stdout,received,''
+15041,Stimulus,presented,3
+15041,stdout,received,'Duration = 200.0'
+15041,stdout,received,''
+15441,Stimulus,presented,4
+15441,stdout,received,'Duration = 400.0'
+15441,stdout,received,''
+15691,Stimulus,presented,5
+15691,stdout,received,'Duration = 250.0'
+15691,stdout,received,''
+15911,Stimulus,presented,2
+15911,stdout,received,'Duration = 220.0'
+15911,stdout,received,''
+16052,Stimulus,presented,6
+16053,stdout,received,'Duration = 140.0'
+16053,stdout,received,''
+16371,Stimulus,presented,7
+16371,stdout,received,'Duration = 319.4333400893156'
+16371,stdout,received,''
+16661,Stimulus,presented,8
+16661,stdout,received,'Duration = 290.42852393452813'
+16661,stdout,received,''
+17011,Stimulus,presented,9
+17011,stdout,received,'Duration = 350.13813597615626'
+17011,stdout,received,''
+17651,Stimulus,presented,8
+17651,stdout,received,'Duration = 640.0'
+17651,stdout,received,''
+18111,Stimulus,presented,10
+18111,stdout,received,'Duration = 460.0'
+18111,stdout,received,''
+18721,Stimulus,presented,11
+18721,stdout,received,'Duration = 610.0'
+18721,stdout,received,''
+19374,Stimulus,presented,12
+19374,stdout,received,'Duration = 650.0'
+19374,stdout,received,''
+19691,Stimulus,presented,13
+19691,stdout,received,'Duration = 320.0'
+19691,stdout,received,''
+19891,Stimulus,presented,14
+19891,stdout,received,'Duration = 200.0'
+19891,stdout,received,''
+20161,Stimulus,presented,15
+20161,stdout,received,'Duration = 270.0'
+20161,stdout,received,''
+20361,Stimulus,presented,16
+20361,stdout,received,'Duration = 200.0'
+20361,stdout,received,''
+20461,Stimulus,presented,17
+20461,stdout,received,'Duration = 100.0'
+20461,stdout,received,''
+20841,Stimulus,presented,18
+20841,stdout,received,'Duration = 380.0'
+20841,stdout,received,''
+21321,Stimulus,presented,19
+21321,stdout,received,'Duration = 480.0'
+21321,stdout,received,''
+21501,Stimulus,presented,20
+21501,stdout,received,'Duration = 180.0'
+21501,stdout,received,''
+21631,Stimulus,presented,21
+21631,stdout,received,'Duration = 130.0'
+21631,stdout,received,''
+22321,Stimulus,presented,22
+22321,stdout,received,'Duration = 690.0'
+22321,stdout,received,''
+22861,Stimulus,presented,23
+22861,stdout,received,'Duration = 540.0'
+22861,stdout,received,''
+24151,Stimulus,presented,24
+24151,stdout,received,'Duration = 1290.0'
+24151,stdout,received,''
+24461,Stimulus,presented,25
+24461,stdout,received,'Duration = 310.0'
+24461,stdout,received,''
+25050,Stimulus,presented,13
+25051,stdout,received,'Duration = 590.0'
+25051,stdout,received,''
+25181,Stimulus,presented,26
+25181,stdout,received,'Duration = 130.0'
+25181,stdout,received,''
+25671,Stimulus,presented,27
+25671,stdout,received,'Duration = 490.0'
+25671,stdout,received,''
+26281,Stimulus,presented,19
+26281,stdout,received,'Duration = 610.0'
+26281,stdout,received,''
+26461,Stimulus,presented,28
+26461,stdout,received,'Duration = 180.0'
+26461,stdout,received,''
+26921,Stimulus,presented,13
+26921,stdout,received,'Duration = 460.0'
+26921,stdout,received,''
+27061,Stimulus,presented,29
+27061,stdout,received,'Duration = 140.0'
+27061,stdout,received,''
+28231,Stimulus,presented,30
+28231,stdout,received,'Duration = 1170.0'
+28231,stdout,received,''
+28641,Stimulus,presented,16
+28641,stdout,received,'Duration = 410.0'
+28641,stdout,received,''
+28771,Stimulus,presented,31
+28771,stdout,received,'Duration = 130.0'
+28771,stdout,received,''
+29161,Stimulus,presented,32
+29161,stdout,received,'Duration = 390.0'
+29161,stdout,received,''
+29311,Stimulus,presented,33
+29311,stdout,received,'Duration = 150.0'
+29311,stdout,received,''
+30981,Stimulus,presented,34
+30981,stdout,received,'Duration = 1670.0'
+30981,stdout,received,''
+31041,Stimulus,presented,35
+31041,stdout,received,'Duration = 60.0'
+31041,stdout,received,''
+31451,Stimulus,presented,12
+31451,stdout,received,'Duration = 410.0'
+31451,stdout,received,''
+31620,Stimulus,presented,36
+31621,stdout,received,'Duration = 170.0'
+31621,stdout,received,''
+31771,Stimulus,presented,14
+31771,stdout,received,'Duration = 150.0'
+31771,stdout,received,''
+32491,Stimulus,presented,37
+32491,stdout,received,'Duration = 720.0'
+32491,stdout,received,''
+32681,Stimulus,presented,38
+32681,stdout,received,'Duration = 190.0'
+32681,stdout,received,''
+33161,Stimulus,presented,39
+33161,stdout,received,'Duration = 480.0'
+33161,stdout,received,''
+33651,Stimulus,presented,40
+33651,stdout,received,'Duration = 490.0'
+33651,stdout,received,''
+34201,Stimulus,presented,41
+34201,stdout,received,'Duration = 550.0'
+34201,stdout,received,''
+34391,Stimulus,presented,42
+34391,stdout,received,'Duration = 190.0'
+34391,stdout,received,''
+34911,Stimulus,presented,43
+34911,stdout,received,'Duration = 520.0'
+34911,stdout,received,''
+35161,Stimulus,presented,44
+35161,stdout,received,'Duration = 250.0'
+35161,stdout,received,''
+35825,Stimulus,presented,45
+35826,stdout,received,'Duration = 660.0'
+35826,stdout,received,''
+36171,Stimulus,presented,16
+36171,stdout,received,'Duration = 350.0'
+36171,stdout,received,''
+36301,Stimulus,presented,46
+36301,stdout,received,'Duration = 130.0'
+36301,stdout,received,''
+37321,Stimulus,presented,47
+37321,stdout,received,'Duration = 1020.0'
+37321,stdout,received,''
+37841,Stimulus,presented,48
+37841,stdout,received,'Duration = 520.0'
+37841,stdout,received,''
+37941,Stimulus,presented,49
+37941,stdout,received,'Duration = 100.0'
+37941,stdout,received,''
+38081,Stimulus,presented,50
+38081,stdout,received,'Duration = 140.0'
+38081,stdout,received,''
+38311,Stimulus,presented,51
+38311,stdout,received,'Duration = 230.0'
+38311,stdout,received,''
+38571,Stimulus,presented,52
+38571,stdout,received,'Duration = 260.0'
+38571,stdout,received,''
+39216,Stimulus,presented,53
+39216,stdout,received,'Duration = 644.9031621734357'
+39216,stdout,received,''
+39388,Stimulus,presented,48
+39388,stdout,received,'Duration = 171.1550140276704'
+39388,stdout,received,''
+39537,Stimulus,presented,54
+39537,stdout,received,'Duration = 143.9418237988939'
+39537,stdout,received,''
+39951,Stimulus,presented,55
+39951,stdout,received,'Duration = 420.0'
+39951,stdout,received,''
+40257,stderr,received,'Traceback (most recent call last):'
+40257,stderr,received,'  File "expy_read_lpp.py", line 185, in <module>'
+40258,stderr,received,'    a.wait(1)'
+40258,stderr,received,'  File "/home/is153802/.pyenv/versions/expyriment/lib/python3.7/site-packages/expyriment/misc/_clock.py", line 160, in wait'
+40258,stderr,received,'    while (self.time < start + waiting_time):'
+40258,stderr,received,'  File "/home/is153802/.pyenv/versions/expyriment/lib/python3.7/site-packages/expyriment/misc/_clock.py", line 69, in time'
+40258,stderr,received,'    return int((get_time() - self.__init_time) * 1000)'
+40258,stderr,received,'KeyboardInterrupt'
+40258,Data,saved

@@ -1,0 +1,72 @@
+#Expyriment 0.10.0 (Python 3.7.6), .xpe-file, coding: UTF-8
+#date: Mon Jan 09 2023 17:01:01
+#sha1: fcb2aa
+#modules: 
+#display: size=(800, 600), window_mode=True, open_gl=2
+#os: uname_result(system='Linux', node='is153802', release='5.15.0-48-generic', version='#54-Ubuntu SMP Fri Aug 26 13:26:29 UTC 2022', machine='x86_64', processor='x86_64')
+Time,Type,Event,Value,Detail,Detail2
+10744,design,log,
+#design: #exp: RSVP
+#design: block_cnt,block_id,trial_cnt,trial_id
+10744,design,logged,
+10744,Experiment,started
+13787,Stimulus,presented,1
+14165,Stimulus,presented,0
+14168,Stimulus,presented,2
+14273,Stimulus,presented,0
+14275,Stimulus,presented,3
+14674,Stimulus,presented,0
+14676,Stimulus,presented,4
+14924,Stimulus,presented,0
+14926,Stimulus,presented,5
+15143,Stimulus,presented,0
+15146,Stimulus,presented,2
+15284,Stimulus,presented,0
+15286,Stimulus,presented,6
+15603,Stimulus,presented,0
+15606,Stimulus,presented,7
+15894,Stimulus,presented,0
+15897,Stimulus,presented,8
+16243,Stimulus,presented,0
+16246,Stimulus,presented,9
+16883,Stimulus,presented,0
+16886,Stimulus,presented,8
+17343,Stimulus,presented,0
+17346,Stimulus,presented,10
+17953,Stimulus,presented,0
+17956,Stimulus,presented,11
+18603,Stimulus,presented,0
+18606,Stimulus,presented,12
+18924,Stimulus,presented,0
+18927,Stimulus,presented,13
+19124,Stimulus,presented,0
+19127,Stimulus,presented,14
+19394,Stimulus,presented,0
+19398,Stimulus,presented,15
+19594,Stimulus,presented,0
+19597,Stimulus,presented,16
+19693,Stimulus,presented,0
+19695,Stimulus,presented,17
+20073,Stimulus,presented,0
+20075,Stimulus,presented,18
+20553,Stimulus,presented,0
+20555,Stimulus,presented,19
+20733,Stimulus,presented,0
+20735,Stimulus,presented,20
+20863,Stimulus,presented,0
+20865,Stimulus,presented,21
+21552,Stimulus,presented,0
+21555,Stimulus,presented,22
+22093,Stimulus,presented,0
+22095,Stimulus,presented,23
+23383,Stimulus,presented,0
+23385,Stimulus,presented,24
+23693,stderr,received,'Traceback (most recent call last):'
+23693,stderr,received,'  File "expy_read_lpp.py", line 159, in <module>'
+23693,stderr,received,'    stim.present()'
+23693,stderr,received,'  File "/home/is153802/.pyenv/versions/expyriment/lib/python3.7/site-packages/expyriment/stimuli/_visual.py", line 1208, in present'
+23694,stderr,received,'    _internals.active_exp.screen.update()'
+23694,stderr,received,'  File "/home/is153802/.pyenv/versions/expyriment/lib/python3.7/site-packages/expyriment/io/_screen.py", line 185, in update'
+23695,stderr,received,'    pygame.display.flip()'
+23695,stderr,received,'KeyboardInterrupt'
+23695,Data,saved

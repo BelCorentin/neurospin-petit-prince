@@ -1,0 +1,54 @@
+#Expyriment 0.10.0 (Python 3.7.6), .xpe-file, coding: UTF-8
+#date: Mon Jan 09 2023 17:54:39
+#sha1: 872516
+#modules: 
+#display: size=(800, 600), window_mode=True, open_gl=2
+#os: uname_result(system='Linux', node='is153802', release='5.15.0-48-generic', version='#54-Ubuntu SMP Fri Aug 26 13:26:29 UTC 2022', machine='x86_64', processor='x86_64')
+Time,Type,Event,Value,Detail,Detail2
+11999,design,log,
+#design: #exp: RSVP
+#design: block_cnt,block_id,trial_cnt,trial_id
+11999,design,logged,
+11999,Experiment,started
+15042,Stimulus,presented,1
+15412,Stimulus,presented,2
+15522,Stimulus,presented,3
+15922,Stimulus,presented,4
+16172,Stimulus,presented,5
+16392,Stimulus,presented,2
+16532,Stimulus,presented,6
+16852,Stimulus,presented,7
+17141,Stimulus,presented,8
+17492,Stimulus,presented,9
+18132,Stimulus,presented,8
+18592,Stimulus,presented,10
+19202,Stimulus,presented,11
+19852,Stimulus,presented,12
+20172,Stimulus,presented,13
+20372,Stimulus,presented,14
+20642,Stimulus,presented,15
+20842,Stimulus,presented,16
+20942,Stimulus,presented,17
+21322,Stimulus,presented,18
+21801,Stimulus,presented,19
+21982,Stimulus,presented,20
+22112,Stimulus,presented,21
+22802,Stimulus,presented,22
+23342,Stimulus,presented,23
+24632,Stimulus,presented,24
+24942,Stimulus,presented,25
+25531,Stimulus,presented,13
+25662,Stimulus,presented,26
+26152,Stimulus,presented,27
+26762,Stimulus,presented,19
+26942,Stimulus,presented,28
+27402,Stimulus,presented,13
+27542,Stimulus,presented,29
+27620,stderr,received,'Traceback (most recent call last):'
+27620,stderr,received,'  File "expy_read_lpp.py", line 189, in <module>'
+27621,stderr,received,'    a.wait(1)'
+27621,stderr,received,'  File "/home/is153802/.pyenv/versions/expyriment/lib/python3.7/site-packages/expyriment/misc/_clock.py", line 160, in wait'
+27621,stderr,received,'    while (self.time < start + waiting_time):'
+27621,stderr,received,'  File "/home/is153802/.pyenv/versions/expyriment/lib/python3.7/site-packages/expyriment/misc/_clock.py", line 65, in time'
+27621,stderr,received,'    @property'
+27621,stderr,received,'KeyboardInterrupt'

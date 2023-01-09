@@ -3,7 +3,7 @@ import numpy as np
 import textgrids # pip install praat-textgrids
 
 # Open the text grid file
-grid = textgrids.TextGrid("./annot.TextGrid")
+grid = textgrids.TextGrid("./../textgrids/annot.TextGrid")
 
 win = visual.Window()
 msg = visual.TextStim(win, text="Starting")

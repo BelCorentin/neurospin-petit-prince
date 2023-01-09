@@ -1,0 +1,15 @@
+#Expyriment 0.10.0 (Python 3.7.6), .xpe-file, coding: UTF-8
+#date: Mon Jan 09 2023 16:33:00
+#sha1: 156cf5
+#modules: 
+#display: size=(800, 600), window_mode=True, open_gl=2
+#os: uname_result(system='Linux', node='is153802', release='5.15.0-48-generic', version='#54-Ubuntu SMP Fri Aug 26 13:26:29 UTC 2022', machine='x86_64', processor='x86_64')
+Time,Type,Event,Value,Detail,Detail2
+4012,stderr,received,'Traceback (most recent call last):'
+4012,stderr,received,'  File "expy_read_lpp.py", line 114, in <module>'
+4012,stderr,received,'    events.put((onset * 1000, text, stim))'
+4012,stderr,received,'  File "/home/is153802/.pyenv/versions/3.7.6/lib/python3.7/queue.py", line 149, in put'
+4013,stderr,received,'    self._put(item)'
+4013,stderr,received,'  File "/home/is153802/.pyenv/versions/3.7.6/lib/python3.7/queue.py", line 233, in _put'
+4013,stderr,received,'    heappush(self.queue, item)'
+4013,stderr,received,"TypeError: '<' not supported between instances of 'TextLine' and 'BlankScreen'"

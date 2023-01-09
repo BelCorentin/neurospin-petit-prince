@@ -1,0 +1,55 @@
+#Expyriment 0.10.0 (Python 3.7.6), .xpe-file, coding: UTF-8
+#date: Mon Jan 09 2023 17:25:38
+#sha1: 70bd55
+#modules: 
+#display: size=(800, 600), window_mode=True, open_gl=2
+#os: uname_result(system='Linux', node='is153802', release='5.15.0-48-generic', version='#54-Ubuntu SMP Fri Aug 26 13:26:29 UTC 2022', machine='x86_64', processor='x86_64')
+Time,Type,Event,Value,Detail,Detail2
+11197,design,log,
+#design: #exp: RSVP
+#design: block_cnt,block_id,trial_cnt,trial_id
+11197,design,logged,
+11197,Experiment,started
+14649,Stimulus,presented,1
+14852,Stimulus,presented,2
+15115,Stimulus,presented,3
+15461,Stimulus,presented,4
+15732,Stimulus,presented,5
+15902,Stimulus,presented,2
+16052,Stimulus,presented,6
+16394,Stimulus,presented,7
+16786,Stimulus,presented,8
+17240,Stimulus,presented,9
+17862,Stimulus,presented,8
+18834,Stimulus,presented,10
+19211,Stimulus,presented,11
+19836,Stimulus,presented,12
+19949,Stimulus,presented,13
+20507,Stimulus,presented,14
+20590,Stimulus,presented,15
+20666,Stimulus,presented,16
+21141,Stimulus,presented,17
+21663,Stimulus,presented,18
+21850,Stimulus,presented,19
+21887,Stimulus,presented,20
+22742,Stimulus,presented,21
+23622,Stimulus,presented,22
+23931,Stimulus,presented,23
+24724,Stimulus,presented,24
+25691,Stimulus,presented,13
+26386,Stimulus,presented,25
+26578,Stimulus,presented,27
+26669,Stimulus,presented,26
+27241,Stimulus,presented,19
+27691,Stimulus,presented,13
+28119,Stimulus,presented,28
+28480,Stimulus,presented,29
+29533,Stimulus,presented,16
+29673,stderr,received,'Traceback (most recent call last):'
+29673,stderr,received,'  File "expy_read_lpp.py", line 157, in <module>'
+29673,stderr,received,'    a.wait(1)'
+29673,stderr,received,'  File "/home/is153802/.pyenv/versions/expyriment/lib/python3.7/site-packages/expyriment/misc/_clock.py", line 160, in wait'
+29673,stderr,received,'    while (self.time < start + waiting_time):'
+29673,stderr,received,'  File "/home/is153802/.pyenv/versions/expyriment/lib/python3.7/site-packages/expyriment/misc/_clock.py", line 69, in time'
+29673,stderr,received,'    return int((get_time() - self.__init_time) * 1000)'
+29673,stderr,received,'KeyboardInterrupt'
