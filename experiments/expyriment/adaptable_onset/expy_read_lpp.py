@@ -157,8 +157,8 @@ for i in np.arange(grid_size):
     # events.put((timing+offset, text, stim))
 
     # Try with a higher timing for each word
-    timing = 1200 * onset
-    events.put((timing+offset, text, stim))
+    # timing = 1200 * onset
+    # events.put((timing+offset, text, stim))
 
     # Try with a minimum threshold for word length
     # duration = next_onset - onset
@@ -171,6 +171,24 @@ for i in np.arange(grid_size):
     # events.put((timing+offset, text, stim))
     # print(f'Whats sent is timing : {timing}, offset: {offset, text}   \n')
     # offset += offset_to_add
+
+    # Threshold mini & maxi
+    duration = next_onset - onset
+    timing = 1000 * onset
+    offset_to_add = 0
+    if duration < 0.3:
+        offset_to_add = (0.3 - duration)*1000
+        print(f'Added {(0.3 - duration)*1000} to the offset for the word {text}')
+
+    if duration > 0.6:
+        offset_to_add = (0.6 - duration)*1000
+        # print(f'Added {(0.3 - duration)*1000} to the offset for the word {text}')
+
+    events.put((timing+offset, text, stim))
+    print(f'Whats sent is timing : {timing}, offset: {offset, text}   \n')
+    offset += offset_to_add
+
+    
 
     
     # Not needed anymore
