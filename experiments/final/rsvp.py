@@ -31,7 +31,8 @@ WINDOW_SIZE = 1024, 768
 CHAPTER = 1
 FIXED_WORD_DURATION = 200  # Overriding tsv file
 FIXED_BS_DURATION = 50  # Overriding tsv file
-SPEED = 0.7
+SPEED = 0.9
+END_OF_SENTENCE_BLANK = True
 
 ######## command-line arguments
 parser = argparse.ArgumentParser()
@@ -76,10 +77,12 @@ BACKGROUND_COLOR = tuple(args.background_color)
 WINDOW_SIZE = tuple(args.window_size)
 CHAPTER = args.chapter[0]
 
-csv_file = f'./../formatting/txt_clean/run{CHAPTER}_clean.tsv'
+if END_OF_SENTENCE_BLANK:
+    csv_file = f'./../formatting/txt_clean_end_of_sentence/run{CHAPTER}_clean_sentence.tsv'
+else:
+    csv_file = f'./../formatting/txt_clean/run{CHAPTER}_clean.tsv'
 # stimlist = pd.read_csv(args.csv_files[0][0], sep="\t", quoting=True, quotechar="*")
 stimlist = pd.read_csv(csv_file, sep="\t", quoting=True, quotechar="*")
-
 
 ###############################
 expyriment.control.defaults.window_mode = True
@@ -106,7 +109,7 @@ for row in stimlist.itertuples():
     text = row.word
 
 
-    onset = row.onset 
+    onset = row.onset
     duration = row.duration
 
     if text in map_text_surface.keys():
