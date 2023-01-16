@@ -7,7 +7,8 @@
 
      rsvp file.tsv
 
-    where file.tsv is a tab-separated-values files with three colums: word, onset, duration 
+    where file.tsv is a tab-separated-values files with three colums:
+     word, onset, duration 
     (onset and duration are in seconds)
 """
 
@@ -18,12 +19,19 @@ import expyriment
 from expyriment import stimuli
 from expyriment.misc import Clock
 
-TEXT_FONT = "Inconsolata.ttf"  
+expyriment.control.set_develop_mode(on=True,
+                                    intensive_logging=False,
+                                    skip_wait_methods=True)
+
+TEXT_FONT = "Inconsolata.ttf"
 TEXT_SIZE = 40
-TEXT_COLOR = (255, 255,255)  # white
+TEXT_COLOR = (255, 255, 255)  # white
 BACKGROUND_COLOR = (64, 64, 64)  # grey
 WINDOW_SIZE = 1024, 768
 CHAPTER = 1
+FIXED_WORD_DURATION = 200  # Overriding tsv file
+FIXED_BS_DURATION = 50  # Overriding tsv file
+SPEED = 0.7
 
 ######## command-line arguments
 parser = argparse.ArgumentParser()
@@ -68,13 +76,13 @@ BACKGROUND_COLOR = tuple(args.background_color)
 WINDOW_SIZE = tuple(args.window_size)
 CHAPTER = args.chapter[0]
 
-csv_file = f'./lpp_300_50_{CHAPTER}.tsv'
+csv_file = f'./../formatting/txt_clean/run{CHAPTER}_clean.tsv'
 # stimlist = pd.read_csv(args.csv_files[0][0], sep="\t", quoting=True, quotechar="*")
 stimlist = pd.read_csv(csv_file, sep="\t", quoting=True, quotechar="*")
 
 
 ###############################
-expyriment.control.defaults.window_mode=True
+expyriment.control.defaults.window_mode = True
 #expyriment.control.defaults.window_size = WINDOW_SIZE
 #expyriment.design.defaults.experiment_background_colour = BACKGROUND_COLOR
 
@@ -96,21 +104,23 @@ map_text_surface = dict()
 
 for row in stimlist.itertuples():
     text = row.word
+
+
     onset = row.onset 
     duration = row.duration
 
     if text in map_text_surface.keys():
         stim = map_text_surface[text]
     else:
-        stim = stimuli.TextLine(text, 
+        stim = stimuli.TextLine(text,
                                 text_font=TEXT_FONT,
                                 text_size=TEXT_SIZE,
                                 text_colour=TEXT_COLOR,
                                 background_colour=BACKGROUND_COLOR)
         map_text_surface[text] = stim
 
-    events.put((onset * 1000, text, stim))
-    events.put(((onset + duration) * 1000, "", bs))
+    events.put((onset * 1000 * SPEED, text, stim))
+    events.put(((onset + duration) * 1000 * SPEED, "", bs))
 
 
 #############################################################
@@ -118,10 +128,10 @@ for row in stimlist.itertuples():
 expyriment.control.start(subject_id=0)
 
 a = Clock()
-               
+
 while not events.empty():
     onset, text, stim = events.get()
-            
+
     while a.time < (onset - 10):
         a.wait(1)
         k = kb.check()
