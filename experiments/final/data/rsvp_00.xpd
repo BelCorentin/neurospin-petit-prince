@@ -1,5 +1,5 @@
 #Expyriment 0.10.0 (Python 3.7.6), .xpd-file, coding: UTF-8
-#date: Mon Jan 16 2023 17:19:19
+#date: Mon Jan 16 2023 17:26:48
 #--EXPERIMENT INFO
 #e mainfile: rsvp.py
 #e sha1: 06b9b1
@@ -9,3 +9,4 @@
 #--SUBJECT INFO
 #s id: 0
 subject_id,
+0,575,"keypressed,13"
