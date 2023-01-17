@@ -16,13 +16,18 @@ import argparse
 from queue import PriorityQueue
 import pandas as pd
 import expyriment
-from expyriment import stimuli
+from expyriment import stimuli,io
 from expyriment.misc import Clock
 
 expyriment.control.set_develop_mode(on=True,
                                     intensive_logging=False,
                                     skip_wait_methods=True)
 
+# Triggers
+port_address_output = '/dev/parport1'
+port1 = io.ParallelPort(port_address_output)
+
+# Const
 TEXT_FONT = "Inconsolata.ttf"
 TEXT_SIZE = 40
 TEXT_COLOR = (255, 255, 255)  # white
@@ -130,15 +135,20 @@ for row in stimlist.itertuples():
 # let's go
 expyriment.control.start(subject_id=0)
 
+# init triggers
+port1.send(data=0)
+
+
 a = Clock()
 
 while not events.empty():
     onset, text, stim = events.get()
-
+    value_trigger = len(text)
     while a.time < (onset - 10):
+        port1.send(data=0)
         a.wait(1)
         k = kb.check()
         if k is not None:
             exp.data.add([a.time, 'keypressed,{}'.format(k)])
-
+    port1.send(data=value_trigger)
     stim.present()
