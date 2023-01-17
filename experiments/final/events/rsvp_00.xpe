@@ -1,0 +1,158 @@
+#Expyriment 0.10.0 (Python 3.8.10), .xpe-file, coding: UTF-8
+#date: Tue Jan 17 2023 13:51:37
+#sha1: 322365
+#modules: 
+#display: size=(800, 600), window_mode=True, open_gl=2
+#os: uname_result(system='Linux', node='meg-stim', release='5.14.0-1054-oem', version='#61-Ubuntu SMP Fri Oct 14 13:05:50 UTC 2022', machine='x86_64', processor='x86_64')
+Time,Type,Event,Value,Detail,Detail2
+498,design,log,
+#design: #exp: RSVP
+#design: block_cnt,block_id,trial_cnt,trial_id
+498,design,logged,
+498,Experiment,started
+1131,Stimulus,presented,1
+1414,Stimulus,presented,0
+1448,Stimulus,presented,2
+1714,Stimulus,presented,0
+1764,Stimulus,presented,3
+2031,Stimulus,presented,0
+2081,Stimulus,presented,4
+2348,Stimulus,presented,0
+2381,Stimulus,presented,5
+2664,Stimulus,presented,0
+2698,Stimulus,presented,6
+2981,Stimulus,presented,0
+3014,Stimulus,presented,7
+3298,Stimulus,presented,0
+3331,Stimulus,presented,8
+3614,Stimulus,presented,0
+3648,Stimulus,presented,7
+3931,Stimulus,presented,0
+3964,Stimulus,presented,9
+4231,Stimulus,presented,0
+4281,Stimulus,presented,10
+4548,Stimulus,presented,0
+4598,Stimulus,presented,11
+4864,Stimulus,presented,0
+4914,Stimulus,presented,12
+5181,Stimulus,presented,0
+5231,Stimulus,presented,13
+5498,Stimulus,presented,0
+5531,Stimulus,presented,14
+5814,Stimulus,presented,0
+5848,Stimulus,presented,15
+6131,Stimulus,presented,0
+6164,Stimulus,presented,16
+6448,Stimulus,presented,0
+6481,Stimulus,presented,17
+6764,Stimulus,presented,0
+6798,Stimulus,presented,18
+7081,Stimulus,presented,0
+7114,Stimulus,presented,19
+7381,Stimulus,presented,0
+7431,Stimulus,presented,20
+7698,Stimulus,presented,0
+7748,Stimulus,presented,21
+8014,Stimulus,presented,0
+8231,Stimulus,presented,22
+8514,Stimulus,presented,0
+8548,Stimulus,presented,23
+8831,Stimulus,presented,0
+8864,Stimulus,presented,12
+9148,Stimulus,presented,0
+9181,Stimulus,presented,24
+9464,Stimulus,presented,0
+9498,Stimulus,presented,25
+9781,Stimulus,presented,0
+9815,Stimulus,presented,18
+10081,Stimulus,presented,0
+10131,Stimulus,presented,26
+10398,Stimulus,presented,0
+10448,Stimulus,presented,12
+10714,Stimulus,presented,0
+10765,Stimulus,presented,27
+11031,Stimulus,presented,0
+11248,Stimulus,presented,28
+11531,Stimulus,presented,0
+11565,Stimulus,presented,15
+11848,Stimulus,presented,0
+11881,Stimulus,presented,29
+12165,Stimulus,presented,0
+12198,Stimulus,presented,30
+12481,Stimulus,presented,0
+12515,Stimulus,presented,31
+12781,Stimulus,presented,0
+13015,Stimulus,presented,32
+13281,Stimulus,presented,0
+13331,Stimulus,presented,33
+13598,Stimulus,presented,0
+13631,Stimulus,presented,11
+13915,Stimulus,presented,0
+13948,Stimulus,presented,34
+14231,Stimulus,presented,0
+14265,Stimulus,presented,35
+14548,Stimulus,presented,0
+14581,Stimulus,presented,36
+14865,Stimulus,presented,0
+14898,Stimulus,presented,37
+15181,Stimulus,presented,0
+15215,Stimulus,presented,38
+15481,Stimulus,presented,0
+15531,Stimulus,presented,39
+15798,Stimulus,presented,0
+15848,Stimulus,presented,40
+16115,Stimulus,presented,0
+16165,Stimulus,presented,41
+16431,Stimulus,presented,0
+16481,Stimulus,presented,42
+16748,Stimulus,presented,0
+16781,Stimulus,presented,43
+17065,Stimulus,presented,0
+17098,Stimulus,presented,44
+17381,Stimulus,presented,0
+17415,Stimulus,presented,15
+17698,Stimulus,presented,0
+17731,Stimulus,presented,45
+18015,Stimulus,presented,0
+18231,Stimulus,presented,46
+18498,Stimulus,presented,0
+18548,Stimulus,presented,47
+18815,Stimulus,presented,0
+18865,Stimulus,presented,48
+19131,Stimulus,presented,0
+19181,Stimulus,presented,49
+19448,Stimulus,presented,0
+19481,Stimulus,presented,50
+19765,Stimulus,presented,0
+19798,Stimulus,presented,51
+20082,Stimulus,presented,0
+20116,Stimulus,presented,52
+20398,Stimulus,presented,0
+20431,Stimulus,presented,47
+20715,Stimulus,presented,0
+20748,Stimulus,presented,53
+21031,Stimulus,presented,0
+21065,Stimulus,presented,54
+21331,Stimulus,presented,0
+21381,Stimulus,presented,55
+21648,Stimulus,presented,0
+21698,Stimulus,presented,3
+21965,Stimulus,presented,0
+22015,Stimulus,presented,56
+22282,Stimulus,presented,0
+22331,Stimulus,presented,57
+22598,Stimulus,presented,0
+22631,Stimulus,presented,40
+22915,Stimulus,presented,0
+22948,Stimulus,presented,58
+23231,Stimulus,presented,0
+23419,stderr,received,'Traceback (most recent call last):'
+23419,stderr,received,'  File "rsvp.py", line 148, in <module>'
+23420,stderr,received,'    port1.send(data=0)'
+23420,stderr,received,'  File "/home/neurostim/.local/lib/python3.8/site-packages/expyriment/io/_parallelport/__init__.py", line 407, in send'
+23420,stderr,received,'    self._parallel.setPin(17, c & 8)'
+23420,stderr,received,'  File "/home/neurostim/.local/lib/python3.8/site-packages/expyriment/io/_parallelport/_linux.py", line 111, in setPin'
+23420,stderr,received,'    self.port.PPWCONTROL(self.port.PPRCONTROL() & (255 ^ 8))'
+23420,stderr,received,'  File "/home/neurostim/.local/lib/python3.8/site-packages/parallel/parallelppdev.py", line 378, in PPWCONTROL'
+23420,stderr,received,"    fcntl.ioctl(self._fd, PPWCONTROL, struct.pack('B', lines))"
+23420,stderr,received,'KeyboardInterrupt'

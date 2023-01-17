@@ -1,0 +1,15 @@
+#Expyriment 0.10.0 (Python 3.8.10), .xpe-file, coding: UTF-8
+#date: Tue Jan 17 2023 13:29:44
+#sha1: 0a819f
+#modules: 
+#display: size=(800, 600), window_mode=True, open_gl=2
+#os: uname_result(system='Linux', node='meg-stim', release='5.14.0-1054-oem', version='#61-Ubuntu SMP Fri Oct 14 13:05:50 UTC 2022', machine='x86_64', processor='x86_64')
+Time,Type,Event,Value,Detail,Detail2
+52813,stderr,received,'Traceback (most recent call last):'
+52813,stderr,received,'  File "rsvp.py", line 139, in <module>'
+52814,stderr,received,'    expyriment.control.start(subject_id=0)'
+52814,stderr,received,'  File "/home/neurostim/.local/lib/python3.8/site-packages/expyriment/control/_experiment_control.py", line 214, in start'
+52815,stderr,received,'    experiment.keyboard.wait()'
+52815,stderr,received,'  File "/home/neurostim/.local/lib/python3.8/site-packages/expyriment/io/_keyboard.py", line 343, in wait'
+52816,stderr,received,'    time.sleep(0.0005)'
+52816,stderr,received,'KeyboardInterrupt'

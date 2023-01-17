@@ -19,9 +19,11 @@ import expyriment
 from expyriment import stimuli,io
 from expyriment.misc import Clock
 
-expyriment.control.set_develop_mode(on=True,
-                                    intensive_logging=False,
-                                    skip_wait_methods=True)
+# expyriment.control.set_develop_mode(on=True,
+#                                     intensive_logging=False,
+#                                     skip_wait_methods=True)
+
+expyriment.control.defaults.window_mode = False
 
 # Triggers
 port_address_output = '/dev/parport1'
@@ -107,6 +109,9 @@ kb = expyriment.io.Keyboard()
 ####################################################
 # Prepare the queue of events 
 bs = stimuli.BlankScreen(colour=BACKGROUND_COLOR)
+photodiode = stimuli.Rectangle((30,30),position=(200,-200))
+
+
 events = PriorityQueue()
 map_text_surface = dict()
 
@@ -145,10 +150,13 @@ while not events.empty():
     onset, text, stim = events.get()
     value_trigger = len(text)
     while a.time < (onset - 10):
-        port1.send(data=0)
         a.wait(1)
         k = kb.check()
         if k is not None:
             exp.data.add([a.time, 'keypressed,{}'.format(k)])
     port1.send(data=value_trigger)
     stim.present()
+    if value_trigger == 0:
+        photodiode.present()
+
+
