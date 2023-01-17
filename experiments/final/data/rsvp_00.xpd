@@ -1,8 +1,13 @@
+<<<<<<< HEAD
 #Expyriment 0.10.0 (Python 3.7.6), .xpd-file, coding: UTF-8
 #date: Mon Jan 16 2023 17:43:15
+=======
+#Expyriment 0.10.0 (Python 3.8.10), .xpd-file, coding: UTF-8
+#date: Tue Jan 17 2023 12:11:09
+>>>>>>> a1c2b48a72dd85d474cdb69947a4c1336f7882dc
 #--EXPERIMENT INFO
 #e mainfile: rsvp.py
-#e sha1: 06b9b1
+#e sha1: 322365
 #e modules: 
 #e Experiment: RSVP
 #e no between subject factors
