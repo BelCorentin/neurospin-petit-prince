@@ -32,8 +32,10 @@ port1 = io.ParallelPort(port_address_output)
 # Const
 TEXT_FONT = "Inconsolata.ttf"
 TEXT_SIZE = 40
-TEXT_COLOR = (255, 255, 255)  # white
-BACKGROUND_COLOR = (64, 64, 64)  # grey
+# TEXT_COLOR = (255, 255, 255)  # white
+TEXT_COLOR = (230, 230, 230)  # white but not too white
+# BACKGROUND_COLOR = (64, 64, 64)  # grey
+BACKGROUND_COLOR = (1, 1, 1)  # black
 WINDOW_SIZE = 1024, 768
 CHAPTER = 1
 FIXED_WORD_DURATION = 200  # Overriding tsv file
@@ -92,7 +94,7 @@ else:
 stimlist = pd.read_csv(csv_file, sep="\t", quoting=True, quotechar="*")
 
 ###############################
-expyriment.control.defaults.window_mode = True
+# expyriment.control.defaults.window_mode = True
 #expyriment.control.defaults.window_size = WINDOW_SIZE
 #expyriment.design.defaults.experiment_background_colour = BACKGROUND_COLOR
 
@@ -109,7 +111,7 @@ kb = expyriment.io.Keyboard()
 ####################################################
 # Prepare the queue of events 
 bs = stimuli.BlankScreen(colour=BACKGROUND_COLOR)
-photodiode = stimuli.Rectangle((30,30),position=(200,-200))
+photodiode = stimuli.Rectangle((90,90),position=(900,-500))
 
 
 events = PriorityQueue()
@@ -145,6 +147,10 @@ port1.send(data=0)
 
 
 a = Clock()
+
+# Initialize
+
+port1.send(data=CHAPTER)
 
 while not events.empty():
     onset, text, stim = events.get()

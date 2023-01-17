@@ -1,0 +1,13 @@
+#Expyriment 0.10.0 (Python 3.8.10), .xpd-file, coding: UTF-8
+#date: Tue Jan 17 2023 13:58:26
+#--EXPERIMENT INFO
+#e mainfile: rsvp.py
+#e sha1: 400e3f
+#e modules: 
+#e Experiment: RSVP
+#e no between subject factors
+#--SUBJECT INFO
+#s id: 0
+subject_id,
+0,43285,"keypressed,306"
+0,43341,"keypressed,99"
