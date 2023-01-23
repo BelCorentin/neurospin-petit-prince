@@ -5,11 +5,9 @@
 
     Usage: 
 
-     rsvp file.tsv
+     rsvp --chapter 4
 
-    where file.tsv is a tab-separated-values files with three colums:
-     word, onset, duration 
-    (onset and duration are in seconds)
+    where 4 is the number of the chapter wanted
 """
 
 import argparse
