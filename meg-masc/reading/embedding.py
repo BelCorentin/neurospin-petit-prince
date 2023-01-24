@@ -132,7 +132,7 @@ def decod(X, y):
     for t in range(n_times):
         print(".", end="")
         y_pred = cross_val_predict(model, X[:, :, t], y, cv=cv)
-        R[t] = correlate(y, y_pred)
+        R[t] = np.mean(correlate(y, y_pred))
     return R
 
 
