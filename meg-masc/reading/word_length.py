@@ -17,7 +17,7 @@ from sklearn.preprocessing import StandardScaler, RobustScaler
 from sklearn.linear_model import RidgeCV
 from wordfreq import zipf_frequency
 from Levenshtein import editops
-from TO_EXCLUDE import to_exclude
+
 
 # Tools
 import matplotlib.pyplot as plt
@@ -75,11 +75,7 @@ def epoch_data(subject, run_id):
     word_events = events[events[:, 2] > 1]
     meg_delta = np.round(np.diff(word_events[:, 0] / raw.info["sfreq"]))
     meta_delta = np.round(np.diff(meta.onset.values))
-
-    print(events)
-    print(meta.onset.values)
     i, j = match_list(meg_delta, meta_delta)
-    print(f"Len i : {len(i)} for run {run_id}")
     assert len(i) > 500
     events = word_events[i]
     # events = events[i]  # events = words_events[i]
@@ -222,9 +218,6 @@ if __name__ == "__main__":
 
     for subject in subjects:
 
-        if subject in to_exclude:
-            continue
-
         print(f"Subject {subject}'s decoding started")
         epochs = []
         for run_id in range(1, RUN + 1):
@@ -259,7 +252,7 @@ if __name__ == "__main__":
         # X = epochs.copy().pick_types(meg='mag').get_data()  # Only mag data
         # X = epochs.copy().pick_types(meg='grad').get_data() # Only grad data
         X = epochs.get_data()  # Both mag and grad
-        y = epochs.metadata.word.apply(lambda w: zipf_frequency(w, "fr"))
+        y = np.asarray([len(word) for word in epochs.metadata.word])
         R = decod(X, y)
 
         fig, ax = plt.subplots(1, figsize=[6, 6])
@@ -268,6 +261,6 @@ if __name__ == "__main__":
         report.add_evokeds(evo, titles=f"Evoked for sub {subject} ")
         report.add_figure(fig, title=f"decoding for subject {subject}")
         # report.add_figure(dec, subject, tags="word")
-        report.save("./figures/decoding_raw.html", open_browser=False, overwrite=True)
+        report.save("./figures/decoding_raw_word_length.html", open_browser=False, overwrite=True)
 
         print("Finished!")
