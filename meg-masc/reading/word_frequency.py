@@ -17,7 +17,6 @@ from sklearn.preprocessing import StandardScaler, RobustScaler
 from sklearn.linear_model import RidgeCV
 from wordfreq import zipf_frequency
 from Levenshtein import editops
-from TO_EXCLUDE import to_exclude
 
 # Tools
 import matplotlib.pyplot as plt
@@ -229,10 +228,6 @@ if __name__ == "__main__":
     print(subjects)
 
     for subject in subjects:
-
-        if subject in to_exclude:
-            continue
-
         print(f"Subject {subject}'s decoding started")
         epochs = []
         epochs_no_bs = []
