@@ -42,7 +42,7 @@ TASK = "listen"
 
 
 # Epoching and decoding
-def epoch_data(subject, run_id):
+def epoch_data(subject, run_id, baseline=True):
 
     bids_path = mne_bids.BIDSPath(
         subject=subject,
@@ -85,11 +85,18 @@ def epoch_data(subject, run_id):
     events = word_events[i]
     # events = events[i]  # events = words_events[i]
     meta = meta.iloc[j].reset_index()
-
-    epochs = mne.Epochs(
-        raw, events, metadata=meta, tmin=-0.3, tmax=0.8, decim=10, baseline=(-0.3, 0.0)
-    )
-
+    if baseline:
+        epochs = mne.Epochs(
+            raw,
+            events,
+            metadata=meta,
+            tmin=-0.3,
+            tmax=0.8,
+            decim=10,
+            baseline=(-0.3, 0.0),
+        )
+    else:
+        epochs = mne.Epochs(raw, events, metadata=meta, tmin=-0.3, tmax=0.8, decim=10)
     data = epochs.get_data()
     epochs.load_data()
 
@@ -228,23 +235,35 @@ if __name__ == "__main__":
 
         print(f"Subject {subject}'s decoding started")
         epochs = []
+        epochs_no_bs = []
         for run_id in range(1, RUN + 1):
             print(".", end="")
             epo = epoch_data(subject, "%.2i" % run_id)
+            epo_no_baseline = epoch_data(subject, "%.2i" % run_id, baseline=False)
+
             epo.metadata["label"] = f"run_{run_id}"
+            epo_no_baseline.metadata["label"] = f"run_{run_id}"
+
             epochs.append(epo)
+            epochs_no_bs.append(epo_no_baseline)
 
         # Quick fix for the dev_head: has to be
         # fixed before doing source reconstruction
         for epo in epochs:
             epo.info["dev_head_t"] = epochs[0].info["dev_head_t"]
-            # epo.info['nchan'] = epochs[0].info['nchan']
+
+        for epo in epochs_no_bs:
+            epo.info["dev_head_t"] = epochs_no_bs[0].info["dev_head_t"]
 
         epochs = mne.concatenate_epochs(epochs)
+        epochs_no_bs = mne.concatenate_epochs(epochs_no_bs)
 
         # Get the evoked potential averaged on all epochs for each channel
         evo = epochs.average(method="median")
         evo.plot(spatial_colors=True)
+
+        evo_no_bs = epochs_no_bs.average(method="median")
+        evo_no_bs.plot(spatial_colors=True)
 
         # Handling the data structure
         epochs.metadata["kind"] = epochs.metadata.trial_type.apply(
@@ -267,8 +286,14 @@ if __name__ == "__main__":
         dec = plt.fill_between(epochs.times, R)
         # plt.show()
         report.add_evokeds(evo, titles=f"Evoked for sub {subject} ")
+        report.add_evokeds(
+            evo_no_bs, titles=f"Evoked for sub {subject} without baseline"
+        )
+
         report.add_figure(fig, title=f"decoding for subject {subject}")
         # report.add_figure(dec, subject, tags="word")
-        report.save("./figures/decoding_raw.html", open_browser=False, overwrite=True)
+        report.save(
+            "./figures/decoding_word_frequency.html", open_browser=False, overwrite=True
+        )
 
         print("Finished!")
