@@ -26,7 +26,7 @@ import matplotlib
 
 matplotlib.use("Agg")
 mne.set_log_level(False)
-nlp = spacy.load('fr_core_news_sm'
+nlp = spacy.load("fr_core_news_sm")
 
 
 class PATHS:
