@@ -14,7 +14,7 @@ import argparse
 from queue import PriorityQueue
 import pandas as pd
 import expyriment
-from expyriment import stimuli,io
+from expyriment import stimuli, io
 from expyriment.misc import Clock
 
 # expyriment.control.set_develop_mode(on=True,
@@ -23,8 +23,14 @@ from expyriment.misc import Clock
 
 expyriment.control.defaults.window_mode = False
 
+
+# VERSION CHOICE:
+# Version 1: 350 ms between each word; 300 ms of word + 50 ms of black screen
+# Version 2: 250 ms / 50 ms + 500 ms at the end of each sentence
+VERSION = 2
+
 # Triggers
-port_address_output = '/dev/parport1'
+port_address_output = "/dev/parport1"
 port1 = io.ParallelPort(port_address_output)
 
 # Const
@@ -48,34 +54,43 @@ parser = argparse.ArgumentParser()
 #                     nargs='+',
 #                     action="append",
 #                     default=[])
-parser.add_argument("--text-font",
-                    type=str,
-                    default=TEXT_FONT,
-                    help="set the font for text stimuli")
-parser.add_argument("--text-size",
-                    type=int,
-                    default=TEXT_SIZE,
-                    help="set the vertical size of text stimuli")
-parser.add_argument("--text-color",
-                    nargs='+',
-                    type=int,
-                    default=TEXT_COLOR,
-                    help="set the font for text stimuli")
-parser.add_argument("--background-color",
-                    nargs='+',
-                    type=int,
-                    default=BACKGROUND_COLOR,
-                    help="set the background color")
-parser.add_argument("--window-size",
-                    nargs='+',
-                    type=int,
-                    default=WINDOW_SIZE,
-                    help="in window mode, sets the window size")
-parser.add_argument("--chapter",
-                    nargs='+',
-                    type=int,
-                    default=CHAPTER,
-                    help="choose which chapter to play")
+parser.add_argument(
+    "--text-font", type=str, default=TEXT_FONT, help="set the font for text stimuli"
+)
+parser.add_argument(
+    "--text-size",
+    type=int,
+    default=TEXT_SIZE,
+    help="set the vertical size of text stimuli",
+)
+parser.add_argument(
+    "--text-color",
+    nargs="+",
+    type=int,
+    default=TEXT_COLOR,
+    help="set the font for text stimuli",
+)
+parser.add_argument(
+    "--background-color",
+    nargs="+",
+    type=int,
+    default=BACKGROUND_COLOR,
+    help="set the background color",
+)
+parser.add_argument(
+    "--window-size",
+    nargs="+",
+    type=int,
+    default=WINDOW_SIZE,
+    help="in window mode, sets the window size",
+)
+parser.add_argument(
+    "--chapter",
+    nargs="+",
+    type=int,
+    default=CHAPTER,
+    help="choose which chapter to play",
+)
 args = parser.parse_args()
 TEXT_SIZE = args.text_size
 TEXT_COLOR = tuple(args.text_color)
@@ -84,32 +99,34 @@ BACKGROUND_COLOR = tuple(args.background_color)
 WINDOW_SIZE = tuple(args.window_size)
 CHAPTER = args.chapter[0]
 
-if END_OF_SENTENCE_BLANK:
-    csv_file = f'./../formatting/txt_clean_end_of_sentence/run{CHAPTER}_clean_sentence.tsv'
+if VERSION == 1:
+    csv_file = f"./../formatting/v1/run{CHAPTER}_v1_word_0.3_end_sentence_0.2.tsv"
 else:
-    csv_file = f'./../formatting/txt_clean/run{CHAPTER}_clean.tsv'
+    csv_file = f"./../formatting/v2/run{CHAPTER}run1_v1_word_0.3_end_sentence_0.2.tsv"
 # stimlist = pd.read_csv(args.csv_files[0][0], sep="\t", quoting=True, quotechar="*")
 stimlist = pd.read_csv(csv_file, sep="\t", quoting=True, quotechar="*")
 
 ###############################
 # expyriment.control.defaults.window_mode = True
-#expyriment.control.defaults.window_size = WINDOW_SIZE
-#expyriment.design.defaults.experiment_background_colour = BACKGROUND_COLOR
+# expyriment.control.defaults.window_size = WINDOW_SIZE
+# expyriment.design.defaults.experiment_background_colour = BACKGROUND_COLOR
 
-exp = expyriment.design.Experiment(name="RSVP",
-                                   background_colour=BACKGROUND_COLOR,
-                                   foreground_colour=TEXT_COLOR,
-                                   text_size=TEXT_SIZE,
-                                   text_font=TEXT_FONT)
+exp = expyriment.design.Experiment(
+    name="RSVP",
+    background_colour=BACKGROUND_COLOR,
+    foreground_colour=TEXT_COLOR,
+    text_size=TEXT_SIZE,
+    text_font=TEXT_FONT,
+)
 expyriment.control.initialize(exp)
 exp._screen_colour = BACKGROUND_COLOR
 kb = expyriment.io.Keyboard()
 
 
 ####################################################
-# Prepare the queue of events 
+# Prepare the queue of events
 bs = stimuli.BlankScreen(colour=BACKGROUND_COLOR)
-photodiode = stimuli.Rectangle((90,90),position=(900,-500))
+photodiode = stimuli.Rectangle((90, 90), position=(900, -500))
 
 
 events = PriorityQueue()
@@ -118,18 +135,19 @@ map_text_surface = dict()
 for row in stimlist.itertuples():
     text = row.word
 
-
     onset = row.onset
     duration = row.duration
 
     if text in map_text_surface.keys():
         stim = map_text_surface[text]
     else:
-        stim = stimuli.TextLine(text,
-                                text_font=TEXT_FONT,
-                                text_size=TEXT_SIZE,
-                                text_colour=TEXT_COLOR,
-                                background_colour=BACKGROUND_COLOR)
+        stim = stimuli.TextLine(
+            text,
+            text_font=TEXT_FONT,
+            text_size=TEXT_SIZE,
+            text_colour=TEXT_COLOR,
+            background_colour=BACKGROUND_COLOR,
+        )
         map_text_surface[text] = stim
 
     events.put((onset * 1000 * SPEED, text, stim))
@@ -157,10 +175,8 @@ while not events.empty():
         a.wait(1)
         k = kb.check()
         if k is not None:
-            exp.data.add([a.time, 'keypressed,{}'.format(k)])
+            exp.data.add([a.time, "keypressed,{}".format(k)])
     port1.send(data=value_trigger)
     stim.present()
     if value_trigger == 0:
         photodiode.present()
-
-
