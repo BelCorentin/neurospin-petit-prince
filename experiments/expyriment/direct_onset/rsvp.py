@@ -1,4 +1,5 @@
 #! /usr/bin/env python3
+# Time-stamp: <2023-01-07 18:06:25 chistophe@pallier.org>
 
 """ Display text, word by word, at the center of the screen.
 
@@ -6,21 +7,16 @@
 
      rsvp file.tsv
 
-    where file.tsv is a tab-separated-values files with three colums: 
-    word, onset, duration 
+    where file.tsv is a tab-separated-values files with three colums: word, onset, duration 
     (onset and duration are in seconds)
 """
 
 import argparse
 from queue import PriorityQueue
-
-# import pandas as pd
+import pandas as pd
 import expyriment
 from expyriment import stimuli
 from expyriment.misc import Clock
-
-import numpy as np
-import textgrids  # pip install praat-textgrids
 
 TEXT_FONT = "Inconsolata.ttf"
 TEXT_SIZE = 40
@@ -32,15 +28,10 @@ expyriment.control.set_develop_mode(
     on=True, intensive_logging=False, skip_wait_methods=True
 )
 
-# *****************************************
-# Command-line arguments
-
+######## command-line arguments
 parser = argparse.ArgumentParser()
 
-# parser.add_argument('csv_files',
-#                     nargs='+',
-#                     action="append",
-#                     default=[])
+parser.add_argument("csv_files", nargs="+", action="append", default=[])
 parser.add_argument(
     "--text-font", type=str, default=TEXT_FONT, help="set the font for text stimuli"
 )
@@ -78,13 +69,7 @@ TEXT_FONT = args.text_font
 BACKGROUND_COLOR = tuple(args.background_color)
 WINDOW_SIZE = tuple(args.window_size)
 
-# Open the text grid file
-print("")
-grid = textgrids.TextGrid("./../textgrids/annot.TextGrid")
-grid_size = 1200  # To be redefined later
-
-# stimlist = pd.read_csv(args.csv_files[0][0],
-# sep="\t", quoting=True, quotechar="*")
+stimlist = pd.read_csv(args.csv_files[0][0], sep="\t", quoting=True, quotechar="*")
 
 
 ###############################
@@ -110,38 +95,10 @@ bs = stimuli.BlankScreen(colour=BACKGROUND_COLOR)
 events = PriorityQueue()
 map_text_surface = dict()
 
-
-# Initial function working with the way the tsv file is built
-# Printing a word every 300ms to the screen
-
-# for row in stimlist.itertuples():
-#     text = row.word
-#     onset = row.onset
-#     duration = row.duration
-
-# Secondary function, for the textgrids files
-# Printing every word for its duration in the audio file
-
-for i in np.arange(grid_size):
-    text = grid["text words"][i].text
-    next_text = grid["text words"][i + 1].text
-    # There are some empty textual intervals in the textgrid
-    # Ignore them
-    if text == "":
-        continue
-
-    # Adapt the duration if the next word interval is empty
-    if next_text == "":
-        duration = float(grid["text words"][i + 2].xmin) - float(
-            grid["text words"][i].xmin
-        )
-
-    else:
-        duration = float(grid["text words"][i + 1].xmin) - float(
-            grid["text words"][i].xmin
-        )
-
-    onset = float(grid["text words"][i].xmin)
+for row in stimlist.itertuples():
+    text = row.word
+    onset = row.onset
+    duration = row.duration
 
     if text in map_text_surface.keys():
         stim = map_text_surface[text]
@@ -155,9 +112,8 @@ for i in np.arange(grid_size):
         )
         map_text_surface[text] = stim
 
-    # print(f"Text, onset, stim {text}, {onset}\n")
     events.put((onset * 1000, text, stim))
-    # events.put(((onset + duration) * 1000, "", bs))
+    events.put(((onset + duration) * 1000, "", bs))
 
 
 #############################################################

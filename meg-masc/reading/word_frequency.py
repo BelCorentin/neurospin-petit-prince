@@ -31,6 +31,7 @@ mne.set_log_level(False)
 class PATHS:
     data = Path("/home/is153802/workspace_LPP/data/MEG/LPP/BIDS_lecture")
 
+
 TASK = "listen"
 
 ####################################################
@@ -86,7 +87,7 @@ def epoch_data(subject, run_id):
     meta = meta.iloc[j].reset_index()
 
     epochs = mne.Epochs(
-        raw, events, metadata=meta, tmin=-0.3, tmax=0.8, decim=10, baseline=(-0.2, 0.0)
+        raw, events, metadata=meta, tmin=-0.3, tmax=0.8, decim=10, baseline=(-0.3, 0.0)
     )
 
     data = epochs.get_data()
@@ -215,7 +216,7 @@ if __name__ == "__main__":
 
     subjects = get_subjects()
 
-    RUN = 1
+    RUN = 9
 
     print("\nSubjects for which the decoding will be tested: \n")
     print(subjects)
