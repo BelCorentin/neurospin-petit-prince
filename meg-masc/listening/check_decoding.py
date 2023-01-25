@@ -296,9 +296,6 @@ if __name__ == "__main__":
 
     for subject in subjects:
 
-        if subject in to_exclude:
-            continue
-
         print(f"Subject {subject}'s decoding started")
         epochs = []
         for run_id in range(1, RUN + 1):
