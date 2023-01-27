@@ -33,12 +33,10 @@ from pathlib import Path
 from mne_bids import BIDSPath, write_raw_bids
 # from CONST import dict_nip_to_sn
 
-dict_nip_to_sn = {'cb_666666': '1'}
+dict_nip_to_sn = {'cb_666666': '1', 'rb_666666': '2'}
 
-# Copying the new files first to the raw directory:
-
-# cp -ru ~/neurospin/acquisition/neuromag/data/petit_prince
-# /home/is153802/workspace_LPP/data/MEG/LPP/raw
+# Get the vX used for the recording
+subj_version = {'1': '1', '2': '2'}
 
 # 1) Raw format to BIDS #####
 
@@ -47,34 +45,7 @@ BASE_PATH = Path('/home/is153802/workspace_LPP/data/MEG/LPP/')
 # BIDS_PATH = BASE_PATH / 'LPP_bids'
 BIDS_PATH = BASE_PATH / 'BIDS_lecture'
 RAW_DATA_PATH = BASE_PATH / 'raw_lecture'
-PROC_DATA_PATH = BASE_PATH / 'derivatives' / 'final_all'
 TASK = 'listen'
-
-
-"""
-
-Each folder / fif file name format is different, so
-depending on its format, we need
-different processes to extract the run, subject, etc..
-
-Different types:
-SA_bloc82_raw.fif
-sf_r1_raw.fif
-rt220104_partie9.fif
-bloc2_raw.fif
-
-The objective is to get all the unnormalized
-file names to follow the same pattern:
-in this case, we'll choose the most common:
-the sub_r{run_number}_raw.fif format
-
-Once it's done, it is possible to iterate on
-the file names to create the corresponding
-BIDS Datasets
-
-In the next acquisitions, we'll make sure to respect this normalized format:
-rX_raw.fif
-"""
 
 # For each of these folders, go into the sub folder
 # (that has the name of a subject)
@@ -93,9 +64,6 @@ for folder in RAW_DATA_PATH.iterdir():
         # Get the list of runs
         run_dir = sub_dir / sub_
         for file in os.listdir(run_dir):
-            # Use a regular expression to get the run number in the file name
-            # assert file.name.startswith('_r')
-            # assert file.name.endswith('_raw')
             file = str(file)
             print((file))
 
@@ -137,11 +105,11 @@ for folder in RAW_DATA_PATH.iterdir():
 
 # Putting the generated annotation files (one for each run) in the correct
 # directories: the processed one and the regular one
-annotation_folder = '/home/is153802/code/experiments/formatting/decoding_tsv'
-
 for sub in os.listdir(BIDS_PATH):
     if sub.__contains__('sub-'):
-        # SUBJ_PATH_FILT = PROC_DATA_PATH / f'{sub}/ses-01/meg'
+        version = subj_version[sub[4:]]  # Find version of timings used
+        annotation_folder = f'/home/is153802/code/experiments/formatting/decoding_tsv_v{version}'
+
         SUBJ_PATH_BIDS = BIDS_PATH / f'{sub}/ses-01/meg'
         # files = os.listdir(SUBJ_PATH_FILT)
         files_bids = os.listdir(SUBJ_PATH_BIDS)
@@ -152,7 +120,7 @@ for sub in os.listdir(BIDS_PATH):
             except Exception:
                 continue
 
-            annot = f'{annotation_folder}/run{run}_clean.tsv'
+            annot = f'{annotation_folder}/run{run}_v{version}.tsv'
 
             df = pd.read_csv(annot, sep='\t')
             df.to_csv(f'{SUBJ_PATH_BIDS}/{sub}_ses-01_task-{TASK}_run-0{run}_events.tsv', sep='\t')
@@ -161,9 +129,4 @@ for sub in os.listdir(BIDS_PATH):
 print(f"\n \n ***************************************************\
 \n Script finished!\n \
 ***************************************************\
-\n Folder created: \n For bids: {BIDS_PATH} \n For Preproc: {PROC_DATA_PATH}")
-
-
-# TODO
-
-# Add the files like participants.tsv & co
+\n Folder created: \n For bids: {BIDS_PATH} ")
