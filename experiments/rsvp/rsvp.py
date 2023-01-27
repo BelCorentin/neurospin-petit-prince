@@ -102,7 +102,7 @@ CHAPTER = args.chapter[0]
 if VERSION == 1:
     csv_file = f"./../formatting/v1/run{CHAPTER}_v1_word_0.3_end_sentence_0.2.tsv"
 else:
-    csv_file = f"./../formatting/v2/run{CHAPTER}run1_v1_word_0.3_end_sentence_0.2.tsv"
+    csv_file = f"./../formatting/v2/run{CHAPTER}run1_v1_word_0.25_0.5.tsv"
 # stimlist = pd.read_csv(args.csv_files[0][0], sep="\t", quoting=True, quotechar="*")
 stimlist = pd.read_csv(csv_file, sep="\t", quoting=True, quotechar="*")
 

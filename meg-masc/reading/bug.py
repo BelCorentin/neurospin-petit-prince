@@ -1,16 +1,3 @@
-"""
-
-Check decoding scripts from JR King adapted
-to fit the LPP MEG Dataset and annotations
-
--> No phonemes annotations / timestamps
-
-However the rest is the same, as we have all the words onset, durations & co
-
-Using a Ridge to decode the word frequency class (based off median)
-
-"""
-
 ####################################################
 ####################################################
 # Imports
@@ -30,7 +17,7 @@ from sklearn.preprocessing import StandardScaler, RobustScaler
 from sklearn.linear_model import RidgeCV
 from wordfreq import zipf_frequency
 from Levenshtein import editops
-from TO_EXCLUDE import to_exclude
+import spacy
 
 # Tools
 import matplotlib.pyplot as plt
@@ -39,55 +26,14 @@ import matplotlib
 
 matplotlib.use("Agg")
 mne.set_log_level(False)
-
-
-####################################################
-####################################################
-# Const
-####################################################
-####################################################
-
-"""
-Here, we use two datasets, both BIDS formatted
-
-RAW: the raw files organised under the BIDS format
-PROC: the processed files that have undergone
-a Maxwell Filter (Elektra MEG data)
-
-# RAW = "~/workspace_LPP/data/MEG/LPP/BIDS"
-# PROC = "~/workspace_LPP/data/MEG/LPP/final_all"
-
-"""
+nlp = spacy.load("fr_core_news_sm")
 
 
 class PATHS:
-    path_file = Path("./data_path.txt")
-    if not path_file.exists():
-        data = Path(input("data_path?"))
-        # assert data.exists()
-        with open(path_file, "w") as f:
-            f.write(str(data) + "\n")
-    with open(path_file, "r") as f:
-        data = Path(f.readlines()[0].strip("\n"))
-        print(f"File opened: {data}")
-        if str(data).__contains__("final"):
-            print("Processed data (Maxwell filtered) used")
-        if str(data).__contains__("BIDS"):
-            print("Raw data (no filtering) used")
-    # assert data.exists()
+    data = Path("/home/is153802/workspace_LPP/data/MEG/LPP/BIDS_lecture")
 
 
 TASK = "listen"
-# To simplify for the time being
-# To run on the Neurospin workstation
-PATHS.data = Path("/home/is153802/workspace_LPP/data/MEG/LPP/BIDS")
-# PATHS.data = Path("/home/is153802/workspace_LPP/data/MEG/LPP/LPP_bids_old")
-
-# for raw data
-# PATHS.data = Path("/home/is153802/workspace_LPP/
-# data/MEG/LPP/derivatives/final_all_old") # for filtered data
-# On the DELL
-# PATHS.data = Path("/home/co/workspace_LPP/data/MEG/LPP/LPP_bids")
 
 ####################################################
 ####################################################
@@ -97,34 +43,16 @@ PATHS.data = Path("/home/is153802/workspace_LPP/data/MEG/LPP/BIDS")
 
 
 # Epoching and decoding
-def epoch_data(subject, run_id):
+def epoch_data(subject, run_id, baseline=True):
 
-    # define path
-    # Two cases: running on raw or filtered data
-    if str(PATHS.data).__contains__("derivatives"):
-        print("Running the script on FILTERED data:")
-        print(f"run {run_id}, subject: {subject}")
-        bids_path = mne_bids.BIDSPath(
-            subject=subject,
-            session="01",
-            task=TASK,
-            datatype="meg",
-            root=PATHS.data,
-            run=run_id,
-            processing="sss",
-        )
-    # elif str(PATHS.data).__contains__('BIDS'):
-    else:
-        print("Running the script on RAW data:")
-        print(f"run {run_id}, subject: {subject}")
-        bids_path = mne_bids.BIDSPath(
-            subject=subject,
-            session="01",
-            task=TASK,
-            datatype="meg",
-            root=PATHS.data,
-            run=run_id,
-        )
+    bids_path = mne_bids.BIDSPath(
+        subject=subject,
+        session="01",
+        task=TASK,
+        datatype="meg",
+        root=PATHS.data,
+        run=run_id,
+    )
 
     raw = mne_bids.read_raw_bids(bids_path)
     raw.pick_types(meg=True, stim=True)
@@ -158,11 +86,18 @@ def epoch_data(subject, run_id):
     events = word_events[i]
     # events = events[i]  # events = words_events[i]
     meta = meta.iloc[j].reset_index()
-
-    epochs = mne.Epochs(
-        raw, events, metadata=meta, tmin=-0.3, tmax=0.8, decim=10, baseline=(-0.2, 0.0)
-    )
-
+    if baseline:
+        epochs = mne.Epochs(
+            raw,
+            events,
+            metadata=meta,
+            tmin=-0.3,
+            tmax=0.8,
+            decim=10,
+            baseline=(-0.3, 0.0),
+        )
+    else:
+        epochs = mne.Epochs(raw, events, metadata=meta, tmin=-0.3, tmax=0.8, decim=10)
     data = epochs.get_data()
     epochs.load_data()
 
@@ -197,7 +132,7 @@ def decod(X, y):
     for t in range(n_times):
         print(".", end="")
         y_pred = cross_val_predict(model, X[:, :, t], y, cv=cv)
-        R[t] = correlate(y, y_pred)
+        R[t] = np.mean(correlate(y, y_pred))
     return R
 
 
@@ -289,32 +224,43 @@ if __name__ == "__main__":
 
     subjects = get_subjects()
 
-    RUN = 9
+    RUN =9
 
     print("\nSubjects for which the decoding will be tested: \n")
     print(subjects)
 
     for subject in subjects:
-
         print(f"Subject {subject}'s decoding started")
         epochs = []
+        epochs_no_bs = []
         for run_id in range(1, RUN + 1):
             print(".", end="")
             epo = epoch_data(subject, "%.2i" % run_id)
+            epo_no_baseline = epoch_data(subject, "%.2i" % run_id, baseline=False)
+
             epo.metadata["label"] = f"run_{run_id}"
+            epo_no_baseline.metadata["label"] = f"run_{run_id}"
+
             epochs.append(epo)
+            epochs_no_bs.append(epo_no_baseline)
 
         # Quick fix for the dev_head: has to be
         # fixed before doing source reconstruction
         for epo in epochs:
             epo.info["dev_head_t"] = epochs[0].info["dev_head_t"]
-            # epo.info['nchan'] = epochs[0].info['nchan']
+
+        for epo in epochs_no_bs:
+            epo.info["dev_head_t"] = epochs_no_bs[0].info["dev_head_t"]
 
         epochs = mne.concatenate_epochs(epochs)
+        epochs_no_bs = mne.concatenate_epochs(epochs_no_bs)
 
         # Get the evoked potential averaged on all epochs for each channel
         evo = epochs.average(method="median")
         evo.plot(spatial_colors=True)
+
+        evo_no_bs = epochs_no_bs.average(method="median")
+        evo_no_bs.plot(spatial_colors=True)
 
         # Handling the data structure
         epochs.metadata["kind"] = epochs.metadata.trial_type.apply(
@@ -330,18 +276,25 @@ if __name__ == "__main__":
         # X = epochs.copy().pick_types(meg='mag').get_data()  # Only mag data
         # X = epochs.copy().pick_types(meg='grad').get_data() # Only grad data
         X = epochs.get_data()  # Both mag and grad
-        y = epochs.metadata.word.apply(lambda w: zipf_frequency(w, "fr"))
+        print(f'\n\n\n\n XXXX \n {X.shape}\n\n')
+        embeddings = epochs.metadata.word.apply(lambda word: nlp(word).vector).values
+        embeddings = np.array([emb for emb in embeddings])
+        y = embeddings
+        # y = epochs.metadata.word.apply(lambda w: zipf_frequency(w, "fr"))
         R = decod(X, y)
 
         fig, ax = plt.subplots(1, figsize=[6, 6])
         dec = plt.fill_between(epochs.times, R)
         # plt.show()
         report.add_evokeds(evo, titles=f"Evoked for sub {subject} ")
+        report.add_evokeds(
+            evo_no_bs, titles=f"Evoked for sub {subject} without baseline"
+        )
+
         report.add_figure(fig, title=f"decoding for subject {subject}")
         # report.add_figure(dec, subject, tags="word")
-        if str(PATHS.data).__contains__("BIDS"):
-            report.save("decoding_raw.html", open_browser=False, overwrite=True)
-        elif str(PATHS.data).__contains__("derivatives"):
-            report.save("decoding_filtered.html", open_browser=False, overwrite=True)
+        report.save(
+            "./figures/decoding_embeddings.html", open_browser=False, overwrite=True
+        )
 
         print("Finished!")
