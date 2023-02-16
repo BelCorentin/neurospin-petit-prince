@@ -1,0 +1,78 @@
+#Expyriment 0.10.0 (Python 3.7.6), .xpe-file, coding: UTF-8
+#date: Thu Feb 16 2023 14:34:02
+#sha1: 6ec06e
+#modules: 
+#display: size=(2560, 1440), window_mode=False, open_gl=2
+#os: uname_result(system='Linux', node='is153802', release='5.15.0-48-generic', version='#54-Ubuntu SMP Fri Aug 26 13:26:29 UTC 2022', machine='x86_64', processor='x86_64')
+Time,Type,Event,Value,Detail,Detail2
+11295,design,log,
+#design: #exp: RSVP
+#design: block_cnt,block_id,trial_cnt,trial_id
+11296,design,logged,
+11296,Experiment,started
+11923,Stimulus,presented,2
+11938,Stimulus,presented,2
+11950,Stimulus,presented,2
+11962,Stimulus,presented,2
+11981,Stimulus,presented,2
+11994,Stimulus,presented,2
+12005,Stimulus,presented,2
+12016,Stimulus,presented,2
+12044,Stimulus,presented,2
+12054,Stimulus,presented,2
+12065,Stimulus,presented,2
+12076,Stimulus,presented,2
+12092,Stimulus,presented,2
+12105,Stimulus,presented,2
+12116,Stimulus,presented,2
+12126,Stimulus,presented,2
+12142,Stimulus,presented,2
+12155,Stimulus,presented,2
+12166,Stimulus,presented,2
+12177,Stimulus,presented,2
+12299,Stimulus,presented,0
+12311,Stimulus,presented,1
+12401,Stimulus,presented,0
+12415,Stimulus,presented,1
+12505,Stimulus,presented,0
+12521,Stimulus,presented,1
+12600,Stimulus,presented,0
+12616,Stimulus,presented,1
+12695,Stimulus,presented,0
+12710,Stimulus,presented,1
+12787,Stimulus,presented,0
+12801,Stimulus,presented,1
+12870,Stimulus,presented,0
+12882,Stimulus,presented,1
+12986,Stimulus,presented,0
+12998,Stimulus,presented,1
+13069,Stimulus,presented,0
+13084,Stimulus,presented,1
+13161,Stimulus,presented,0
+13177,Stimulus,presented,1
+13257,Stimulus,presented,0
+13273,Stimulus,presented,1
+13353,Stimulus,presented,0
+13369,Stimulus,presented,1
+13448,Stimulus,presented,0
+13463,Stimulus,presented,1
+13544,Stimulus,presented,0
+13559,Stimulus,presented,1
+13638,Stimulus,presented,0
+13653,Stimulus,presented,1
+13732,Stimulus,presented,0
+13748,Stimulus,presented,1
+13829,Stimulus,presented,0
+13844,Stimulus,presented,1
+13927,Stimulus,presented,0
+13941,Stimulus,presented,1
+14022,Stimulus,presented,0
+14038,Stimulus,presented,1
+14109,Stimulus,presented,0
+14124,Stimulus,presented,1
+22285,Experiment,paused
+22293,Stimulus,presented,4
+22645,Keyboard,received,y,wait_char
+22645,Experiment,ended
+22646,Data,saved
+22656,Stimulus,presented,4

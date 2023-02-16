@@ -17,9 +17,9 @@ import expyriment
 from expyriment import stimuli, io
 from expyriment.misc import Clock
 
-# expyriment.control.set_develop_mode(on=True,
-#                                     intensive_logging=False,
-#                                     skip_wait_methods=True)
+expyriment.control.set_develop_mode(on=True,
+                                    intensive_logging=False,
+                                    skip_wait_methods=True)
 
 expyriment.control.defaults.window_mode = False
 
@@ -29,9 +29,9 @@ expyriment.control.defaults.window_mode = False
 # Version 2: 250 ms / 50 ms + 500 ms at the end of each sentence
 VERSION = 2
 
-# Triggers
-port_address_output = "/dev/parport1"
-port1 = io.ParallelPort(port_address_output)
+# # Triggers
+# port_address_output = "/dev/parport1"
+# port1 = io.ParallelPort(port_address_output)
 
 # Const
 TEXT_FONT = "Inconsolata.ttf"
@@ -102,7 +102,7 @@ CHAPTER = args.chapter[0]
 if VERSION == 1:
     csv_file = f"./../formatting/v1/run{CHAPTER}_v1_word_0.3_end_sentence_0.2.tsv"
 else:
-    csv_file = f"./../formatting/v2/run{CHAPTER}run1_v1_word_0.25_0.5.tsv"
+    csv_file = f"./../formatting/v2/run{CHAPTER}_v2_0.25_0.5.tsv"
 # stimlist = pd.read_csv(args.csv_files[0][0], sep="\t", quoting=True, quotechar="*")
 stimlist = pd.read_csv(csv_file, sep="\t", quoting=True, quotechar="*")
 
@@ -131,59 +131,62 @@ photodiode = stimuli.Rectangle((90, 90), position=(900, -500))
 
 events = PriorityQueue()
 map_text_surface = dict()
-
-max_onset = 0
-
+i = 0
+max_offset = 0
+print(stimlist)
 for row in stimlist.itertuples():
-    text = row.word
+    if(i<20):
+        text = row.word
+        print(text)
+        onset = row.onset
+        duration = row.duration
+        max_offset = max(onset,max_offset)
+        if text in map_text_surface.keys():
+            stim = map_text_surface[text]
+        else:
+            stim = stimuli.TextLine(
+                text,
+                text_font=TEXT_FONT,
+                text_size=TEXT_SIZE,
+                text_colour=TEXT_COLOR,
+                background_colour=BACKGROUND_COLOR,
+            )
+            map_text_surface[text] = stim
 
-    onset = row.onset
-    duration = row.duration
-    max_onset = max(onset, max_onset)
+        events.put((onset * 1000 * SPEED, text, stim))
+        events.put(((onset + duration) * 1000 * SPEED, "", bs))
+        print(onset+duration)
+        i = i + 1
 
-    if text in map_text_surface.keys():
-        stim = map_text_surface[text]
-    else:
-        stim = stimuli.TextLine(
-            text,
-            text_font=TEXT_FONT,
-            text_size=TEXT_SIZE,
-            text_colour=TEXT_COLOR,
-            background_colour=BACKGROUND_COLOR,
-        )
-        map_text_surface[text] = stim
 
-    events.put((onset * 1000 * SPEED, text, stim))
-    events.put(((onset + duration) * 1000 * SPEED, "", bs))
-
-# Adding a 3s blackscreen at the end 
-
-end_bs = ((max_onset*1000)+3000)
-events.put((end_bs * SPEED, "", bs))
+end_end = ((max_offset*1000)+3000)
+print(end_end/1000)
+events.put((end_end * SPEED, "", bs))
 
 #############################################################
 # let's go
 expyriment.control.start(subject_id=0)
 
 # init triggers
-port1.send(data=0)
+# port1.send(data=0)
 
 
 a = Clock()
 
 # Initialize
 
-port1.send(data=CHAPTER)
+# port1.send(data=CHAPTER)
 
 while not events.empty():
     onset, text, stim = events.get()
+    print(onset,text,stim)
     value_trigger = len(text)
     while a.time < (onset - 10):
         a.wait(1)
         k = kb.check()
         if k is not None:
             exp.data.add([a.time, "keypressed,{}".format(k)])
-    port1.send(data=value_trigger)
+    # port1.send(data=value_trigger)
     stim.present()
     if value_trigger == 0:
         photodiode.present()

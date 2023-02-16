@@ -1,0 +1,81 @@
+#Expyriment 0.10.0 (Python 3.7.6), .xpe-file, coding: UTF-8
+#date: Thu Feb 16 2023 14:45:26
+#sha1: 9170dd
+#modules: 
+#display: size=(2560, 1440), window_mode=False, open_gl=2
+#os: uname_result(system='Linux', node='is153802', release='5.15.0-48-generic', version='#54-Ubuntu SMP Fri Aug 26 13:26:29 UTC 2022', machine='x86_64', processor='x86_64')
+Time,Type,Event,Value,Detail,Detail2
+447,stdout,received,'             word  onset  duration\n0         Lorsque    0.7      0.25\n1         j\'avais    1.0      0.25\n2             six    1.3      0.25\n3            ans,    1.6      0.25\n4            j\'ai    1.9      0.25\n...           ...    ...       ...\n1460         peut  509.2      0.25\n1461          pas  509.5      0.25\n1462        aller  509.8      0.25\n1463         bien  510.1      0.25\n1464  "loin..."""  510.4      0.25\n\n[1465 rows x 3 columns]'
+447,stdout,received,'Lorsque'
+447,stdout,received,'0.95'
+447,stdout,received,"j'avais"
+448,stdout,received,'1.25'
+448,stdout,received,'six'
+448,stdout,received,'1.55'
+448,stdout,received,'ans,'
+448,stdout,received,'1.85'
+448,stdout,received,"j'ai"
+448,stdout,received,'2.15'
+448,stdout,received,'vu,'
+448,stdout,received,'2.45'
+448,stdout,received,'une'
+449,stdout,received,'2.75'
+449,stdout,received,'fois,'
+449,stdout,received,'3.0500000000000007'
+449,stdout,received,'une'
+449,stdout,received,'3.3500000000000005'
+449,stdout,received,'magnifique'
+449,stdout,received,'3.6500000000000004'
+449,stdout,received,'image,'
+449,stdout,received,'3.95'
+449,stdout,received,'dans'
+449,stdout,received,'4.250000000000001'
+449,stdout,received,'un'
+450,stdout,received,'4.550000000000001'
+450,stdout,received,'livre'
+450,stdout,received,'4.8500000000000005'
+450,stdout,received,'sur'
+450,stdout,received,'5.150000000000001'
+450,stdout,received,'la'
+450,stdout,received,'5.450000000000001'
+450,stdout,received,'forêt'
+450,stdout,received,'5.750000000000001'
+450,stdout,received,'vierge'
+450,stdout,received,'6.050000000000001'
+450,stdout,received,'qui'
+451,stdout,received,'6.3500000000000005'
+451,stdout,received,"s'appelait"
+451,stdout,received,'6.650000000000001'
+452,stdout,received,'9.4'
+479,design,log,
+#design: #exp: RSVP
+#design: block_cnt,block_id,trial_cnt,trial_id
+479,design,logged,
+479,Experiment,started
+479,stdout,received,'630.0 Lorsque <expyriment.stimuli._textline.TextLine object at 0x7f408aea68d0>'
+1148,Stimulus,presented,2
+1148,stdout,received,'855.0  <expyriment.stimuli._blankscreen.BlankScreen object at 0x7f407ee85110>'
+1424,Stimulus,presented,0
+1442,Stimulus,presented,1
+1442,stdout,received,"900.0 j'avais <expyriment.stimuli._textline.TextLine object at 0x7f407e670c10>"
+1460,Stimulus,presented,3
+1460,stdout,received,'1125.0  <expyriment.stimuli._blankscreen.BlankScreen object at 0x7f407ee85110>'
+1674,Stimulus,presented,0
+1686,Stimulus,presented,1
+1686,stdout,received,'1170.0 six <expyriment.stimuli._textline.TextLine object at 0x7f407ee70f50>'
+1704,Stimulus,presented,4
+1705,stdout,received,'1395.0  <expyriment.stimuli._blankscreen.BlankScreen object at 0x7f407ee85110>'
+1942,Stimulus,presented,0
+1957,Stimulus,presented,1
+1957,stdout,received,'1440.0 ans, <expyriment.stimuli._textline.TextLine object at 0x7f4079fb1fd0>'
+1969,Stimulus,presented,5
+1969,stdout,received,'1665.0  <expyriment.stimuli._blankscreen.BlankScreen object at 0x7f407ee85110>'
+2193,Stimulus,presented,0
+2209,Stimulus,presented,1
+2210,stdout,received,"1710.0 j'ai <expyriment.stimuli._textline.TextLine object at 0x7f4079fdaf50>"
+2222,Stimulus,presented,6
+2222,stdout,received,'1935.0  <expyriment.stimuli._blankscreen.BlankScreen object at 0x7f407ee85110>'
+2222,Experiment,paused
+2244,Stimulus,presented,22
+2244,Experiment,ended
+2254,Stimulus,presented,22

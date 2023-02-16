@@ -1,0 +1,27 @@
+#Expyriment 0.10.0 (Python 3.7.6), .xpe-file, coding: UTF-8
+#date: Thu Feb 16 2023 14:19:37
+#sha1: f9f764
+#modules: 
+#display: size=(2560, 1440), window_mode=False, open_gl=2
+#os: uname_result(system='Linux', node='is153802', release='5.15.0-48-generic', version='#54-Ubuntu SMP Fri Aug 26 13:26:29 UTC 2022', machine='x86_64', processor='x86_64')
+Time,Type,Event,Value,Detail,Detail2
+11292,design,log,
+#design: #exp: RSVP
+#design: block_cnt,block_id,trial_cnt,trial_id
+11292,design,logged,
+11292,Experiment,started
+11920,Stimulus,presented,2
+12223,Stimulus,presented,0
+12238,Stimulus,presented,1
+12258,Stimulus,presented,3
+12488,Stimulus,presented,0
+12505,Stimulus,presented,1
+12517,Stimulus,presented,4
+12739,Stimulus,presented,0
+12756,Stimulus,presented,1
+12769,Stimulus,presented,5
+13003,Stimulus,presented,0
+13016,Stimulus,presented,1
+13028,Stimulus,presented,6
+13283,Stimulus,presented,0
+13300,Stimulus,presented,1
