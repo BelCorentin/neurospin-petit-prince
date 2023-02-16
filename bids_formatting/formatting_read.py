@@ -36,7 +36,7 @@ from mne_bids import BIDSPath, write_raw_bids
 dict_nip_to_sn = {'cb_666666': '1', 'rb_666666': '2'}
 
 # Get the vX used for the recording
-subj_version = {'1': '1', '2': '2'}
+subj_version = {'1': '1', '2': '2', '3': '2', '4': '2'}
 
 # 1) Raw format to BIDS #####
 
@@ -45,7 +45,7 @@ BASE_PATH = Path('/home/is153802/workspace_LPP/data/MEG/LPP/')
 # BIDS_PATH = BASE_PATH / 'LPP_bids'
 BIDS_PATH = BASE_PATH / 'BIDS_lecture'
 RAW_DATA_PATH = BASE_PATH / 'raw_lecture'
-TASK = 'listen'
+TASK = 'read'
 
 # For each of these folders, go into the sub folder
 # (that has the name of a subject)

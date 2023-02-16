@@ -25,7 +25,7 @@ import matplotlib
 def decod(X, y):
     assert len(X) == len(y)
     # define data
-    model = make_pipeline(StandardScaler(), RidgeCV(alphas=np.logspace(-3, 8, 10)))
+    model = make_pipeline(StandardScaler(), RidgeCV(alphas=np.logspace(-1, 6, 10)))
     cv = KFold(15, shuffle=True, random_state=0)
 
     # fit predict
@@ -37,12 +37,14 @@ def decod(X, y):
     for t in range(n_times):
         print(".", end="")
         rs = []
+        # y_pred = cross_val_predict(model, X[:, :, t], y, cv=cv)
         for train, test in cv.split(X):
             model.fit(X[train,:,t],y[train])
             y_pred = model.predict(X[test,:,t])
             r = correlate(y[test],y_pred)
             rs.append(r)
         R[t] = np.mean(rs)    
+        #R[t] = correlate(y, y_pred)
         
     return R
 
