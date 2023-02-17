@@ -13,6 +13,10 @@ from sklearn.linear_model import RidgeCV
 from wordfreq import zipf_frequency
 from Levenshtein import editops
 import matplotlib.pyplot as plt
+import matplotlib
+
+matplotlib.use("Agg")
+mne.set_log_level(False)
 
 ####################################################
 ####################################################
@@ -30,7 +34,7 @@ if __name__ == "__main__":
     print("\nSubjects for which the decoding will be tested: \n")
     print(subjects)
 
-    for subject in subjects[1:]:  # Ignore the first one
+    for subject in subjects:  # Ignore the first one
 
         print(f"Subject {subject}'s decoding started")
         epochs = []

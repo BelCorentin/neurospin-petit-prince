@@ -70,7 +70,10 @@ def epoch_data(subject, run_id, task, path, filter=True):
     events = mne.find_events(
         raw, stim_channel="STI101",  shortest_event=1
     )
-    word_length_meg = events[:, 2] - 2048  # Remove first event: chapter start and remove offset
+    if bids_path.subject == '2':
+        word_length_meg = events[:, 2] - 2048  # Remove first event: chapter start and remove offset
+    else:
+        word_length_meg = events[:, 2]
     word_len_meta = meta.word.apply(len)
     i, j = match_list(word_len_meta, word_length_meg)
     events = events[j]
@@ -78,7 +81,6 @@ def epoch_data(subject, run_id, task, path, filter=True):
     meta = meta.iloc[i].reset_index()
 
     meta['start'] = events[:, 0]/raw.info['sfreq']
-    print(raw,events,meta)
     epochs = mne.Epochs(
         raw, events, metadata=meta, tmin=-0.1, tmax=0.6, decim=20, baseline=(-0.1, 0.0)
     )
