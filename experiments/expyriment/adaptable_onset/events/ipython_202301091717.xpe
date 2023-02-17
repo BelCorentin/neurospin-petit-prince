@@ -1,7 +1,0 @@
-#Expyriment 0.10.0 (Python 3.7.6), .xpe-file, coding: UTF-8
-#date: Mon Jan 09 2023 17:17:17
-#sha1: None
-#modules: 
-#display: size=(800, 600), window_mode=True, open_gl=2
-#os: uname_result(system='Linux', node='is153802', release='5.15.0-48-generic', version='#54-Ubuntu SMP Fri Aug 26 13:26:29 UTC 2022', machine='x86_64', processor='x86_64')
-Time,Type,Event,Value,Detail,Detail2
