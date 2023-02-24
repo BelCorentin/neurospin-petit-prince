@@ -13,14 +13,11 @@ import mne_bids
 import numpy as np
 import pandas as pd
 from sklearn.preprocessing import StandardScaler, RobustScaler
-from wordfreq import zipf_frequency
-from Levenshtein import editops
 
 # Tools
 import matplotlib.pyplot as plt
 from pathlib import Path
 import matplotlib
-from utils import match_list
 
 def get_path(name='LPP_read'):
     if name == 'LPP_read':
