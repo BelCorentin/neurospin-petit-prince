@@ -99,22 +99,25 @@ def epoch_data(subject, run_id, task, path, filter=True):
         9: "26-27",
     }
 
-    chapter = CHAPTERS[run_id]
+    chapter = CHAPTERS[int(run_id)]
 
     meta["start"] = events[:, 0] / raw.info["sfreq"]
     meta["condition"] = "sentence"
     meta = meta.sort_values("start").reset_index(drop=True)
     # add parsing data
-    path_txt = path / "../../code/data/txt_raw"
+    # path_txt = path / "../../code/data/txt_raw"  # for XPS
+    path_txt = path / "../../../../code/neurospin-petit-prince/data/txt_raw"
     meta = enrich(meta, path_txt / f"ch{chapter}.txt")
+    print(meta)
+    epochs = mne.Epochs(raw, **mne_events(meta, raw),
+                        decim=20, tmin=-0.2, tmax=0.8)
 
-    epochs = mne.Epochs(raw, **mne_events(meta), decim=20, tmin=-0.2, tmax=0.8)
-    epochs = epochs['kind=="word"']
+    # epochs = epochs['kind=="word"']
     epochs.metadata["closing"] = epochs.metadata.closing_.fillna(0)
     epochs = epochs.pick_types(meg=True, stim=False, misc=False)
-
-    data = epochs.get_data()
     epochs.load_data()
+    data = epochs.get_data()
+
 
     # Scaling the data
     n_words, n_chans, n_times = data.shape
@@ -230,7 +233,8 @@ class Enrich:
             prev_word = parse_annots.iloc[[missed - 1]].index
             if prev_word[0] >= 0:
                 parse_annots.loc[prev_word, "missed_closing"] = current_closing
-        parse_annots.closing_ = parse_annots.closing + parse_annots.missed_closing
+        parse_annots.closing_ = parse_annots.closing +\
+            parse_annots.missed_closing
 
         # Add new columns to original mne.Epochs.metadata
         # fill columns
