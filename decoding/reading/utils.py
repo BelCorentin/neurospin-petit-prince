@@ -1,8 +1,8 @@
-'''
+"""
 
 General functions for decoding purposes
 
-'''
+"""
 # Neuro
 import mne
 import mne_bids
@@ -16,11 +16,31 @@ from sklearn.preprocessing import StandardScaler, RobustScaler
 from sklearn.linear_model import RidgeCV
 from wordfreq import zipf_frequency
 from Levenshtein import editops
+from tqdm.notebook import trange
+from scipy.stats import pearsonr
+import spacy
+
+nlp = spacy.load("fr_core_news_sm")
 
 # Tools
 import matplotlib.pyplot as plt
 from pathlib import Path
 import matplotlib
+
+## CONST
+
+CHAPTERS = {
+    1: "1-3",
+    2: "4-6",
+    3: "7-9",
+    4: "10-12",
+    5: "13-14",
+    6: "15-19",
+    7: "20-22",
+    8: "23-25",
+    9: "26-27",
+}
+
 
 def decod(X, y):
     assert len(X) == len(y)
@@ -31,21 +51,21 @@ def decod(X, y):
     # fit predict
     n, n_chans, n_times = X.shape
     if y.ndim == 1:
-        y = np.asarray(y).reshape(y.shape[0],1)
+        y = np.asarray(y).reshape(y.shape[0], 1)
     R = np.zeros((n_times, y.shape[1]))
-    
+
     for t in range(n_times):
         print(".", end="")
         rs = []
         # y_pred = cross_val_predict(model, X[:, :, t], y, cv=cv)
         for train, test in cv.split(X):
-            model.fit(X[train,:,t],y[train])
-            y_pred = model.predict(X[test,:,t])
-            r = correlate(y[test],y_pred)
+            model.fit(X[train, :, t], y[train])
+            y_pred = model.predict(X[test, :, t])
+            r = correlate(y[test], y_pred)
             rs.append(r)
-        R[t] = np.mean(rs)    
-        #R[t] = correlate(y, y_pred)
-        
+        R[t] = np.mean(rs)
+        # R[t] = correlate(y, y_pred)
+
     return R
 
 
@@ -62,6 +82,7 @@ def correlate(X, Y):
     SY2 = (Y**2).sum(0) ** 0.5
     SXY = (X * Y).sum(0)
     return SXY / (SX2 * SY2)
+
 
 def match_list(A, B, on_replace="delete"):
     """Match two lists of different sizes and return corresponding indice
@@ -110,3 +131,121 @@ def match_list(A, B, on_replace="delete"):
     A_sel = A_sel[np.where(~np.isnan(A_sel))]
     assert len(B_sel) == len(A_sel)
     return A_sel.astype(int), B_sel.astype(int)
+
+
+def get_syntax(file):
+    with open(file, "r") as f:
+        txt = f.readlines()
+
+    # parse syntactic trees
+    out = []
+    for sequence_id, sent in enumerate(txt):
+        splits = sent.split("=")
+
+        for prev, token in zip(splits, splits[1:]):
+            out.append(
+                dict(
+                    pos=prev.split("(")[-1].split()[0],
+                    word_id=int(prev.split()[-1]),
+                    word=token.split(")")[0],
+                    n_closing=token.count(")"),
+                    sequence_id=sequence_id,
+                    is_last_word=False,
+                )
+            )
+        out[-1]["is_last_word"] = True
+
+    synt = pd.DataFrame(out)
+
+    # add deal with apostrophe
+    out = []
+    for sent, d in synt.groupby("sequence_id"):
+        for token in d.itertuples():
+            for tok in token.word.split("'"):
+                out.append(dict(word=tok, n_closing=1, is_last_word=False, pos="XXX"))
+            out[-1]["n_closing"] = token.n_closing
+            out[-1]["is_last_word"] = token.is_last_word
+            out[-1]["pos"] = token.pos
+    return pd.DataFrame(out)
+
+
+def add_syntax(meta, data_path, run):
+    # get basic annotations
+    meta = meta.copy().reset_index(drop=True)
+
+    # get syntactic annotations
+    syntax_file = data_path / "syntax" / f"ch{CHAPTERS[run]}.syntax.txt"
+    synt = get_syntax(syntax_file)
+
+    # align
+    meta_tokens = meta.word.fillna("XXXX").apply(format_text).values
+    synt_tokens = synt.word.apply(format_text).values
+
+    i, j = match_list(meta_tokens, synt_tokens)
+    assert (len(i) / len(meta_tokens)) > 0.9
+
+    for key, default_value in dict(n_closing=1, is_last_word=False, pos="XXX").items():
+        meta[key] = default_value
+        meta.loc[i, key] = synt.iloc[j][key].values
+
+    content_pos = ("NC", "ADJ", "ADV", "VINF", "VS", "VPP", "V")
+    meta["content_word"] = meta.pos.apply(
+        lambda pos: pos in content_pos if isinstance(pos, str) else False
+    )
+    return meta
+
+
+# TO change
+def analysis(raw, meta, data_path):
+    # load MEG data
+    raw.load_data()
+    raw.filter(0.5, 20.0, n_jobs=-1)
+
+    # get metadata
+    meta = add_syntax(meta, data_path, run)
+
+    # epoch
+    def mne_events(meta):
+        events = np.ones((len(meta), 3), dtype=int)
+        events[:, 0] = meta.start * raw.info["sfreq"]
+        return dict(events=events, metadata=meta.reset_index())
+
+    epochs = mne.Epochs(
+        raw, **mne_events(meta), decim=20, tmin=-0.2, tmax=1.5, preload=True
+    )
+    epochs = epochs['kind=="word"']
+
+    scores = dict()
+    scores["n_closing"] = decod(epochs, "n_closing")
+    scores["n_closing_notlast"] = decod(
+        epochs["content_word and not is_last_word"], "n_closing"
+    )
+    scores["n_closing_noun_notlast"] = decod(
+        epochs['pos=="NC" and not is_last_word'], "n_closing"
+    )
+    return scores
+
+
+def decod(epochs, target):
+    model = make_pipeline(StandardScaler(), RidgeCV())
+    cv = KFold(n_splits=5)
+
+    y = epochs.metadata[target].values
+    r = np.zeros(len(epochs.times))
+    for t in trange(len(epochs.times)):
+        X = epochs.get_data()[:, :, t]
+        for train, test in cv.split(X, y):
+            model.fit(X[train], y[train])
+            y_pred = model.predict(X[test])
+            r[t] += pearsonr(y_pred, y[test])[0]
+    r /= cv.n_splits
+    return r
+
+
+def create_target(decoding_criterion, epochs):
+    if decoding_criterion == "embeddings":
+        embeddings = epochs.metadata.word.apply(lambda word: nlp(word).vector).values
+        embeddings = np.array([emb for emb in embeddings])
+        return embeddings
+    elif decoding_criterion == "word_length":
+        return epochs.metadata.word.apply(len)

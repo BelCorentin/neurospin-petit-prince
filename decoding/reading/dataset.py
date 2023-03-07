@@ -76,7 +76,7 @@ def epoch_data(subject, run_id, task, path, filter=True):
     # read events
     meta = pd.read_csv(event_file, sep="\t")
     events = mne.find_events(raw, stim_channel="STI101", shortest_event=1)
-    if bids_path.subject == "2":
+    if bids_path.task == "read" and bids_path.subject == "2":
         word_length_meg = (
             events[:, 2] - 2048
         )  # Remove first event: chapter start and remove offset
@@ -270,3 +270,25 @@ def parse(sent):
 
     closing = np.r_[np.diff(closeds), closeds[-1]]
     return closing
+
+
+def epoch_runs(subject, run, task, path):
+    epochs = []
+    for run_id in range(1, run + 1):
+        print(".", end="")
+        epo = epoch_data(subject, "%.2i" % run_id, task, path)
+        epo.metadata["label"] = f"run_{run_id}"
+        epochs.append(epo)
+    for epo in epochs:
+        epo.info["dev_head_t"] = epochs[0].info["dev_head_t"]
+
+    epochs = mne.concatenate_epochs(epochs)
+
+    # Handling the data structure
+    epochs.metadata["kind"] = epochs.metadata.trial_type.apply(
+        lambda s: eval(s)["kind"]
+    )
+    epochs.metadata["word"] = epochs.metadata.trial_type.apply(
+        lambda s: eval(s)["word"]
+    )
+    return epochs
