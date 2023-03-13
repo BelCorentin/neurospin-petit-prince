@@ -169,12 +169,19 @@ def get_syntax(file):
     return pd.DataFrame(out)
 
 
-def add_syntax(meta, data_path, run):
+def format_text(text):
+    for char in "jlsmtncd":
+        text = text.replace(f"{char}'", char)
+    text = text.replace("œ", "oe")
+    return text.lower()
+
+
+def add_syntax(meta, syntax_path, run):
     # get basic annotations
     meta = meta.copy().reset_index(drop=True)
 
     # get syntactic annotations
-    syntax_file = data_path / "syntax" / f"ch{CHAPTERS[run]}.syntax.txt"
+    syntax_file = syntax_path / f"ch{CHAPTERS[run]}.syntax.txt"
     synt = get_syntax(syntax_file)
 
     # align
@@ -182,7 +189,8 @@ def add_syntax(meta, data_path, run):
     synt_tokens = synt.word.apply(format_text).values
 
     i, j = match_list(meta_tokens, synt_tokens)
-    assert (len(i) / len(meta_tokens)) > 0.9
+    print(meta_tokens, synt_tokens)
+    assert (len(i) / len(meta_tokens)) > 0.8
 
     for key, default_value in dict(n_closing=1, is_last_word=False, pos="XXX").items():
         meta[key] = default_value

@@ -1,2 +1,2 @@
 *.wav
-data/data_path.txt
+./data/data_path.txt

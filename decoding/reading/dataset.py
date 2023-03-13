@@ -20,7 +20,7 @@ from Levenshtein import editops
 import matplotlib.pyplot as plt
 from pathlib import Path
 import matplotlib
-from utils import match_list
+from utils import match_list, add_syntax
 import spacy
 
 
@@ -104,20 +104,30 @@ def epoch_data(subject, run_id, task, path, filter=True):
     meta["start"] = events[:, 0] / raw.info["sfreq"]
     meta["condition"] = "sentence"
     meta = meta.sort_values("start").reset_index(drop=True)
+
     # add parsing data
-    # path_txt = path / "../../code/data/txt_raw"  # for XPS
-    path_txt = path / "../../../../code/neurospin-petit-prince/data/txt_raw"
-    meta = enrich(meta, path_txt / f"ch{chapter}.txt")
-    print(meta)
-    epochs = mne.Epochs(raw, **mne_events(meta, raw),
-                        decim=20, tmin=-0.2, tmax=0.8)
+
+    # Raw textual data
+    path_txt = path / "../../code/data/txt_raw"  # for XPS
+    # path_txt = path / "../../../../code/neurospin-petit-prince/data/txt_raw"
+
+    # Syntax data
+    path_syntax = path / "../../code/data/syntax"  # for XPS
+    # path_txt = path / "../../../../code/neurospin-petit-prince/data/syntax"  # for NS
+
+    # Enriching the metadata with outside files:
+
+    # meta = enrich(meta, path_txt / f"ch{chapter}.txt")
+    # print(meta)
+    meta = add_syntax(meta, path_syntax, int(run_id))
+
+    epochs = mne.Epochs(raw, **mne_events(meta, raw), decim=20, tmin=-0.2, tmax=0.8)
 
     # epochs = epochs['kind=="word"']
-    epochs.metadata["closing"] = epochs.metadata.closing_.fillna(0)
-    epochs = epochs.pick_types(meg=True, stim=False, misc=False)
+    # epochs.metadata["closing"] = epochs.metadata.closing_.fillna(0)
     epochs.load_data()
+    epochs = epochs.pick_types(meg=True, stim=False, misc=False)
     data = epochs.get_data()
-
 
     # Scaling the data
     n_words, n_chans, n_times = data.shape
@@ -233,8 +243,7 @@ class Enrich:
             prev_word = parse_annots.iloc[[missed - 1]].index
             if prev_word[0] >= 0:
                 parse_annots.loc[prev_word, "missed_closing"] = current_closing
-        parse_annots.closing_ = parse_annots.closing +\
-            parse_annots.missed_closing
+        parse_annots.closing_ = parse_annots.closing + parse_annots.missed_closing
 
         # Add new columns to original mne.Epochs.metadata
         # fill columns

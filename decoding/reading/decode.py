@@ -55,7 +55,7 @@ for subject in subjects:  # Ignore the first one
     y = create_target(decoding_criterion, epochs)
 
     R_vec = decod(X, y)
-    if decoding_criterion == "emdeddings":
+    if decoding_criterion == "embeddings":
         R_vec = np.mean(R_vec, axis=1)
 
     fig, ax = plt.subplots(1, figsize=[6, 6])
