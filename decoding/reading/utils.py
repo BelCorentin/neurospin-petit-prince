@@ -189,7 +189,6 @@ def add_syntax(meta, syntax_path, run):
     synt_tokens = synt.word.apply(format_text).values
 
     i, j = match_list(meta_tokens, synt_tokens)
-    print(meta_tokens, synt_tokens)
     assert (len(i) / len(meta_tokens)) > 0.8
 
     for key, default_value in dict(n_closing=1, is_last_word=False, pos="XXX").items():
@@ -257,3 +256,11 @@ def create_target(decoding_criterion, epochs):
         return embeddings
     elif decoding_criterion == "word_length":
         return epochs.metadata.word.apply(len)
+    elif decoding_criterion == "closing":
+        target = "n_closing"
+        return epochs.metadata[target].values
+
+
+def save_decoding_results(sub, decoding_criterion, task, R):
+    np.save(f"./../results/decoding_{task}_{decoding_criterion}_{sub}.npy", R)
+    return True
