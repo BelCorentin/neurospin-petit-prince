@@ -3,11 +3,11 @@
 Functions for plotting
 
 """
-from dataset import get_path
+from dataset import get_path, get_code_path
 
 import mne
 import matplotlib.pyplot as plt
-import pandas as pd
+import numpy as np
 from pathlib import Path
 
 
@@ -25,16 +25,16 @@ def plot_subject(subject, decoding_criterion, task):
 
     Returns: matplotlib plot
     """
-    if task == "read":
-        task_path = "LPP_read"
-    elif task == "listen":
-        task_path = "LPP_listen"
-    path = get_path(task_path)
+
+    path = get_code_path()
     # Format the file path
-    file_path = Path("to/define.tsv")
 
     # Open the pandas DataFrame containing the decoding values
-    df = pd.open_csv(file_path, sep="\t")
-
+    R = np.load(
+        (path) / f"decoding/results/decoding_{task}_{decoding_criterion}_{subject}.npy"
+    )
     # Plot it
-    plt.fill_between(df["R_score"], df["epochs.times"])
+    times = np.linspace(-0.2, 0.8, R.shape[0])  # To do better at generalizing
+    fig, ax = plt.subplots(1, figsize=[6, 6])
+    dec = plt.fill_between(times, R)
+    return fig

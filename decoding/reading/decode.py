@@ -1,5 +1,13 @@
 from dataset import get_path, get_subjects, epoch_data, epoch_runs
-from utils import decod, correlate, match_list, create_target, analysis
+from utils import (
+    decod,
+    correlate,
+    match_list,
+    create_target,
+    analysis,
+    save_decoding_results,
+)
+from plot import plot_subject
 import mne_bids
 from pathlib import Path
 import pandas as pd
@@ -44,7 +52,7 @@ task = "read"
 print("\nSubjects for which the decoding will be tested: \n")
 print(subjects)
 
-for subject in subjects[3]:  # Ignore the first one
+for subject in subjects[4]:  # Ignore the first one
     print(f"Subject {subject}'s decoding started")
     epochs = epoch_runs(subject, RUN, task, path)
 
@@ -62,14 +70,20 @@ for subject in subjects[3]:  # Ignore the first one
     if decoding_criterion == "embeddings":
         R_vec = np.mean(R_vec, axis=1)
 
-    fig, ax = plt.subplots(1, figsize=[6, 6])
-    dec = plt.fill_between(epochs.times, R_vec)
+    save_decoding_results(subject, decoding_criterion, task, R_vec)
+
+    fig = plot_subject(subject, decoding_criterion, task)
     # plt.show()
     # report.add_evokeds(evo, titles=f"Evoked for sub {subject} ")
     report.add_figure(fig, title=f"decoding for subject {subject}")
     # report.add_figure(dec, subject, tags="word")
     report.save(
-        f"./figures/reading_decoding_{decoding_criterion}.html",
+        f"./figures/{task}_decoding_{decoding_criterion}_{subject}.html",
+        open_browser=False,
+        overwrite=True,
+    )
+    report.save(
+        f"./figures/{task}_decoding_{decoding_criterion}.html",
         open_browser=False,
         overwrite=True,
     )

@@ -41,12 +41,29 @@ def get_path(name="LPP_read"):
     return data
 
 
+def get_code_path():
+    path_file = Path("./../../data/origin.txt")
+    with open(path_file, "r") as f:
+        user = Path(f.readlines()[0].strip("\n"))
+        user = str(user)
+    if user == "XPS":
+        # TASK = "read"
+        data = get_path() / "../../code"
+    elif user == "NS":
+        # TASK = "listen"
+        data = get_path() / "../../../../code/neurospin-petit-prince"
+    else:
+        return f"{user} is an invalid name. \n\
+        Current options: XPS and NS"
+    return data
+
+
 # Epoching and decoding
 
 
 def epoch_data(subject, run_id, task, path, filter=True):
 
-    enrich = Enrich()
+    # enrich = Enrich()
 
     task = "read"
     print("Running the script on RAW data:")

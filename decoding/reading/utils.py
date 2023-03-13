@@ -42,34 +42,35 @@ CHAPTERS = {
 }
 
 
-def decod(X, y):
-    assert len(X) == len(y)
-    # define data
-    model = make_pipeline(StandardScaler(), RidgeCV(alphas=np.logspace(-1, 6, 10)))
-    cv = KFold(15, shuffle=True, random_state=0)
+# def decod(X, y):
+#     assert len(X) == len(y)
+#     # define data
+#     model = make_pipeline(StandardScaler(), RidgeCV(alphas=np.logspace(-1, 6, 10)))
+#     cv = KFold(15, shuffle=True, random_state=0)
 
-    # fit predict
-    n, n_chans, n_times = X.shape
-    if y.ndim == 1:
-        y = np.asarray(y).reshape(y.shape[0], 1)
-    R = np.zeros((n_times, y.shape[1]))
+#     # fit predict
+#     n, n_chans, n_times = X.shape
+#     if y.ndim == 1:
+#         y = np.asarray(y).reshape(y.shape[0], 1)
+#     R = np.zeros((n_times, y.shape[1]))
 
-    for t in range(n_times):
-        print(".", end="")
-        rs = []
-        # y_pred = cross_val_predict(model, X[:, :, t], y, cv=cv)
-        for train, test in cv.split(X):
-            model.fit(X[train, :, t], y[train])
-            y_pred = model.predict(X[test, :, t])
-            r = correlate(y[test], y_pred)
-            rs.append(r)
-        R[t] = np.mean(rs)
-        # R[t] = correlate(y, y_pred)
+#     for t in range(n_times):
+#         print(".", end="")
+#         rs = []
+#         # y_pred = cross_val_predict(model, X[:, :, t], y, cv=cv)
+#         for train, test in cv.split(X):
+#             model.fit(X[train, :, t], y[train])
+#             y_pred = model.predict(X[test, :, t])
+#             r = correlate(y[test], y_pred)
+#             rs.append(r)
+#         R[t] = np.mean(rs)
+#         # R[t] = correlate(y, y_pred)
 
-    return R
+#     return R
 
 
-# Function to correlate
+# Function to return the Pearson correlation
+# Between X and Y
 def correlate(X, Y):
     if X.ndim == 1:
         X = np.array(X)[:, None]
@@ -134,6 +135,14 @@ def match_list(A, B, on_replace="delete"):
 
 
 def get_syntax(file):
+    """
+    Add the syntactic information to the existing metadata
+    Feed the existing: word information with
+    n_closing, number of closing nodes
+    is_last_word, boolean value
+    pos, the position in the sentence
+
+    """
     with open(file, "r") as f:
         txt = f.readlines()
 
@@ -170,6 +179,10 @@ def get_syntax(file):
 
 
 def format_text(text):
+    """
+    Simple function to make sure there is
+    no problematic characters
+    """
     for char in "jlsmtncd":
         text = text.replace(f"{char}'", char)
     text = text.replace("œ", "oe")
@@ -177,6 +190,10 @@ def format_text(text):
 
 
 def add_syntax(meta, syntax_path, run):
+    """
+    Use the get_syntax function to add it directly to
+    the metadata from the epochs
+    """
     # get basic annotations
     meta = meta.copy().reset_index(drop=True)
 
@@ -204,6 +221,12 @@ def add_syntax(meta, syntax_path, run):
 
 # TO change
 def analysis(raw, meta, data_path):
+    """
+    One function to rule them all:
+
+    To be better defined before future refinement
+
+    """
     # load MEG data
     raw.load_data()
     raw.filter(0.5, 20.0, n_jobs=-1)
@@ -234,6 +257,16 @@ def analysis(raw, meta, data_path):
 
 
 def decod(epochs, target):
+    """
+    Run a RidgeCV to get the Pearson correlation between
+    the predicted values and the actual values for a target
+
+    The target can be anything as:
+    word_length,
+    spacy embeddings,
+    syntactic informations, etc..
+
+    """
     model = make_pipeline(StandardScaler(), RidgeCV())
     cv = KFold(n_splits=5)
 
@@ -250,6 +283,11 @@ def decod(epochs, target):
 
 
 def create_target(decoding_criterion, epochs):
+    """
+    Trivial function to handle different use cases
+
+    Not currently used, needs refinement
+    """
     if decoding_criterion == "embeddings":
         embeddings = epochs.metadata.word.apply(lambda word: nlp(word).vector).values
         embeddings = np.array([emb for emb in embeddings])
@@ -262,5 +300,9 @@ def create_target(decoding_criterion, epochs):
 
 
 def save_decoding_results(sub, decoding_criterion, task, R):
+    """
+    To save decoding results for later use
+    eg: plotting, further analysis
+    """
     np.save(f"./../results/decoding_{task}_{decoding_criterion}_{sub}.npy", R)
     return True
