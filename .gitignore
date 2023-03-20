@@ -1,3 +1,4 @@
 *.wav
 ./data/data_path.txt
 ./data/origin.txt
+*.txt
