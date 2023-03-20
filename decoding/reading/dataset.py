@@ -124,11 +124,11 @@ def epoch_data(subject, run_id, task, path, filter=True):
     # add parsing data
 
     # Raw textual data
-    path_txt = path / "../../code/data/txt_raw"  # for XPS
+    path_txt = get_code_path / "data/txt_raw"  # for XPS
     # path_txt = path / "../../../../code/neurospin-petit-prince/data/txt_raw"
 
     # Syntax data
-    path_syntax = path / "../../code/data/syntax"  # for XPS
+    path_syntax = get_code_path / "data/syntax"
     # path_txt = path / "../../../../code/neurospin-petit-prince/data/syntax"  # for NS
 
     # Enriching the metadata with outside files:
