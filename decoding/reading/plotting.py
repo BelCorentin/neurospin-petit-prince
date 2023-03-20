@@ -53,7 +53,11 @@ for condi in cond:
     evo.plot(spatial_colors=True)
     report.add_evokeds(evo, titles=f"Evoked for condition {col}  ")
 
-
+report.save(
+    f"./figures/{task}_ERP_all_cond.html",
+    open_browser=False,
+    overwrite=True,
+)
 # for condi in cond:
 #     for case in cases:
 #         target = cond[condi]["target"]
