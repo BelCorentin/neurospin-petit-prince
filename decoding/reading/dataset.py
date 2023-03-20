@@ -4,7 +4,6 @@ DATASET related functions
 
 """
 
-
 # Neuro
 import mne
 import mne_bids
@@ -197,111 +196,6 @@ def concac_runs(subject, task, path):
     return epochs
 
 
-class Enrich:
-    """Enrich word dataframes (e.g. mne.Epochs.metadata)
-    with syntactic information"""
-
-    def __init__(
-        self,
-    ):
-        model = "fr_core_news_sm"
-        if not spacy.util.is_package(model):
-            spacy.cli.download(model)
-
-        self.nlp = spacy.load(model)
-
-    def __call__(self, meta, txt_file):
-
-        # read text file
-        with open(txt_file, "r") as f:
-            txt = f.read().replace("\n", "")
-
-        # parse text file
-        doc = self.nlp(txt)
-
-        # add parse information to metadata
-        parse_annots = []
-        for sent_id, sent in enumerate(doc.sents):
-            # HERE ADD ERIC DE LA CLERGERIE parser instead
-            closings = parse(sent)
-            assert len(closings) == len(sent)
-            for word, closing in zip(sent, closings):
-                parse_annots.append(
-                    dict(
-                        word_index=word.i - sent[0].i,
-                        sequence_id=sent_id,
-                        sequence_uid=str(sent),
-                        closing=closing,
-                        match_token=word.text,
-                    )
-                )
-
-        # align text file and meg metadata
-        def format_text(text):
-            for char in "jlsmtncd":
-                text = text.replace(f"{char}'", char)
-            text = text.replace("œ", "oe")
-            return text.lower()
-
-        meg_words = meta.word.fillna("######").values
-        text_words = [format_text(w.text) for w in doc]
-
-        i, j = match_list(meg_words, text_words)
-
-        # deal with missed tokens (e.g. wrong spelling, punctuation)
-        assert len(parse_annots) == len(text_words)
-        parse_annots = pd.DataFrame(parse_annots)
-        parse_annots.closing = parse_annots.closing.fillna(0)
-        parse_annots["closing_"] = 0
-        parse_annots["missed_closing"] = 0
-        missing = np.setdiff1d(range(len(parse_annots)), j)
-        for missed in missing:
-            current_closing = parse_annots.iloc[missed].closing
-            prev_word = parse_annots.iloc[[missed - 1]].index
-            if prev_word[0] >= 0:
-                parse_annots.loc[prev_word, "missed_closing"] = current_closing
-        parse_annots.closing_ = parse_annots.closing + parse_annots.missed_closing
-
-        # Add new columns to original mne.Epochs.metadata
-        # fill columns
-        columns = (
-            "word_index",
-            "sequence_id",
-            "sequence_uid",
-            "closing_",
-            "match_token",
-        )
-        for column in columns:
-            meta[column] = None
-            meta.loc[meta.iloc[i].index, column] = parse_annots[column].iloc[j].values
-        return meta
-
-
-def parse(sent):
-    "identifies the number of closing nodes"
-
-    def is_closed(node, position):
-        """JR quick code to know whether is a word is closed given a word position"""
-        if node.i > position:
-            return False
-        for child in node.children:
-            if child.i > position:
-                return False
-            if not is_closed(child, position):
-                return False
-        return True
-
-    closeds = []
-    for current in range(1, len(sent) + 1):
-        closed = 0
-        for position, word in enumerate(sent):  # [:current]
-            closed += is_closed(word, current)
-        closeds.append(closed)
-
-    closing = np.r_[np.diff(closeds), closeds[-1]]
-    return closing
-
-
 def epoch_runs(subject, run, task, path):
     epochs = []
     for run_id in range(1, run + 1):
@@ -322,3 +216,34 @@ def epoch_runs(subject, run, task, path):
         lambda s: eval(s)["word"]
     )
     return epochs
+
+
+def epoch_subjects(subjects, RUN, task, path):
+    epochs = []
+    for subject in subjects:
+        epo = epoch_runs(subject, RUN, task, path)
+        epochs.append(epo)
+    for epo in epochs:
+        epo.info["dev_head_t"] = epochs[0].info["dev_head_t"]
+
+    epochs = mne.concatenate_epochs(epochs)
+
+    # Handling the data structure
+    epochs.metadata["kind"] = epochs.metadata.trial_type.apply(
+        lambda s: eval(s)["kind"]
+    )
+    epochs.metadata["word"] = epochs.metadata.trial_type.apply(
+        lambda s: eval(s)["word"]
+    )
+    return epochs
+
+
+def epochs_slice(epochs, column, value, equal=True):
+    meta = epochs.metadata
+    if equal:
+        subset = meta[meta[column] == value].level_0
+    elif equal == "sup":
+        subset = meta[meta[column] >= value].level_0
+    elif equal == "inf":
+        subset = meta[meta[column] <= value].level_0
+    return epochs[subset]

@@ -1,0 +1,4 @@
+event_type: "word"
+task: "read"
+case: "start"
+var: "None"

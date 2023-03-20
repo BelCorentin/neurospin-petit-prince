@@ -24,6 +24,9 @@ Set-up cases: what kind of decoding is being done:
 - etc...
 
 We are using Hydra configurations to simplify this process
+
+Hydra organization:
+
 """
 
 
@@ -33,6 +36,7 @@ def run(cfg: DictConfig) -> None:
     task = cfg.decod.task
     baseline_min = cfg.decod.baseline_min
     baseline_max = cfg.decod.baseline_max
+    plot = cfg.decod.plot
 
     print("Decoding criterion chosen:", decoding_criterion)
     print("Modality of data (read or audio) chosen:", task)
@@ -48,8 +52,7 @@ def run(cfg: DictConfig) -> None:
     report = mne.Report()
     path = get_path("LPP_read")
     subjects = get_subjects(path)
-    RUN = 1
-    task = "read"
+    RUN = 9
 
     print("\nSubjects for which the decoding will be tested: \n")
     print(subjects)
