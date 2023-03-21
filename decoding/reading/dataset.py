@@ -225,6 +225,7 @@ def epoch_subjects(subjects, RUN, task, path):
         epochs.append(epo)
     for epo in epochs:
         epo.info["dev_head_t"] = epochs[0].info["dev_head_t"]
+        epo.info["projs"] = epochs[0].info["projs"]
 
     epochs = mne.concatenate_epochs(epochs)
 

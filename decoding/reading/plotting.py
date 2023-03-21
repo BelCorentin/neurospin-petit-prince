@@ -15,7 +15,7 @@ mne.set_log_level(False)
 report = mne.Report()
 path = get_path("LPP_read")
 subjects = get_subjects(path)
-RUN = 9
+RUN = 1
 task = "read"
 print("\nSubjects for which the plotting will be done: \n")
 print(subjects)
@@ -41,6 +41,7 @@ cases = {"start", "end"}
 # - beginning of sentence (epochs[i+1] !danger limits)
 # - beginning of constituent (epochs[i+1] !same danger)
 
+evos = []
 for condi in cond:
     target = cond[condi]["target"]
     col = cond[condi]["column"]
@@ -50,8 +51,18 @@ for condi in cond:
         ep = epochs_slice(epochs, col, target)
     # ep.average().plot(gfp='only')
     evo = ep.average(method="median")
+    evos.append(evo)
     evo.plot(spatial_colors=True)
     report.add_evokeds(evo, titles=f"Evoked for condition {col}  ")
+
+evokeds = dict(sentence=evos[0], word=evos[1], constituent=evos[2])
+
+fig = mne.viz.plot_compare_evokeds(evokeds, combine="mean")
+
+report.add_figs_to_section(
+    fig, captions="Evoked response comparaison", section="My section"
+)
+
 
 report.save(
     f"./figures/{task}_ERP_all_cond.html",
