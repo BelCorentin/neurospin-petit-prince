@@ -20,6 +20,8 @@ task = "read"
 print("\nSubjects for which the plotting will be done: \n")
 print(subjects)
 
+# DEBUG
+subjects = subjects[3:]
 epochs = epoch_subjects(subjects, RUN, task, path)
 
 # Build a 3x2 plot, with for each condition (sentence, word, constituent), and for (start, end),

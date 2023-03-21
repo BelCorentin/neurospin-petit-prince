@@ -60,7 +60,16 @@ def get_code_path():
 # Epoching and decoding
 
 
-def epoch_data(subject, run_id, task, path, filter=True):
+def epoch_data(
+    subject,
+    run_id,
+    task,
+    path,
+    baseline_min=-0.2,
+    baseline_max=0.8,
+    filter=True,
+    epoch_on="word",
+):
 
     # enrich = Enrich()
 
@@ -137,8 +146,20 @@ def epoch_data(subject, run_id, task, path, filter=True):
     # print(meta)
     meta = add_syntax(meta, path_syntax, int(run_id))
 
-    epochs = mne.Epochs(raw, **mne_events(meta, raw), decim=20, tmin=-0.2, tmax=0.8)
-
+    if epoch_on == "word":
+        epochs = mne.Epochs(
+            raw, **mne_events(meta, raw), decim=20, tmin=baseline_min, tmax=baseline_max
+        )
+    elif epoch_on == "sentence":
+        # Create a sentence-start column:
+        meta["sentence_start"] = [
+            True
+            for i, is_last_word in enumerate(meta.is_last_word)
+            if meta.is_last_word[i + 1]
+        ]
+        epochs = mne.Epochs(
+            raw, **mne_events(meta, raw), decim=20, tmin=baseline_min, tmax=baseline_max
+        )
     # epochs = epochs['kind=="word"']
     # epochs.metadata["closing"] = epochs.metadata.closing_.fillna(0)
     epochs.load_data()
@@ -196,11 +217,13 @@ def concac_runs(subject, task, path):
     return epochs
 
 
-def epoch_runs(subject, run, task, path):
+def epoch_runs(subject, run, task, path, baseline_min, baseline_max):
     epochs = []
     for run_id in range(1, run + 1):
         print(".", end="")
-        epo = epoch_data(subject, "%.2i" % run_id, task, path)
+        epo = epoch_data(
+            subject, "%.2i" % run_id, task, path, baseline_min, baseline_max
+        )
         epo.metadata["label"] = f"run_{run_id}"
         epochs.append(epo)
     for epo in epochs:
@@ -218,14 +241,16 @@ def epoch_runs(subject, run, task, path):
     return epochs
 
 
-def epoch_subjects(subjects, RUN, task, path):
+def epoch_subjects(subjects, RUN, task, path, baseline_min, baseline_max):
     epochs = []
     for subject in subjects:
-        epo = epoch_runs(subject, RUN, task, path)
+        epo = epoch_runs(subject, RUN, task, path, baseline_min, baseline_max)
         epochs.append(epo)
     for epo in epochs:
         epo.info["dev_head_t"] = epochs[0].info["dev_head_t"]
-        epo.info["projs"] = epochs[0].info["projs"]
+        proj_list = epochs[0].info["projs"]
+        for proj in proj_list:
+            epo.add_proj(proj)
 
     epochs = mne.concatenate_epochs(epochs)
 
