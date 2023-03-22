@@ -69,14 +69,10 @@ def epoch_data(
     baseline_max=0.8,
     filter=True,
     epoch_on="word",
-    reference="start"
+    reference="start",
 ):
 
-    # enrich = Enrich()
-
-    task = "read"
-    print("Running the script on RAW data:")
-    print(f"run {run_id}, subject: {subject}")
+    print(f"\n Epoching for run {run_id}, subject: {subject}\n")
     bids_path = mne_bids.BIDSPath(
         subject=subject,
         session="01",
@@ -92,6 +88,7 @@ def epoch_data(
     raw.load_data()
     raw = raw.filter(0.5, 20)
 
+    # Generate event_file path
     event_file = path / f"sub-{bids_path.subject}"
     event_file = event_file / f"ses-{bids_path.session}"
     event_file = event_file / "meg"
@@ -100,70 +97,87 @@ def epoch_data(
     event_file += f"_task-{bids_path.task}"
     event_file += f"_run-{bids_path.run}_events.tsv"
     assert Path(event_file).exists()
+
     # read events
     meta = pd.read_csv(event_file, sep="\t")
     events = mne.find_events(raw, stim_channel="STI101", shortest_event=1)
-    if bids_path.task == "read" and bids_path.subject == "2":
+    if (
+        bids_path.task == "read" and bids_path.subject == "2"
+    ):  # A trigger value bug for this subject
         word_length_meg = (
             events[:, 2] - 2048
         )  # Remove first event: chapter start and remove offset
     else:
         word_length_meg = events[:, 2]
+    # Here, the trigger value encoded the word length
+    # which helps us realign triggers
+    # From the event file / from the MEG events
     word_len_meta = meta.word.apply(len)
     i, j = match_list(word_len_meta, word_length_meg)
     events = events[j]
-    # events = events[i]  # events = words_events[i]
     meta = meta.iloc[i].reset_index()
-    CHAPTERS = {
-        1: "1-3",
-        2: "4-6",
-        3: "7-9",
-        4: "10-12",
-        5: "13-14",
-        6: "15-19",
-        7: "20-22",
-        8: "23-25",
-        9: "26-27",
-    }
-
-    chapter = CHAPTERS[int(run_id)]
-
+    # The start parameter will help us
+    # keep the link between raw events and metadata
     meta["start"] = events[:, 0] / raw.info["sfreq"]
     meta["condition"] = "sentence"
     meta = meta.sort_values("start").reset_index(drop=True)
 
-    # add parsing data
-
-    # Raw textual data
-    path_txt = get_code_path() / "data/txt_raw"  # for XPS
-    # path_txt = path / "../../../../code/neurospin-petit-prince/data/txt_raw"
-
-    # Syntax data
+    # Raw LPP textual data
+    path_txt = get_code_path() / "data/txt_raw"
+    # LPP Syntax data
     path_syntax = get_code_path() / "data/syntax"
-    # path_txt = path / "../../../../code/neurospin-petit-prince/data/syntax"  # for NS
 
     # Enriching the metadata with outside files:
-
-    # meta = enrich(meta, path_txt / f"ch{chapter}.txt")
-    # print(meta)
     meta = add_syntax(meta, path_syntax, int(run_id))
 
-    if epoch_on == "word" and reference=="start":
+    # We are considering different cases:
+    # Are we epoching on words, sentences, or constituents?
+    # Different epoching for different analysis
+    if epoch_on == "word" and reference == "start":
         # Default case, so nothing to change
-    elif epoch_on == "sentence":
+        # Could be removed but kept for easy of reading
+        happy = True
+    # Word end
+    if epoch_on == "word" and reference == "end":
+        # Little hack: not really pretty but does the job
+        # As epoching again uses the start column, we rename it like that
+        # But it should be meta["end"] instead...
+        meta["start"] = [row["start"] + row["duration"] for i, row in meta.iterrows()]
 
-        # Create a sentence-start column:
-        # meta["sentence_start"] = [
-        #     True
-        #     for i, is_last_word in enumerate(meta.is_last_word)
-        #     if meta.is_last_word[i + 1]
-        # ]
+    # Sentence end
+    elif epoch_on == "sentence" and reference == "end":
         column = "is_last_word"
         value = True
         meta = meta[meta[column] == value]
-        epochs = mne.Epochs(
-            raw, **mne_events(meta, raw), decim=20, tmin=baseline_min, tmax=baseline_max
-        )
+    # Sentence start
+    elif epoch_on == "sentence" and reference == "start":
+        # Create a sentence-start column:
+        meta["sentence_start"] = [
+            True
+            for i, is_last_word in enumerate(meta.is_last_word[:-1])
+            if meta.is_last_word[i + 1]
+        ]
+        column = "sentence_start"
+        value = True
+        meta = meta[meta[column] == value]
+    # Constituent start
+    elif epoch_on == "constituent" and reference == "start":
+        # Create a constituent-start column:
+        meta["constituent_start"] = [
+            True for i, _ in enumerate(meta.is_last_word[1:]) if meta.n_closing > 1
+        ]
+        column = "constituent_start"
+        value = True
+        meta = meta[meta[column] == value]
+    # Constituent end
+    elif epoch_on == "constituent" and reference == "end":
+        # Create a constituent-start column:
+        meta["constituent_start"] = [
+            True for i, _ in enumerate(meta.is_last_word[1:]) if meta.n_closing > 1
+        ]
+        column = "constituent_start"
+        value = True
+        meta = meta[meta[column] == value]
     epochs = mne.Epochs(
         raw, **mne_events(meta, raw), decim=20, tmin=baseline_min, tmax=baseline_max
     )
