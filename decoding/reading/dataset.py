@@ -143,6 +143,13 @@ def epoch_data(
 
     # Enriching the metadata with outside files:
     meta = add_syntax(meta, path_syntax, int(run_id))
+    # Add the information on the sentence ending:
+    end_of_sentence = [
+        True if meta.onset.iloc[i + 1] - meta.onset.iloc[i] > 0.4 else False
+        for i, _ in enumerate(meta.values[:-1])
+    ]
+    end_of_sentence.append(True)
+    meta["sentence_end"] = end_of_sentence
 
     # We are considering different cases:
     # Are we epoching on words, sentences, or constituents?
@@ -169,7 +176,7 @@ def epoch_data(
         )
         embeds.resize(embeds.shape[0] // dim, dim)
 
-        column = "is_last_word"
+        column = "sentence_end"
         value = True
         meta = meta[meta[column] == value]
         print(meta.shape[0], embeds.shape[0])
@@ -184,11 +191,13 @@ def epoch_data(
         #     for i, is_last_word in enumerate(meta.is_last_word[:-1])
         #     if meta.is_last_word[i + 1]
         # ]
-        list_word_start = [
-            True if meta.is_last_word[i + 1] else False
-            for i, _ in enumerate(meta.is_last_word[:-1])
+        list_word_start = [True]
+        list_word_start_to_add = [
+            True if meta.sentence_end[i - 1] else False
+            for i, _ in enumerate(meta.sentence_end[1:])
         ]
-        list_word_start.append(False)
+        for boolean in list_word_start_to_add:
+            list_word_start.append(boolean)
         meta["sentence_start"] = list_word_start
         column = "sentence_start"
         value = True
