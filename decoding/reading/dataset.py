@@ -238,7 +238,16 @@ def concac_runs(subject, task, path):
     return epochs
 
 
-def epoch_runs(subject, run, task, path, baseline_min, baseline_max, epoch_on="word"):
+def epoch_runs(
+    subject,
+    run,
+    task,
+    path,
+    baseline_min,
+    baseline_max,
+    epoch_on="word",
+    reference="start",
+):
     epochs = []
     for run_id in range(1, run + 1):
         print(".", end="")
@@ -268,10 +277,28 @@ def epoch_runs(subject, run, task, path, baseline_min, baseline_max, epoch_on="w
     return epochs
 
 
-def epoch_subjects(subjects, RUN, task, path, baseline_min, baseline_max):
+def epoch_subjects(
+    subjects,
+    RUN,
+    task,
+    path,
+    baseline_min,
+    baseline_max,
+    epoch_on="word",
+    reference="start",
+):
     epochs = []
     for subject in subjects:
-        epo = epoch_runs(subject, RUN, task, path, baseline_min, baseline_max)
+        epo = epoch_runs(
+            subject,
+            RUN,
+            task,
+            path,
+            baseline_min,
+            baseline_max,
+            epoch_on=epoch_on,
+            reference=reference,
+        )
         epochs.append(epo)
     for epo in epochs:
         epo.info["dev_head_t"] = epochs[0].info["dev_head_t"]
