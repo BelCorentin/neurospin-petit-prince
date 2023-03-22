@@ -51,12 +51,12 @@ def run(cfg: DictConfig) -> None:
 
     path = get_path("LPP_read")
     subjects = get_subjects(path)
-    RUN = 9
+    RUN = 1
 
     print("\nSubjects for which the decoding will be tested: \n")
     print(subjects)
 
-    for subject in subjects:
+    for subject in subjects[4]:
         print(f"Subject {subject}'s decoding started")
         epochs = epoch_runs(
             subject,

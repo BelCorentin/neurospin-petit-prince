@@ -22,6 +22,20 @@ import matplotlib
 from utils import match_list, add_syntax
 import spacy
 
+# CONST:
+
+CHAPTERS = {
+    1: "1-3",
+    2: "4-6",
+    3: "7-9",
+    4: "10-12",
+    5: "13-14",
+    6: "15-19",
+    7: "20-22",
+    8: "23-25",
+    9: "26-27",
+}
+
 
 def get_path(name="LPP_read"):
     path_file = Path("./../../data/data_path.txt")
@@ -146,17 +160,36 @@ def epoch_data(
 
     # Sentence end
     elif epoch_on == "sentence" and reference == "end":
+        # Add a LASER embeddings column for decoding
+        dim = 1024
+        embeds = np.fromfile(
+            f"{get_code_path()}/data/laser_embeddings/emb_{CHAPTERS[int(run_id)]}.bin",
+            dtype=np.float32,
+            count=-1,
+        )
+        embeds.resize(embeds.shape[0] // dim, dim)
+
         column = "is_last_word"
         value = True
         meta = meta[meta[column] == value]
+        print(meta.shape[0], embeds.shape[0])
+        assert embeds.shape[0] == meta.shape[0]
+        meta["laser"] = [emb for emb in embeds]
+        print("Added embeddings")
     # Sentence start
     elif epoch_on == "sentence" and reference == "start":
         # Create a sentence-start column:
-        meta["sentence_start"] = [
-            True
-            for i, is_last_word in enumerate(meta.is_last_word[:-1])
-            if meta.is_last_word[i + 1]
+        # list_word_start = [
+        #     True
+        #     for i, is_last_word in enumerate(meta.is_last_word[:-1])
+        #     if meta.is_last_word[i + 1]
+        # ]
+        list_word_start = [
+            True if meta.is_last_word[i + 1] else False
+            for i, _ in enumerate(meta.is_last_word[:-1])
         ]
+        list_word_start.append(False)
+        meta["sentence_start"] = list_word_start
         column = "sentence_start"
         value = True
         meta = meta[meta[column] == value]
@@ -259,6 +292,7 @@ def epoch_runs(
             baseline_min,
             baseline_max,
             epoch_on=epoch_on,
+            reference=reference,
         )
         epo.metadata["label"] = f"run_{run_id}"
         epochs.append(epo)
