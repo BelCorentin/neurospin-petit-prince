@@ -57,7 +57,7 @@ def run(cfg: DictConfig) -> None:
     print("\nSubjects for which the decoding will be tested: \n")
     print(subjects)
 
-    for subject in subjects[4]:  # Ignore the first one
+    for subject in subjects:
         print(f"Subject {subject}'s decoding started")
         epochs = epoch_runs(subject, RUN, task, path)  # To do: add baseline as a param
 

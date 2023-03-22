@@ -86,6 +86,7 @@ def epoch_data(
     )
 
     raw = mne_bids.read_raw_bids(bids_path)
+    raw.del_proj()  # To fix proj issues
     raw.pick_types(meg=True, stim=True)
     raw.load_data()
     raw = raw.filter(0.5, 20)
@@ -248,9 +249,6 @@ def epoch_subjects(subjects, RUN, task, path, baseline_min, baseline_max):
         epochs.append(epo)
     for epo in epochs:
         epo.info["dev_head_t"] = epochs[0].info["dev_head_t"]
-        proj_list = epochs[0].info["projs"]
-        for proj in proj_list:
-            epo.add_proj(proj)
 
     epochs = mne.concatenate_epochs(epochs)
 

@@ -7,6 +7,9 @@ import numpy as np
 import mne
 import hydra
 from omegaconf import DictConfig
+import matplotlib
+
+matplotlib.use("Agg")
 
 mne.set_log_level(False)
 
@@ -16,13 +19,17 @@ report = mne.Report()
 path = get_path("LPP_read")
 subjects = get_subjects(path)
 RUN = 1
+baseline_min = -0.2
+baseline_max = 0.8
 task = "read"
 print("\nSubjects for which the plotting will be done: \n")
 print(subjects)
 
 # DEBUG
 subjects = subjects[3:]
-epochs = epoch_subjects(subjects, RUN, task, path)
+epochs = epoch_subjects(
+    subjects, RUN, task, path, baseline_max=baseline_max, baseline_min=baseline_min
+)
 
 # Build a 3x2 plot, with for each condition (sentence, word, constituent), and for (start, end),
 # the ERP associated
@@ -61,9 +68,7 @@ evokeds = dict(sentence=evos[0], word=evos[1], constituent=evos[2])
 
 fig = mne.viz.plot_compare_evokeds(evokeds, combine="mean")
 
-report.add_figs_to_section(
-    fig, captions="Evoked response comparaison", section="My section"
-)
+report.add_figure(fig, title="Evoked response comparaison")
 
 
 report.save(
