@@ -69,6 +69,7 @@ def epoch_data(
     baseline_max=0.8,
     filter=True,
     epoch_on="word",
+    reference="start"
 ):
 
     # enrich = Enrich()
@@ -147,20 +148,25 @@ def epoch_data(
     # print(meta)
     meta = add_syntax(meta, path_syntax, int(run_id))
 
-    if epoch_on == "word":
-        epochs = mne.Epochs(
-            raw, **mne_events(meta, raw), decim=20, tmin=baseline_min, tmax=baseline_max
-        )
+    if epoch_on == "word" and reference=="start":
+        # Default case, so nothing to change
     elif epoch_on == "sentence":
+
         # Create a sentence-start column:
-        meta["sentence_start"] = [
-            True
-            for i, is_last_word in enumerate(meta.is_last_word)
-            if meta.is_last_word[i + 1]
-        ]
+        # meta["sentence_start"] = [
+        #     True
+        #     for i, is_last_word in enumerate(meta.is_last_word)
+        #     if meta.is_last_word[i + 1]
+        # ]
+        column = "is_last_word"
+        value = True
+        meta = meta[meta[column] == value]
         epochs = mne.Epochs(
             raw, **mne_events(meta, raw), decim=20, tmin=baseline_min, tmax=baseline_max
         )
+    epochs = mne.Epochs(
+        raw, **mne_events(meta, raw), decim=20, tmin=baseline_min, tmax=baseline_max
+    )
     # epochs = epochs['kind=="word"']
     # epochs.metadata["closing"] = epochs.metadata.closing_.fillna(0)
     epochs.load_data()
@@ -218,12 +224,18 @@ def concac_runs(subject, task, path):
     return epochs
 
 
-def epoch_runs(subject, run, task, path, baseline_min, baseline_max):
+def epoch_runs(subject, run, task, path, baseline_min, baseline_max, epoch_on="word"):
     epochs = []
     for run_id in range(1, run + 1):
         print(".", end="")
         epo = epoch_data(
-            subject, "%.2i" % run_id, task, path, baseline_min, baseline_max
+            subject,
+            "%.2i" % run_id,
+            task,
+            path,
+            baseline_min,
+            baseline_max,
+            epoch_on=epoch_on,
         )
         epo.metadata["label"] = f"run_{run_id}"
         epochs.append(epo)

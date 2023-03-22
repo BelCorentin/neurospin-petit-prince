@@ -18,7 +18,7 @@ mne.set_log_level(False)
 report = mne.Report()
 path = get_path("LPP_read")
 subjects = get_subjects(path)
-RUN = 1
+RUN = 9
 baseline_min = -0.2
 baseline_max = 0.8
 task = "read"
@@ -26,7 +26,7 @@ print("\nSubjects for which the plotting will be done: \n")
 print(subjects)
 
 # DEBUG
-subjects = subjects[3:]
+subjects = subjects
 epochs = epoch_subjects(
     subjects, RUN, task, path, baseline_max=baseline_max, baseline_min=baseline_min
 )

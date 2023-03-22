@@ -59,7 +59,9 @@ def run(cfg: DictConfig) -> None:
 
     for subject in subjects:
         print(f"Subject {subject}'s decoding started")
-        epochs = epoch_runs(subject, RUN, task, path)  # To do: add baseline as a param
+        epochs = epoch_runs(
+            subject, RUN, task, path, baseline_min, baseline_max
+        )  # To do: add baseline as a param
 
         # Get the evoked potential averaged on all epochs for each channel
         # evo = epochs.average(method="median")
