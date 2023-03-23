@@ -1,2 +1,2 @@
 defaults:
-  - decod: read_wordlength
+  - decod: read_laser
