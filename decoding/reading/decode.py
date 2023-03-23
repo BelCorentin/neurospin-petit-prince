@@ -51,12 +51,12 @@ def run(cfg: DictConfig) -> None:
 
     path = get_path("LPP_read")
     subjects = get_subjects(path)
-    RUN = 1
+    RUN = 9
 
     print("\nSubjects for which the decoding will be tested: \n")
     print(subjects)
 
-    for subject in subjects[4]:
+    for subject in subjects:
         print(f"Subject {subject}'s decoding started")
         epochs = epoch_runs(
             subject,
@@ -78,7 +78,9 @@ def run(cfg: DictConfig) -> None:
         if decoding_criterion == "embeddings":
             R_vec = np.mean(R_vec, axis=1)
 
-        save_decoding_results(subject, decoding_criterion, task, R_vec)
+        save_decoding_results(
+            subject, decoding_criterion, task, reference, epoch_on, R_vec
+        )
 
         # fig = plot_subject(subject, decoding_criterion, task)
         # plt.show()

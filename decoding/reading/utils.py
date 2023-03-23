@@ -307,10 +307,13 @@ def create_target(decoding_criterion, epochs):
         return epochs.metadata[target].values
 
 
-def save_decoding_results(sub, decoding_criterion, task, R):
+def save_decoding_results(sub, decoding_criterion, task, reference, epoch_on, R):
     """
     To save decoding results for later use
     eg: plotting, further analysis
     """
-    np.save(f"./../results/decoding_{task}_{decoding_criterion}_{sub}.npy", R)
+    np.save(
+        f"./../results/{task}/decoding_{decoding_criterion}_{epoch_on}_{reference}_{sub}.npy",
+        R,
+    )
     return True
