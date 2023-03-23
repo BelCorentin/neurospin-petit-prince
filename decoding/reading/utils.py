@@ -270,14 +270,22 @@ def decod(epochs, target):
     model = make_pipeline(StandardScaler(), RidgeCV())
     cv = KFold(n_splits=5)
 
-    y = epochs.metadata[target].values
+    y_ini = epochs.metadata[target].values
+    if target == "laser":
+        # Create an empty 2D array of size (134, 1024)
+        y = np.empty((134, 1024))
+
+        # Fill in the new array with data from the original arrays
+        for i in range(len(y)):
+            y[i] = y_ini[i]
+
     r = np.zeros(len(epochs.times))
     for t in trange(len(epochs.times)):
         X = epochs.get_data()[:, :, t]
         for train, test in cv.split(X, y):
             model.fit(X[train], y[train])
             y_pred = model.predict(X[test])
-            r[t] += pearsonr(y_pred, y[test])[0]
+            r[t] += correlate(y_pred, y[test]).mean()
     r /= cv.n_splits
     return r
 
