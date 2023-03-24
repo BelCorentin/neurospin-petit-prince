@@ -1,0 +1,56 @@
+/media/cb271805/272a9f9d-f140-48d6-b390-094ccc29aae0/workspace-LPP/code/neurospin-petit-prince/decoding/reading/dataset.py:99: RuntimeWarning: This file contains raw Internal Active Shielding data. It may be distorted. Elekta recommends it be run through MaxFilter to produce reliable results. Consider closing the file and running MaxFilter on the data.
+  raw = mne_bids.read_raw_bids(bids_path)
+/media/cb271805/272a9f9d-f140-48d6-b390-094ccc29aae0/workspace-LPP/code/neurospin-petit-prince/decoding/reading/dataset.py:99: RuntimeWarning: Omitted 117 annotation(s) that were outside data range.
+  raw = mne_bids.read_raw_bids(bids_path)
+/media/cb271805/272a9f9d-f140-48d6-b390-094ccc29aae0/workspace-LPP/code/neurospin-petit-prince/decoding/reading/dataset.py:99: RuntimeWarning: Limited 1 annotation(s) that were expanding outside the data range.
+  raw = mne_bids.read_raw_bids(bids_path)
+/media/cb271805/272a9f9d-f140-48d6-b390-094ccc29aae0/workspace-LPP/code/neurospin-petit-prince/decoding/reading/dataset.py:99: RuntimeWarning: The unit for channel(s) STI001, STI002, STI003, STI004, STI005, STI006, STI007, STI008, STI009, STI010, STI011, STI012, STI013, STI014, STI015, STI016, STI101, STI201, STI301 has changed from V to NA.
+  raw = mne_bids.read_raw_bids(bids_path)
+/media/cb271805/272a9f9d-f140-48d6-b390-094ccc29aae0/workspace-LPP/code/neurospin-petit-prince/decoding/reading/dataset.py:242: RuntimeWarning: The measurement information indicates a low-pass frequency of 20.0 Hz. The decim=20 parameter will result in a sampling frequency of 50.0 Hz, which can cause aliasing artifacts.
+  epochs = mne.Epochs(
+/media/cb271805/272a9f9d-f140-48d6-b390-094ccc29aae0/workspace-LPP/code/neurospin-petit-prince/decoding/reading/dataset.py:99: RuntimeWarning: This file contains raw Internal Active Shielding data. It may be distorted. Elekta recommends it be run through MaxFilter to produce reliable results. Consider closing the file and running MaxFilter on the data.
+  raw = mne_bids.read_raw_bids(bids_path)
+/media/cb271805/272a9f9d-f140-48d6-b390-094ccc29aae0/workspace-LPP/code/neurospin-petit-prince/decoding/reading/dataset.py:99: RuntimeWarning: Omitted 146 annotation(s) that were outside data range.
+  raw = mne_bids.read_raw_bids(bids_path)
+/media/cb271805/272a9f9d-f140-48d6-b390-094ccc29aae0/workspace-LPP/code/neurospin-petit-prince/decoding/reading/dataset.py:99: RuntimeWarning: Limited 1 annotation(s) that were expanding outside the data range.
+  raw = mne_bids.read_raw_bids(bids_path)
+/media/cb271805/272a9f9d-f140-48d6-b390-094ccc29aae0/workspace-LPP/code/neurospin-petit-prince/decoding/reading/dataset.py:99: RuntimeWarning: The unit for channel(s) STI001, STI002, STI003, STI004, STI005, STI006, STI007, STI008, STI009, STI010, STI011, STI012, STI013, STI014, STI015, STI016, STI101, STI201, STI301 has changed from V to NA.
+  raw = mne_bids.read_raw_bids(bids_path)
+
+Decoding criterion chosen: laser
+
+Modality of data (read or audio) chosen: read
+
+Start of decoding window chosen: -4.0
+
+End of decoding window chosen: 0.5
+
+Epoching on: sentence
+
+Start or end of previous epoching reference:
+ end
+
+Subjects for which the decoding will be tested: 
+
+['1', '2', '3', '4', '5', '6']
+Subject 2's decoding started
+.
+ Epoching for run 01, subject: 2
+
+134 134
+Added embeddings
+.
+ Epoching for run 02, subject: 2
+
+134 136
+Error executing job with overrides: []
+Traceback (most recent call last):
+  File "/media/cb271805/272a9f9d-f140-48d6-b390-094ccc29aae0/workspace-LPP/code/neurospin-petit-prince/decoding/reading/decode.py", line 61, in run
+    epochs = epoch_runs(
+  File "/media/cb271805/272a9f9d-f140-48d6-b390-094ccc29aae0/workspace-LPP/code/neurospin-petit-prince/decoding/reading/dataset.py", line 315, in epoch_runs
+    epo = epoch_data(
+  File "/media/cb271805/272a9f9d-f140-48d6-b390-094ccc29aae0/workspace-LPP/code/neurospin-petit-prince/decoding/reading/dataset.py", line 182, in epoch_data
+    assert embeds.shape[0] == meta.shape[0]
+AssertionError
+
+Set the environment variable HYDRA_FULL_ERROR=1 for a complete stack trace.
