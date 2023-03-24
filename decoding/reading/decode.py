@@ -56,7 +56,7 @@ def run(cfg: DictConfig) -> None:
     print("\nSubjects for which the decoding will be tested: \n")
     print(subjects)
 
-    for subject in subjects:
+    for subject in subjects[1:]:  # Removing subject 1 as it doesn't work
         print(f"Subject {subject}'s decoding started")
         epochs = epoch_runs(
             subject,

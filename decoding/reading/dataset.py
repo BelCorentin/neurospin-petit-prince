@@ -145,6 +145,7 @@ def epoch_data(
     meta = add_syntax(meta, path_syntax, int(run_id))
     # Add the information on the sentence ending:
     # Only works for reading: TO FIX for listening... to see with Christophe
+    # Also: only works for v2 (subject 1 (me) doesn't work )
     end_of_sentence = [
         True if meta.onset.iloc[i + 1] - meta.onset.iloc[i] > 0.7 else False
         for i, _ in enumerate(meta.values[:-1])
@@ -176,11 +177,12 @@ def epoch_data(
             count=-1,
         )
         embeds.resize(embeds.shape[0] // dim, dim)
-
+        print(meta)
         column = "sentence_end"
         value = True
         meta = meta[meta[column] == value]
         # TODO: rerun LASER
+        print(embeds.shape[0], meta.shape[0])
         assert embeds.shape[0] == meta.shape[0]
         meta["laser"] = [emb for emb in embeds]
         print("Added embeddings")
