@@ -122,6 +122,18 @@ def epoch_data(
         )  # Remove first event: chapter start and remove offset
     else:
         word_length_meg = events[:, 2]
+    # Here, the trigger value encoded the word length
+    # which helps us realign triggers
+    # From the event file / from the MEG events
+    word_len_meta = meta.word.apply(len)
+    i, j = match_list(word_len_meta, word_length_meg)
+    events = events[j]
+    meta = meta.iloc[i].reset_index()
+    # The start parameter will help us
+    # keep the link between raw events and metadata
+    meta["start"] = events[:, 0] / raw.info["sfreq"]
+    meta["condition"] = "sentence"
+    meta = meta.sort_values("start").reset_index(drop=True)
 
     # Raw LPP textual data
     path_txt = get_code_path() / "data/txt_raw"
@@ -130,39 +142,35 @@ def epoch_data(
 
     # Enriching the metadata with outside files:
     meta = add_syntax(meta, path_syntax, int(run_id))
-
-    # Add this before the matchlist so
     # Add the information on the sentence ending:
     # Only works for reading: TO FIX for listening... to see with Christophe
     # Also: only works for v2 (subject 1 (me) doesn't work )
-
-    # Test 1
-    # end_of_sentence = [
-    #     True if meta.onset.iloc[i + 1] - meta.onset.iloc[i] > 0.7 else False
-    #     for i, _ in enumerate(meta.values[:-1])
-    # ]
-    # end_of_sentence.append(True)
-
-    # Test 2
+    # Big problem with that:
+    # There is in the
+    end_of_sentence = [
+        True if meta.onset.iloc[i + 1] - meta.onset.iloc[i] > 0.7 else False
+        for i, _ in enumerate(meta.values[:-1])
+    ]
+    # Quick fix:
+    if int(run_id) == 2:
+        print(end_of_sentence[84])
+        end_of_sentence[84] = False
+    end_of_sentence.append(True)
+    meta["sentence_end"] = end_of_sentence
 
     # We are considering different cases:
     # Are we epoching on words, sentences, or constituents?
     # Different epoching for different analysis
-    end_of_sentence = [
-        True
-        if str(meta.word.iloc[i]).__contains__(".")
-        or str(meta.word.iloc[i]).__contains__("?")
-        or str(meta.word.iloc[i]).__contains__("!")
-        else False
-        for i, _ in enumerate(meta.values[:-1])
-    ]
-    end_of_sentence.append(True)
-    meta["sentence_end"] = end_of_sentence
-
     if epoch_on == "word" and reference == "start":
         # Default case, so nothing to change
         # Could be removed but kept for easy of reading
         happy = True
+    # Word end
+    if epoch_on == "word" and reference == "end":
+        # Little hack: not really pretty but does the job
+        # As epoching again uses the start column, we rename it like that
+        # But it should be meta["end"] instead...
+        meta["start"] = [row["start"] + row["duration"] for i, row in meta.iterrows()]
 
     # Sentence end
     elif epoch_on == "sentence" and reference == "end":
@@ -177,7 +185,7 @@ def epoch_data(
         column = "sentence_end"
         value = True
         meta = meta[meta[column] == value]
-        # TODO: create a match list between the embeds sentence and the
+        # TODO: rerun LASER
         print(embeds.shape[0], meta.shape[0])
         assert embeds.shape[0] == meta.shape[0]
         meta["laser"] = [emb for emb in embeds]
@@ -219,26 +227,6 @@ def epoch_data(
         column = "constituent_start"
         value = True
         meta = meta[meta[column] == value]
-    # Here, the trigger value encoded the word length
-    # which helps us realign triggers
-    # From the event file / from the MEG events
-    word_len_meta = meta.word.apply(len)
-    i, j = match_list(word_len_meta, word_length_meg)
-    events = events[j]
-    meta = meta.iloc[i].reset_index()
-
-    # The start parameter will help us
-    # keep the link between raw events and metadata
-    meta["start"] = events[:, 0] / raw.info["sfreq"]
-    meta["condition"] = "sentence"
-    meta = meta.sort_values("start").reset_index(drop=True)
-
-    if epoch_on == "word" and reference == "end":
-        # Little hack: not really pretty but does the job
-        # As epoching again uses the start column, we rename it like that
-        # But it should be meta["end"] instead...
-        meta["start"] = [row["start"] + row["duration"] for i, row in meta.iterrows()]
-
     epochs = mne.Epochs(
         raw, **mne_events(meta, raw), decim=20, tmin=baseline_min, tmax=baseline_max
     )
