@@ -271,9 +271,11 @@ def decod(epochs, target):
     cv = KFold(n_splits=5)
 
     y_ini = epochs.metadata[target].values
-    if target == "laser":
+
+    def reshape_y(y_ini, size):
+
         # Create an empty 2D array of size (134, 1024)
-        y = np.empty((134, 1024))
+        y = np.empty((size, 1024))
 
         # Fill in the new array with data from the original arrays
         for i in range(len(y)):
@@ -282,6 +284,8 @@ def decod(epochs, target):
     r = np.zeros(len(epochs.times))
     for t in trange(len(epochs.times)):
         X = epochs.get_data()[:, :, t]
+        if target == "laser":
+            y = reshape_y(y_ini, X.shape[0])
         for train, test in cv.split(X, y):
             model.fit(X[train], y[train])
             y_pred = model.predict(X[test])
