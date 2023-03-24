@@ -280,6 +280,7 @@ def decod(epochs, target):
         # Fill in the new array with data from the original arrays
         for i in range(len(y)):
             y[i] = y_ini[i]
+        return y
 
     r = np.zeros(len(epochs.times))
     for t in trange(len(epochs.times)):
