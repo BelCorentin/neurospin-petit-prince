@@ -1,5 +1,5 @@
 decoding_criterion: "word_length"
 task: "read"
-baseline_min: "-0.2"
-baseline_max: "0.8"
+baseline_min: -0.2
+baseline_max: 0.8
 

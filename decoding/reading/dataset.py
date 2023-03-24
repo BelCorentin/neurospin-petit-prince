@@ -101,6 +101,8 @@ def epoch_data(
     raw.pick_types(meg=True, stim=True)
     raw.load_data()
     raw = raw.filter(0.5, 20)
+    print(raw.info["sfreq"])
+    print(type(raw.info["sfreq"]))
 
     # Generate event_file path
     event_file = path / f"sub-{bids_path.subject}"

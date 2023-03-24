@@ -1,6 +1,6 @@
 decoding_criterion: "laser"
 task: "read"
-baseline_min: "-4.0"
-baseline_max: "2.0"
+baseline_min: -4.0
+baseline_max: 0.5
 epoch_on: "sentence"
 reference: "end"
