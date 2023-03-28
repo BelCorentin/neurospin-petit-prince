@@ -18,27 +18,27 @@ mne.set_log_level(False)
 report = mne.Report()
 path = get_path("LPP_read")
 subjects = get_subjects(path)
-RUN = 9
-baseline_min = -0.2
-baseline_max = 0.8
+RUN = 1
+baseline_min = -1.0
+baseline_max = 1.0
 task = "read"
 print("\nSubjects for which the plotting will be done: \n")
 print(subjects)
 
 # DEBUG
-subjects = subjects
+subjects = subjects[4]
 epochs = epoch_subjects(
     subjects, RUN, task, path, baseline_max=baseline_max, baseline_min=baseline_min
 )
 
+
+
+
+
+
 # Build a 3x2 plot, with for each condition (sentence, word, constituent), and for (start, end),
 # the ERP associated
-cond = {
-    "sentence": {"column": "is_last_word", "target": True},
-    "word": {"column": "kind", "target": "word"},
-    "constituent": {"column": "n_closing", "target": 3},
-}
-
+cond = ["sentence", "word", "constituent"]
 cases = {"start", "end"}
 
 # Plotting and adding to the report, the averaged ERPs of:
@@ -52,18 +52,17 @@ cases = {"start", "end"}
 
 evos = []
 for condi in cond:
-        for case in cases:
-        target = cond[condi]["target"]
-        col = cond[condi]["column"]
-        if col == "n_closing":  # To handle all n_closings
-            ep = epochs_slice(epochs, col, target, equal="sup")
-        else:
-            ep = epochs_slice(epochs, col, target)
-        # ep.average().plot(gfp='only')
-        evo = ep.average(method="median")
+    for case in cases:
+        # Slice the epochs based on the epoch_criterion:
+        column_to_slice_on = f"{condi}_{case}"
+        if condi == "sentence" or condi == "word":  # eg: {sentence}_{end} or {word}_{start}
+            epochs = epochs_slice(epochs, column_to_slice_on)
+        elif condi == "constituent":
+            epochs = epochs_slice(epochs, column_to_slice_on, value=2, equal='sup')
+        evo = epochs.average(method="median")
         evos.append(evo)
         evo.plot(spatial_colors=True)
-        report.add_evokeds(evo, titles=f"Evoked for condition {col}  ")
+        report.add_evokeds(evo, titles=f"Evoked for condition {column_to_slice_on}  ")
 
 evokeds = dict(sentence=evos[0], word=evos[2], constituent=evos[4])
 
@@ -77,6 +76,63 @@ report.save(
     open_browser=False,
     overwrite=True,
 )
+
+
+
+
+
+
+
+
+
+
+
+# # Build a 3x2 plot, with for each condition (sentence, word, constituent), and for (start, end),
+# # the ERP associated
+# cond = {
+#     "sentence": {"column": "is_last_word", "target": True},
+#     "word": {"column": "kind", "target": "word"},
+#     "constituent": {"column": "n_closing", "target": 3},
+# }
+
+# cases = {"start", "end"}
+
+# # Plotting and adding to the report, the averaged ERPs of:
+# # words, sentences and constituents, centered at the beginning and end of each
+
+
+# # Need to map for:
+# # - end of word,
+# # - beginning of sentence (epochs[i+1] !danger limits)
+# # - beginning of constituent (epochs[i+1] !same danger)
+
+# evos = []
+# for condi in cond:
+#         for case in cases:
+#         target = cond[condi]["target"]
+#         col = cond[condi]["column"]
+#         if col == "n_closing":  # To handle all n_closings
+#             ep = epochs_slice(epochs, col, target, equal="sup")
+#         else:
+#             ep = epochs_slice(epochs, col, target)
+#         # ep.average().plot(gfp='only')
+#         evo = ep.average(method="median")
+#         evos.append(evo)
+#         evo.plot(spatial_colors=True)
+#         report.add_evokeds(evo, titles=f"Evoked for condition {col}  ")
+
+# evokeds = dict(sentence=evos[0], word=evos[2], constituent=evos[4])
+
+# fig = mne.viz.plot_compare_evokeds(evokeds, combine="mean")
+
+# report.add_figure(fig, title="Evoked response comparaison")
+
+
+# report.save(
+#     f"./figures/{task}_ERP_all_cond.html",
+#     open_browser=False,
+#     overwrite=True,
+# )
 # for condi in cond:
 #     for case in cases:
 #         target = cond[condi]["target"]

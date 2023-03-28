@@ -38,10 +38,24 @@ dict_nip_to_sn = {'cb_666666': '1',
                   'dl_230038': '3',
                   'yb_220174': '4',
                   'mn_230056': '5',
-                  'eg_220435': '6'}
-
-# Get the vX used for the recording
-subj_version = {'1': '1', '2': '2', '3': '2', '4': '2', '5': '2', '6': '2'}
+                  'eg_220435': '6',
+                  'gb_220537': '7',
+                  'am_230061': '8',
+                  'jd_220636': '9',
+                  'jm_100042': '10',
+                  'es_220094': '11',
+                  'aa_230065': '12',
+                  'll_180197': '13',
+                  'am_220107': '14',
+                  'ci_210203': '15',
+                  'pl_230089': '16',
+                  'jm_230095': '17',
+                  'aj_220730': '18',
+                  'fv_230122': '19',
+                  'vr_230124': '20',
+                  'gd_230114': '21',
+                  'um_230121': '22',
+                  }
 
 # 1) Raw format to BIDS #####
 
@@ -112,7 +126,11 @@ for folder in RAW_DATA_PATH.iterdir():
 # directories: the processed one and the regular one
 for sub in os.listdir(BIDS_PATH):
     if sub.__contains__('sub-'):
-        version = subj_version[sub[4:]]  # Find version of timings used
+        sub_number = int(sub[4:])
+        if sub_number == 1:
+            version = 1
+        else:
+            version = 2  # Find version of timings used
         annotation_folder = f'/home/is153802/code/experiments/formatting/decoding_tsv_v{version}'
 
         SUBJ_PATH_BIDS = BIDS_PATH / f'{sub}/ses-01/meg'

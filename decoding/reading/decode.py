@@ -1,10 +1,9 @@
 # Homemade imports
-from dataset import get_path, get_subjects, epoch_runs
+from dataset import get_path, get_subjects, epoch_runs, epochs_slice
 from utils import (
     decod,
     save_decoding_results,
 )
-from plot import plot_subject
 
 # General imports
 import numpy as np
@@ -46,9 +45,6 @@ def run(cfg: DictConfig) -> None:
     print("\nEpoching on:", epoch_on)
     print("\nStart or end of previous epoching reference:\n", reference)
 
-    if decoding_criterion == "embeddings":
-        nlp = spacy.load("fr_core_news_sm")
-
     path = get_path("LPP_read")
     subjects = get_subjects(path)
     RUN = 9
@@ -65,14 +61,14 @@ def run(cfg: DictConfig) -> None:
             path,
             baseline_min,
             baseline_max,
-            epoch_on=epoch_on,
-            reference=reference,
         )
-        # Run a linear regression between MEG signals
-        # and word frequency classification
-        # X = epochs.get_data()
 
-        # y = create_target(decoding_criterion, epochs)
+        # Slice the epochs based on the epoch_criterion:
+        column_to_slice_on = f"{epoch_on}_{reference}"
+        if epoch_on == "sentence" or epoch_on == "word":  # eg: {sentence}_{end} or {word}_{start}
+            epochs = epochs_slice(epochs, column_to_slice_on)
+        elif epoch_on == "constituent":
+            epochs = epochs_slice(epochs, column_to_slice_on, value=2, equal='sup')
 
         R_vec = decod(epochs, decoding_criterion)
         if decoding_criterion == "embeddings":
@@ -81,23 +77,6 @@ def run(cfg: DictConfig) -> None:
         save_decoding_results(
             subject, decoding_criterion, task, reference, epoch_on, R_vec
         )
-
-        # fig = plot_subject(subject, decoding_criterion, task)
-        # plt.show()
-        # report.add_evokeds(evo, titles=f"Evoked for sub {subject} ")
-        # report.add_figure(fig, title=f"decoding for subject {subject}")
-        # report.add_figure(dec, subject, tags="word")
-        # report.save(
-        #     f"./figures/{task}_decoding_{decoding_criterion}_{subject}.html",
-        #     open_browser=False,
-        #     overwrite=True,
-        # )
-        # report.save(
-        #     f"./figures/{task}_decoding_{decoding_criterion}.html",
-        #     open_browser=False,
-        #     overwrite=True,
-        # )
-
         print("Decoding job finished!")
 
 
