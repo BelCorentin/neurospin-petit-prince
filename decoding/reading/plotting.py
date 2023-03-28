@@ -36,7 +36,7 @@ epochs = epoch_subjects(
 cond = {
     "sentence": {"column": "is_last_word", "target": True},
     "word": {"column": "kind", "target": "word"},
-    "constituent": {"column": "n_closing", "target": 2},
+    "constituent": {"column": "n_closing", "target": 3},
 }
 
 cases = {"start", "end"}
@@ -52,17 +52,18 @@ cases = {"start", "end"}
 
 evos = []
 for condi in cond:
-    target = cond[condi]["target"]
-    col = cond[condi]["column"]
-    if col == "n_closing":  # To handle all n_closings
-        ep = epochs_slice(epochs, col, target, equal="sup")
-    else:
-        ep = epochs_slice(epochs, col, target)
-    # ep.average().plot(gfp='only')
-    evo = ep.average(method="median")
-    evos.append(evo)
-    evo.plot(spatial_colors=True)
-    report.add_evokeds(evo, titles=f"Evoked for condition {col}  ")
+        for case in cases:
+        target = cond[condi]["target"]
+        col = cond[condi]["column"]
+        if col == "n_closing":  # To handle all n_closings
+            ep = epochs_slice(epochs, col, target, equal="sup")
+        else:
+            ep = epochs_slice(epochs, col, target)
+        # ep.average().plot(gfp='only')
+        evo = ep.average(method="median")
+        evos.append(evo)
+        evo.plot(spatial_colors=True)
+        report.add_evokeds(evo, titles=f"Evoked for condition {col}  ")
 
 evokeds = dict(sentence=evos[0], word=evos[1], constituent=evos[2])
 

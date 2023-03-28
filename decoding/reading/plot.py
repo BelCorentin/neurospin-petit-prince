@@ -17,7 +17,7 @@ def plot_evoked(epochs):
     evo.plot(spatial_colors=True)
 
 
-def plot_subject(subject, decoding_criterion, task):
+def plot_subject(sub, decoding_criterion, task, reference, epoch_on, R):
     """
     Function to plot the decoding score of a particular subject
     and for a particular decoding criterion
@@ -31,7 +31,7 @@ def plot_subject(subject, decoding_criterion, task):
 
     # Open the pandas DataFrame containing the decoding values
     R = np.load(
-        (path) / f"decoding/results/decoding_{task}_{decoding_criterion}_{subject}.npy"
+        (path) / f"./../results/{task}/decoding_{decoding_criterion}_{epoch_on}_{reference}_{sub}.npy"
     )
     # Plot it
     times = np.linspace(-0.2, 0.8, R.shape[0])  # To do better at generalizing
