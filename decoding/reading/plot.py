@@ -17,7 +17,7 @@ def plot_evoked(epochs):
     evo.plot(spatial_colors=True)
 
 
-def plot_subject(sub, decoding_criterion, task, reference, epoch_on, R):
+def plot_subject(sub, decoding_criterion, task, reference, epoch_on):
     """
     Function to plot the decoding score of a particular subject
     and for a particular decoding criterion

@@ -65,7 +65,7 @@ for condi in cond:
         evo.plot(spatial_colors=True)
         report.add_evokeds(evo, titles=f"Evoked for condition {col}  ")
 
-evokeds = dict(sentence=evos[0], word=evos[1], constituent=evos[2])
+evokeds = dict(sentence=evos[0], word=evos[2], constituent=evos[4])
 
 fig = mne.viz.plot_compare_evokeds(evokeds, combine="mean")
 

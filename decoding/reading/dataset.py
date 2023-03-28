@@ -184,12 +184,6 @@ def epoch_data(
         print("Added embeddings")
     # Sentence start
     elif epoch_on == "sentence" and reference == "start":
-        # Create a sentence-start column:
-        # list_word_start = [
-        #     True
-        #     for i, is_last_word in enumerate(meta.is_last_word[:-1])
-        #     if meta.is_last_word[i + 1]
-        # ]
         list_word_start = [True]
         list_word_start_to_add = [
             True if meta.sentence_end[i - 1] else False
@@ -202,6 +196,7 @@ def epoch_data(
         value = True
         meta = meta[meta[column] == value]
     # Constituent start
+    # TO FIX
     elif epoch_on == "constituent" and reference == "start":
         # Create a constituent-start column:
         meta["constituent_start"] = [
@@ -213,10 +208,10 @@ def epoch_data(
     # Constituent end
     elif epoch_on == "constituent" and reference == "end":
         # Create a constituent-start column:
-        meta["constituent_start"] = [
+        meta["constituent_end"] = [
             True for i, _ in enumerate(meta.is_last_word[1:]) if meta.n_closing > 1
         ]
-        column = "constituent_start"
+        column = "constituent_end"
         value = True
         meta = meta[meta[column] == value]
     # Here, the trigger value encoded the word length
