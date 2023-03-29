@@ -145,7 +145,7 @@ def epoch_data(
     list_word_start = [True]
     list_word_start_to_add = [
         True if meta.sentence_end[i - 1] else False
-        for i, _ in enumerate(meta.sentence_end[1:])
+        for i in np.arange(1, meta.shape[0])
     ]
     for boolean in list_word_start_to_add:
         list_word_start.append(boolean)
@@ -167,14 +167,13 @@ def epoch_data(
 
     # constituent end information
     meta["constituent_end"] = [
-            True for i, closing in enumerate(meta.n_closing) if closing > 1
-        ]
+            True if closing > 1 else False for i, closing in enumerate(meta.n_closing)]
 
     # constituent start information
     list_constituent_start = [True]
     list_constituent_start_to_add = [
         True if meta.constituent_end[i - 1] else False
-        for i, _ in enumerate(meta.constituent_end[1:])
+        for i in np.arange(1, meta.shape[0])
     ]
     for boolean in list_constituent_start_to_add:
         list_constituent_start.append(boolean)
