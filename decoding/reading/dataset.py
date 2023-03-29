@@ -185,6 +185,7 @@ def epoch_data(
     word_len_meta = meta.word.apply(len)
     i, j = match_list(word_len_meta, word_length_meg)
     events = events[j]
+    assert len(i) / meta.shape[0] > 0.8
     meta = meta.iloc[i].reset_index()
 
     # The start parameter will help us
