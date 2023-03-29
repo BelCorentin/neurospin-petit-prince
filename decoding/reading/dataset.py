@@ -144,7 +144,7 @@ def epoch_data(
     # sentence start information
     list_word_start = [True]
     list_word_start_to_add = [
-        True if meta.sentence_end[i - 1] else False
+        True if meta.sentence_end.iloc[i - 1] else False
         for i in np.arange(1, meta.shape[0])
     ]
     for boolean in list_word_start_to_add:
@@ -172,7 +172,7 @@ def epoch_data(
     # constituent start information
     list_constituent_start = [True]
     list_constituent_start_to_add = [
-        True if meta.constituent_end[i - 1] else False
+        True if meta.constituent_end.iloc[i - 1] else False
         for i in np.arange(1, meta.shape[0])
     ]
     for boolean in list_constituent_start_to_add:
