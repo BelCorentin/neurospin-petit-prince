@@ -11,16 +11,11 @@ import mne_bids
 # ML/Data
 import numpy as np
 import pandas as pd
-from sklearn.preprocessing import StandardScaler, RobustScaler
-from wordfreq import zipf_frequency
-from Levenshtein import editops
+from sklearn.preprocessing import RobustScaler
 
 # Tools
-import matplotlib.pyplot as plt
 from pathlib import Path
-import matplotlib
 from utils import match_list, add_syntax
-import spacy
 
 # CONST:
 
@@ -35,6 +30,161 @@ CHAPTERS = {
     8: "23-25",
     9: "26-27",
 }
+
+# FUNC
+
+
+def read_raw(subject, run_id):
+    path = get_path("LPP_read")
+    task = "read"
+    print(f"\n Epoching for run {run_id}, subject: {subject}\n")
+    bids_path = mne_bids.BIDSPath(
+        subject=subject,
+        session="01",
+        task=task,
+        datatype="meg",
+        root=path,
+        run=run_id,
+    )
+
+    raw = mne_bids.read_raw_bids(bids_path)
+    raw.del_proj()  # To fix proj issues
+    raw.pick_types(meg=True, stim=True)
+
+    # Generate event_file path
+    event_file = path / f"sub-{bids_path.subject}"
+    event_file = event_file / f"ses-{bids_path.session}"
+    event_file = event_file / "meg"
+    event_file = str(event_file / f"sub-{bids_path.subject}")
+    event_file += f"_ses-{bids_path.session}"
+    event_file += f"_task-{bids_path.task}"
+    event_file += f"_run-{bids_path.run}_events.tsv"
+    assert Path(event_file).exists()
+
+    # read events
+    meta = pd.read_csv(event_file, sep="\t")
+    events = mne.find_events(raw, stim_channel="STI101", shortest_event=1)
+
+    # Enriching the metadata with outside files:
+    path_syntax = get_code_path() / "data/syntax"
+    meta = add_syntax(meta, path_syntax, int(run_id))
+
+    # add sentence and word positions
+    meta["sequence_id"] = np.cumsum(meta.is_last_word.shift(1, fill_value=False))
+    for s, d in meta.groupby("sequence_id"):
+        meta.loc[d.index, "word_id"] = range(len(d))
+
+    # XXX FIXME
+    i, j = match_list(events[:, 2], meta.word.apply(len))
+    assert len(i) > (0.9 * len(events))
+    meta["has_trigger"] = False
+    meta.loc[j, "has_trigger"] = True
+    assert (events[i, 2] == meta.loc[j].word.apply(len)).mean() > 0.95
+
+    # integrate events to meta for simplicity
+    meta.loc[j, "start"] = events[i, 0] / raw.info["sfreq"]
+
+    # preproc raw
+    raw.load_data()
+    raw = raw.filter(0.5, 20)
+
+    return raw, meta
+
+
+def sentence_epochs(subject):
+    all_epochs = []
+    for run_id in range(1, 10):
+        print(".", end="")
+        raw, meta = read_raw(subject=subject, run_id=run_id)
+
+        # FIXME
+        meta = meta.query("has_trigger").reset_index(drop=True)
+        mne_events = np.ones((len(meta), 3), dtype=int)
+        mne_events[:, 0] = meta.start * raw.info["sfreq"]
+        sent_events = meta.query("word_id==0")
+        assert len(sent_events)
+
+        epochs = mne.Epochs(
+            raw,
+            mne_events[sent_events.index],
+            metadata=sent_events,
+            tmin=-0.500,
+            tmax=2.0,
+            decim=10,
+            preload=True,
+        )
+        all_epochs.append(epochs)
+
+    for epo in all_epochs:
+        epo.info["dev_head_t"] = all_epochs[1].info["dev_head_t"]
+
+    epochs = mne.concatenate_epochs(all_epochs)
+
+    return epochs
+
+
+def word_epochs(subject):
+    all_epochs = []
+    for run_id in range(1, 2):  # TOFIX
+        print(".", end="")
+        raw, meta = read_raw(subject=subject, run_id=run_id)
+
+        # FIXME
+        meta = meta.query("has_trigger").reset_index(drop=True)
+        mne_events = np.ones((len(meta), 3), dtype=int)
+        mne_events[:, 0] = meta.start * raw.info["sfreq"]
+        word_events = meta
+        assert len(word_events)
+
+        epochs = mne.Epochs(
+            raw,
+            mne_events[word_events.index],
+            metadata=word_events,
+            tmin=-0.500,
+            tmax=2.0,
+            decim=10,
+            preload=True,
+        )
+        all_epochs.append(epochs)
+
+    for epo in all_epochs:
+        epo.info["dev_head_t"] = all_epochs[1].info["dev_head_t"]
+
+    epochs = mne.concatenate_epochs(all_epochs)
+
+    return epochs
+
+
+def constituent_epochs(subject):
+    all_epochs = []
+    for run_id in range(1, 10):
+        print(".", end="")
+        raw, meta = read_raw(subject=subject, run_id=run_id)
+
+        # FIXME
+        meta = meta.query("has_trigger").reset_index(drop=True)
+        mne_events = np.ones((len(meta), 3), dtype=int)
+        mne_events[:, 0] = meta.start * raw.info["sfreq"]
+        const_events = meta.query("constituent_start==True")
+        assert len(const_events)
+
+        epochs = mne.Epochs(
+            raw,
+            mne_events[const_events.index],
+            metadata=const_events,
+            tmin=-0.500,
+            tmax=2.0,
+            decim=10,
+            preload=True,
+        )
+        all_epochs.append(epochs)
+
+    for epo in all_epochs:
+        epo.info["dev_head_t"] = all_epochs[1].info["dev_head_t"]
+
+    epochs = mne.concatenate_epochs(all_epochs)
+
+    return epochs
 
 
 def get_path(name="LPP_read"):
@@ -72,8 +222,6 @@ def get_code_path():
 
 
 # Epoching and decoding
-
-
 def epoch_data(
     subject,
     run_id,
@@ -85,6 +233,7 @@ def epoch_data(
 ):
 
     print(f"\n Epoching for run {run_id}, subject: {subject}\n")
+
     bids_path = mne_bids.BIDSPath(
         subject=subject,
         session="01",
@@ -97,8 +246,7 @@ def epoch_data(
     raw = mne_bids.read_raw_bids(bids_path)
     raw.del_proj()  # To fix proj issues
     raw.pick_types(meg=True, stim=True)
-    raw.load_data()
-    raw = raw.filter(0.5, 20)
+
     # Generate event_file path
     event_file = path / f"sub-{bids_path.subject}"
     event_file = event_file / f"ses-{bids_path.session}"
@@ -112,23 +260,17 @@ def epoch_data(
     # read events
     meta = pd.read_csv(event_file, sep="\t")
     events = mne.find_events(raw, stim_channel="STI101", shortest_event=1)
-    if (
-        bids_path.task == "read" and bids_path.subject == "2"
-    ):  # A trigger value bug for this subject
-        word_length_meg = (
-            events[:, 2] - 2048
-        )  # Remove first event: chapter start and remove offset
-    else:
-        word_length_meg = events[:, 2]
 
     # LPP Syntax data
     path_syntax = get_code_path() / "data/syntax"
-
-    # Enriching the metadata with outside files:
     meta = add_syntax(meta, path_syntax, int(run_id))
 
-    # Enriching the metadata with simple operations:
+    # add sentence and word positions
+    meta["sequence_id"] = np.cumsum(meta.is_last_word.shift(1, fill_value=False))
+    for s, d in meta.groupby("sequence_id"):
+        meta.loc[d.index, "word_id"] = range(len(d))
 
+    # Enriching the metadata with simple operations:
     # end of sentence information
     end_of_sentence = [
         True
@@ -151,23 +293,22 @@ def epoch_data(
         list_word_start.append(boolean)
     meta["sentence_start"] = list_word_start
 
-    # laser embeddings information
-    dim = 1024
-    embeds = np.fromfile(
-        f"{get_code_path()}/data/laser_embeddings/emb_{CHAPTERS[int(run_id)]}.bin",
-        dtype=np.float32,
-        count=-1,
-    )
-    embeds.resize(embeds.shape[0] // dim, dim)
-    column = "sentence_end"
-    value = True
-    meta = meta[meta[column] == value]
-    assert embeds.shape[0] == meta.shape[0]
-    meta["laser"] = [emb for emb in embeds]
+    # Will be done in a singular use case
+    # # laser embeddings information
+    # dim = 1024
+    # embeds = np.fromfile(
+    #     f"{get_code_path()}/data/laser_embeddings/emb_{CHAPTERS[int(run_id)]}.bin",
+    #     dtype=np.float32,
+    #     count=-1,
+    # )
+    # embeds.resize(embeds.shape[0] // dim, dim)
+    # assert embeds.shape[0] == meta.shape[0]
+    # meta["laser"] = [emb for emb in embeds]
 
     # constituent end information
     meta["constituent_end"] = [
-            True if closing > 1 else False for i, closing in enumerate(meta.n_closing)]
+        True if closing > 1 else False for i, closing in enumerate(meta.n_closing)
+    ]
 
     # constituent start information
     list_constituent_start = [True]
