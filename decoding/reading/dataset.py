@@ -125,7 +125,7 @@ def sentence_epochs(subject):
 
 def word_epochs(subject):
     all_epochs = []
-    for run_id in range(1, 2):  # TOFIX
+    for run_id in range(1, 9):
         print(".", end="")
         raw, meta = read_raw(subject=subject, run_id=run_id)
 
