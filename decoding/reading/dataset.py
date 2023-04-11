@@ -476,3 +476,40 @@ def epochs_slice(epochs, column, value=True, equal=True):
     elif equal == "inf":
         subset = meta[meta[column] <= value].level_0
     return epochs[subset]
+
+
+#
+# DEBUG FUNCTIONS
+#
+
+
+def word_epochs_debug(subject, run):
+    all_epochs = []
+    for run_id in range(1, run):
+        print(".", end="")
+        raw, meta = read_raw(subject=subject, run_id=run_id)
+
+        # FIXME
+        meta = meta.query("has_trigger").reset_index(drop=True)
+        mne_events = np.ones((len(meta), 3), dtype=int)
+        mne_events[:, 0] = meta.start * raw.info["sfreq"]
+        word_events = meta
+        assert len(word_events)
+
+        epochs = mne.Epochs(
+            raw,
+            mne_events[word_events.index],
+            metadata=word_events,
+            tmin=-0.500,
+            tmax=2.0,
+            decim=10,
+            preload=True,
+        )
+        all_epochs.append(epochs)
+
+    for epo in all_epochs:
+        epo.info["dev_head_t"] = all_epochs[1].info["dev_head_t"]
+
+    epochs = mne.concatenate_epochs(all_epochs)
+
+    return epochs

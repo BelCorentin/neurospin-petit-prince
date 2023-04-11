@@ -31,10 +31,19 @@ def plot_subject(sub, decoding_criterion, task, reference, epoch_on, min, max):
 
     # Open the pandas DataFrame containing the decoding values
     R = np.load(
-        (path) / f"decoding/results/{task}/decoding_{decoding_criterion}_{epoch_on}_{reference}_{sub}.npy"
+        (path)
+        / f"decoding/results/{task}/decoding_{decoding_criterion}_{epoch_on}_{reference}_{sub}.npy"
     )
     # Plot it
     times = np.linspace(min, max, R.shape[0])  # To do better at generalizing
+    fig, ax = plt.subplots(1, figsize=[6, 6])
+    dec = plt.fill_between(times, R)
+    return fig
+
+
+def plot_R(R):
+    # Plot it
+    times = np.linspace(-0.5, 2.0, R.shape[0])  # To do better at generalizing
     fig, ax = plt.subplots(1, figsize=[6, 6])
     dec = plt.fill_between(times, R)
     return fig

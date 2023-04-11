@@ -285,6 +285,7 @@ def decod(epochs, target):
     r = np.zeros(len(epochs.times))
     for t in trange(len(epochs.times)):
         X = epochs.get_data()[:, :, t]
+        y = y_ini
         if target == "laser":
             y = reshape_y(y_ini, X.shape[0])
         for train, test in cv.split(X, y):
@@ -322,3 +323,48 @@ def save_decoding_results(sub, decoding_criterion, task, reference, epoch_on, R)
         R,
     )
     return True
+
+
+#
+# DEBUG
+#
+
+
+def decod_debug(epochs, target):
+    """
+    Run a RidgeCV to get the Pearson correlation between
+    the predicted values and the actual values for a target
+
+    The target can be anything as:
+    word_length,
+    spacy embeddings,
+    syntactic informations, etc..
+
+    """
+    model = make_pipeline(StandardScaler(), RidgeCV())
+    cv = KFold(n_splits=5)
+
+    y_ini = epochs.metadata[target].values
+
+    def reshape_y(y_ini, size):
+
+        # Create an empty 2D array of size (134, 1024)
+        y = np.empty((size, 1024))
+
+        # Fill in the new array with data from the original arrays
+        for i in range(len(y)):
+            y[i] = y_ini[i]
+        return y
+
+    r = np.zeros(len(epochs.times))
+    for t in trange(len(epochs.times)):
+        X = epochs.get_data()[:, :, t]
+        y = y_ini
+        if target == "laser":
+            y = reshape_y(y_ini, X.shape[0])
+        for train, test in cv.split(X, y):
+            model.fit(X[train], y[train])
+            y_pred = model.predict(X[test])
+            r[t] += correlate(y_pred, y[test]).mean()
+    r /= cv.n_splits
+    return r
