@@ -501,7 +501,7 @@ def word_epochs_debug(subject, run):
             mne_events[word_events.index],
             metadata=word_events,
             tmin=-0.500,
-            tmax=2.0,
+            tmax=1.0,
             decim=10,
             preload=True,
         )
