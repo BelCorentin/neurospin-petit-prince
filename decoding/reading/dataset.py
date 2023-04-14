@@ -513,3 +513,59 @@ def word_epochs_debug(subject, run):
     epochs = mne.concatenate_epochs(all_epochs)
 
     return epochs
+
+
+def sentence_epochs_debug(subject, run):
+    all_epochs = []
+    for run_id in range(1, run):
+        print(".", end="")
+        raw, meta = read_raw(subject=subject, run_id=run_id)
+
+        # FIXME
+        meta = meta.query("has_trigger").reset_index(drop=True)
+        mne_events = np.ones((len(meta), 3), dtype=int)
+        mne_events[:, 0] = meta.start * raw.info["sfreq"]
+        sent_events = meta.query("word_id==0")
+        assert len(sent_events)
+
+        # # laser embeddings information
+        dim = 1024
+        embeds = np.fromfile(
+            f"{get_code_path()}/data/laser_embeddings/emb_{CHAPTERS[int(run_id)]}.bin",
+            dtype=np.float32,
+            count=-1,
+        )
+        embeds.resize(embeds.shape[0] // dim, dim)
+
+        end_of_sentence = [
+            True
+            if str(meta.word.iloc[i]).__contains__(".")
+            or str(meta.word.iloc[i]).__contains__("?")
+            or str(meta.word.iloc[i]).__contains__("!")
+            else False
+            for i, _ in enumerate(meta.values[:-1])
+        ]
+        end_of_sentence.append(True)
+        meta["sentence_end"] = end_of_sentence
+
+        sent_events = meta.query("sentence_end==True")
+        sent_events["laser"] = [emb for emb in embeds]
+        assert embeds.shape[0] == sent_events.shape[0]
+
+        epochs = mne.Epochs(
+            raw,
+            mne_events[sent_events.index],
+            metadata=sent_events,
+            tmin=-3.0,
+            tmax=1.0,
+            decim=10,
+            preload=True,
+        )
+        all_epochs.append(epochs)
+
+    for epo in all_epochs:
+        epo.info["dev_head_t"] = all_epochs[1].info["dev_head_t"]
+
+    epochs = mne.concatenate_epochs(all_epochs)
+
+    return epochs
