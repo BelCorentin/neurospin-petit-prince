@@ -34,7 +34,7 @@ CHAPTERS = {
 # FUNC
 
 
-def read_raw(subject, run_id):
+def read_raw(subject, run_id, events_return=False):
     path = get_path("LPP_read")
     task = "read"
     print(f"\n Epoching for run {run_id}, subject: {subject}\n")
@@ -88,7 +88,11 @@ def read_raw(subject, run_id):
     raw.load_data()
     raw = raw.filter(0.5, 20)
 
-    return raw, meta
+    if events_return:
+        return raw, meta, events[i]
+
+    else:
+        return raw, meta
 
 
 def sentence_epochs(subject):
