@@ -3,7 +3,8 @@
 DATASET related functions
 
 """
-    
+
+
 # Neuro
 import mne
 import mne_bids
@@ -219,6 +220,9 @@ def get_code_path():
     elif user == "NS":
         # TASK = "listen"
         data = get_path() / "../../../../code/neurospin-petit-prince"
+    elif user == "jeanzay":
+        # TASK = "listen"
+        data = Path("/gpfswork/rech/qtr/ulg98mt/data/LPP")
     else:
         return f"{user} is an invalid name. \n\
         Current options: XPS and NS"
