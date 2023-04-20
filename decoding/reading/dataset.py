@@ -222,7 +222,7 @@ def get_code_path():
         data = get_path() / "../../../../code/neurospin-petit-prince"
     elif user == "jeanzay":
         # TASK = "listen"
-        data = Path("/linkhome/rech/genmfd01/ulg98mt/code/neurospin-petit-prince")
+        data = Path("/gpfswork/rech/qtr/ulg98mt/code/neurospin-petit-prince")
     else:
         return f"{user} is an invalid name. \n\
         Current options: XPS and NS"
