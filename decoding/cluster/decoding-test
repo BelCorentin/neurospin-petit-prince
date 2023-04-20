@@ -1,0 +1,33 @@
+#!/bin/bash
+#SBATCH --job-name="GTSRB Full conv." # Job name
+#SBATCH --ntasks=1 # nbr of tasks (= nbr of GPU)
+#SBATCH --gres=gpu:1 # nbr of GPU per node
+#SBATCH --cpus-per-task=32 # nbr of cores per task
+#SBATCH --hint=nomultithread # physical core
+#SBATCH --time=03:00:00 # Max exec time
+#SBATCH --output="_batch/G.out" # out file name
+#SBATCH --error="_batch/G.err" # error file name
+#SBATCH --mail-user=corentin.bel@protonmail.com
+#SBATCH --mail-type=ALL
+MODULE_ENV="python/3.10.4"
+RUN_DIR="$WORK/code/neurospin-petit-prince/decoding/reading"
+RUN_SCRIPT="./jeanzay_job_test.py"
+# ---- Welcome...
+echo '-------------------------------------'
+echo "Start : $0"
+echo '-------------------------------------'
+echo "Job id : $SLURM_JOB_ID"
+echo "Job name : $SLURM_JOB_NAME"
+echo "Job node list : $SLURM_JOB_NODELIST"
+echo '--------------------------------------'
+echo "Script : $RUN_SCRIPT"
+echo "Run in : $RUN_DIR"
+echo "With env. : $MODULE_ENV"
+echo '--------- --------------------------'
+# ---- Module
+module purge
+module load "$MODULE_ENV"
+# ---- Run it...
+#
+cd "$RUN_DIR"
+srun -A qtr@cpu python "$RUN_SCRIPT"
