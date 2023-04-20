@@ -198,11 +198,11 @@ def get_path(name="LPP_read"):
         data = Path(f.readlines()[0].strip("\n"))
     if name == "LPP_read":
         # TASK = "read"
-        data = data / "BIDS_lecture"
+        data = data / "LPP_MEG_visual"
 
     elif name == "LPP_listen":
         # TASK = "listen"
-        data = data / "BIDS"
+        data = data / "LPP_MEG_auditory"
     else:
         return f"{name} is an invalid name. \n\
         Current options: LPP_read and LPP_listen"
@@ -222,7 +222,7 @@ def get_code_path():
         data = get_path() / "../../../../code/neurospin-petit-prince"
     elif user == "jeanzay":
         # TASK = "listen"
-        data = Path("/gpfswork/rech/qtr/ulg98mt/data/LPP")
+        data = Path("/linkhome/rech/genmfd01/ulg98mt/code/neurospin-petit-prince")
     else:
         return f"{user} is an invalid name. \n\
         Current options: XPS and NS"

@@ -43,7 +43,7 @@ from CONST import dict_nip_to_sn
 #  CONST ###
 BASE_PATH = Path('/home/is153802/workspace_LPP/data/MEG/LPP/')
 # BIDS_PATH = BASE_PATH / 'LPP_bids'
-BIDS_PATH = BASE_PATH / 'BIDS'
+BIDS_PATH = BASE_PATH / 'LPP_MEG_auditory'
 RAW_DATA_PATH = BASE_PATH / 'raw_old'
 PROC_DATA_PATH = BASE_PATH / 'derivatives' / 'final_all'
 TASK = 'listen'
