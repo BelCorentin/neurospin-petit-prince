@@ -20,6 +20,7 @@ from tqdm.notebook import trange
 from scipy.stats import pearsonr
 import spacy
 
+import string
 nlp = spacy.load("fr_core_news_sm")
 
 # Tools
@@ -178,6 +179,34 @@ def get_syntax(file):
     return pd.DataFrame(out)
 
 
+def format_text_meta(text):
+    """
+    Simple function to make sure there is
+    no problematic characters
+    """
+    # I comment these lines as the new parsers handles it !
+    for char in "jlsmtncd":
+        text = text.replace(f"{char}'", char)
+
+    text = text.replace("œ", "oe")
+    return text.lower()
+
+
+def format_text_syntax(text):
+    """
+    Simple function to make sure there is
+    no problematic characters
+    """
+    # I comment these lines as the new parsers handles it !
+    # for char in "jlsmtncd":
+    #     text = text.replace(f"{char}'", char)
+    # Instead:
+    if text.strip(string.punctuation).eq(""):
+        return ""
+    
+    text = df.replace("œ", "oe")
+    return text.lower()
+
 def format_text(text):
     """
     Simple function to make sure there is
@@ -206,8 +235,51 @@ def add_syntax(meta, syntax_path, run):
     meta_tokens = meta.word.fillna("XXXX").apply(format_text).values
     # Synt tokens doesn't work anymore: the new parser has added 
     synt_tokens = synt.word.apply(format_text).values
-    print(meta_tokens.head(50))
-    print(synt_tokens.head(50))
+
+    i, j = match_list(meta_tokens, synt_tokens)
+    assert (len(i) / len(meta_tokens)) > 0.8
+
+    for key, default_value in dict(n_closing=1, is_last_word=False, pos="XXX").items():
+        meta[key] = default_value
+        meta.loc[i, key] = synt.iloc[j][key].values
+
+    content_pos = ("NC", "ADJ", "ADV", "VINF", "VS", "VPP", "V")
+    meta["content_word"] = meta.pos.apply(
+        lambda pos: pos in content_pos if isinstance(pos, str) else False
+    )
+    return meta
+
+def add_new_syntax(meta, syntax_path, run):
+    """
+    Use the get_syntax function to add it directly to
+    the metadata from the epochs
+    """
+    # get basic annotations
+    meta_ = meta.copy().reset_index(drop=True)
+
+    # get syntactic annotations
+    syntax_file = syntax_path / f"ch{CHAPTERS[run]}.syntax.txt"
+    synt = get_syntax(syntax_file)
+
+    # align
+
+    # split hyphenated words
+    meta_["clean_word"] = meta_["word"].fillna("XXXX").str.replace(r"'", " '").str.split()
+    # explode list to create new rows for each token
+    meta_ = meta_.explode("clean_word").reset_index(drop=True)
+    meta_.word = meta_.word.str.lower()
+    # create a set of all punctuation characters
+    punct = set(string.punctuation)
+    # remove punctuation from clean_word column
+    meta_tokens = meta_["clean_word"].apply(lambda x: "".join([c for c in x if c not in punct]))
+    meta_tokens = meta_tokens.str.lower()
+    # meta_tokens = meta.word.fillna("XXXX").apply(format_text).values
+
+    synt = synt[~synt["word"].str.strip(string.punctuation + " ").eq("")]
+    synt_tokens = synt.word.str.lower()
+    # synt_tokens = synt.word.apply(format_text_syntax).values
+    print(synt_tokens[-50:], meta_tokens[-50:])
+    
     i, j = match_list(meta_tokens, synt_tokens)
     assert (len(i) / len(meta_tokens)) > 0.8
 
