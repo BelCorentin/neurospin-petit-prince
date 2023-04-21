@@ -8,8 +8,19 @@ import matplotlib.pyplot as plt
 from utils import match_list
 import spacy
 nlp = spacy.load("fr_core_news_sm")
+from dataset import read_raw, get_subjects, get_path, mne_events
+from utils import decod_xy
+import mne
+import seaborn as sns
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+from utils import match_list
+import spacy
+nlp = spacy.load("fr_core_news_sm")
 
 all_evos = []
+all_scores = []
 
 path = get_path("LPP_read")
 subjects = get_subjects(path)
@@ -21,15 +32,15 @@ epoch_windows = {"word": {"onset_min": -0.3, "onset_max": 1.0, "offset_min": -1.
                   "constituent": {"offset_min": -2.0, "offset_max": 0.5, "onset_min": -0.5, "onset_max": 2.0},
                   "sentence": {"offset_min": -4.0, "offset_max": 1.0, "onset_min": -1.0, "onset_max": 4.0}}
 
-dict_epochs = dict() # DICT containing epochs grouped by conditions (start x level)
-# Dict init
-for start in ('onset', 'offset'): 
-    for level in ('word', 'constituent', 'sentence'):
-        epoch_key = f'{level}_{start}'
-        dict_epochs[epoch_key] = [] 
+
             
 for subject in subjects[2:]:
-    all_epochs = []
+    dict_epochs = dict() # DICT containing epochs grouped by conditions (start x level)
+    # Dict init
+    for start in ('onset', 'offset'): 
+            for level in ('word', 'constituent', 'sentence'):
+                epoch_key = f'{level}_{start}'
+                dict_epochs[epoch_key] = [] 
     for run in range(1,runs+1):
         raw, meta_, events = read_raw(subject, run, events_return = True)
         meta = meta_.copy()
@@ -75,48 +86,48 @@ for subject in subjects[2:]:
                 epochs = mne.Epochs(raw, **mne_events(sel, raw), decim = 10,
                                      tmin = epoch_windows[f'{level}'][f'{start}_min'],
                                        tmax = epoch_windows[f'{level}'][f'{start}_max'],
-                                         event_repeated = 'drop',
+                                         event_repeated = 'drop', # check event repeated
                                             preload=True)  # n_words OR n_constitutent OR n_sentences
                 epoch_key = f'{level}_{start}'
             
                 dict_epochs[epoch_key].append(epochs)
-
-# Once we have the dict of epochs per condition full, we can concatenate them, and fix the dev_head             
-for start_ in ('onset', 'offset'): 
-    for level_ in ('word', 'constituent', 'sentence'):
-        epoch_key = f'{level_}_{start_}'
-        all_epochs_chosen = dict_epochs[epoch_key]
-        # Concatenate epochs
-        for epo in all_epochs_chosen:
-            epo.info["dev_head_t"] = all_epochs_chosen[1].info["dev_head_t"]
-
-        dict_epochs[epoch_key] = mne.concatenate_epochs(all_epochs_chosen)
+        
             
-dict_evos = dict() # DICT containing epochs grouped by conditions (start x level)
-# Dict init
-for start in ('onset', 'offset'): 
-        for level in ('word', 'constituent', 'sentence'):
-            epoch_key = f'{level}_{start}'
-            dict_evos[epoch_key] = [] 
+    # Once we have the dict of epochs per condition full (epoching for each run for a subject)
+    # we can concatenate them, and fix the dev_head             
+    for start_ in ('onset', 'offset'): 
+        for level_ in ('word', 'constituent', 'sentence'):
+            epoch_key = f'{level_}_{start_}'
+            all_epochs_chosen = dict_epochs[epoch_key]
+            # Concatenate epochs
+            for epo in all_epochs_chosen:
+                epo.info["dev_head_t"] = all_epochs_chosen[1].info["dev_head_t"]
 
-# Now that we have all the epochs, rerun the plotting / decoding on averaged
-for start in ('onset', 'offset'): 
-        for level in ('word', 'constituent', 'sentence'):  
-            epoch_key = f'{level}_{start}'
-            epochs = dict_epochs[epoch_key]
-            # mean
-            evo = epochs.copy().pick_types(meg=True).average(method='median')
-            dict_evos[epoch_key] = evo
+            dict_epochs[epoch_key] = mne.concatenate_epochs(all_epochs_chosen)
 
-for level in ('word', 'constituent', 'sentence'):
-    for start in ('onset', 'offset'):        
-            epoch_key = f'{level}_{start}'
-            print(f"Plotting for: {epoch_key}")
-            dict_evos[epoch_key].plot(gfp=True)
+    # Now that we have all the epochs, rerun the plotting / decoding on averaged
+    for start in ('onset', 'offset'): 
+            for level in ('word', 'constituent', 'sentence'):  
+                epoch_key = f'{level}_{start}'
+                epochs = dict_epochs[epoch_key]
+                # mean
+                evo = epochs.copy().pick_types(meg=True).average(method='median')
+                all_evos.append(dict(subject=subject, evo=evo, start=start, level=level))
 
 
-for level in ('word', 'constituent', 'sentence'):
-    for start in ('onset', 'offset'):        
-            epoch_key = f'{level}_{start}'
-            print(f"Plotting for: {epoch_key}")
-            dict_evos[epoch_key].save(get_path() / f'../{epoch_key}.fif')
+                # decoding word emb
+                epochs = epochs.load_data().pick_types(meg=True, stim=False, misc=False)
+                X = epochs.get_data()
+                embeddings = epochs.metadata.word.apply(lambda word: nlp(word).vector).values
+                embeddings = np.array([emb for emb in embeddings])
+                R_vec = decod_xy(X, embeddings)
+                scores = np.mean(R_vec, axis=1)
+
+                for t, score in enumerate(scores):
+                    all_scores.append(dict(subject=subject, score=score, start=start, level=level, t=epochs.times[t]))
+
+all_scores = pd.DataFrame(all_scores,index=False)
+all_evos = pd.DataFrame(all_evos,index=False)
+
+all_scores.to_csv('./score.csv')
+all_evos.to_csv('./evos.csv')
