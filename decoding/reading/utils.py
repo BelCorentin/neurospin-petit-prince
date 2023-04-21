@@ -229,7 +229,6 @@ def add_syntax(meta, syntax_path, run):
     # get syntactic annotations
     syntax_file = syntax_path / f"ch{CHAPTERS[run]}.syntax.txt"
     synt = get_syntax(syntax_file)
-    print(synt.head(50))
 
     # align
     meta_tokens = meta.word.fillna("XXXX").apply(format_text).values

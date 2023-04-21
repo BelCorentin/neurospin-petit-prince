@@ -26,7 +26,7 @@ path = get_path("LPP_read")
 subjects = get_subjects(path)
 task = "read"
 # Debug
-runs = 9
+runs = 4
 
 epoch_windows = {"word": {"onset_min": -0.3, "onset_max": 1.0, "offset_min": -1.0, "offset_max": 0.3},
                   "constituent": {"offset_min": -2.0, "offset_max": 0.5, "onset_min": -0.5, "onset_max": 2.0},
