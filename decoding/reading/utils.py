@@ -200,11 +200,14 @@ def add_syntax(meta, syntax_path, run):
     # get syntactic annotations
     syntax_file = syntax_path / f"ch{CHAPTERS[run]}.syntax.txt"
     synt = get_syntax(syntax_file)
+    print(synt.head(50))
 
     # align
     meta_tokens = meta.word.fillna("XXXX").apply(format_text).values
+    # Synt tokens doesn't work anymore: the new parser has added 
     synt_tokens = synt.word.apply(format_text).values
-
+    print(meta_tokens.head(50))
+    print(synt_tokens.head(50))
     i, j = match_list(meta_tokens, synt_tokens)
     assert (len(i) / len(meta_tokens)) > 0.8
 
