@@ -126,8 +126,8 @@ for subject in subjects[2:]:
                 for t, score in enumerate(scores):
                     all_scores.append(dict(subject=subject, score=score, start=start, level=level, t=epochs.times[t]))
 
-all_scores = pd.DataFrame(all_scores,index=False)
-all_evos = pd.DataFrame(all_evos,index=False)
+all_scores = pd.DataFrame(all_scores)
+all_evos = pd.DataFrame(all_evos)
 
 all_scores.to_csv('./score.csv')
 all_evos.to_csv('./evos.csv')
