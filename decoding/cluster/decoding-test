@@ -1,7 +1,7 @@
 #!/bin/bash
 #SBATCH --job-name="LPP decoding" # Job name
 #SBATCH --ntasks=1 # nbr of tasks (= nbr of GPU)
-#SBATCH --cpus-per-task=64 # nbr of cores per task
+#SBATCH --cpus-per-task=32 # nbr of cores per task
 #SBATCH --hint=nomultithread # physical core
 #SBATCH --time=03:00:00 # Max exec time
 #SBATCH --output="_batch/G.out" # out file name
