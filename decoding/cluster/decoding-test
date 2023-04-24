@@ -1,7 +1,6 @@
 #!/bin/bash
 #SBATCH --job-name="LPP decoding" # Job name
 #SBATCH --ntasks=1 # nbr of tasks (= nbr of GPU)
-#SBATCH --gres=gpu:1 # nbr of GPU per node
 #SBATCH --cpus-per-task=64 # nbr of cores per task
 #SBATCH --hint=nomultithread # physical core
 #SBATCH --time=03:00:00 # Max exec time
