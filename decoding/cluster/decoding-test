@@ -3,7 +3,7 @@
 #SBATCH --ntasks=1 # nbr of tasks (= nbr of GPU)
 #SBATCH --cpus-per-task=32 # nbr of cores per task
 #SBATCH --hint=nomultithread # physical core
-#SBATCH --time=03:00:00 # Max exec time
+#SBATCH --time=10:00:00 # Max exec time
 #SBATCH --output="logs/G.out" # out file name
 #SBATCH --error="logs/G.err" # error file name
 #SBATCH --mail-user=corentin.bel@protonmail.com
