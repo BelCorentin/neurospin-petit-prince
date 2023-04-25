@@ -9,7 +9,7 @@
 #SBATCH --mail-user=corentin.bel@protonmail.com
 #SBATCH --mail-type=ALL
 MODULE_ENV="python/3.10.4"
-RUN_DIR="$WORK/code/neurospin-petit-prince/decoding/reading"
+RUN_DIR="$WORK/code/neurospin-petit-prince/decoding/cluster"
 RUN_SCRIPT="./jeanzay_job_test.py"
 # ---- Welcome...
 echo '-------------------------------------'
