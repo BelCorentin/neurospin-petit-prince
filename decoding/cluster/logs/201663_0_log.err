@@ -1,0 +1,43 @@
+/mnt/localdrive/workspace-LPP/code/neurospin-petit-prince/decoding/cluster/dataset.py:51: RuntimeWarning: This file contains raw Internal Active Shielding data. It may be distorted. Elekta recommends it be run through MaxFilter to produce reliable results. Consider closing the file and running MaxFilter on the data.
+  raw = mne_bids.read_raw_bids(bids_path)
+/mnt/localdrive/workspace-LPP/code/neurospin-petit-prince/decoding/cluster/dataset.py:51: RuntimeWarning: Omitted 117 annotation(s) that were outside data range.
+  raw = mne_bids.read_raw_bids(bids_path)
+/mnt/localdrive/workspace-LPP/code/neurospin-petit-prince/decoding/cluster/dataset.py:51: RuntimeWarning: Limited 1 annotation(s) that were expanding outside the data range.
+  raw = mne_bids.read_raw_bids(bids_path)
+/mnt/localdrive/workspace-LPP/code/neurospin-petit-prince/decoding/cluster/dataset.py:51: RuntimeWarning: The unit for channel(s) STI001, STI002, STI003, STI004, STI005, STI006, STI007, STI008, STI009, STI010, STI011, STI012, STI013, STI014, STI015, STI016, STI101, STI201, STI301 has changed from V to NA.
+  raw = mne_bids.read_raw_bids(bids_path)
+Traceback (most recent call last):
+  File "/home/is153802/.pyenv/versions/3.10.6/lib/python3.10/runpy.py", line 196, in _run_module_as_main
+    return _run_code(code, main_globals, None,
+  File "/home/is153802/.pyenv/versions/3.10.6/lib/python3.10/runpy.py", line 86, in _run_code
+    exec(code, run_globals)
+  File "/home/is153802/.pyenv/versions/meg-masc/lib/python3.10/site-packages/submitit/core/_submit.py", line 11, in <module>
+    submitit_main()
+  File "/home/is153802/.pyenv/versions/meg-masc/lib/python3.10/site-packages/submitit/core/submission.py", line 72, in submitit_main
+    process_job(args.folder)
+  File "/home/is153802/.pyenv/versions/meg-masc/lib/python3.10/site-packages/submitit/core/submission.py", line 54, in process_job
+    result = delayed.result()
+  File "/home/is153802/.pyenv/versions/meg-masc/lib/python3.10/site-packages/submitit/core/utils.py", line 133, in result
+    self._result = self.function(*self.args, **self.kwargs)
+  File "/tmp/ipykernel_200815/751625764.py", line 31, in analysis
+  File "/mnt/localdrive/workspace-LPP/code/neurospin-petit-prince/decoding/cluster/dataset.py", line 89, in read_raw
+    raw.load_data()
+  File "<decorator-gen-224>", line 12, in load_data
+  File "/home/is153802/.pyenv/versions/meg-masc/lib/python3.10/site-packages/mne/io/base.py", line 497, in load_data
+    self._preload_data(True)
+  File "/home/is153802/.pyenv/versions/meg-masc/lib/python3.10/site-packages/mne/io/base.py", line 507, in _preload_data
+    self._data = self._read_segment(
+  File "<decorator-gen-223>", line 12, in _read_segment
+  File "/home/is153802/.pyenv/versions/meg-masc/lib/python3.10/site-packages/mne/io/base.py", line 392, in _read_segment
+    _ReadSegmentFileProtector(self)._read_segment_file(
+  File "/home/is153802/.pyenv/versions/meg-masc/lib/python3.10/site-packages/mne/io/base.py", line 2133, in _read_segment_file
+    return self.__raw.__class__._read_segment_file(
+  File "/home/is153802/.pyenv/versions/meg-masc/lib/python3.10/site-packages/mne/io/fiff/raw.py", line 368, in _read_segment_file
+    one = read_tag(fid, ent.pos,
+  File "/home/is153802/.pyenv/versions/meg-masc/lib/python3.10/site-packages/mne/io/tag.py", line 476, in read_tag
+    tag.data = fun(fid, tag, shape, rlims)
+  File "/home/is153802/.pyenv/versions/meg-masc/lib/python3.10/site-packages/mne/io/tag.py", line 265, in _read_simple
+    return _frombuffer_rows(fid, tag.size, dtype=dtype, shape=shape,
+  File "/home/is153802/.pyenv/versions/meg-masc/lib/python3.10/site-packages/mne/io/tag.py", line 99, in _frombuffer_rows
+    out = np.frombuffer(fid.read(read_size), dtype=dtype)
+KeyboardInterrupt

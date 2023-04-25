@@ -1,0 +1,42 @@
+/mnt/localdrive/workspace-LPP/code/neurospin-petit-prince/decoding/cluster/dataset.py:51: RuntimeWarning: This file contains raw Internal Active Shielding data. It may be distorted. Elekta recommends it be run through MaxFilter to produce reliable results. Consider closing the file and running MaxFilter on the data.
+  raw = mne_bids.read_raw_bids(bids_path)
+/mnt/localdrive/workspace-LPP/code/neurospin-petit-prince/decoding/cluster/dataset.py:51: RuntimeWarning: Omitted 128 annotation(s) that were outside data range.
+  raw = mne_bids.read_raw_bids(bids_path)
+/mnt/localdrive/workspace-LPP/code/neurospin-petit-prince/decoding/cluster/dataset.py:51: RuntimeWarning: Limited 1 annotation(s) that were expanding outside the data range.
+  raw = mne_bids.read_raw_bids(bids_path)
+/mnt/localdrive/workspace-LPP/code/neurospin-petit-prince/decoding/cluster/dataset.py:51: RuntimeWarning: The unit for channel(s) STI001, STI002, STI003, STI004, STI005, STI006, STI007, STI008, STI009, STI010, STI011, STI012, STI013, STI014, STI015, STI016, STI101, STI201, STI301 has changed from V to NA.
+  raw = mne_bids.read_raw_bids(bids_path)
+[Parallel(n_jobs=1)]: Using backend SequentialBackend with 1 concurrent workers.
+[Parallel(n_jobs=1)]: Done   1 out of   1 | elapsed:    0.0s remaining:    0.0s
+[Parallel(n_jobs=1)]: Done   2 out of   2 | elapsed:    0.1s remaining:    0.0s
+[Parallel(n_jobs=1)]: Done   3 out of   3 | elapsed:    0.1s remaining:    0.0s
+[Parallel(n_jobs=1)]: Done   4 out of   4 | elapsed:    0.1s remaining:    0.0s
+[Parallel(n_jobs=1)]: Done 306 out of 306 | elapsed:   11.4s finished
+/tmp/ipykernel_200815/751625764.py:72: RuntimeWarning: The events passed to the Epochs constructor are not chronologically ordered.
+/tmp/ipykernel_200815/751625764.py:72: RuntimeWarning: The events passed to the Epochs constructor are not chronologically ordered.
+/tmp/ipykernel_200815/751625764.py:72: RuntimeWarning: The events passed to the Epochs constructor are not chronologically ordered.
+/tmp/ipykernel_200815/751625764.py:72: RuntimeWarning: The events passed to the Epochs constructor are not chronologically ordered.
+/tmp/ipykernel_200815/751625764.py:72: RuntimeWarning: The events passed to the Epochs constructor are not chronologically ordered.
+/tmp/ipykernel_200815/751625764.py:72: RuntimeWarning: The events passed to the Epochs constructor are not chronologically ordered.
+/mnt/localdrive/workspace-LPP/code/neurospin-petit-prince/decoding/cluster/dataset.py:51: RuntimeWarning: This file contains raw Internal Active Shielding data. It may be distorted. Elekta recommends it be run through MaxFilter to produce reliable results. Consider closing the file and running MaxFilter on the data.
+  raw = mne_bids.read_raw_bids(bids_path)
+/mnt/localdrive/workspace-LPP/code/neurospin-petit-prince/decoding/cluster/dataset.py:51: RuntimeWarning: Omitted 134 annotation(s) that were outside data range.
+  raw = mne_bids.read_raw_bids(bids_path)
+/mnt/localdrive/workspace-LPP/code/neurospin-petit-prince/decoding/cluster/dataset.py:51: RuntimeWarning: Limited 1 annotation(s) that were expanding outside the data range.
+  raw = mne_bids.read_raw_bids(bids_path)
+/mnt/localdrive/workspace-LPP/code/neurospin-petit-prince/decoding/cluster/dataset.py:51: RuntimeWarning: The unit for channel(s) STI001, STI002, STI003, STI004, STI005, STI006, STI007, STI008, STI009, STI010, STI011, STI012, STI013, STI014, STI015, STI016, STI101, STI201, STI301 has changed from V to NA.
+  raw = mne_bids.read_raw_bids(bids_path)
+[Parallel(n_jobs=1)]: Using backend SequentialBackend with 1 concurrent workers.
+[Parallel(n_jobs=1)]: Done   1 out of   1 | elapsed:    0.0s remaining:    0.0s
+[Parallel(n_jobs=1)]: Done   2 out of   2 | elapsed:    0.1s remaining:    0.0s
+[Parallel(n_jobs=1)]: Done   3 out of   3 | elapsed:    0.1s remaining:    0.0s
+[Parallel(n_jobs=1)]: Done   4 out of   4 | elapsed:    0.1s remaining:    0.0s
+[Parallel(n_jobs=1)]: Done 306 out of 306 | elapsed:   13.1s finished
+/tmp/ipykernel_200815/751625764.py:72: RuntimeWarning: The events passed to the Epochs constructor are not chronologically ordered.
+/tmp/ipykernel_200815/751625764.py:72: RuntimeWarning: The events passed to the Epochs constructor are not chronologically ordered.
+/tmp/ipykernel_200815/751625764.py:72: RuntimeWarning: The events passed to the Epochs constructor are not chronologically ordered.
+/tmp/ipykernel_200815/751625764.py:72: RuntimeWarning: The events passed to the Epochs constructor are not chronologically ordered.
+/tmp/ipykernel_200815/751625764.py:72: RuntimeWarning: The events passed to the Epochs constructor are not chronologically ordered.
+/tmp/ipykernel_200815/751625764.py:72: RuntimeWarning: The events passed to the Epochs constructor are not chronologically ordered.
+Traceback (most recent call last):
+

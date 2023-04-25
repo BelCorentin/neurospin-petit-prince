@@ -1,0 +1,29 @@
+submitit INFO (2023-04-25 13:35:49,214) - Starting with JobEnvironment(job_id=201663, hostname=is153802, local_rank=0(1), node=0(1), global_rank=0(1))
+submitit INFO (2023-04-25 13:35:49,214) - Loading pickle: /mnt/localdrive/workspace-LPP/code/neurospin-petit-prince/decoding/cluster/logs/201663_submitted.pkl
+
+ Epoching for run 1, subject: 12
+
+Opening raw data file /home/is153802/data/LPP_MEG_visual/sub-12/ses-01/meg/sub-12_ses-01_task-read_run-01_meg.fif...
+    Read a total of 13 projection items:
+        grad_ssp_upright.fif : PCA-v1 (1 x 306)  idle
+        grad_ssp_upright.fif : PCA-v2 (1 x 306)  idle
+        grad_ssp_upright.fif : PCA-v3 (1 x 306)  idle
+        grad_ssp_upright.fif : PCA-v4 (1 x 306)  idle
+        grad_ssp_upright.fif : PCA-v5 (1 x 306)  idle
+        mag_ssp_upright.fif : PCA-v1 (1 x 306)  idle
+        mag_ssp_upright.fif : PCA-v2 (1 x 306)  idle
+        mag_ssp_upright.fif : PCA-v3 (1 x 306)  idle
+        mag_ssp_upright.fif : PCA-v4 (1 x 306)  idle
+        mag_ssp_upright.fif : PCA-v5 (1 x 306)  idle
+        mag_ssp_upright.fif : PCA-v6 (1 x 306)  idle
+        mag_ssp_upright.fif : PCA-v7 (1 x 306)  idle
+        mag_ssp_upright.fif : PCA-v8 (1 x 306)  idle
+    Range : 28000 ... 497999 =     28.000 ...   497.999 secs
+Ready.
+Reading events from /home/is153802/data/LPP_MEG_visual/sub-12/ses-01/meg/sub-12_ses-01_task-read_run-01_events.tsv.
+Reading channel info from /home/is153802/data/LPP_MEG_visual/sub-12/ses-01/meg/sub-12_ses-01_task-read_run-01_channels.tsv.
+Using 4 HPI coils: 293 307 314 321 Hz
+Not fully anonymizing info - keeping his_id, sex, and hand info
+1468 events found
+Event IDs: [ 1  2  3  4  5  6  7  8  9 10 11 12 13 14 15]
+Reading 0 ... 469999  =      0.000 ...   469.999 secs...
