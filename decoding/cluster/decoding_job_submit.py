@@ -126,8 +126,7 @@ executor = submitit.AutoExecutor(folder='logs')
 executor.update_parameters(slurm_partition="cpu_p1", #gpu_p2
                            cpus_per_task=32, #10
                            timeout_min=60, #15 min for each checkpoint 700
-                           account="qtr@cpu",
-                           hint='nomultithread') #
+                           slurm_account="qtr@cpu",) #
 
 path = get_path("LPP_read")
 task = "read"
