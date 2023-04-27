@@ -76,6 +76,8 @@ def read_raw(subject, run_id, events_return=False):
         meta.loc[d.index, "word_id"] = range(len(d))
 
     # XXX FIXME
+    # Making sure that there is no problem with words that contain ""
+    meta.word = meta.word.str.replace('"', '')
     i, j = match_list(events[:, 2], meta.word.apply(len))
     assert len(i) > (0.9 * len(events))
     meta["has_trigger"] = False

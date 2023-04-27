@@ -447,8 +447,8 @@ def decod_debug(epochs, target):
 def decod_xy(X, y):
     assert len(X) == len(y)
     # define data
-    model = make_pipeline(StandardScaler(), RidgeCV(alphas=np.logspace(-1, 6, 10)))
-    cv = KFold(15, shuffle=True, random_state=0)
+    model = make_pipeline(StandardScaler(), RidgeCV(alphas=np.logspace(-3, 8, 10)))
+    cv = KFold(5, shuffle=True, random_state=0)
 
     # fit predict
     n, n_chans, n_times = X.shape
