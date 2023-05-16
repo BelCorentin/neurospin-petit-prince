@@ -66,8 +66,10 @@ def read_raw(subject, run_id, events_return=False):
     meta = pd.read_csv(event_file, sep="\t")
     events = mne.find_events(raw, stim_channel="STI101", shortest_event=1)
 
+    meta["wlength"] = meta.word.apply(len)
     # Enriching the metadata with outside files:
-    path_syntax = get_code_path() / "data/syntax"
+    # path_syntax = get_code_path() / "data/syntax"
+    path_syntax = get_code_path() / "data" / "syntax_new_untested"  # testing new syntax
     meta = add_syntax(meta, path_syntax, int(run_id))
 
     # add sentence and word positions
@@ -77,12 +79,16 @@ def read_raw(subject, run_id, events_return=False):
 
     # XXX FIXME
     # Making sure that there is no problem with words that contain ""
-    meta.word = meta.word.str.replace('"', '')
-    i, j = match_list(events[:, 2], meta.word.apply(len))
+    meta.word = meta.word.str.replace('"', "")
+    # Here, events are the presented stimuli: with hyphens.
+    # Have to make sure meta.word still contains the hyphens.
+    # However, the meta.word might have lost the hyphens because
+    # of the previous match hen adding syntax.
+    i, j = match_list(events[:, 2], meta.wlength)
     assert len(i) > (0.9 * len(events))
     meta["has_trigger"] = False
     meta.loc[j, "has_trigger"] = True
-    assert (events[i, 2] == meta.loc[j].word.apply(len)).mean() > 0.95
+    assert (events[i, 2] == meta.loc[j].wlength).mean() > 0.95
 
     # integrate events to meta for simplicity
     meta.loc[j, "start"] = events[i, 0] / raw.info["sfreq"]

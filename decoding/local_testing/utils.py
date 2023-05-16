@@ -19,8 +19,9 @@ from Levenshtein import editops
 from tqdm.notebook import trange
 from scipy.stats import pearsonr
 import spacy
-
+import re
 import string
+
 nlp = spacy.load("fr_core_news_sm")
 
 # Tools
@@ -203,9 +204,10 @@ def format_text_syntax(text):
     # Instead:
     if text.strip(string.punctuation).eq(""):
         return ""
-    
+
     text = df.replace("œ", "oe")
     return text.lower()
+
 
 def format_text(text):
     """
@@ -215,6 +217,7 @@ def format_text(text):
     for char in "jlsmtncd":
         text = text.replace(f"{char}'", char)
     text = text.replace("œ", "oe")
+
     return text.lower()
 
 
@@ -226,14 +229,32 @@ def add_syntax(meta, syntax_path, run):
     # get basic annotations
     meta = meta.copy().reset_index(drop=True)
 
+    translator = str.maketrans("", "", string.punctuation)
+
+    meta.word = [string.translate(translator) for string in meta.word]
     # get syntactic annotations
-    syntax_file = syntax_path / f"ch{CHAPTERS[run]}.syntax.txt"
+    # syntax_file = syntax_path / f"ch{CHAPTERS[run]}.syntax.txt"
+    syntax_file = (
+        syntax_path / f"run{run}_v2_0.25_0.5-tokenized.syntax.txt"
+    )  # testing new syntax
     synt = get_syntax(syntax_file)
 
-    # align
+    # Clean the meta tokens to match synt tokens
     meta_tokens = meta.word.fillna("XXXX").apply(format_text).values
-    # Synt tokens doesn't work anymore: the new parser has added 
+    # Get the word after the hyphen to match the synt tokens
+    meta_tokens = [
+        string.split("'")[1] if "'" in string else string for string in meta.word
+    ]
+    # Handle synt tokens: they are split by hyphen
     synt_tokens = synt.word.apply(format_text).values
+    # Remove the empty strings and ponct
+    punctuation_chars = set(string.punctuation)
+    synt_tokens = [
+        string
+        for string in synt_tokens
+        if string.strip() != ""
+        and not any(char in punctuation_chars for char in string)
+    ]
 
     i, j = match_list(meta_tokens, synt_tokens)
     assert (len(i) / len(meta_tokens)) > 0.8
@@ -247,6 +268,7 @@ def add_syntax(meta, syntax_path, run):
         lambda pos: pos in content_pos if isinstance(pos, str) else False
     )
     return meta
+
 
 def add_new_syntax(meta, syntax_path, run):
     """
@@ -263,14 +285,18 @@ def add_new_syntax(meta, syntax_path, run):
     # align
 
     # split hyphenated words
-    meta_["clean_word"] = meta_["word"].fillna("XXXX").str.replace(r"'", " '").str.split()
+    meta_["clean_word"] = (
+        meta_["word"].fillna("XXXX").str.replace(r"'", " '").str.split()
+    )
     # explode list to create new rows for each token
     meta_ = meta_.explode("clean_word").reset_index(drop=True)
     meta_.word = meta_.word.str.lower()
     # create a set of all punctuation characters
     punct = set(string.punctuation)
     # remove punctuation from clean_word column
-    meta_tokens = meta_["clean_word"].apply(lambda x: "".join([c for c in x if c not in punct]))
+    meta_tokens = meta_["clean_word"].apply(
+        lambda x: "".join([c for c in x if c not in punct])
+    )
     meta_tokens = meta_tokens.str.lower()
     # meta_tokens = meta.word.fillna("XXXX").apply(format_text).values
 
@@ -278,7 +304,7 @@ def add_new_syntax(meta, syntax_path, run):
     synt_tokens = synt.word.str.lower()
     # synt_tokens = synt.word.apply(format_text_syntax).values
     print(synt_tokens[-50:], meta_tokens[-50:])
-    
+
     i, j = match_list(meta_tokens, synt_tokens)
     assert (len(i) / len(meta_tokens)) > 0.8
 
