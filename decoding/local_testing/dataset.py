@@ -69,7 +69,7 @@ def read_raw(subject, run_id, events_return=False):
     meta["wlength"] = meta.word.apply(len)
     # Enriching the metadata with outside files:
     # path_syntax = get_code_path() / "data/syntax"
-    path_syntax = get_code_path() / "data" / "syntax_new_untested"  # testing new syntax
+    path_syntax = get_code_path() / "data" / "syntax_new_no_punct"  # testing new syntax
     meta = add_syntax(meta, path_syntax, int(run_id))
 
     # add sentence and word positions
