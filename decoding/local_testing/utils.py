@@ -214,8 +214,8 @@ def format_text(text):
     Simple function to make sure there is
     no problematic characters
     """
-    for char in "jlsmtncd":
-        text = text.replace(f"{char}'", char)
+    # for char in "jlsmtncd":
+    #     text = text.replace(f"{char}'", char)
     text = text.replace("œ", "oe")
 
     return text.lower()
@@ -225,13 +225,14 @@ def add_syntax(meta, syntax_path, run):
     """
     Use the get_syntax function to add it directly to
     the metadata from the epochs
+    Basic problem with match list: new syntax has words like:
+    "j" "avais"
+    meta has:
+    "j'avais"
     """
     # get basic annotations
     meta = meta.copy().reset_index(drop=True)
 
-    translator = str.maketrans("", "", string.punctuation)
-
-    meta.word = [string.translate(translator) for string in meta.word]
     # get syntactic annotations
     # syntax_file = syntax_path / f"ch{CHAPTERS[run]}.syntax.txt"
     syntax_file = (
@@ -242,19 +243,20 @@ def add_syntax(meta, syntax_path, run):
     # Clean the meta tokens to match synt tokens
     meta_tokens = meta.word.fillna("XXXX").apply(format_text).values
     # Get the word after the hyphen to match the synt tokens
-    meta_tokens = [
-        string.split("'")[1] if "'" in string else string for string in meta.word
-    ]
+    meta_tokens = [stri.split("'")[1] if "'" in stri else stri for stri in meta.word]
+    # Remove the punctuation
+    translator = str.maketrans("", "", string.punctuation)
+    meta_tokens = [stri.translate(translator) for stri in meta_tokens]
+
     # Handle synt tokens: they are split by hyphen
     synt_tokens = synt.word.apply(format_text).values
     # Remove the empty strings and ponct
-    punctuation_chars = set(string.punctuation)
-    synt_tokens = [
-        string
-        for string in synt_tokens
-        if string.strip() != ""
-        and not any(char in punctuation_chars for char in string)
-    ]
+    # punctuation_chars = set(string.punctuation)
+    # synt_tokens = [
+    #     stri
+    #     for stri in synt_tokens
+    #     if stri.strip() != "" and not any(char in punctuation_chars for char in stri)
+    # ]
 
     i, j = match_list(meta_tokens, synt_tokens)
     assert (len(i) / len(meta_tokens)) > 0.8
