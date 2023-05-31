@@ -497,3 +497,18 @@ def decod_xy(X, y):
         # R[t] = correlate(y, y_pred)
 
     return R
+
+
+def mne_events(meta, raw, start, level):
+    if start == 'onset':
+        events = np.ones((len(meta), 3), dtype=int)
+        events[:, 0] = meta.start * raw.info["sfreq"]
+        return dict(events=events, metadata=meta.reset_index())
+    elif start == 'offset':
+        events = np.ones((len(meta), 3), dtype=int)
+        events[:, 0] = (meta.start+meta.duration) * raw.info["sfreq"]
+        return dict(events=events, metadata=meta.reset_index())
+
+    else:
+        print('start should be either onset or offset')
+        return 0
