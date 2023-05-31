@@ -40,7 +40,7 @@ from mne_bids import BIDSPath, write_raw_bids
 # 1) Raw format to BIDS #####
 
 #  CONST ###
-BASE_PATH = Path('/home/is153802/workspace_LPP/data/MEG/LPP/')
+BASE_PATH = Path('/home/is153802/data/')
 # BIDS_PATH = BASE_PATH / 'LPP_bids'
 BIDS_PATH = BASE_PATH / 'LPP_MEG_auditory'
 RAW_DATA_PATH = BASE_PATH / 'raw_old'
