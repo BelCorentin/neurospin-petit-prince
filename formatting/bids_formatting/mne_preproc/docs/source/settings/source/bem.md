@@ -1,7 +1,0 @@
-
-::: config.use_template_mri
-::: config.adjust_coreg
-::: config.bem_mri_images
-::: config.recreate_bem
-::: config.recreate_scalp_surface
-::: config.freesurfer_verbose
