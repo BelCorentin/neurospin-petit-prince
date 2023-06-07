@@ -204,20 +204,23 @@ def constituent_epochs(subject):
     return epochs
 
 
-def get_path(name="LPP_read"):
+def get_path(name="visual"):
     path_file = Path("./../../data/data_path.txt")
     with open(path_file, "r") as f:
         data = Path(f.readlines()[0].strip("\n"))
-    if name == "LPP_read":
+    if name == "visual":
         # TASK = "read"
         data = data / "LPP_MEG_visual"
 
-    elif name == "LPP_listen":
+    elif name == "auditory":
         # TASK = "listen"
         data = data / "LPP_MEG_auditory"
+    elif name == "fmri":
+        # TASK = "listen"
+        data = data / "LPP_MEG_fMRI"
     else:
         return f"{name} is an invalid name. \n\
-        Current options: LPP_read and LPP_listen"
+        Current options: visual and auditory, fmri"
     return data
 
 
