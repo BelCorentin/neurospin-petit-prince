@@ -87,15 +87,31 @@ def read_raw(subject, run_id, events_return=False, modality="visual"):
     # Making sure that there is no problem with words that contain ""
     meta.word = meta.word.str.replace('"', "")
 
-    # Here, events are the presented stimuli: with hyphens.
-    # Have to make sure meta.word still contains the hyphens.
-    # However, the meta.word might have lost the hyphens because
-    # of the previous match hen adding syntax.
-    i, j = match_list(events[:, 2], meta.wlength)
-    assert len(i) > (0.9 * len(events))
-    meta["has_trigger"] = False
-    meta.loc[j, "has_trigger"] = True
-    assert (events[i, 2] == meta.loc[j].wlength).mean() > 0.95
+    # Two cases for match list: is it auditory or visual ?
+    if modality == 'auditory':
+        word_events = events[events[:, 2] > 1]
+        meg_delta = np.round(np.diff(word_events[:, 0]/raw.info['sfreq']))
+        meta_delta = np.round(np.diff(meta.onset.values))
+        i, j = match_list(meg_delta, meta_delta)
+        assert len(i) > 1000
+        events = word_events[i]
+        # events = events[i]  # events = words_events[i]
+        meta["has_trigger"] = False
+        meta.loc[j, "has_trigger"] = True
+        meta = meta.iloc[j].reset_index()
+    # For auditory, we match on the time difference between triggers
+    elif modality == "visual":
+        # For visual, we match on the difference of word length encoded in the triggers
+        # Here, events are the presented stimuli: with hyphens.
+        # Have to make sure meta.word still contains the hyphens.
+        # However, the meta.word might have lost the hyphens because
+        # of the previous match hen adding syntax.
+
+        i, j = match_list(events[:, 2], meta.wlength)
+        assert len(i) > (0.9 * len(events))
+        meta["has_trigger"] = False
+        meta.loc[j, "has_trigger"] = True
+        assert (events[i, 2] == meta.loc[j].wlength).mean() > 0.95
 
     # integrate events to meta for simplicity
     meta.loc[j, "start"] = events[i, 0] / raw.info["sfreq"]
