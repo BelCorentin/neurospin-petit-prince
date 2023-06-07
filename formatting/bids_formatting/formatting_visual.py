@@ -143,4 +143,4 @@ for sub in os.listdir(BIDS_PATH):
 print(f"\n \n ***************************************************\
 \n Script finished!\n \
 ***************************************************\
-\n Folder created: \n For bids: {BIDS_PATH} ")
+\n Folder created: \n")
