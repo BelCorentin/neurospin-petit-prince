@@ -35,9 +35,11 @@ CHAPTERS = {
 # FUNC
 
 
-def read_raw(subject, run_id, events_return=False):
-    path = get_path("LPP_read")
-    task = "read"
+def read_raw(subject, run_id, events_return=False, modality="visual"):
+    print(f"Reading raw files for modality: {modality}")
+    path = get_path(modality)
+    task_map = {"auditory": "listen", "visual": "read", "fmri": "listen"}
+    task = task_map[modality]
     print(f"\n Epoching for run {run_id}, subject: {subject}\n")
     bids_path = mne_bids.BIDSPath(
         subject=subject,
@@ -219,8 +221,10 @@ def get_path(name="visual"):
         # TASK = "listen"
         data = data / "LPP_MEG_fMRI"
     else:
-        return f"{name} is an invalid name. \n\
-        Current options: visual and auditory, fmri"
+        print(f"{name} is an invalid name. \n\
+        Current options: visual and auditory, fmri")
+
+    print(f"{name} modality chosen\n")
     return data
 
 
