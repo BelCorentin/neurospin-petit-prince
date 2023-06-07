@@ -27,7 +27,7 @@ BASE_PATH = Path('/home/is153802/data/')
 BIDS_PATH = BASE_PATH / 'LPP_MEG_fMRI'
 RAW_DATA_PATH = BASE_PATH / 'raw_ibc'
 TASK = 'listen'
-
+annotation_folder = '~/workspace_LPP/code/neurospin-petit-prince/formatting/bids_formatting/annotations'
 
 dict_nip_to_sn = {'pj_150414': '1',
                   'gt_150298': '2',
@@ -152,7 +152,6 @@ df9.to_csv('./annotations/annotation_processed9.tsv', sep='\t', index=False)
 
 # Putting the generated annotation files (one for each run) in the correct
 # directories
-annotation_folder = '~/workspace_LPP/code/neurospin-petit-prince/bids_formatting/annotations'
 
 for sub in os.listdir(BIDS_PATH):
     if sub.__contains__('sub-'):
