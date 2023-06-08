@@ -415,13 +415,6 @@ def get_subjects(path):
 
     return subjects
 
-
-def mne_events(meta, raw):
-    events = np.ones((len(meta), 3), dtype=int)
-    events[:, 0] = meta.start * raw.info["sfreq"]
-    return dict(events=events, metadata=meta.reset_index())
-
-
 def concac_runs(subject, task, path):
     RUN = 9
     epochs = []

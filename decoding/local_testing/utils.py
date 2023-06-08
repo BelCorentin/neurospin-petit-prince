@@ -336,12 +336,6 @@ def analysis(raw, meta, data_path):
     # get metadata
     meta = add_syntax(meta, data_path, run)
 
-    # epoch
-    def mne_events(meta):
-        events = np.ones((len(meta), 3), dtype=int)
-        events[:, 0] = meta.start * raw.info["sfreq"]
-        return dict(events=events, metadata=meta.reset_index())
-
     epochs = mne.Epochs(
         raw, **mne_events(meta), decim=20, tmin=-0.2, tmax=1.5, preload=True
     )
@@ -499,6 +493,7 @@ def decod_xy(X, y):
     return R
 
 
+# TO TEST !!!!
 def mne_events(meta, raw, start, level):
     if start == 'onset':
         events = np.ones((len(meta), 3), dtype=int)
@@ -506,7 +501,7 @@ def mne_events(meta, raw, start, level):
         return dict(events=events, metadata=meta.reset_index())
     elif start == 'offset':
         events = np.ones((len(meta), 3), dtype=int)
-        events[:, 0] = (meta.start+meta.duration) * raw.info["sfreq"]
+        events[:, 0] = meta['{level}_stop'] * raw.info["sfreq"]
         return dict(events=events, metadata=meta.reset_index())
 
     else:
