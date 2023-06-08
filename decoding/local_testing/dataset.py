@@ -94,11 +94,8 @@ def read_raw(subject, run_id, events_return=False, modality="visual"):
         meta_delta = np.round(np.diff(meta.onset.values))
         i, j = match_list(meg_delta, meta_delta)
         assert len(i) > 1000
-        events = word_events[i]
         # events = events[i]  # events = words_events[i]
-        meta["has_trigger"] = False
-        meta.loc[j, "has_trigger"] = True
-        meta = meta.iloc[j].reset_index()
+
     # For auditory, we match on the time difference between triggers
     elif modality == "visual":
         # For visual, we match on the difference of word length encoded in the triggers
@@ -109,9 +106,10 @@ def read_raw(subject, run_id, events_return=False, modality="visual"):
 
         i, j = match_list(events[:, 2], meta.wlength)
         assert len(i) > (0.9 * len(events))
-        meta["has_trigger"] = False
-        meta.loc[j, "has_trigger"] = True
         assert (events[i, 2] == meta.loc[j].wlength).mean() > 0.95
+
+    meta["has_trigger"] = False
+    meta.loc[j, "has_trigger"] = True
 
     # integrate events to meta for simplicity
     meta.loc[j, "start"] = events[i, 0] / raw.info["sfreq"]
@@ -241,7 +239,6 @@ def get_path(name="visual"):
         print(f"{name} is an invalid name. \n\
         Current options: visual and auditory, fmri")
 
-    print(f"{name} modality chosen\n")
     return data
 
 
