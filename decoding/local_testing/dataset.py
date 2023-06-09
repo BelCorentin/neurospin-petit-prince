@@ -16,6 +16,8 @@ from sklearn.preprocessing import RobustScaler
 
 # Tools
 from pathlib import Path
+import os
+import subprocess
 from utils import match_list, add_syntax
 
 # CONST:
@@ -603,3 +605,91 @@ def sentence_epochs_debug(subject, run):
     epochs = mne.concatenate_epochs(all_epochs)
 
     return epochs
+
+
+def add_embeddings(meta, run, level):
+    
+    """
+    Function made to generate laser embeddings, store them,
+    and add them to the metadata 
+
+    Does so for both constituent embeddings, and sentence ones
+
+
+    """
+    # Parse the metadata into constituents / sentences, 
+    # and generate txt files for each constituents / sentence
+    # So that it can be parsed by LASER
+    sentences = []
+    current_sentence = []
+    
+    meta['const_end'] = meta.constituent_onset.shift(-1)
+    for index, row in meta.iterrows():
+
+        # Append word to current sentence 
+        current_sentence.append(row['word'])
+
+        # Check if end of sentence 
+        if level == 'sentence' and row['is_last_word']:
+            # Join words into sentence string and append to list
+            sentences.append(' '.join(current_sentence)) 
+            # Reset current sentence   
+            current_sentence = []
+            
+        if level == 'constituent' and row['const_end']:
+            # Join words into sentence string and append to list
+            sentences.append(' '.join(current_sentence)) 
+            # Reset current sentence   
+            current_sentence = []
+
+    # Loop through sentences 
+    for i, sentence in enumerate(sentences):
+        # Get sentence number
+        sentence_num = i + 1
+
+        # Create file name
+        file_name = f'./embeds/txt/run{run}_{level}_{sentence_num}.txt'
+
+        # Open text file 
+        with open(file_name, 'w') as f:
+            # Write sentence to file
+            f.write(sentence)
+            
+    # Run LASER using the run number
+    path = Path('/home/is153802/github/LASER/tasks/embed')
+    os.environ['LASER'] = '/home/is153802/github/LASER'
+
+    for i, _ in enumerate(sentences):
+    # Get sentence number
+        sentence_num = i + 1
+
+        txt_file = f"/home/is153802/code/decoding/local_testing/embeds/txt/run{run}_{level}_{sentence_num}.txt"
+        emb_file = f"/home/is153802/code/decoding/local_testing/embeds/emb/run{run}_{level}_{sentence_num}.bin"
+        if os.path.exists(emb_file):
+            continue
+        else:
+            subprocess.run(['/bin/bash', '/home/is153802/github/LASER/tasks/embed/embed.sh', txt_file, emb_file])
+        
+    # Get the embeddings from the generated txt file, and add them to metadata
+    dim = 1024
+    embeddings = {}
+    for index, sentence in enumerate(sentences):
+        embeds = np.fromfile(
+                f"{get_code_path()}/decoding/local_testing/embeds/emb/run{run}_{level}_{index+1}.bin",
+                dtype=np.float32,
+                count=-1,
+                )
+        embeds.resize(embeds.shape[0] // dim, dim)
+        embeds = embeds.reshape(-1)
+        embeddings[index] = embeds
+    sent_index = 0
+    embed_arrays = []
+    for index, row in meta.iterrows():
+        embed_arrays.append(embeddings[sent_index])
+        # Check if end of sentence 
+        if row['is_last_word']:
+            sent_index += 1
+
+    meta[f'embed_{level}'] = embed_arrays
+    
+    return meta
