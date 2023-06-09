@@ -21,6 +21,8 @@ BASE_PATH = Path('/home/is153802/data/')
 BIDS_PATH = BASE_PATH / 'LPP_MEG_auditory'
 RAW_DATA_PATH = BASE_PATH / 'raw_auditory'
 TASK = 'listen'
+annotation_folder = './annotations'
+
 
 
 dict_nip_to_sn = {'ae_140329': '2', 'cc_150418': '3', 'cl_220500': '5',
@@ -162,7 +164,6 @@ df9.to_csv('./annotations/annotation_processed9.tsv', sep='\t', index=False)
 
 # Putting the generated annotation files (one for each run) in the correct
 # directories: the processed one and the regular one
-annotation_folder = '~/workspace_LPP/code/neurospin-petit-prince/bids_formatting/annotations'
 
 for sub in os.listdir(BIDS_PATH):
     if sub.__contains__('sub-'):

@@ -501,7 +501,7 @@ def mne_events(meta, raw, start, level):
         return dict(events=events, metadata=meta.reset_index())
     elif start == 'offset':
         events = np.ones((len(meta), 3), dtype=int)
-        events[:, 0] = meta['{level}_stop'] * raw.info["sfreq"]
+        events[:, 0] = meta[f'{level}_stop'] * raw.info["sfreq"]
         return dict(events=events, metadata=meta.reset_index())
 
     else:

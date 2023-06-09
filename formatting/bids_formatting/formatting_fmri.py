@@ -27,7 +27,7 @@ BASE_PATH = Path('/home/is153802/data/')
 BIDS_PATH = BASE_PATH / 'LPP_MEG_fMRI'
 RAW_DATA_PATH = BASE_PATH / 'raw_ibc'
 TASK = 'listen'
-annotation_folder = '~/workspace_LPP/code/neurospin-petit-prince/formatting/bids_formatting/annotations'
+annotation_folder = './annotations'
 
 dict_nip_to_sn = {'pj_150414': '1',
                   'gt_150298': '2',

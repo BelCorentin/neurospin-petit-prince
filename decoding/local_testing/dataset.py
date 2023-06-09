@@ -690,6 +690,6 @@ def add_embeddings(meta, run, level):
         if row['is_last_word']:
             sent_index += 1
 
-    meta[f'embed_{level}'] = embed_arrays
+    meta[f'embeds_{level}'] = embed_arrays
     
     return meta
