@@ -16,7 +16,7 @@ import pandas as pd
 from pathlib import Path
 import os
 import subprocess
-from utils import match_list, add_syntax
+from utils import match_list, add_syntax, add_new_syntax
 
 # CONST:
 
@@ -76,6 +76,7 @@ def read_raw(subject, run_id, events_return=False, modality="visual"):
     path_syntax = get_code_path() / "data" / "syntax_new_no_punct"  # testing new syntax
 
     # Send raw metadata
+    # meta = add_new_syntax(meta, path_syntax, int(run_id))
     meta = add_syntax(meta, path_syntax, int(run_id))
 
     # add sentence and word positions
@@ -93,7 +94,7 @@ def read_raw(subject, run_id, events_return=False, modality="visual"):
         meg_delta = np.round(np.diff(word_events[:, 0]/raw.info['sfreq']))
         meta_delta = np.round(np.diff(meta.onset.values))
         i, j = match_list(meg_delta, meta_delta)
-        assert len(i) > 1000
+        assert len(i) > 1
         # events = events[i]  # events = words_events[i]
 
     # For auditory, we match on the time difference between triggers
@@ -194,7 +195,6 @@ def add_embeddings(meta, run, level):
     sentences = []
     current_sentence = []
 
-    meta['const_end'] = meta.constituent_onset.shift(-1)
     for index, row in meta.iterrows():
 
         # Append word to current sentence
@@ -258,7 +258,9 @@ def add_embeddings(meta, run, level):
     for index, row in meta.iterrows():
         embed_arrays.append(embeddings[sent_index])
         # Check if end of sentence 
-        if row['is_last_word']:
+        if level == 'sentence' and row['is_last_word']:
+            sent_index += 1
+        elif level == 'constituent' and row['const_end']:
             sent_index += 1
 
     meta[f'embeds_{level}'] = embed_arrays

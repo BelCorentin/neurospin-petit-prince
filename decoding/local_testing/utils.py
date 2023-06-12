@@ -189,6 +189,12 @@ def add_syntax(meta, syntax_path, run):
     "j" "avais"
     meta has:
     "j'avais"
+
+    That means there is a limitation in terms of matching we can do: 
+    Since what is presented is: "J'avais" but to parse the syntax, we need j + avais
+    We'll never get a perfect match.
+    Option chosen: keep only the second part (verb) and tag it as a VERB 
+    When aligning it with brain signals
     """
     # get basic annotations
     meta = meta.copy().reset_index(drop=True)
@@ -219,7 +225,7 @@ def add_syntax(meta, syntax_path, run):
     # ]
 
     i, j = match_list(meta_tokens, synt_tokens)
-    assert (len(i) / len(meta_tokens)) > 0.95
+    assert (len(i) / len(meta_tokens)) > 0.8
 
     for key, default_value in dict(n_closing=1, is_last_word=False, pos="XXX").items():
         meta[key] = default_value
@@ -241,7 +247,9 @@ def add_new_syntax(meta, syntax_path, run):
     meta_ = meta.copy().reset_index(drop=True)
 
     # get syntactic annotations
-    syntax_file = syntax_path / f"ch{CHAPTERS[run]}.syntax.txt"
+    syntax_file = (
+        syntax_path / f"run{run}_v2_0.25_0.5-tokenized.syntax.txt"
+    )  # testing new syntax
     synt = get_syntax(syntax_file)
 
     # align
@@ -265,10 +273,9 @@ def add_new_syntax(meta, syntax_path, run):
     synt = synt[~synt["word"].str.strip(string.punctuation + " ").eq("")]
     synt_tokens = synt.word.str.lower()
     # synt_tokens = synt.word.apply(format_text_syntax).values
-    print(synt_tokens[-50:], meta_tokens[-50:])
 
     i, j = match_list(meta_tokens, synt_tokens)
-    assert (len(i) / len(meta_tokens)) > 0.8
+    assert (len(i) / len(meta_tokens)) > 0.95
 
     for key, default_value in dict(n_closing=1, is_last_word=False, pos="XXX").items():
         meta[key] = default_value
