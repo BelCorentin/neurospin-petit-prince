@@ -70,7 +70,7 @@ def read_raw(subject, run_id, events_return=False, modality="visual"):
     meta = pd.read_csv(event_file, sep="\t")
     events = mne.find_events(raw, stim_channel="STI101", shortest_event=1)
 
-    meta['word'] = meta['trial_type'].apply(lambda x: eval(x)['word'] if type(eval(x)) == dict else np.nan)
+    # meta['word'] = meta['trial_type'].apply(lambda x: eval(x)['word'] if type(eval(x)) == dict else np.nan)
     # Initial wlength, as presented in the stimuli / triggers to match list
     meta["wlength"] = meta.word.apply(len)
     # Enriching the metadata with outside files:
