@@ -3,33 +3,19 @@
 General functions for decoding purposes
 
 """
-# Neuro
-import mne
-import mne_bids
 
 # ML/Data
+
 import numpy as np
 import pandas as pd
-from sklearn.model_selection import KFold, cross_val_predict
 from sklearn.pipeline import make_pipeline
-from sklearn.preprocessing import StandardScaler, RobustScaler
+from sklearn.preprocessing import StandardScaler
+from sklearn.model_selection import KFold
 from sklearn.linear_model import RidgeCV
-from wordfreq import zipf_frequency
 from Levenshtein import editops
-from tqdm.notebook import trange
-from scipy.stats import pearsonr
-import spacy
-import re
 import string
 
-nlp = spacy.load("fr_core_news_sm")
-
-# Tools
-import matplotlib.pyplot as plt
-from pathlib import Path
-import matplotlib
-
-## CONST
+# CONST
 
 CHAPTERS = {
     1: "1-3",
@@ -43,36 +29,10 @@ CHAPTERS = {
     9: "26-27",
 }
 
-
-# def decod(X, y):
-#     assert len(X) == len(y)
-#     # define data
-#     model = make_pipeline(StandardScaler(), RidgeCV(alphas=np.logspace(-1, 6, 10)))
-#     cv = KFold(15, shuffle=True, random_state=0)
-
-#     # fit predict
-#     n, n_chans, n_times = X.shape
-#     if y.ndim == 1:
-#         y = np.asarray(y).reshape(y.shape[0], 1)
-#     R = np.zeros((n_times, y.shape[1]))
-
-#     for t in range(n_times):
-#         print(".", end="")
-#         rs = []
-#         # y_pred = cross_val_predict(model, X[:, :, t], y, cv=cv)
-#         for train, test in cv.split(X):
-#             model.fit(X[train, :, t], y[train])
-#             y_pred = model.predict(X[test, :, t])
-#             r = correlate(y[test], y_pred)
-#             rs.append(r)
-#         R[t] = np.mean(rs)
-#         # R[t] = correlate(y, y_pred)
-
-#     return R
-
-
 # Function to return the Pearson correlation
 # Between X and Y
+
+
 def correlate(X, Y):
     if X.ndim == 1:
         X = np.array(X)[:, None]
@@ -259,7 +219,7 @@ def add_syntax(meta, syntax_path, run):
     # ]
 
     i, j = match_list(meta_tokens, synt_tokens)
-    assert (len(i) / len(meta_tokens)) > 0.8
+    assert (len(i) / len(meta_tokens)) > 0.95
 
     for key, default_value in dict(n_closing=1, is_last_word=False, pos="XXX").items():
         meta[key] = default_value
@@ -319,151 +279,6 @@ def add_new_syntax(meta, syntax_path, run):
         lambda pos: pos in content_pos if isinstance(pos, str) else False
     )
     return meta
-
-
-# TO change
-def analysis(raw, meta, data_path):
-    """
-    One function to rule them all:
-
-    To be better defined before future refinement
-
-    """
-    # load MEG data
-    raw.load_data()
-    raw.filter(0.5, 20.0, n_jobs=-1)
-
-    # get metadata
-    meta = add_syntax(meta, data_path, run)
-
-    epochs = mne.Epochs(
-        raw, **mne_events(meta), decim=20, tmin=-0.2, tmax=1.5, preload=True
-    )
-    epochs = epochs['kind=="word"']
-
-    scores = dict()
-    scores["n_closing"] = decod(epochs, "n_closing")
-    scores["n_closing_notlast"] = decod(
-        epochs["content_word and not is_last_word"], "n_closing"
-    )
-    scores["n_closing_noun_notlast"] = decod(
-        epochs['pos=="NC" and not is_last_word'], "n_closing"
-    )
-    return scores
-
-
-def decod(epochs, target):
-    """
-    Run a RidgeCV to get the Pearson correlation between
-    the predicted values and the actual values for a target
-
-    The target can be anything as:
-    word_length,
-    spacy embeddings,
-    syntactic informations, etc..
-
-    """
-    model = make_pipeline(StandardScaler(), RidgeCV())
-    cv = KFold(n_splits=5)
-
-    y_ini = epochs.metadata[target].values
-
-    def reshape_y(y_ini, size):
-
-        # Create an empty 2D array of size (134, 1024)
-        y = np.empty((size, 1024))
-
-        # Fill in the new array with data from the original arrays
-        for i in range(len(y)):
-            y[i] = y_ini[i]
-        return y
-
-    r = np.zeros(len(epochs.times))
-    for t in trange(len(epochs.times)):
-        X = epochs.get_data()[:, :, t]
-        y = y_ini
-        if target == "laser":
-            y = reshape_y(y_ini, X.shape[0])
-        for train, test in cv.split(X, y):
-            model.fit(X[train], y[train])
-            y_pred = model.predict(X[test])
-            r[t] += correlate(y_pred, y[test]).mean()
-    r /= cv.n_splits
-    return r
-
-
-def create_target(decoding_criterion, epochs):
-    """
-    Trivial function to handle different use cases
-
-    Not currently used, needs refinement
-    """
-    if decoding_criterion == "embeddings":
-        embeddings = epochs.metadata.word.apply(lambda word: nlp(word).vector).values
-        embeddings = np.array([emb for emb in embeddings])
-        return embeddings
-    elif decoding_criterion == "word_length":
-        return epochs.metadata.word.apply(len)
-    elif decoding_criterion == "closing":
-        target = "n_closing"
-        return epochs.metadata[target].values
-
-
-def save_decoding_results(sub, decoding_criterion, task, reference, epoch_on, R):
-    """
-    To save decoding results for later use
-    eg: plotting, further analysis
-    """
-    np.save(
-        f"./../results/{task}/decoding_{decoding_criterion}_{epoch_on}_{reference}_{sub}.npy",
-        R,
-    )
-    return True
-
-
-#
-# DEBUG
-#
-
-
-def decod_debug(epochs, target):
-    """
-    Run a RidgeCV to get the Pearson correlation between
-    the predicted values and the actual values for a target
-
-    The target can be anything as:
-    word_length,
-    spacy embeddings,
-    syntactic informations, etc..
-
-    """
-    model = make_pipeline(StandardScaler(), RidgeCV())
-    cv = KFold(n_splits=5)
-
-    y_ini = epochs.metadata[target].values
-
-    def reshape_y(y_ini, size):
-
-        # Create an empty 2D array of size (134, 1024)
-        y = np.empty((size, 1024))
-
-        # Fill in the new array with data from the original arrays
-        for i in range(len(y)):
-            y[i] = y_ini[i]
-        return y
-
-    r = np.zeros(len(epochs.times))
-    for t in trange(len(epochs.times)):
-        X = epochs.get_data()[:, :, t]
-        y = y_ini
-        if target == "laser":
-            y = reshape_y(y_ini, X.shape[0])
-        for train, test in cv.split(X, y):
-            model.fit(X[train], y[train])
-            y_pred = model.predict(X[test])
-            r[t] += correlate(y_pred, y[test]).mean()
-    r /= cv.n_splits
-    return r
 
 
 def decod_xy(X, y):
