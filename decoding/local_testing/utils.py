@@ -8,12 +8,15 @@ General functions for decoding purposes
 
 import numpy as np
 import pandas as pd
+import matplotlib.pyplot as plt
 from sklearn.pipeline import make_pipeline
 from sklearn.preprocessing import StandardScaler
 from sklearn.model_selection import KFold
 from sklearn.linear_model import RidgeCV
 from Levenshtein import editops
 import string
+
+
 
 # CONST
 
@@ -329,3 +332,79 @@ def mne_events(meta, raw, start, level):
     else:
         print('start should be either onset or offset')
         return 0
+
+
+def decoding_from_criterion(criterion, dict_epochs, starts, levels, subject):
+    """
+    Input:
+    - criterion: the criterion on which the decoding will be done (embeddings, wlength, w_freq, etc..)
+    - dict_epochs: the dictionnary containing the epochs for each condition (starts x levels)
+    - starts: (onset, offset)
+    - levels: (word, sentence, constituent)
+    
+    Returns:
+    Two dataframes: 
+    - all_scores: decoding scores for each subject / starts x levels
+    - all_evos: ERP plots for each subject / starts x levels
+
+    """
+
+    all_evos = []
+    all_scores = []
+    # All epochs -> Decoding and generate evoked potentials
+    for start in starts: 
+        for level in levels:
+            epoch_key = f'{level}_{start}'
+            epochs = dict_epochs[epoch_key]
+            # mean
+            evo = epochs.copy().pick_types(meg=True).average(method='median')
+            all_evos.append(dict(subject=subject, evo=evo, start=start, level=level))
+
+
+            # decoding word emb
+            epochs = epochs.load_data().pick_types(meg=True, stim=False, misc=False)
+            X = epochs.get_data()
+            if criterion == 'emb_sentence' or criterion == 'emb_constituent':
+                embeddings = epochs.metadata[f'embeds_{level}']
+                embeddings = np.vstack(embeddings.values)
+                R_vec = decod_xy(X, embeddings)
+                scores = np.mean(R_vec, axis=1)
+            elif criterion == 'emb_word':
+                nlp = spacy.load("fr_core_news_sm")
+                embeddings = epochs.metadata.word.apply(lambda word: nlp(word).vector).values
+                embeddings = np.array([emb for emb in embeddings])
+                R_vec = decod_xy(X, embeddings)
+                scores = np.mean(R_vec, axis=1)
+            elif criterion == 'wlength':
+                y = epochs.metadata.wlength
+                R_vec = decod_xy(X, y)
+                scores = R_vec
+
+            for t, score in enumerate(scores):
+                all_scores.append(dict(subject=subject, score=score, start=start, level=level, t=epochs.times[t]))
+    all_scores = pd.DataFrame(all_scores)
+    all_evos = pd.DataFrame(all_evos)
+    return all_scores, all_evos
+
+
+def plot_scores(all_scores, levels, starts):
+    from matplotlib.pyplot import figure
+
+    figure(figsize=(16, 10), dpi=80)
+
+    fig, axes = plt.subplots(3, 2)
+
+    for axes_, level in zip( axes, levels):  
+        for ax, start in zip( axes_, starts):  
+            cond1 = all_scores.level==f'{level}'
+            cond2 = all_scores.start==f'{start}'
+            data = all_scores[ cond1 & cond2]
+            y = []
+            x = []
+            for s, t in data.groupby('t'):
+                score_avg = t.score.mean()
+                y.append(score_avg)
+                x.append(s)
+
+            ax.plot(x,y)
+            ax.set_title(f'{level} {start}')
