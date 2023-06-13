@@ -191,8 +191,18 @@ def add_embeddings(meta, run, level):
 
     Does so for both constituent embeddings, and sentence ones
 
+    Handles word embeddings as well
+
 
     """
+
+    # Handle the simple case of words embeddings
+
+    if level == 'word':
+        embeddings = meta.word.apply(lambda word: nlp(word).vector).values
+        meta['embeds_word'] = embeddings
+
+        return meta
     # Parse the metadata into constituents / sentences,
     # and generate txt files for each constituents / sentence
     # So that it can be parsed by LASER
@@ -278,6 +288,35 @@ def add_embeddings(meta, run, level):
 
     return meta
 
+def enrich_metadata(meta):
+    # Metadata update
+    meta['word_onset'] = True
+    meta['word_stop'] = meta.start + meta.duration
+    meta['sentence_onset'] = meta.word_id == 0
+    meta['prev_closing'] = meta['n_closing'].shift(1)
+    meta['constituent_onset'] = meta.apply(lambda x: x['prev_closing'] > x['n_closing'] and x['n_closing'] == 1, axis=1)
+    meta['constituent_onset'].fillna(False, inplace=True)
+    meta['const_end'] = meta.constituent_onset.shift(-1)
+    meta.drop('prev_closing', axis=1, inplace=True)
+    
+    # Adding the sentence stop info
+    meta['sentence_id'] = np.cumsum(meta.sentence_onset)
+    for s, d in meta.groupby('sentence_id'):
+        meta.loc[d.index, 'sent_word_id'] = range(len(d))
+        meta.loc[d.index, 'sentence_start'] = d.start.min()
+        last_word_duration = meta.loc[d.index.max(), 'duration']
+        meta.loc[d.index, 'sentence_stop'] = d.start.max() + last_word_duration
+        # Todo: Add the last word duration ? 
+        
+    # Adding the constituents stop info
+    meta['constituent_id'] = np.cumsum(meta.constituent_onset)
+    for s, d in meta.groupby('constituent_id'):
+        meta.loc[d.index, 'const_word_id'] = range(len(d))
+        meta.loc[d.index, 'constituent_start'] = d.start.min()
+        last_word_duration = meta.loc[d.index.max(), 'duration']
+        meta.loc[d.index, 'constituent_stop'] = d.start.max() + last_word_duration
+
+    return meta
 
 def epoch_add_metadata(modality, subject, levels, 
                        starts, runs=9, epoch_windows={}):
@@ -295,41 +334,17 @@ def epoch_add_metadata(modality, subject, levels,
     
     # Initialization of the dictionary
     for start in starts: 
-            for level in levels:
-                epoch_key = f'{level}_{start}'
-                dict_epochs[epoch_key] = [] 
+        for level in levels:
+            epoch_key = f'{level}_{start}'
+            dict_epochs[epoch_key] = [] 
                 
     # Iterating on runs, building the metadata and re-epoching
     for run in range(1,runs+1):
         raw, meta_, events = read_raw(subject, run, events_return = True, modality=modality)
         meta = meta_.copy()
         
-        # Metadata update
-        meta['word_onset'] = True
-        meta['word_stop'] = meta.start + meta.duration
-        meta['sentence_onset'] = meta.word_id == 0
-        meta['prev_closing'] = meta['n_closing'].shift(1)
-        meta['constituent_onset'] = meta.apply(lambda x: x['prev_closing'] > x['n_closing'] and x['n_closing'] == 1, axis=1)
-        meta['constituent_onset'].fillna(False, inplace=True)
-        meta['const_end'] = meta.constituent_onset.shift(-1)
-        meta.drop('prev_closing', axis=1, inplace=True)
-        
-        # Adding the sentence stop info
-        meta['sentence_id'] = np.cumsum(meta.sentence_onset)
-        for s, d in meta.groupby('sentence_id'):
-            meta.loc[d.index, 'sent_word_id'] = range(len(d))
-            meta.loc[d.index, 'sentence_start'] = d.start.min()
-            last_word_duration = meta.loc[d.index.max(), 'duration']
-            meta.loc[d.index, 'sentence_stop'] = d.start.max() + last_word_duration
-            # Todo: Add the last word duration ? 
-            
-        # Adding the constituents stop info
-        meta['constituent_id'] = np.cumsum(meta.constituent_onset)
-        for s, d in meta.groupby('constituent_id'):
-            meta.loc[d.index, 'const_word_id'] = range(len(d))
-            meta.loc[d.index, 'constituent_start'] = d.start.min()
-            last_word_duration = meta.loc[d.index.max(), 'duration']
-            meta.loc[d.index, 'constituent_stop'] = d.start.max() + last_word_duration
+        # Add information about constituents onsets, offsets, etc..
+        meta = enrich_metadata(meta)
 
         # Adding embeddings info
         meta = add_embeddings(meta, run, 'constituent')
@@ -358,16 +373,18 @@ def epoch_add_metadata(modality, subject, levels,
                 dict_epochs[epoch_key].append(epochs)
             
     # Once we have the dict of epochs per condition full (epoching for each run for a subject)
-    # we can concatenate them, and fix the dev_head             
+    # we can concatenate them, and fix the dev_head         
     for start_ in starts: 
         for level_ in levels:
             epoch_key = f'{level_}_{start_}'
             all_epochs_chosen = dict_epochs[epoch_key]
             # Concatenate epochs
-
+            if len(all_epochs_chosen) == 1:
+                # Handle the case where there is only one run
+                continue
             for epo in all_epochs_chosen:
                 epo.info["dev_head_t"] = all_epochs_chosen[1].info["dev_head_t"]
 
             dict_epochs[epoch_key] = mne.concatenate_epochs(all_epochs_chosen)
-            
+    
     return dict_epochs

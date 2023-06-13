@@ -348,12 +348,14 @@ def decoding_from_criterion(criterion, dict_epochs, starts, levels, subject):
     - all_evos: ERP plots for each subject / starts x levels
 
     """
-
+    
     all_evos = []
     all_scores = []
     # All epochs -> Decoding and generate evoked potentials
     for start in starts: 
         for level in levels:
+            if criterion == 'embeddings':
+                criterion = f'emb_{level}'
             epoch_key = f'{level}_{start}'
             epochs = dict_epochs[epoch_key]
             # mean
@@ -365,8 +367,6 @@ def decoding_from_criterion(criterion, dict_epochs, starts, levels, subject):
             epochs = epochs.load_data().pick_types(meg=True, stim=False, misc=False)
             X = epochs.get_data()
 
-            if criterion == 'embeddings':
-                criterion = f'emb_{level}'
             if criterion == 'emb_sentence' or criterion == 'emb_constituent':
                 embeddings = epochs.metadata[f'embeds_{level}']
                 embeddings = np.vstack(embeddings.values)
