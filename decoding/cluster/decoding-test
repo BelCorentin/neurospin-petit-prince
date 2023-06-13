@@ -9,8 +9,8 @@
 #SBATCH --mail-user=corentin.bel@protonmail.com
 #SBATCH --mail-type=ALL
 MODULE_ENV="python/3.10.4"
-RUN_DIR="$WORK/code/neurospin-petit-prince/decoding/cluster"
-RUN_SCRIPT="./jeanzay_job_test.py"
+RUN_DIR="$WORK/code/neurospin-petit-prince/decoding/local_testing"
+RUN_SCRIPT="./jeanzay.py"
 # ---- Welcome...
 echo '-------------------------------------'
 echo "Start : $0"
@@ -26,6 +26,7 @@ echo '--------- --------------------------'
 # ---- Module
 module purge
 module load "$MODULE_ENV"
+conda activate meg
 # ---- Run it...
 #
 cd "$RUN_DIR"

@@ -334,7 +334,7 @@ def mne_events(meta, raw, start, level):
         return 0
 
 
-def decoding_from_criterion(criterion, dict_epochs, starts, levels, subject):
+def decoding_from_criterion(criterion, dict_epochs, starts, levels, subject, all_scores):
     """
     Input:
     - criterion: the criterion on which the decoding will be done (embeddings, wlength, w_freq, etc..)
@@ -385,29 +385,25 @@ def decoding_from_criterion(criterion, dict_epochs, starts, levels, subject):
 
             for t, score in enumerate(scores):
                 all_scores.append(dict(subject=subject, score=score, start=start, level=level, t=epochs.times[t]))
-    all_scores = pd.DataFrame(all_scores)
-    all_evos = pd.DataFrame(all_evos)
-    return all_scores, all_evos
+
+    return all_scores
 
 
-def plot_scores(all_scores, levels, starts):
-    from matplotlib.pyplot import figure
-
-    figure(figsize=(16, 10), dpi=80)
-
+def plot_scores(all_scores, levels, starts, decoding_criterion):
+    figure = plt.figure(figsize=(16, 10), dpi=80)
     fig, axes = plt.subplots(3, 2)
-
     for axes_, level in zip( axes, levels):  
-        for ax, start in zip( axes_, starts):  
-            cond1 = all_scores.level==f'{level}'
-            cond2 = all_scores.start==f'{start}'
-            data = all_scores[ cond1 & cond2]
+        for ax, start in zip(axes_, starts):     
+            cond1 = all_scores.level==f'{level}'      
+            cond2 = all_scores.start==f'{start}'  
+            data = all_scores[ cond1 & cond2]   
             y = []
             x = []
-            for s, t in data.groupby('t'):
+            for s, t in data.groupby('t'):       
                 score_avg = t.score.mean()
-                y.append(score_avg)
-                x.append(s)
-
+                y.append(score_avg)        
+                x.append(s)    
             ax.plot(x,y)
-            ax.set_title(f'{level} {start}')
+            ax.set_title(f'{level} {start}') 
+            ax.axhline(y=0, color='r', linestyle='-')
+    plt.suptitle(f"Decoding Performance for {decoding_criterion}")
