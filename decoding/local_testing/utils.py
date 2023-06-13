@@ -15,7 +15,7 @@ from sklearn.model_selection import KFold
 from sklearn.linear_model import RidgeCV
 from Levenshtein import editops
 import string
-
+import spacy
 
 
 # CONST
@@ -364,6 +364,9 @@ def decoding_from_criterion(criterion, dict_epochs, starts, levels, subject):
             # decoding word emb
             epochs = epochs.load_data().pick_types(meg=True, stim=False, misc=False)
             X = epochs.get_data()
+
+            if criterion == 'embeddings':
+                criterion = f'emb_{level}'
             if criterion == 'emb_sentence' or criterion == 'emb_constituent':
                 embeddings = epochs.metadata[f'embeds_{level}']
                 embeddings = np.vstack(embeddings.values)
