@@ -193,7 +193,8 @@ def add_embeddings(meta, run, level):
 
     Handles word embeddings as well
 
-
+    Testing options can be run to try to isolate embeddings
+    and make simpler predictions
     """
 
     # Handle the simple case of words embeddings
@@ -288,8 +289,12 @@ def add_embeddings(meta, run, level):
 
     return meta
 
+
 def enrich_metadata(meta):
-    # Metadata update
+    """
+    Populate the metadata with information about onset, offset of 
+    different syntactic markers and categories
+    """
     meta['word_onset'] = True
     meta['word_stop'] = meta.start + meta.duration
     meta['sentence_onset'] = meta.word_id == 0
@@ -298,7 +303,7 @@ def enrich_metadata(meta):
     meta['constituent_onset'].fillna(False, inplace=True)
     meta['const_end'] = meta.constituent_onset.shift(-1)
     meta.drop('prev_closing', axis=1, inplace=True)
-    
+
     # Adding the sentence stop info
     meta['sentence_id'] = np.cumsum(meta.sentence_onset)
     for s, d in meta.groupby('sentence_id'):
@@ -306,8 +311,11 @@ def enrich_metadata(meta):
         meta.loc[d.index, 'sentence_start'] = d.start.min()
         last_word_duration = meta.loc[d.index.max(), 'duration']
         meta.loc[d.index, 'sentence_stop'] = d.start.max() + last_word_duration
-        # Todo: Add the last word duration ? 
-        
+
+        # Adding the info for each word the information about the sentence / constituent 
+        # it is part of, in order to keep it when filtering on sentence / const later
+        meta.at[d.index[0], 'sentence_words'] = d.word.values
+
     # Adding the constituents stop info
     meta['constituent_id'] = np.cumsum(meta.constituent_onset)
     for s, d in meta.groupby('constituent_id'):
@@ -316,62 +324,103 @@ def enrich_metadata(meta):
         last_word_duration = meta.loc[d.index.max(), 'duration']
         meta.loc[d.index, 'constituent_stop'] = d.start.max() + last_word_duration
 
+        # Adding the info for each word the information about the sentence / constituent 
+        # it is part of, in order to keep it when filtering on sentence / const later
+        meta.at[d.index[0], 'constituent_words'] = d.word.values
+
     return meta
+
+
+def select_meta_subset(meta, level):
+    """
+    Select only the rows containing the True for the conditions
+    Simplified to only get for the onset: sentence onset epochs, constituent onset epochs,etc
+    """
+    sel = meta.query(f'{level}_onset==True')
+    assert sel.shape[0] > 10
+    return sel
+
+
+def epoch_on_selection(raw, sel, start, level, epoch_windows):
+    """
+    TODO: add adaptative baseline
+
+    Epoching from the metadata having all onset events: if the start=Offset, the mne events
+    Function will epoch on the offset of each level instead of the onset
+    """
+    epochs = mne.Epochs(raw,
+                        **mne_events(sel, raw, start=start, level=level),
+                        decim=100,
+                        tmin=epoch_windows[f'{level}'][f'{start}_min'],
+                        tmax=epoch_windows[f'{level}'][f'{start}_max'],
+                        event_repeated='drop',
+                        preload=True,
+                        baseline=None)
+    return epochs
+
+
+def apply_baseline(epochs, level):
+    """
+    TO BE FIXED AND ADDED LATER
+    Apply a baseline to the object
+
+    Returns epochs
+    """
+    sent_starts = epochs['word_id==0'].apply_baseline((-.300, 0.))
+    sent_starts.average().plot()
+
+    sent_stops = epochs['is_last_word']
+    bsl = (epochs.times >= .300)*(epochs.times <= 0)
+    baseline_starts = sent_starts.get_data()[:, :, bsl].mean(-2)
+
+    sent_stop_data = sent_stops.get_data()
+    n_sentences, n_channels, n_times = sent_stop_data.shape
+    sent_stop_data -= baseline_starts[:, :, None]
+    return epochs
+
 
 def epoch_add_metadata(modality, subject, levels, 
                        starts, runs=9, epoch_windows={}):
     """
     Takes as input subject number, modality, levels of epoching wanted (word, sentence, constituent)
     and starts (onset, offset) as well as the number of total runs (for debugging).
-    
-    Returns: 
-    
+
+    Returns:
+
     A dict of epochs objects, concatenated on the key (levels x starts)
-    
+
     e.g: {'word_onset': <Epochs 10000 objects>, 'sentence_offset': <Epochs 1000 objects> ....}
     """
-    dict_epochs = dict() # DICT containing epochs grouped by conditions (start x level)
-    
+    dict_epochs = dict()  # DICT containing epochs grouped by conditions (start x level)
+
     # Initialization of the dictionary
-    for start in starts: 
+    for start in starts:
         for level in levels:
             epoch_key = f'{level}_{start}'
-            dict_epochs[epoch_key] = [] 
-                
+            dict_epochs[epoch_key] = []
+
     # Iterating on runs, building the metadata and re-epoching
-    for run in range(1,runs+1):
-        raw, meta_, events = read_raw(subject, run, events_return = True, modality=modality)
+    for run in range(1, runs+1):
+        raw, meta_, events = read_raw(subject, run,
+                                      events_return=True, modality=modality)
         meta = meta_.copy()
-        
+
         # Add information about constituents onsets, offsets, etc..
         meta = enrich_metadata(meta)
 
-        # Adding embeddings info
-        meta = add_embeddings(meta, run, 'constituent')
-        meta = add_embeddings(meta, run, 'sentence')
-        
-        embeddings = meta.word.apply(lambda word: nlp(word).vector).values
-        meta['embeds_word'] = embeddings
-        for start in starts: 
+        for start in starts:
             for level in levels:
-                # Select only the rows containing the True for the conditions
-                # Simplified to only get for the onset: sentence onset epochs, constituent onset epochs,etc
-                sel = meta.query(f'{level}_onset==True')
-                assert sel.shape[0] > 10  #
+                # Select the subset needed for the level (filter on sentence/constituent)
+                sel = select_meta_subset(meta, level)
 
-                # Epoching from the metadata having all onset events: if the start=Offset, the mne events
-                # Function will epoch on the offset of each level instead of the onset
-                # TODO: add adaptative baseline
-                epochs = mne.Epochs(raw, **mne_events(sel, raw , start=start, level=level), decim=100,
-                                     tmin = epoch_windows[f'{level}'][f'{start}_min'],
-                                       tmax = epoch_windows[f'{level}'][f'{start}_max'],
-                                         event_repeated = 'drop',
-                                            preload=True,
-                                                baseline=None)
+                # Add the embeddings to the metadata limited to the level
+                meta = add_embeddings(meta, run, level)
+                epochs = epoch_on_selection(raw, sel, start,
+                                            level, epoch_windows)
                 epoch_key = f'{level}_{start}'
 
                 dict_epochs[epoch_key].append(epochs)
-            
+
     # Once we have the dict of epochs per condition full (epoching for each run for a subject)
     # we can concatenate them, and fix the dev_head         
     for start_ in starts: 
@@ -386,5 +435,5 @@ def epoch_add_metadata(modality, subject, levels,
                 epo.info["dev_head_t"] = all_epochs_chosen[1].info["dev_head_t"]
 
             dict_epochs[epoch_key] = mne.concatenate_epochs(all_epochs_chosen)
-    
+
     return dict_epochs
