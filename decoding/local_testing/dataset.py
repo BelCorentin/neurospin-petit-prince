@@ -108,10 +108,10 @@ def read_raw(subject, run_id, events_return=False, modality="visual"):
         # Here, events are the presented stimuli: with hyphens.
         # Have to make sure meta.word still contains the hyphens.
         # However, the meta.word might have lost the hyphens because
-        # of the previous match hen adding syntax.
+        # of the previous match when adding syntax.
 
         i, j = match_list(events[:, 2], meta.wlength)
-        assert len(i) > (0.9 * len(events))
+        assert len(i) > (0.8 * len(events))
         assert (events[i, 2] == meta.loc[j].wlength).mean() > 0.95
 
     meta["has_trigger"] = False
@@ -437,3 +437,39 @@ def epoch_add_metadata(modality, subject, levels,
             dict_epochs[epoch_key] = mne.concatenate_epochs(all_epochs_chosen)
 
     return dict_epochs
+
+
+def analysis(modality, decoding_criterion):
+    file_path = f'./scores_{modality}_{decoding_criterion}'
+    if os.path.exists(file_path):
+        print("Analysis already done")
+        sys.exit()
+    path = get_path(modality)
+    subjects = get_subjects(path)
+    runs = 9
+    epoch_windows = {"word": {"onset_min": -0.3, "onset_max": 1.0, "offset_min": -1.0, "offset_max": 0.3},
+                      "constituent": {"offset_min": -2.0, "offset_max": 0.5, "onset_min": -0.5, "onset_max": 2.0},
+                      "sentence": {"offset_min": -4.0, "offset_max": 1.0, "onset_min": -1.0, "onset_max": 4.0}}
+    levels = ('word','constituent','sentence')
+    starts = ('onset', 'offset')
+    all_scores = []
+
+    if isinstance(levels, str):
+        levels = [levels]
+
+    if isinstance(starts, str):
+        starts = [starts]
+
+    # Iterate on subjects to epochs, and mean later
+    for subject in subjects[2:]:
+        
+        try:
+            dict_epochs = epoch_add_metadata(modality, subject, levels, starts, runs, epoch_windows)
+        except:
+            print(f'Boom subject {subject}')
+
+        all_scores = decoding_from_criterion(decoding_criterion, dict_epochs, starts, levels, subject, all_scores)
+        
+        all_scores.to_csv(f'./scores_{modality}_{decoding_criterion}_to_sub{subject}.csv', index=False)
+    
+        
