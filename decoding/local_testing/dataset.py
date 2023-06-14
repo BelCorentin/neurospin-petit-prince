@@ -494,16 +494,19 @@ def analysis_subject(subject, modality, decoding_criterion):
         starts = [starts]
 
     # Iterate on subjects to epochs, and mean later
-        
+
     try:
         dict_epochs = epoch_add_metadata(modality, subject, levels, starts, runs, epoch_windows)
+
+        all_scores = decoding_from_criterion(decoding_criterion, dict_epochs, starts, levels, subject, all_scores)
+    
+        pd.DataFrame(all_scores).to_csv(f'./scores_{modality}_{decoding_criterion}_to_sub{subject}.csv', index=False)
+
+        return all_scores
     except:
         print(f'Boom subject {subject}')
+        return None
 
-    all_scores = decoding_from_criterion(decoding_criterion, dict_epochs, starts, levels, subject, all_scores)
-    
-    pd.DataFrame(all_scores).to_csv(f'./scores_{modality}_{decoding_criterion}_to_sub{subject}.csv', index=False)
 
-    return all_scores
 
         
