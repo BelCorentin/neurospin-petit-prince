@@ -17,7 +17,7 @@ import pandas as pd
 from pathlib import Path
 import os
 import subprocess
-from utils import match_list, add_syntax, add_new_syntax, mne_events
+from utils import match_list, add_syntax, add_new_syntax, mne_events, decoding_from_criterion
 import spacy
 
 nlp = spacy.load("fr_core_news_sm")
@@ -470,6 +470,6 @@ def analysis(modality, decoding_criterion):
 
         all_scores = decoding_from_criterion(decoding_criterion, dict_epochs, starts, levels, subject, all_scores)
         
-        all_scores.to_csv(f'./scores_{modality}_{decoding_criterion}_to_sub{subject}.csv', index=False)
+        pd.DataFrame(all_scores).to_csv(f'./scores_{modality}_{decoding_criterion}_to_sub{subject}.csv', index=False)
     
         
