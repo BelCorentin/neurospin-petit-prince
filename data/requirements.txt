@@ -1,15 +1,3 @@
-aiohttp==3.8.1
-aiosignal==1.2.0
-antlr4-python3-runtime==4.9.3
-anyio==3.6.1
-appdirs==1.4.4
-argon2-cffi==21.3.0
-argon2-cffi-bindings==21.2.0
-asttokens==2.0.8
-async-timeout==4.0.2
-attrs==22.1.0
-autoreject==0.4.dev0
-backcall==0.2.0
 beautifulsoup4==4.11.1
 bitarray==2.7.3
 bleach==5.0.1
@@ -32,8 +20,6 @@ dask==2022.9.0
 debugpy==1.6.3
 decorator==5.1.1
 defusedxml==0.7.1
-distributed==2022.9.0
-EDFlib-Python==1.0.6
 entrypoints==0.4
 et-xmlfile==1.1.0
 executing==1.1.0
@@ -44,7 +30,6 @@ fire==0.4.0
 fonttools==4.37.1
 fr-core-news-sm @ https://github.com/explosion/spacy-models/releases/download/fr_core_news_sm-3.4.0/fr_core_news_sm-3.4.0-py3-none-any.whl
 frozenlist==1.3.1
-fsspec==2022.8.2
 ftfy==6.1.1
 future==0.18.2
 gevent==21.12.0
@@ -84,8 +69,6 @@ MarkupSafe==2.1.1
 matplotlib==3.5.3
 matplotlib-inline==0.1.6
 mistune==2.0.4
-mne==1.2.dev0
-mne-bids==0.11.dev0
 mpmath==1.3.0
 msgpack==1.0.4
 multidict==6.0.2
