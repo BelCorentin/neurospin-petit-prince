@@ -19,6 +19,7 @@ import os
 import subprocess
 from utils import match_list, add_syntax, add_new_syntax, mne_events, decoding_from_criterion
 import spacy
+import sys
 
 nlp = spacy.load("fr_core_news_sm")
 
@@ -471,5 +472,38 @@ def analysis(modality, decoding_criterion):
         all_scores = decoding_from_criterion(decoding_criterion, dict_epochs, starts, levels, subject, all_scores)
         
         pd.DataFrame(all_scores).to_csv(f'./scores_{modality}_{decoding_criterion}_to_sub{subject}.csv', index=False)
+      
+
+def analysis_subject(subject, modality, decoding_criterion):
+    file_path = f'./scores_{modality}_{decoding_criterion}_sub{subject}.csv'
+    if os.path.exists(file_path):
+        print("Analysis already done")
+        sys.exit()
+    runs = 9
+    epoch_windows = {"word": {"onset_min": -0.3, "onset_max": 1.0, "offset_min": -1.0, "offset_max": 0.3},
+                      "constituent": {"offset_min": -2.0, "offset_max": 0.5, "onset_min": -0.5, "onset_max": 2.0},
+                      "sentence": {"offset_min": -4.0, "offset_max": 1.0, "onset_min": -1.0, "onset_max": 4.0}}
+    levels = ('word', 'constituent', 'sentence')
+    starts = ('onset', 'offset')
+    all_scores = []
+
+    if isinstance(levels, str):
+        levels = [levels]
+
+    if isinstance(starts, str):
+        starts = [starts]
+
+    # Iterate on subjects to epochs, and mean later
+        
+    try:
+        dict_epochs = epoch_add_metadata(modality, subject, levels, starts, runs, epoch_windows)
+    except:
+        print(f'Boom subject {subject}')
+
+    all_scores = decoding_from_criterion(decoding_criterion, dict_epochs, starts, levels, subject, all_scores)
     
+    pd.DataFrame(all_scores).to_csv(f'./scores_{modality}_{decoding_criterion}_to_sub{subject}.csv', index=False)
+
+    return all_scores
+
         
