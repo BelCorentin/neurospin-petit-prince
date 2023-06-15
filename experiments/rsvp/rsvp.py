@@ -30,8 +30,8 @@ expyriment.control.defaults.window_mode = False
 VERSION = 2
 
 # Triggers
-port_address_output = "/dev/parport1"
-port1 = io.ParallelPort(port_address_output)
+# port_address_output = "/dev/parport1"
+# port1 = io.ParallelPort(port_address_output)
 
 # Const
 TEXT_FONT = "Inconsolata.ttf"
@@ -102,7 +102,7 @@ CHAPTER = args.chapter[0]
 if VERSION == 1:
     csv_file = f"./../formatting/v1/run{CHAPTER}_v1_word_0.3_end_sentence_0.2.tsv"
 else:
-    csv_file = f"./../formatting/v2/run{CHAPTER}run1_v1_word_0.25_0.5.tsv"
+    csv_file = f"./../formatting/v2/run{CHAPTER}_v2_0.25_0.5.tsv"
 # stimlist = pd.read_csv(args.csv_files[0][0], sep="\t", quoting=True, quotechar="*")
 stimlist = pd.read_csv(csv_file, sep="\t", quoting=True, quotechar="*")
 
@@ -166,14 +166,14 @@ events.put((end_bs * SPEED, "", bs))
 expyriment.control.start(subject_id=0)
 
 # init triggers
-port1.send(data=0)
+# port1.send(data=0)
 
 
 a = Clock()
 
 # Initialize
 
-port1.send(data=CHAPTER)
+# port1.send(data=CHAPTER)
 
 while not events.empty():
     onset, text, stim = events.get()
@@ -183,7 +183,7 @@ while not events.empty():
         k = kb.check()
         if k is not None:
             exp.data.add([a.time, "keypressed,{}".format(k)])
-    port1.send(data=value_trigger)
+    # port1.send(data=value_trigger)
     stim.present()
     if value_trigger == 0:
         photodiode.present()
