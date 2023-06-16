@@ -1,4 +1,3 @@
-
 """
 
 DATASET related functions
@@ -13,11 +12,18 @@ import mne_bids
 # ML/Data
 import numpy as np
 import pandas as pd
+
 # Tools
 from pathlib import Path
 import os
 import subprocess
-from utils import match_list, add_syntax, add_new_syntax, mne_events, decoding_from_criterion
+from utils import (
+    match_list,
+    add_syntax,
+    add_new_syntax,
+    mne_events,
+    decoding_from_criterion,
+)
 import spacy
 import sys
 
@@ -94,9 +100,9 @@ def read_raw(subject, run_id, events_return=False, modality="visual"):
     meta.word = meta.word.str.replace('"', "")
 
     # Two cases for match list: is it auditory or visual ?
-    if modality == 'auditory':
+    if modality == "auditory":
         word_events = events[events[:, 2] > 1]
-        meg_delta = np.round(np.diff(word_events[:, 0]/raw.info['sfreq']))
+        meg_delta = np.round(np.diff(word_events[:, 0] / raw.info["sfreq"]))
         meta_delta = np.round(np.diff(meta.onset.values))
         i, j = match_list(meg_delta, meta_delta)
         assert len(i) > 1
@@ -104,7 +110,7 @@ def read_raw(subject, run_id, events_return=False, modality="visual"):
 
     # For auditory, we match on the time difference between triggers
     elif modality == "visual":
-        # For visual, we match on the difference of word length 
+        # For visual, we match on the difference of word length
         # encoded in the triggers
         # Here, events are the presented stimuli: with hyphens.
         # Have to make sure meta.word still contains the hyphens.
@@ -147,8 +153,10 @@ def get_path(name="visual"):
         # TASK = "listen"
         data = data / "LPP_MEG_fMRI"
     else:
-        print(f"{name} is an invalid name. \n\
-        Current options: visual and auditory, fmri")
+        print(
+            f"{name} is an invalid name. \n\
+        Current options: visual and auditory, fmri"
+        )
 
     return data
 
@@ -200,9 +208,9 @@ def add_embeddings(meta, run, level):
 
     # Handle the simple case of words embeddings
 
-    if level == 'word':
+    if level == "word":
         embeddings = meta.word.apply(lambda word: nlp(word).vector).values
-        meta['embeds_word'] = embeddings
+        meta["embeds_word"] = embeddings
 
         return meta
     # Parse the metadata into constituents / sentences,
@@ -214,18 +222,18 @@ def add_embeddings(meta, run, level):
     for index, row in meta.iterrows():
 
         # Append word to current sentence
-        current_sentence.append(row['word'])
+        current_sentence.append(row["word"])
 
         # Check if end of sentence
-        if level == 'sentence' and row['is_last_word']:
+        if level == "sentence" and row["is_last_word"]:
             # Join words into sentence string and append to list
-            sentences.append(' '.join(current_sentence))
+            sentences.append(" ".join(current_sentence))
             # Reset current sentence
             current_sentence = []
 
-        if level == 'constituent' and row['const_end']:
+        if level == "constituent" and row["const_end"]:
             # Join words into sentence string and append to list
-            sentences.append(' '.join(current_sentence))
+            sentences.append(" ".join(current_sentence))
             # Reset current sentence
             current_sentence = []
 
@@ -235,16 +243,16 @@ def add_embeddings(meta, run, level):
         sentence_num = i + 1
 
         # Create file name
-        file_name = f'./embeds/txt/run{run}_{level}_{sentence_num}.txt'
+        file_name = f"./embeds/txt/run{run}_{level}_{sentence_num}.txt"
 
-        # Open text file 
-        with open(file_name, 'w') as f:
+        # Open text file
+        with open(file_name, "w") as f:
             # Write sentence to file
             f.write(sentence)
 
     # Run LASER using the run number
     # path = Path('/home/is153802/github/LASER/tasks/embed')
-    os.environ['LASER'] = '/home/is153802/github/LASER'
+    os.environ["LASER"] = "/home/is153802/github/LASER"
 
     for i, _ in enumerate(sentences):
         # Get sentence number
@@ -255,17 +263,24 @@ def add_embeddings(meta, run, level):
         if os.path.exists(emb_file):
             continue
         else:
-            subprocess.run(['/bin/bash', '/home/is153802/github/LASER/tasks/embed/embed.sh', txt_file, emb_file])
+            subprocess.run(
+                [
+                    "/bin/bash",
+                    "/home/is153802/github/LASER/tasks/embed/embed.sh",
+                    txt_file,
+                    emb_file,
+                ]
+            )
 
     # Get the embeddings from the generated txt file, and add them to metadata
     dim = 1024
     embeddings = {}
     for index, sentence in enumerate(sentences):
         embeds = np.fromfile(
-                f"{get_code_path()}/decoding/local_testing/embeds/emb/run{run}_{level}_{index+1}.bin",
-                dtype=np.float32,
-                count=-1,
-                )
+            f"{get_code_path()}/decoding/local_testing/embeds/emb/run{run}_{level}_{index+1}.bin",
+            dtype=np.float32,
+            count=-1,
+        )
         embeds.resize(embeds.shape[0] // dim, dim)
         embeds = embeds.reshape(-1)
         embeddings[index] = embeds
@@ -276,58 +291,60 @@ def add_embeddings(meta, run, level):
         try:
             embed_arrays.append(embeddings[sent_index])
         except KeyError:
-            embed_arrays.append(embeddings[sent_index-1])
+            embed_arrays.append(embeddings[sent_index - 1])
 
         # Check if end of sentence
-        if level == 'sentence' and row['is_last_word']:
+        if level == "sentence" and row["is_last_word"]:
             sent_index += 1
-        elif level == 'constituent' and row['const_end']:
+        elif level == "constituent" and row["const_end"]:
             sent_index += 1
-        else: 
+        else:
             sent_index = sent_index
 
-    meta[f'embeds_{level}'] = embed_arrays
+    meta[f"embeds_{level}"] = embed_arrays
 
     return meta
 
 
 def enrich_metadata(meta):
     """
-    Populate the metadata with information about onset, offset of 
+    Populate the metadata with information about onset, offset of
     different syntactic markers and categories
     """
-    meta['word_onset'] = True
-    meta['word_stop'] = meta.start + meta.duration
-    meta['sentence_onset'] = meta.word_id == 0
-    meta['prev_closing'] = meta['n_closing'].shift(1)
-    meta['constituent_onset'] = meta.apply(lambda x: x['prev_closing'] > x['n_closing'] and x['n_closing'] == 1, axis=1)
-    meta['constituent_onset'].fillna(False, inplace=True)
-    meta['const_end'] = meta.constituent_onset.shift(-1)
-    meta.drop('prev_closing', axis=1, inplace=True)
+    meta["word_onset"] = True
+    meta["word_stop"] = meta.start + meta.duration
+    meta["sentence_onset"] = meta.word_id == 0
+    meta["prev_closing"] = meta["n_closing"].shift(1)
+    meta["constituent_onset"] = meta.apply(
+        lambda x: x["prev_closing"] > x["n_closing"] and x["n_closing"] == 1, axis=1
+    )
+    meta["constituent_onset"].fillna(False, inplace=True)
+    meta["const_end"] = meta.constituent_onset.shift(-1)
+    meta.drop("prev_closing", axis=1, inplace=True)
 
     # Adding the sentence stop info
-    meta['sentence_id'] = np.cumsum(meta.sentence_onset)
-    for s, d in meta.groupby('sentence_id'):
-        meta.loc[d.index, 'sent_word_id'] = range(len(d))
-        meta.loc[d.index, 'sentence_start'] = d.start.min()
-        last_word_duration = meta.loc[d.index.max(), 'duration']
-        meta.loc[d.index, 'sentence_stop'] = d.start.max() + last_word_duration
+    meta["sentence_id"] = np.cumsum(meta.sentence_onset)
+    for s, d in meta.groupby("sentence_id"):
+        meta.loc[d.index, "sent_word_id"] = range(len(d))
+        meta.loc[d.index, "sentence_start"] = d.start.min()
+        last_word_duration = meta.loc[d.index.max(), "duration"]
+        meta.loc[d.index, "sentence_stop"] = d.start.max() + last_word_duration
 
-        # Adding the info for each word the information about the sentence / constituent 
+        # Adding the info for each word the information about the sentence / constituent
         # it is part of, in order to keep it when filtering on sentence / const later
-        meta.at[d.index[0], 'sentence_words'] = d.word.values
+        meta.at[d.index[0], "sentence_words"] = d.word.values
 
     # Adding the constituents stop info
-    meta['constituent_id'] = np.cumsum(meta.constituent_onset)
-    for s, d in meta.groupby('constituent_id'):
-        meta.loc[d.index, 'const_word_id'] = range(len(d))
-        meta.loc[d.index, 'constituent_start'] = d.start.min()
-        last_word_duration = meta.loc[d.index.max(), 'duration']
-        meta.loc[d.index, 'constituent_stop'] = d.start.max() + last_word_duration
+    meta["constituent_id"] = np.cumsum(meta.constituent_onset)
+    for s, d in meta.groupby("constituent_id"):
+        meta.loc[d.index, "const_word_id"] = range(len(d))
+        meta.loc[d.index, "constituent_start"] = d.start.min()
+        last_word_duration = meta.loc[d.index.max(), "duration"]
+        meta.loc[d.index, "constituent_stop"] = d.start.max() + last_word_duration
 
-        # Adding the info for each word the information about the sentence / constituent 
+        # Adding the info for each word the information about the sentence / constituent
         # it is part of, in order to keep it when filtering on sentence / const later
-        meta.at[d.index[0], 'constituent_words'] = d.word.values
+        meta.at[d.index[0], "constituent_words"] = d.word.values
 
     return meta
 
@@ -337,7 +354,7 @@ def select_meta_subset(meta, level):
     Select only the rows containing the True for the conditions
     Simplified to only get for the onset: sentence onset epochs, constituent onset epochs,etc
     """
-    sel = meta.query(f'{level}_onset==True')
+    sel = meta.query(f"{level}_onset==True")
     assert sel.shape[0] > 10
     return sel
 
@@ -349,14 +366,16 @@ def epoch_on_selection(raw, sel, start, level, epoch_windows):
     Epoching from the metadata having all onset events: if the start=Offset, the mne events
     Function will epoch on the offset of each level instead of the onset
     """
-    epochs = mne.Epochs(raw,
-                        **mne_events(sel, raw, start=start, level=level),
-                        decim=100,
-                        tmin=epoch_windows[f'{level}'][f'{start}_min'],
-                        tmax=epoch_windows[f'{level}'][f'{start}_max'],
-                        event_repeated='drop',
-                        preload=True,
-                        baseline=None)
+    epochs = mne.Epochs(
+        raw,
+        **mne_events(sel, raw, start=start, level=level),
+        decim=100,
+        tmin=epoch_windows[f"{level}"][f"{start}_min"],
+        tmax=epoch_windows[f"{level}"][f"{start}_max"],
+        event_repeated="drop",
+        preload=True,
+        baseline=None,
+    )
     return epochs
 
 
@@ -367,11 +386,11 @@ def apply_baseline(epochs, level):
 
     Returns epochs
     """
-    sent_starts = epochs['word_id==0'].apply_baseline((-.300, 0.))
+    sent_starts = epochs["word_id==0"].apply_baseline((-0.300, 0.0))
     sent_starts.average().plot()
 
-    sent_stops = epochs['is_last_word']
-    bsl = (epochs.times >= .300)*(epochs.times <= 0)
+    sent_stops = epochs["is_last_word"]
+    bsl = (epochs.times >= 0.300) * (epochs.times <= 0)
     baseline_starts = sent_starts.get_data()[:, :, bsl].mean(-2)
 
     sent_stop_data = sent_stops.get_data()
@@ -380,8 +399,7 @@ def apply_baseline(epochs, level):
     return epochs
 
 
-def epoch_add_metadata(modality, subject, levels, 
-                       starts, runs=9, epoch_windows={}):
+def epoch_add_metadata(modality, subject, levels, starts, runs=9, epoch_windows={}):
     """
     Takes as input subject number, modality, levels of epoching wanted (word, sentence, constituent)
     and starts (onset, offset) as well as the number of total runs (for debugging).
@@ -397,13 +415,14 @@ def epoch_add_metadata(modality, subject, levels,
     # Initialization of the dictionary
     for start in starts:
         for level in levels:
-            epoch_key = f'{level}_{start}'
+            epoch_key = f"{level}_{start}"
             dict_epochs[epoch_key] = []
 
     # Iterating on runs, building the metadata and re-epoching
-    for run in range(1, runs+1):
-        raw, meta_, events = read_raw(subject, run,
-                                      events_return=True, modality=modality)
+    for run in range(1, runs + 1):
+        raw, meta_, events = read_raw(
+            subject, run, events_return=True, modality=modality
+        )
         meta = meta_.copy()
 
         # Add information about constituents onsets, offsets, etc..
@@ -416,17 +435,16 @@ def epoch_add_metadata(modality, subject, levels,
 
                 # Add the embeddings to the metadata limited to the level
                 meta = add_embeddings(meta, run, level)
-                epochs = epoch_on_selection(raw, sel, start,
-                                            level, epoch_windows)
-                epoch_key = f'{level}_{start}'
+                epochs = epoch_on_selection(raw, sel, start, level, epoch_windows)
+                epoch_key = f"{level}_{start}"
 
                 dict_epochs[epoch_key].append(epochs)
 
     # Once we have the dict of epochs per condition full (epoching for each run for a subject)
-    # we can concatenate them, and fix the dev_head         
-    for start_ in starts: 
+    # we can concatenate them, and fix the dev_head
+    for start_ in starts:
         for level_ in levels:
-            epoch_key = f'{level_}_{start_}'
+            epoch_key = f"{level_}_{start_}"
             all_epochs_chosen = dict_epochs[epoch_key]
             # Concatenate epochs
             if len(all_epochs_chosen) == 1:
@@ -441,50 +459,45 @@ def epoch_add_metadata(modality, subject, levels,
 
 
 def analysis(modality, decoding_criterion):
-    file_path = f'./scores_{modality}_{decoding_criterion}'
-    if os.path.exists(file_path):
-        print("Analysis already done")
-        sys.exit()
     path = get_path(modality)
     subjects = get_subjects(path)
-    runs = 9
-    epoch_windows = {"word": {"onset_min": -0.3, "onset_max": 1.0, "offset_min": -1.0, "offset_max": 0.3},
-                      "constituent": {"offset_min": -2.0, "offset_max": 0.5, "onset_min": -0.5, "onset_max": 2.0},
-                      "sentence": {"offset_min": -4.0, "offset_max": 1.0, "onset_min": -1.0, "onset_max": 4.0}}
-    levels = ('word','constituent','sentence')
-    starts = ('onset', 'offset')
     all_scores = []
-
-    if isinstance(levels, str):
-        levels = [levels]
-
-    if isinstance(starts, str):
-        starts = [starts]
-
-    # Iterate on subjects to epochs, and mean later
     for subject in subjects[2:]:
-        
-        try:
-            dict_epochs = epoch_add_metadata(modality, subject, levels, starts, runs, epoch_windows)
-        except:
-            print(f'Boom subject {subject}')
+        scores = analysis_subject(subject, modality, decoding_criterion)
+        all_scores.append(scores)
 
-        all_scores = decoding_from_criterion(decoding_criterion, dict_epochs, starts, levels, subject, all_scores)
-        
-        pd.DataFrame(all_scores).to_csv(f'./scores_{modality}_{decoding_criterion}_to_sub{subject}.csv', index=False)
-      
+    file_path = f"./results/scores_{modality}_{decoding_criterion}_to_sub{subject}.csv"
+    pd.DataFrame(all_scores).to_csv(file_path, index=False)
+
 
 def analysis_subject(subject, modality, decoding_criterion):
-    file_path = f'./scores_{modality}_{decoding_criterion}_sub{subject}.csv'
+    file_path = f"./results/scores_{modality}_{decoding_criterion}_sub{subject}.csv"
     if os.path.exists(file_path):
         print("Analysis already done")
         sys.exit()
     runs = 9
-    epoch_windows = {"word": {"onset_min": -0.3, "onset_max": 1.0, "offset_min": -1.0, "offset_max": 0.3},
-                      "constituent": {"offset_min": -2.0, "offset_max": 0.5, "onset_min": -0.5, "onset_max": 2.0},
-                      "sentence": {"offset_min": -4.0, "offset_max": 1.0, "onset_min": -1.0, "onset_max": 4.0}}
-    levels = ('word', 'constituent', 'sentence')
-    starts = ('onset', 'offset')
+    epoch_windows = {
+        "word": {
+            "onset_min": -0.3,
+            "onset_max": 1.0,
+            "offset_min": -1.0,
+            "offset_max": 0.3,
+        },
+        "constituent": {
+            "offset_min": -2.0,
+            "offset_max": 0.5,
+            "onset_min": -0.5,
+            "onset_max": 2.0,
+        },
+        "sentence": {
+            "offset_min": -4.0,
+            "offset_max": 1.0,
+            "onset_min": -1.0,
+            "onset_max": 4.0,
+        },
+    }
+    levels = ("word", "constituent", "sentence")
+    starts = ("onset", "offset")
     all_scores = []
 
     if isinstance(levels, str):
@@ -496,17 +509,17 @@ def analysis_subject(subject, modality, decoding_criterion):
     # Iterate on subjects to epochs, and mean later
 
     try:
-        dict_epochs = epoch_add_metadata(modality, subject, levels, starts, runs, epoch_windows)
+        dict_epochs = epoch_add_metadata(
+            modality, subject, levels, starts, runs, epoch_windows
+        )
 
-        all_scores = decoding_from_criterion(decoding_criterion, dict_epochs, starts, levels, subject, all_scores)
-    
-        pd.DataFrame(all_scores).to_csv(f'./scores_{modality}_{decoding_criterion}_to_sub{subject}.csv', index=False)
+        all_scores = decoding_from_criterion(
+            decoding_criterion, dict_epochs, starts, levels, subject, all_scores
+        )
+
+        pd.DataFrame(all_scores).to_csv(file_path, index=False)
 
         return all_scores
     except:
-        print(f'Boom subject {subject}')
+        print(f"Boom subject {subject}")
         return None
-
-
-
-        
