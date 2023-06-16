@@ -27,6 +27,7 @@ from utils import (
 import spacy
 import sys
 import matplotlib.pyplot as plt
+
 nlp = spacy.load("fr_core_news_sm")
 
 # CONST:
@@ -354,6 +355,12 @@ def select_meta_subset(meta, level):
     Select only the rows containing the True for the conditions
     Simplified to only get for the onset: sentence onset epochs, constituent onset epochs,etc
     """
+
+    # In the case of sentences, it might be worth it to try to
+    # Only select longer sentences ?
+    # Like:
+    # if level == sentence:
+    # sel = meta.query(f'{level}_onset==True and len({levels}_words)>=5')
     sel = meta.query(f"{level}_onset==True")
     assert sel.shape[0] > 10
     return sel
