@@ -482,7 +482,23 @@ def analysis(modality, decoding_criterion):
     pd.DataFrame(all_scores).to_csv(file_path, index=False)
 
 
+def sanitize(levels, starts):
+    if isinstance(levels, str):
+        levels = [levels]
+
+    if isinstance(starts, str):
+        starts = [starts]
+    return levels, starts
+
+
 def analysis_subject(subject, modality, decoding_criterion):
+    """
+    Decode for the criterion the correlation score between predicted
+    and real criterion
+
+    Returns a dataframe containing the scores, as well as saving it under ./results
+
+    """
     file_path = f"./results/scores_{modality}_{decoding_criterion}_sub{subject}.csv"
     if os.path.exists(file_path):
         print("Analysis already done")
@@ -512,12 +528,7 @@ def analysis_subject(subject, modality, decoding_criterion):
         starts = ("onset", "offset")
         all_scores = []
 
-        if isinstance(levels, str):
-            levels = [levels]
-
-        if isinstance(starts, str):
-            starts = [starts]
-
+        levels, starts = sanitize(levels, starts)
         # Iterate on subjects to epochs, and mean later
 
         dict_epochs = epoch_add_metadata(
