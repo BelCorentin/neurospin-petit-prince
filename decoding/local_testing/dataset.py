@@ -80,7 +80,10 @@ def read_raw(subject, run_id, events_return=False, modality="visual"):
     meta = pd.read_csv(event_file, sep="\t")
     events = mne.find_events(raw, stim_channel="STI101", shortest_event=1)
 
-    # meta['word'] = meta['trial_type'].apply(lambda x: eval(x)['word'] if type(eval(x)) == dict else np.nan)
+    if modality == "auditory":
+        meta["word"] = meta["trial_type"].apply(
+            lambda x: eval(x)["word"] if type(eval(x)) == dict else np.nan
+        )
     # Initial wlength, as presented in the stimuli / triggers to match list
     meta["wlength"] = meta.word.apply(len)
     # Enriching the metadata with outside files:
@@ -515,21 +518,17 @@ def analysis_subject(subject, modality, decoding_criterion):
 
     # Iterate on subjects to epochs, and mean later
 
-    try:
-        dict_epochs = epoch_add_metadata(
-            modality, subject, levels, starts, runs, epoch_windows
-        )
+    dict_epochs = epoch_add_metadata(
+        modality, subject, levels, starts, runs, epoch_windows
+    )
 
-        all_scores = decoding_from_criterion(
-            decoding_criterion, dict_epochs, starts, levels, subject, all_scores
-        )
+    all_scores = decoding_from_criterion(
+        decoding_criterion, dict_epochs, starts, levels, subject, all_scores
+    )
 
-        pd.DataFrame(all_scores).to_csv(file_path, index=False)
+    pd.DataFrame(all_scores).to_csv(file_path, index=False)
 
-        return all_scores
-    except:
-        print(f"Boom subject {subject}")
-        return None
+    return all_scores
 
 
 def load_scores(modality, decoding_criterion):
