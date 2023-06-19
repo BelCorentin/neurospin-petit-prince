@@ -353,7 +353,7 @@ def enrich_metadata(meta):
     return meta
 
 
-def select_meta_subset(meta, level):
+def select_meta_subset(meta, level, decoding_criterion):
     """
     Select only the rows containing the True for the conditions
     Simplified to only get for the onset: sentence onset epochs, constituent onset epochs,etc
@@ -364,7 +364,12 @@ def select_meta_subset(meta, level):
     # Like:
     # if level == sentence:
     # sel = meta.query(f'{level}_onset==True and len({levels}_words)>=5')
-    sel = meta.query(f"{level}_onset==True")
+    if decoding_criterion == "embeddings_word_non_const_end":
+        sel = meta.query(f"{level}_onset==True and is_last_word==False")
+    elif decoding_criterion == "embeddings_word_const_end":
+        sel = meta.query(f"{level}_onset==True and is_last_word==True")
+    else:
+        sel = meta.query(f"{level}_onset==True")
     assert sel.shape[0] > 10
     return sel
 
@@ -409,7 +414,15 @@ def apply_baseline(epochs, level):
     return epochs
 
 
-def epoch_add_metadata(modality, subject, levels, starts, runs=9, epoch_windows={}):
+def epoch_add_metadata(
+    modality,
+    subject,
+    levels,
+    starts,
+    runs=9,
+    epoch_windows={},
+    decoding_criterion="embeddings",
+):
     """
     Takes as input subject number, modality, levels of epoching wanted (word, sentence, constituent)
     and starts (onset, offset) as well as the number of total runs (for debugging).
@@ -441,7 +454,7 @@ def epoch_add_metadata(modality, subject, levels, starts, runs=9, epoch_windows=
         for start in starts:
             for level in levels:
                 # Select the subset needed for the level (filter on sentence/constituent)
-                sel = select_meta_subset(meta, level)
+                sel = select_meta_subset(meta, level, decoding_criterion)
 
                 # Add the embeddings to the metadata limited to the level
                 meta = add_embeddings(meta, run, level)
@@ -524,15 +537,21 @@ def analysis_subject(subject, modality, decoding_criterion):
                 "onset_max": 4.0,
             },
         }
-        levels = ("word", "constituent", "sentence")
         starts = ("onset", "offset")
+        if decoding_criterion == "embeddings":
+            levels = ("word", "constituent", "sentence")
+        elif (
+            decoding_criterion == "embeddings_word_non_const_end"
+            or decoding_criterion == "embeddings_word_const_end"
+        ):
+            levels = "word"
         all_scores = []
 
         levels, starts = sanitize(levels, starts)
         # Iterate on subjects to epochs, and mean later
 
         dict_epochs = epoch_add_metadata(
-            modality, subject, levels, starts, runs, epoch_windows
+            modality, subject, levels, starts, runs, epoch_windows, decoding_criterion
         )
 
         all_scores = decoding_from_criterion(
