@@ -472,7 +472,9 @@ def analysis(modality, decoding_criterion):
     path = get_path(modality)
     subjects = get_subjects(path)
     all_scores = []
-    for subject in subjects[2:]:
+    if modality == "auditory":  # TO REDO BIDS AND FIX THIS
+        subjects = subjects[2:]
+    for subject in subjects:
         scores = analysis_subject(subject, modality, decoding_criterion)
         all_scores.append(scores)
 
@@ -484,51 +486,51 @@ def analysis_subject(subject, modality, decoding_criterion):
     file_path = f"./results/scores_{modality}_{decoding_criterion}_sub{subject}.csv"
     if os.path.exists(file_path):
         print("Analysis already done")
-        sys.exit()
-    runs = 9
-    epoch_windows = {
-        "word": {
-            "onset_min": -0.3,
-            "onset_max": 1.0,
-            "offset_min": -1.0,
-            "offset_max": 0.3,
-        },
-        "constituent": {
-            "offset_min": -2.0,
-            "offset_max": 0.5,
-            "onset_min": -0.5,
-            "onset_max": 2.0,
-        },
-        "sentence": {
-            "offset_min": -4.0,
-            "offset_max": 1.0,
-            "onset_min": -1.0,
-            "onset_max": 4.0,
-        },
-    }
-    levels = ("word", "constituent", "sentence")
-    starts = ("onset", "offset")
-    all_scores = []
+    else:
+        runs = 9
+        epoch_windows = {
+            "word": {
+                "onset_min": -0.3,
+                "onset_max": 1.0,
+                "offset_min": -1.0,
+                "offset_max": 0.3,
+            },
+            "constituent": {
+                "offset_min": -2.0,
+                "offset_max": 0.5,
+                "onset_min": -0.5,
+                "onset_max": 2.0,
+            },
+            "sentence": {
+                "offset_min": -4.0,
+                "offset_max": 1.0,
+                "onset_min": -1.0,
+                "onset_max": 4.0,
+            },
+        }
+        levels = ("word", "constituent", "sentence")
+        starts = ("onset", "offset")
+        all_scores = []
 
-    if isinstance(levels, str):
-        levels = [levels]
+        if isinstance(levels, str):
+            levels = [levels]
 
-    if isinstance(starts, str):
-        starts = [starts]
+        if isinstance(starts, str):
+            starts = [starts]
 
-    # Iterate on subjects to epochs, and mean later
+        # Iterate on subjects to epochs, and mean later
 
-    dict_epochs = epoch_add_metadata(
-        modality, subject, levels, starts, runs, epoch_windows
-    )
+        dict_epochs = epoch_add_metadata(
+            modality, subject, levels, starts, runs, epoch_windows
+        )
 
-    all_scores = decoding_from_criterion(
-        decoding_criterion, dict_epochs, starts, levels, subject, all_scores
-    )
+        all_scores = decoding_from_criterion(
+            decoding_criterion, dict_epochs, starts, levels, subject, all_scores
+        )
 
-    pd.DataFrame(all_scores).to_csv(file_path, index=False)
+        pd.DataFrame(all_scores).to_csv(file_path, index=False)
 
-    return all_scores
+        return all_scores
 
 
 def load_scores(modality, decoding_criterion):
