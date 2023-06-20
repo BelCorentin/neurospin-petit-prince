@@ -260,23 +260,25 @@ def add_embeddings(meta, run, level):
     # path = Path('/home/is153802/github/LASER/tasks/embed')
     os.environ["LASER"] = "/home/is153802/github/LASER"
 
-    for i, _ in enumerate(sentences):
-        # Get sentence number
-        sentence_num = i + 1
-        # TODO: change the location of the embeddings so it can run on Jean Zay
-        txt_file = f"/home/is153802/code/decoding/local_testing/embeds/txt/run{run}_{level}_{sentence_num}.txt"
-        emb_file = f"/home/is153802/code/decoding/local_testing/embeds/emb/run{run}_{level}_{sentence_num}.bin"
-        if os.path.exists(emb_file):
-            continue
-        else:
-            subprocess.run(
-                [
-                    "/bin/bash",
-                    "/home/is153802/github/LASER/tasks/embed/embed.sh",
-                    txt_file,
-                    emb_file,
-                ]
-            )
+    # Not supposed to be needed anymore, as the files have already been generated
+
+    # for i, _ in enumerate(sentences):
+    #     # Get sentence number
+    #     sentence_num = i + 1
+    #     # TODO: change the location of the embeddings so it can run on Jean Zay
+    #     txt_file = f"/home/is153802/code/decoding/local_testing/embeds/txt/run{run}_{level}_{sentence_num}.txt"
+    #     emb_file = f"/home/is153802/code/decoding/local_testing/embeds/emb/run{run}_{level}_{sentence_num}.bin"
+    #     if os.path.exists(emb_file):
+    #         continue
+    #     else:
+    #         subprocess.run(
+    #             [
+    #                 "/bin/bash",
+    #                 "/home/is153802/github/LASER/tasks/embed/embed.sh",
+    #                 txt_file,
+    #                 emb_file,
+    #             ]
+    #         )
 
     # Get the embeddings from the generated txt file, and add them to metadata
     dim = 1024
