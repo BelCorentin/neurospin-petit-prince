@@ -580,6 +580,48 @@ def load_scores(modality, decoding_criterion):
     return all
 
 
+def load_scores_debug(modality, decoding_criterion):
+    path = get_path(modality)
+    # subjects = get_subjects(path)
+    subjects = range(3, 17)
+    first_subject = subjects[0]
+    all_scores = pd.read_csv(
+        f"./results/scores_{modality}_{decoding_criterion}_sub{first_subject}.csv"
+    )
+    for subject in subjects[1:]:
+        file = f"./results/scores_{modality}_{decoding_criterion}_to_sub{subject}.csv"  # TO CHANGE
+        scores = pd.read_csv(file)
+        all_scores = pd.concat([all_scores, scores])
+
+    all = pd.DataFrame(all_scores)
+    return all
+
+
+def plot_scores_debug(modality, decoding_criterion):
+    levels = ("word", "constituent", "sentence")
+    starts = ("onset", "offset")
+    # For all subjects, there is a max:
+    all_scores = load_scores_debug(modality, decoding_criterion)
+
+    figure = plt.figure(figsize=(16, 10), dpi=80)
+    fig, axes = plt.subplots(3, 2)
+    for axes_, level in zip(axes, levels):
+        for ax, start in zip(axes_, starts):
+            cond1 = all_scores.level == f"{level}"
+            cond2 = all_scores.start == f"{start}"
+            data = all_scores[cond1 & cond2]
+            y = []
+            x = []
+            for s, t in data.groupby("t"):
+                score_avg = t.score.mean()
+                y.append(score_avg)
+                x.append(s)
+            ax.fill_between(x, y)
+            ax.set_title(f"{level} {start}")
+            ax.axhline(y=0, color="r", linestyle="-")
+    plt.suptitle(f"Decoding Performance for {decoding_criterion}")
+
+
 def plot_scores(modality, decoding_criterion):
     levels = ("word", "constituent", "sentence")
     starts = ("onset", "offset")

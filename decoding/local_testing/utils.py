@@ -373,7 +373,7 @@ def decoding_from_criterion(
                 embeddings = np.vstack(embeddings.values)
                 R_vec = decod_xy(X, embeddings)
                 scores = np.mean(R_vec, axis=1)
-            elif criterion == "emb_word":
+            elif criterion == "emb_word" or criterion.startswith('embeddings_words'):
                 nlp = spacy.load("fr_core_news_sm")
                 embeddings = epochs.metadata.word.apply(
                     lambda word: nlp(word).vector
