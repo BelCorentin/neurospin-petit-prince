@@ -2,6 +2,8 @@ import submitit
 import sys
 import argparse
 from dataset import analysis_subject, get_subjects, get_path
+import mne
+mne.set_log_level(verbose='error')
 
 
 def get_parser(args):
