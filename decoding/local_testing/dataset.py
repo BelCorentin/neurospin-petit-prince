@@ -398,23 +398,25 @@ def epoch_on_selection(raw, sel, start, level, epoch_windows):
     return epochs
 
 
-def apply_baseline(epochs, level):
+def apply_baseline(epochs, level, tmin=-.300, tmax=0):
     """
     TO BE FIXED AND ADDED LATER
     Apply a baseline to the object
 
     Returns epochs
+    
     """
-    sent_starts = epochs["word_id==0"].apply_baseline((-0.300, 0.0))
-    sent_starts.average().plot()
+    meta = epochs.metadata.copy()
+    LEVELS = dict(sentence='word_id', constituent='const_word_id')
 
-    sent_stops = epochs["is_last_word"]
-    bsl = (epochs.times >= 0.300) * (epochs.times <= 0)
-    baseline_starts = sent_starts.get_data()[:, :, bsl].mean(-2)
-
-    sent_stop_data = sent_stops.get_data()
-    n_sentences, n_channels, n_times = sent_stop_data.shape
-    sent_stop_data -= baseline_starts[:, :, None]
+    meta["level_uid"] = np.cumsum(epochs.metadata[LEVELS[level]] == 0)*-1
+    bsl_time = (epochs.times >= tmin) * (epochs.times <= tmax)
+    # For each sentence, baseline by the first word
+    for sid, df in epochs.metadata.groupby('sentence_uid'):
+        # Basline activity of the first word
+        bsl = epochs.data[df.index[0], :, bsl_time].mean(-2)
+        # Remove basline to all words in the sentence
+        epochs._data[df.index] -= bsl[None, :, None]
     return epochs
 
 
@@ -581,7 +583,8 @@ def load_scores(modality, decoding_criterion):
         all_scores = pd.concat([all_scores, scores])
 
     all = pd.DataFrame(all_scores)
-    return all
+    total_subjects = subject
+    return all, total_subjects
 
 
 def load_scores_debug(modality, decoding_criterion):
@@ -623,14 +626,19 @@ def plot_scores_debug(modality, decoding_criterion):
             ax.fill_between(x, y)
             ax.set_title(f"{level} {start}")
             ax.axhline(y=0, color="r", linestyle="-")
-    plt.suptitle(f"Decoding Performance for {decoding_criterion}")
+    plt.suptitle(f"Decoding Performance for {decoding_criterion} and {modality}")
 
 
 def plot_scores(modality, decoding_criterion):
+    """
+    Simple function to build a matplotlib fillbetween plot
+    of the decoding score on a window
+
+    """
     levels = ("word", "constituent", "sentence")
     starts = ("onset", "offset")
     # For all subjects, there is a max:
-    all_scores = load_scores(modality, decoding_criterion)
+    all_scores, total_subjects = load_scores(modality, decoding_criterion)
 
     figure = plt.figure(figsize=(16, 10), dpi=80)
     fig, axes = plt.subplots(3, 2)
@@ -648,4 +656,42 @@ def plot_scores(modality, decoding_criterion):
             ax.fill_between(x, y)
             ax.set_title(f"{level} {start}")
             ax.axhline(y=0, color="r", linestyle="-")
-    plt.suptitle(f"Decoding Performance for {decoding_criterion}")
+    plt.suptitle(f"Decoding Performance for {decoding_criterion} and {modality} for {total_subjects} subs")
+
+
+def check_plotting_possible():
+    """
+    This function gives an overview of the type of results file 
+    available, such that can be used to decide easily what to plot 
+    using the plot_scores function
+    """
+    path = '.'
+    file_types = []
+    for filename in os.listdir(os.path.join(path, 'results')):  
+        if filename.startswith("scores_"):
+            parts = filename.split("_")      
+            file_type = parts[1] 
+            # Check if second part is 'embeddings'      
+            if parts[2] == 'embeddings':  
+                file_types.append(file_type)
+            else:
+                # Get everything after file type until next '_'        
+                rest = "_".join(parts[2:])  
+                file_types.append(file_type + "_" + rest)         
+    return list(set(file_types))
+
+
+def subs_to_plot(modality, decoding_criterion):
+    """
+    This function calculates the amount of subjects for which we can do 
+    the plotting of their results
+    """
+    path = '.'
+    subs = []
+    for filename in os.listdir(os.path.join(path, 'results')):
+        if filename.startswith("scores_"):
+            subcategory = filename.split("_")[1].split("_sub")[0]
+            sub_number = filename.split("_")[1].split("_sub")[1].split(".")[0]
+            if subcategory == f'{modality}_{decoding_criterion}':
+                subs.append(sub_number)
+    return subs
