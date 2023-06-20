@@ -28,7 +28,8 @@ def main(args):
     criterion = args_class.criterion
     modality = args_class.modality
 
-    subjects = get_subjects(get_path(modality))
+    # subjects = get_subjects(get_path(modality))
+    subjects = ['3']
 
     executor.update_parameters(slurm_partition="cpu_p1",  # gpu_p2
                                nodes=NUM_NODES,
