@@ -9,8 +9,8 @@ mne.set_log_level(verbose='error')
 def get_parser(args):
     parser = argparse.ArgumentParser(description='Launch the LPP analysis')
 
-    parser.add_argument('--nb_cpu', type=int, default=10, help="cpus")
-    parser.add_argument('--nb_nodes', type=int, default=10, help="nb nodes")
+    parser.add_argument('--nb_cpu', type=int, default=1, help="cpus")
+    parser.add_argument('--nb_nodes', type=int, default=1, help="nb nodes")
     parser.add_argument('--criterion', type=str,
                         default="embeddings", help="embeddings / wlength")
     parser.add_argument('--modality', type=str,
@@ -44,7 +44,7 @@ def main(args):
 
             print('Decoding criterion chosen: ', criterion)
             print('Decoding modality chosen: ', modality)
-
+            print(f'Doing it for subject: {subject}')
             analysis_subject(subject, modality, criterion)
 
     task = Task()
@@ -55,7 +55,8 @@ def main(args):
             jobs.append(job)
     submitit.helpers.monitor_jobs(jobs)
     outputs = [job.result() for job in jobs]
-    print("Finished executing the post analysis")
+    print("Finished executing the analysis")
+    print(outputs)
 
 
 if __name__ == "__main__":
