@@ -120,7 +120,9 @@ def read_raw(subject, run_id, events_return=False, modality="visual"):
         # Have to make sure meta.word still contains the hyphens.
         # However, the meta.word might have lost the hyphens because
         # of the previous match when adding syntax.
-
+        # Handle the first two subjects:
+        if subject == '2':
+            events[:, 2] = events[:, 2] - 2048
         i, j = match_list(events[:, 2], meta.wlength)
         assert len(i) > (0.8 * len(events))
         assert (events[i, 2] == meta.loc[j].wlength).mean() > 0.95
@@ -589,7 +591,7 @@ def load_scores_debug(modality, decoding_criterion):
         f"./results/scores_{modality}_{decoding_criterion}_sub{first_subject}.csv"
     )
     for subject in subjects[1:]:
-        file = f"./results/scores_{modality}_{decoding_criterion}_to_sub{subject}.csv"  # TO CHANGE
+        file = f"./results/scores_{modality}_{decoding_criterion}_sub{subject}.csv"  # TO CHANGE
         scores = pd.read_csv(file)
         all_scores = pd.concat([all_scores, scores])
 
