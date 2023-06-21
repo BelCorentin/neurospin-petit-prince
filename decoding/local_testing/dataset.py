@@ -23,6 +23,7 @@ from utils import (
     add_new_syntax,
     mne_events,
     decoding_from_criterion,
+    get_embeddings
 )
 import spacy
 import sys
@@ -44,6 +45,10 @@ CHAPTERS = {
     9: "26-27",
 }
 
+
+EPOCH_WINDOWS = {"word": {"onset_min": -0.3, "onset_max": 1.0, "offset_min": -1.0, "offset_max": 0.3},
+                  "constituent": {"offset_min": -2.0, "offset_max": 0.5, "onset_min": -0.5, "onset_max": 2.0},
+                  "sentence": {"offset_min": -4.0, "offset_max": 1.0, "onset_min": -1.0, "onset_max": 4.0}}
 # FUNC
 
 
@@ -196,6 +201,7 @@ def get_subjects(path):
     subjects = [str(subj) for subj in int_subjects]
 
     return subjects
+
 
 
 def add_embeddings(meta, run, level):
@@ -378,7 +384,7 @@ def select_meta_subset(meta, level, decoding_criterion):
     return sel
 
 
-def epoch_on_selection(raw, sel, start, level, epoch_windows):
+def epoch_on_selection(raw, sel, start, level):
     """
     TODO: add adaptative baseline
 
@@ -389,8 +395,8 @@ def epoch_on_selection(raw, sel, start, level, epoch_windows):
         raw,
         **mne_events(sel, raw, start=start, level=level),
         decim=100,
-        tmin=epoch_windows[f"{level}"][f"{start}_min"],
-        tmax=epoch_windows[f"{level}"][f"{start}_max"],
+        tmin=EPOCH_WINDOWS[f"{level}"][f"{start}_min"],
+        tmax=EPOCH_WINDOWS[f"{level}"][f"{start}_max"],
         event_repeated="drop",
         preload=True,
         baseline=None,
@@ -400,10 +406,7 @@ def epoch_on_selection(raw, sel, start, level, epoch_windows):
 
 def apply_baseline(epochs, level, tmin=-.300, tmax=0):
     """
-    TO BE FIXED AND ADDED LATER
-    Apply a baseline to the object
-
-    Returns epochs
+    To be applied at the beginning of the preproc
     
     """
     meta = epochs.metadata.copy()
@@ -420,33 +423,24 @@ def apply_baseline(epochs, level, tmin=-.300, tmax=0):
     return epochs
 
 
-def epoch_add_metadata(
+def populate_metadata_epochs(    
     modality,
     subject,
-    levels,
-    starts,
+    level,
+    start,
     runs=9,
-    epoch_windows={},
     decoding_criterion="embeddings",
 ):
     """
-    Takes as input subject number, modality, levels of epoching wanted (word, sentence, constituent)
-    and starts (onset, offset) as well as the number of total runs (for debugging).
+    Takes as input subject number, modality, level of epoching wanted (word, sentence or constituent)
+    and start (onset or offset) as well as the number of total runs (for debugging).
 
     Returns:
 
-    A dict of epochs objects, concatenated on the key (levels x starts)
-
-    e.g: {'word_onset': <Epochs 10000 objects>, 'sentence_offset': <Epochs 1000 objects> ....}
+    An epochs object, for these particular parameters
     """
-    dict_epochs = dict()  # DICT containing epochs grouped by conditions (start x level)
 
-    # Initialization of the dictionary
-    for start in starts:
-        for level in levels:
-            epoch_key = f"{level}_{start}"
-            dict_epochs[epoch_key] = []
-
+    all_epochs = []
     # Iterating on runs, building the metadata and re-epoching
     for run in range(1, runs + 1):
         raw, meta_, events = read_raw(
@@ -457,60 +451,46 @@ def epoch_add_metadata(
         # Add information about constituents onsets, offsets, etc..
         meta = enrich_metadata(meta)
 
-        for start in starts:
-            for level in levels:
-                # Select the subset needed for the level (filter on sentence/constituent)
-                sel = select_meta_subset(meta, level, decoding_criterion)
+        # Select the subset needed for the level (filter on sentence/constituent)
+        sel = select_meta_subset(meta, level, decoding_criterion)
 
-                # Add the embeddings to the metadata limited to the level
-                meta = add_embeddings(meta, run, level)
-                epochs = epoch_on_selection(raw, sel, start, level, epoch_windows)
-                epoch_key = f"{level}_{start}"
+        # Add the embeddings to the metadata limited to the level
 
-                dict_epochs[epoch_key].append(epochs)
+        epochs = epoch_on_selection(raw, sel, start, level)
+
+        all_epochs.append(epochs)
 
     # Once we have the dict of epochs per condition full (epoching for each run for a subject)
     # we can concatenate them, and fix the dev_head
-    for start_ in starts:
-        for level_ in levels:
-            epoch_key = f"{level_}_{start_}"
-            all_epochs_chosen = dict_epochs[epoch_key]
-            # Concatenate epochs
-            if len(all_epochs_chosen) == 1:
-                # Handle the case where there is only one run
-                continue
-            for epo in all_epochs_chosen:
-                epo.info["dev_head_t"] = all_epochs_chosen[1].info["dev_head_t"]
 
-            dict_epochs[epoch_key] = mne.concatenate_epochs(all_epochs_chosen)
+    # Concatenate epochs
+    if len(all_epochs) != 1:
+        # Handle the case where there is only one run
+        for epo in all_epochs:
+            epo.info["dev_head_t"] = all_epochs[1].info["dev_head_t"]
+    else:
+        return all_epochs[0]
 
-    return dict_epochs
+    epochs = mne.concatenate_epochs(all_epochs)
+
+    return epochs
 
 
 def analysis(modality, decoding_criterion):
     path = get_path(modality)
     subjects = get_subjects(path)
     all_scores = []
-    if modality == "auditory":  # TO REDO BIDS AND FIX THIS
+    if modality == "auditory":  # TODO REDO BIDS AND FIX THIS
         subjects = subjects[2:]
     for subject in subjects:
         scores = analysis_subject(subject, modality, decoding_criterion)
         all_scores.append(scores)
 
-    file_path = f"./results/scores_{modality}_{decoding_criterion}_to_sub{subject}.csv"
+    file_path = f"./results/all_scores_{modality}_{decoding_criterion}.csv"
     pd.DataFrame(all_scores).to_csv(file_path, index=False)
 
 
-def sanitize(levels, starts):
-    if isinstance(levels, str):
-        levels = [levels]
-
-    if isinstance(starts, str):
-        starts = [starts]
-    return levels, starts
-
-
-def analysis_subject(subject, modality, decoding_criterion):
+def analysis_subject(subject, modality, start, level, decoding_criterion, runs=9):
     """
     Decode for the criterion the correlation score between predicted
     and real criterion
@@ -518,50 +498,17 @@ def analysis_subject(subject, modality, decoding_criterion):
     Returns a dataframe containing the scores, as well as saving it under ./results
 
     """
-    file_path = f"./results/scores_{modality}_{decoding_criterion}_sub{subject}.csv"
+    # TODO: redo all the file organizing
+    # Check if a file exists (analysis already done) before running it
+    file_path = f"./results/{modality}/{decoding_criterion}_{level}_{start}_sub{subject}.csv"
     if os.path.exists(file_path):
         print("Analysis already done")
+        return None
     else:
-        runs = 9
-        epoch_windows = {
-            "word": {
-                "onset_min": -0.3,
-                "onset_max": 1.0,
-                "offset_min": -1.0,
-                "offset_max": 0.3,
-            },
-            "constituent": {
-                "offset_min": -2.0,
-                "offset_max": 0.5,
-                "onset_min": -0.5,
-                "onset_max": 2.0,
-            },
-            "sentence": {
-                "offset_min": -4.0,
-                "offset_max": 1.0,
-                "onset_min": -1.0,
-                "onset_max": 4.0,
-            },
-        }
-        starts = ("onset", "offset")
-        if decoding_criterion == "embeddings":
-            levels = ("word", "constituent", "sentence")
-        elif (
-            decoding_criterion == "embeddings_word_non_const_end"
-            or decoding_criterion == "embeddings_word_const_end"
-        ):
-            levels = "word"
-        all_scores = []
-
-        levels, starts = sanitize(levels, starts)
-        # Iterate on subjects to epochs, and mean later
-
-        dict_epochs = epoch_add_metadata(
-            modality, subject, levels, starts, runs, epoch_windows, decoding_criterion
-        )
+        epochs = populate_metadata_epochs(modality, subject, level, start, runs=runs, decoding_criterion="embeddings")
 
         all_scores = decoding_from_criterion(
-            decoding_criterion, dict_epochs, starts, levels, subject, all_scores
+            decoding_criterion, epochs, start, level, subject
         )
 
         pd.DataFrame(all_scores).to_csv(file_path, index=False)

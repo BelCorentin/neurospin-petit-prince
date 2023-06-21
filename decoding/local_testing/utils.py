@@ -16,6 +16,8 @@ from sklearn.linear_model import RidgeCV
 from Levenshtein import editops
 import string
 import spacy
+from sentence_transformers import SentenceTransformer
+
 
 
 # CONST
@@ -334,8 +336,29 @@ def mne_events(meta, raw, start, level):
         return 0
 
 
+# TODO: add lru_cache
+def get_embeddings(list_of_strings):
+    model = SentenceTransformer('all-MiniLM-L6-v2')
+
+    embeddings = model.encode(list_of_strings)
+
+    return embeddings
+
+
+# def generate_embeddings(meta, level):
+#     # Group by sentence / constituent id:
+#     for string in 
+#     for level_id, df in meta.groupby(f'{level}_id'):
+        
+#         complete_string = ''
+#         bsl = epochs.data[df.index[0], :, bsl_time].mean(-2)
+#         # Remove basline to all words in the sentence
+#         epochs._data[df.index] -= bsl[None, :, None]
+#     return embeddings
+
+
 def decoding_from_criterion(
-    criterion, dict_epochs, starts, levels, subject, all_scores
+    criterion, epochs, start, level, subject
 ):
     """
     Input:
@@ -351,51 +374,46 @@ def decoding_from_criterion(
 
     """
 
-    all_evos = []
     all_scores = []
     # All epochs -> Decoding and generate evoked potentials
-    for start in starts:
-        for level in levels:
-            if criterion == "embeddings":
-                criterion = f"emb_{level}"
-            epoch_key = f"{level}_{start}"
-            epochs = dict_epochs[epoch_key]
-            # mean
-            evo = epochs.copy().pick_types(meg=True).average(method="median")
-            all_evos.append(dict(subject=subject, evo=evo, start=start, level=level))
+    if criterion == "embeddings":
+        criterion = f"emb_{level}"
 
-            # decoding word emb
-            epochs = epochs.load_data().pick_types(meg=True, stim=False, misc=False)
-            X = epochs.get_data()
+    # decoding word emb
+    epochs = epochs.load_data().pick_types(meg=True, stim=False, misc=False)
+    X = epochs.get_data()
 
-            if criterion == "emb_sentence" or criterion == "emb_constituent":
-                embeddings = epochs.metadata[f"embeds_{level}"]
-                embeddings = np.vstack(embeddings.values)
-                R_vec = decod_xy(X, embeddings)
-                scores = np.mean(R_vec, axis=1)
-            elif criterion == "emb_word" or criterion == 'embeddings_word_non_const_end' or criterion == 'embeddings_word_const_end':
-                nlp = spacy.load("fr_core_news_sm")
-                embeddings = epochs.metadata.word.apply(
-                    lambda word: nlp(word).vector
-                ).values
-                embeddings = np.array([emb for emb in embeddings])
-                R_vec = decod_xy(X, embeddings)
-                scores = np.mean(R_vec, axis=1)
-            elif criterion == "wlength":
-                y = epochs.metadata.wlength
-                R_vec = decod_xy(X, y)
-                scores = R_vec
+    if criterion == "emb_sentence" or criterion == "emb_constituent":
+        # Calculate embeddings here
+        # Like:
+        embeddings = generate_embeddings(epochs.metadata[f'{level}_words'], level)
+        embeddings = epochs.metadata[f"embeds_{level}"]
+        embeddings = np.vstack(embeddings.values)
+        R_vec = decod_xy(X, embeddings)
+        scores = np.mean(R_vec, axis=1)
+    # elif criterion == "emb_word" or criterion == 'embeddings_word_non_const_end' or criterion == 'embeddings_word_const_end':
+    elif criterion.__contains__('word'):
+        # Same, with get_embeddings
+        nlp = spacy.load("fr_core_news_sm")
+        embeddings = epochs.metadata.word.apply(
+            lambda word: nlp(word).vector
+        ).values
+        embeddings = np.array([emb for emb in embeddings])
+        R_vec = decod_xy(X, embeddings)
+        scores = np.mean(R_vec, axis=1)
+    elif criterion == "wlength":
+        y = epochs.metadata.wlength
+        R_vec = decod_xy(X, y)
+        scores = R_vec
 
-            for t, score in enumerate(scores):
-                all_scores.append(
-                    dict(
-                        subject=subject,
-                        score=score,
-                        start=start,
-                        level=level,
-                        t=epochs.times[t],
-                    )
-                )
+    for t, score in enumerate(scores):
+        all_scores.append(
+            dict(
+                subject=subject,
+                score=score,
+                t=epochs.times[t],
+            )
+        )
 
     return all_scores
 
