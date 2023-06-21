@@ -19,8 +19,8 @@ import os
 import subprocess
 from utils import (
     match_list,
-    add_syntax,
     add_new_syntax,
+    add_syntax,
     mne_events,
     decoding_from_criterion,
     get_embeddings
