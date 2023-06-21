@@ -18,7 +18,7 @@ import string
 import spacy
 from sentence_transformers import SentenceTransformer
 
-
+from functools import lru_cache
 
 # CONST
 
@@ -39,6 +39,13 @@ CHAPTERS = {
 
 
 def correlate(X, Y):
+    """
+    Calculates Pearson Correlation score between X and Y
+
+    Input: X, Y two (n, m) arrays
+
+    Returns: R, a (n) dimensional array
+    """
     if X.ndim == 1:
         X = np.array(X)[:, None]
     if Y.ndim == 1:
@@ -138,40 +145,12 @@ def get_syntax(file):
     for sent, d in synt.groupby("sequence_id"):
         for token in d.itertuples():
             for tok in token.word.split("'"):
-                out.append(dict(word=tok, n_closing=1, is_last_word=False, pos="XXX"))
+                out.append(dict(word=tok, n_closing=1,
+                                is_last_word=False, pos="XXX"))
             out[-1]["n_closing"] = token.n_closing
             out[-1]["is_last_word"] = token.is_last_word
             out[-1]["pos"] = token.pos
     return pd.DataFrame(out)
-
-
-def format_text_meta(text):
-    """
-    Simple function to make sure there is
-    no problematic characters
-    """
-    # I comment these lines as the new parsers handles it !
-    for char in "jlsmtncd":
-        text = text.replace(f"{char}'", char)
-
-    text = text.replace("œ", "oe")
-    return text.lower()
-
-
-def format_text_syntax(text):
-    """
-    Simple function to make sure there is
-    no problematic characters
-    """
-    # I comment these lines as the new parsers handles it !
-    # for char in "jlsmtncd":
-    #     text = text.replace(f"{char}'", char)
-    # Instead:
-    if text.strip(string.punctuation).eq(""):
-        return ""
-
-    text = df.replace("œ", "oe")
-    return text.lower()
 
 
 def format_text(text):
@@ -184,63 +163,6 @@ def format_text(text):
     text = text.replace("œ", "oe")
 
     return text.lower()
-
-
-def add_syntax(meta, syntax_path, run):
-    """
-    Use the get_syntax function to add it directly to
-    the metadata from the epochs
-    Basic problem with match list: new syntax has words like:
-    "j" "avais"
-    meta has:
-    "j'avais"
-
-    That means there is a limitation in terms of matching we can do:
-    Since what is presented is: "J'avais" but to parse the syntax, we need j + avais
-    We'll never get a perfect match.
-    Option chosen: keep only the second part (verb) and tag it as a VERB
-    When aligning it with brain signals
-    """
-    # get basic annotations
-    meta = meta.copy().reset_index(drop=True)
-
-    # get syntactic annotations
-    # syntax_file = syntax_path / f"ch{CHAPTERS[run]}.syntax.txt"
-    syntax_file = (
-        syntax_path / f"run{run}_v2_0.25_0.5-tokenized.syntax.txt"
-    )  # testing new syntax
-    synt = get_syntax(syntax_file)
-
-    # Clean the meta tokens to match synt tokens
-    meta_tokens = meta.word.fillna("XXXX").apply(format_text).values
-    # Get the word after the hyphen to match the synt tokens
-    meta_tokens = [stri.split("'")[1] if "'" in stri else stri for stri in meta.word]
-    # Remove the punctuation
-    translator = str.maketrans("", "", string.punctuation)
-    meta_tokens = [stri.translate(translator) for stri in meta_tokens]
-
-    # Handle synt tokens: they are split by hyphen
-    synt_tokens = synt.word.apply(format_text).values
-    # Remove the empty strings and ponct
-    # punctuation_chars = set(string.punctuation)
-    # synt_tokens = [
-    #     stri
-    #     for stri in synt_tokens
-    #     if stri.strip() != "" and not any(char in punctuation_chars for char in stri)
-    # ]
-
-    i, j = match_list(meta_tokens, synt_tokens)
-    assert (len(i) / len(meta_tokens)) > 0.8
-
-    for key, default_value in dict(n_closing=1, is_last_word=False, pos="XXX").items():
-        meta[key] = default_value
-        meta.loc[i, key] = synt.iloc[j][key].values
-
-    content_pos = ("NC", "ADJ", "ADV", "VINF", "VS", "VPP", "V")
-    meta["content_word"] = meta.pos.apply(
-        lambda pos: pos in content_pos if isinstance(pos, str) else False
-    )
-    return meta
 
 
 def add_new_syntax(meta, syntax_path, run):
@@ -282,7 +204,8 @@ def add_new_syntax(meta, syntax_path, run):
     i, j = match_list(meta_tokens, synt_tokens)
     assert (len(i) / len(meta_tokens)) > 0.95
 
-    for key, default_value in dict(n_closing=1, is_last_word=False, pos="XXX").items():
+    for key, default_value in dict(n_closing=1,
+                                   is_last_word=False, pos="XXX").items():
         meta[key] = default_value
         meta.loc[i, key] = synt.iloc[j][key].values
 
@@ -296,7 +219,8 @@ def add_new_syntax(meta, syntax_path, run):
 def decod_xy(X, y):
     assert len(X) == len(y)
     # define data
-    model = make_pipeline(StandardScaler(), RidgeCV(alphas=np.logspace(-3, 8, 10)))
+    model = make_pipeline(StandardScaler(),
+                          RidgeCV(alphas=np.logspace(-3, 8, 10)))
     cv = KFold(5, shuffle=True, random_state=0)
 
     # fit predict
@@ -337,6 +261,7 @@ def mne_events(meta, raw, start, level):
 
 
 # TODO: add lru_cache
+@lru_cache()
 def get_embeddings(list_of_strings):
     model = SentenceTransformer('all-MiniLM-L6-v2')
 
@@ -345,16 +270,13 @@ def get_embeddings(list_of_strings):
     return embeddings
 
 
-# def generate_embeddings(meta, level):
-#     # Group by sentence / constituent id:
-#     for string in 
-#     for level_id, df in meta.groupby(f'{level}_id'):
-        
-#         complete_string = ''
-#         bsl = epochs.data[df.index[0], :, bsl_time].mean(-2)
-#         # Remove basline to all words in the sentence
-#         epochs._data[df.index] -= bsl[None, :, None]
-#     return embeddings
+def generate_embeddings(meta, level):
+    all_embeddings = []
+    for level_id, df in meta.groupby(f'{level}_id'):
+        complete_string = ' '.join(df[f'{level}_words'].values[0])
+        embeddings = get_embeddings(complete_string)
+        all_embeddings.append(embeddings)
+    return all_embeddings
 
 
 def decoding_from_criterion(
@@ -362,8 +284,10 @@ def decoding_from_criterion(
 ):
     """
     Input:
-    - criterion: the criterion on which the decoding will be done (embeddings, wlength, w_freq, etc..)
-    - dict_epochs: the dictionnary containing the epochs for each condition (starts x levels)
+    - criterion: the criterion on which the decoding will
+    be done (embeddings, wlength, w_freq, etc..)
+    - dict_epochs: the dictionnary containing the epochs
+    for each condition (starts x levels)
     - starts: (onset, offset)
     - levels: (word, sentence, constituent)
 
@@ -380,19 +304,20 @@ def decoding_from_criterion(
         criterion = f"emb_{level}"
 
     # decoding word emb
-    epochs = epochs.load_data().pick_types(meg=True, stim=False, misc=False)
+    epochs = epochs.pick_types(meg=True, stim=False, misc=False).load_data()
     X = epochs.get_data()
 
     if criterion == "emb_sentence" or criterion == "emb_constituent":
+        print("Embeddings decoding")
         # Calculate embeddings here
         # Like:
-        embeddings = generate_embeddings(epochs.metadata[f'{level}_words'], level)
-        embeddings = epochs.metadata[f"embeds_{level}"]
-        embeddings = np.vstack(embeddings.values)
+        all_embeddings = generate_embeddings(epochs.metadata,
+                                             level)
+        embeddings = np.vstack(all_embeddings)
         R_vec = decod_xy(X, embeddings)
         scores = np.mean(R_vec, axis=1)
-    # elif criterion == "emb_word" or criterion == 'embeddings_word_non_const_end' or criterion == 'embeddings_word_const_end':
     elif criterion.__contains__('word'):
+        print("Word decoding")
         # Same, with get_embeddings
         nlp = spacy.load("fr_core_news_sm")
         embeddings = epochs.metadata.word.apply(
@@ -419,7 +344,7 @@ def decoding_from_criterion(
 
 
 def plot_scores(all_scores, levels, starts, decoding_criterion):
-    figure = plt.figure(figsize=(16, 10), dpi=80)
+    # figure = plt.figure(figsize=(16, 10), dpi=80)
     fig, axes = plt.subplots(3, 2)
     for axes_, level in zip(axes, levels):
         for ax, start in zip(axes_, starts):

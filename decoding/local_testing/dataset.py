@@ -203,123 +203,6 @@ def get_subjects(path):
     return subjects
 
 
-
-def add_embeddings(meta, run, level):
-
-    """
-    Function made to generate laser embeddings, store them,
-    and add them to the metadata
-
-    Does so for both constituent embeddings, and sentence ones
-
-    Handles word embeddings as well
-
-    Testing options can be run to try to isolate embeddings
-    and make simpler predictions
-    """
-
-    # Handle the simple case of words embeddings
-
-    if level == "word":
-        embeddings = meta.word.apply(lambda word: nlp(word).vector).values
-        meta["embeds_word"] = embeddings
-
-        return meta
-    # Parse the metadata into constituents / sentences,
-    # and generate txt files for each constituents / sentence
-    # So that it can be parsed by LASER
-    sentences = []
-    current_sentence = []
-
-    for index, row in meta.iterrows():
-
-        # Append word to current sentence
-        current_sentence.append(row["word"])
-
-        # Check if end of sentence
-        if level == "sentence" and row["is_last_word"]:
-            # Join words into sentence string and append to list
-            sentences.append(" ".join(current_sentence))
-            # Reset current sentence
-            current_sentence = []
-
-        if level == "constituent" and row["const_end"]:
-            # Join words into sentence string and append to list
-            sentences.append(" ".join(current_sentence))
-            # Reset current sentence
-            current_sentence = []
-
-    # Loop through sentences
-    for i, sentence in enumerate(sentences):
-        # Get sentence number
-        sentence_num = i + 1
-
-        # Create file name
-        file_name = f"./embeds/txt/run{run}_{level}_{sentence_num}.txt"
-
-        # Open text file
-        with open(file_name, "w") as f:
-            # Write sentence to file
-            f.write(sentence)
-
-    # Run LASER using the run number
-    # path = Path('/home/is153802/github/LASER/tasks/embed')
-    os.environ["LASER"] = "/home/is153802/github/LASER"
-
-    # Not supposed to be needed anymore, as the files have already been generated
-
-    # for i, _ in enumerate(sentences):
-    #     # Get sentence number
-    #     sentence_num = i + 1
-    #     # TODO: change the location of the embeddings so it can run on Jean Zay
-    #     txt_file = f"/home/is153802/code/decoding/local_testing/embeds/txt/run{run}_{level}_{sentence_num}.txt"
-    #     emb_file = f"/home/is153802/code/decoding/local_testing/embeds/emb/run{run}_{level}_{sentence_num}.bin"
-    #     if os.path.exists(emb_file):
-    #         continue
-    #     else:
-    #         subprocess.run(
-    #             [
-    #                 "/bin/bash",
-    #                 "/home/is153802/github/LASER/tasks/embed/embed.sh",
-    #                 txt_file,
-    #                 emb_file,
-    #             ]
-    #         )
-
-    # Get the embeddings from the generated txt file, and add them to metadata
-    dim = 1024
-    embeddings = {}
-    for index, sentence in enumerate(sentences):
-        embeds = np.fromfile(
-            f"{get_code_path()}/decoding/local_testing/embeds/emb/run{run}_{level}_{index+1}.bin",
-            dtype=np.float32,
-            count=-1,
-        )
-        embeds.resize(embeds.shape[0] // dim, dim)
-        embeds = embeds.reshape(-1)
-        embeddings[index] = embeds
-    sent_index = 0
-    embed_arrays = []
-
-    for index, row in meta.iterrows():
-        try:
-            embed_arrays.append(embeddings[sent_index])
-        except KeyError:
-            embed_arrays.append(embeddings[sent_index - 1])
-
-        # Check if end of sentence
-        if level == "sentence" and row["is_last_word"]:
-            sent_index += 1
-        elif level == "constituent" and row["const_end"]:
-            sent_index += 1
-        else:
-            sent_index = sent_index
-
-    meta[f"embeds_{level}"] = embed_arrays
-
-    return meta
-
-
 def enrich_metadata(meta):
     """
     Populate the metadata with information about onset, offset of
@@ -498,14 +381,12 @@ def analysis_subject(subject, modality, start, level, decoding_criterion, runs=9
     Returns a dataframe containing the scores, as well as saving it under ./results
 
     """
-    # TODO: redo all the file organizing
-    # Check if a file exists (analysis already done) before running it
     file_path = f"./results/{modality}/{decoding_criterion}_{level}_{start}_sub{subject}.csv"
     if os.path.exists(file_path):
         print("Analysis already done")
         return None
     else:
-        epochs = populate_metadata_epochs(modality, subject, level, start, runs=runs, decoding_criterion="embeddings")
+        epochs = populate_metadata_epochs(modality, subject, level, start, runs=runs, decoding_criterion=decoding_criterion)
 
         all_scores = decoding_from_criterion(
             decoding_criterion, epochs, start, level, subject
@@ -516,129 +397,134 @@ def analysis_subject(subject, modality, start, level, decoding_criterion, runs=9
         return all_scores
 
 
-def load_scores(modality, decoding_criterion):
-    path = get_path(modality)
-    # subjects = get_subjects(path)
-    subjects = range(3, 38)
-    first_subject = subjects[0]
-    all_scores = pd.read_csv(
-        f"./results/scores_{modality}_{decoding_criterion}_to_sub{first_subject}.csv"
-    )
-    for subject in subjects[1:]:
-        file = f"./results/scores_{modality}_{decoding_criterion}_to_sub{subject}.csv"  # TO CHANGE
-        scores = pd.read_csv(file)
-        all_scores = pd.concat([all_scores, scores])
-
-    all = pd.DataFrame(all_scores)
-    total_subjects = subject
-    return all, total_subjects
+def load_scores(subject, level, start, decoding_criterion, modality):
+    file = f"./results/{modality}/{decoding_criterion}_{level}_{start}_sub{subject}.csv"
+    scores = pd.read_csv(file)
+    return scores
 
 
-def load_scores_debug(modality, decoding_criterion):
-    path = get_path(modality)
-    # subjects = get_subjects(path)
-    subjects = range(3, 17)
-    first_subject = subjects[0]
-    all_scores = pd.read_csv(
-        f"./results/scores_{modality}_{decoding_criterion}_sub{first_subject}.csv"
-    )
-    for subject in subjects[1:]:
-        file = f"./results/scores_{modality}_{decoding_criterion}_sub{subject}.csv"  # TO CHANGE
-        scores = pd.read_csv(file)
-        all_scores = pd.concat([all_scores, scores])
-
-    all = pd.DataFrame(all_scores)
-    return all
+def unique_plot(subject, level, start, decoding_criterion, modality):
+    data = load_scores(subject, level, start, decoding_criterion, modality)
+    y = []
+    x = []
+    for s, t in data.groupby("t"):
+        score_avg = t.score.mean()
+        y.append(score_avg)
+        x.append(s)
+    plt.plot(x, y)
+    plt.set_title(f"{level} {start}")
+    plt.axhline(y=0, color="r", linestyle="-")
+    plt.suptitle(f"Decoding Performance for {decoding_criterion} and \
+                 {modality} for sub-{subject}, epoched on {level} {start}")
 
 
-def plot_scores_debug(modality, decoding_criterion):
-    levels = ("word", "constituent", "sentence")
-    starts = ("onset", "offset")
-    # For all subjects, there is a max:
-    all_scores = load_scores_debug(modality, decoding_criterion)
+# # OLD AND NOT WORKING ANYMORE
 
-    figure = plt.figure(figsize=(16, 10), dpi=80)
-    fig, axes = plt.subplots(3, 2)
-    for axes_, level in zip(axes, levels):
-        for ax, start in zip(axes_, starts):
-            cond1 = all_scores.level == f"{level}"
-            cond2 = all_scores.start == f"{start}"
-            data = all_scores[cond1 & cond2]
-            y = []
-            x = []
-            for s, t in data.groupby("t"):
-                score_avg = t.score.mean()
-                y.append(score_avg)
-                x.append(s)
-            ax.fill_between(x, y)
-            ax.set_title(f"{level} {start}")
-            ax.axhline(y=0, color="r", linestyle="-")
-    plt.suptitle(f"Decoding Performance for {decoding_criterion} and {modality}")
+# def load_scores_debug(modality, decoding_criterion):
+#     # subjects = get_subjects(path)
+#     subjects = range(3, 17)
+#     first_subject = subjects[0]
+#     all_scores = pd.read_csv(
+#         f"./results/scores_{modality}_{decoding_criterion}_sub{first_subject}.csv"
+#     )
+#     for subject in subjects[1:]:
+#         file = f"./results/scores_{modality}_{decoding_criterion}_sub{subject}.csv"  # TO CHANGE
+#         scores = pd.read_csv(file)
+#         all_scores = pd.concat([all_scores, scores])
+
+#     all = pd.DataFrame(all_scores)
+#     return all
 
 
-def plot_scores(modality, decoding_criterion):
-    """
-    Simple function to build a matplotlib fillbetween plot
-    of the decoding score on a window
+# def plot_scores_debug(modality, decoding_criterion):
+#     levels = ("word", "constituent", "sentence")
+#     starts = ("onset", "offset")
+#     # For all subjects, there is a max:
+#     all_scores = load_scores_debug(modality, decoding_criterion)
 
-    """
-    levels = ("word", "constituent", "sentence")
-    starts = ("onset", "offset")
-    # For all subjects, there is a max:
-    all_scores, total_subjects = load_scores(modality, decoding_criterion)
-
-    figure = plt.figure(figsize=(16, 10), dpi=80)
-    fig, axes = plt.subplots(3, 2)
-    for axes_, level in zip(axes, levels):
-        for ax, start in zip(axes_, starts):
-            cond1 = all_scores.level == f"{level}"
-            cond2 = all_scores.start == f"{start}"
-            data = all_scores[cond1 & cond2]
-            y = []
-            x = []
-            for s, t in data.groupby("t"):
-                score_avg = t.score.mean()
-                y.append(score_avg)
-                x.append(s)
-            ax.fill_between(x, y)
-            ax.set_title(f"{level} {start}")
-            ax.axhline(y=0, color="r", linestyle="-")
-    plt.suptitle(f"Decoding Performance for {decoding_criterion} and {modality} for {total_subjects} subs")
+#     figure = plt.figure(figsize=(16, 10), dpi=80)
+#     fig, axes = plt.subplots(3, 2)
+#     for axes_, level in zip(axes, levels):
+#         for ax, start in zip(axes_, starts):
+#             cond1 = all_scores.level == f"{level}"
+#             cond2 = all_scores.start == f"{start}"
+#             data = all_scores[cond1 & cond2]
+#             y = []
+#             x = []
+#             for s, t in data.groupby("t"):
+#                 score_avg = t.score.mean()
+#                 y.append(score_avg)
+#                 x.append(s)
+#             ax.fill_between(x, y)
+#             ax.set_title(f"{level} {start}")
+#             ax.axhline(y=0, color="r", linestyle="-")
+#     plt.suptitle(f"Decoding Performance for {decoding_criterion} and {modality}")
 
 
-def check_plotting_possible():
-    """
-    This function gives an overview of the type of results file 
-    available, such that can be used to decide easily what to plot 
-    using the plot_scores function
-    """
-    path = '.'
-    file_types = []
-    for filename in os.listdir(os.path.join(path, 'results')):  
-        if filename.startswith("scores_"):
-            parts = filename.split("_")      
-            file_type = parts[1] 
-            # Check if second part is 'embeddings'      
-            if parts[2] == 'embeddings':  
-                file_types.append(file_type)
-            else:
-                # Get everything after file type until next '_'        
-                rest = "_".join(parts[2:])  
-                file_types.append(file_type + "_" + rest)         
-    return list(set(file_types))
+# def plot_scores(modality, decoding_criterion):
+#     """
+#     Simple function to build a matplotlib fillbetween plot
+#     of the decoding score on a window
+
+#     """
+#     levels = ("word", "constituent", "sentence")
+#     starts = ("onset", "offset")
+#     # For all subjects, there is a max:
+#     all_scores, total_subjects = load_scores(modality, decoding_criterion)
+
+#     figure = plt.figure(figsize=(16, 10), dpi=80)
+#     fig, axes = plt.subplots(3, 2)
+#     for axes_, level in zip(axes, levels):
+#         for ax, start in zip(axes_, starts):
+#             cond1 = all_scores.level == f"{level}"
+#             cond2 = all_scores.start == f"{start}"
+#             data = all_scores[cond1 & cond2]
+#             y = []
+#             x = []
+#             for s, t in data.groupby("t"):
+#                 score_avg = t.score.mean()
+#                 y.append(score_avg)
+#                 x.append(s)
+#             ax.fill_between(x, y)
+#             ax.set_title(f"{level} {start}")
+#             ax.axhline(y=0, color="r", linestyle="-")
+#     plt.suptitle(f"Decoding Performance for {decoding_criterion} and {modality} for {total_subjects} subs")
 
 
-def subs_to_plot(modality, decoding_criterion):
-    """
-    This function calculates the amount of subjects for which we can do 
-    the plotting of their results
-    """
-    path = '.'
-    subs = []
-    for filename in os.listdir(os.path.join(path, 'results')):
-        if filename.startswith("scores_"):
-            subcategory = filename.split("_")[1].split("_sub")[0]
-            sub_number = filename.split("_")[1].split("_sub")[1].split(".")[0]
-            if subcategory == f'{modality}_{decoding_criterion}':
-                subs.append(sub_number)
-    return subs
+# def check_plotting_possible():
+#     """
+#     This function gives an overview of the type of results file 
+#     available, such that can be used to decide easily what to plot 
+#     using the plot_scores function
+#     """
+#     path = '.'
+#     file_types = []
+#     for filename in os.listdir(os.path.join(path, 'results')):  
+#         if filename.startswith("scores_"):
+#             parts = filename.split("_")      
+#             file_type = parts[1] 
+#             # Check if second part is 'embeddings'      
+#             if parts[2] == 'embeddings':  
+#                 file_types.append(file_type)
+#             else:
+#                 # Get everything after file type until next '_'        
+#                 rest = "_".join(parts[2:])  
+#                 file_types.append(file_type + "_" + rest)         
+#     return list(set(file_types))
+
+
+# def subs_to_plot(modality, decoding_criterion):
+#     """
+#     This function calculates the amount of subjects for which we can do 
+#     the plotting of their results
+#     """
+#     path = '.'
+#     subs = []
+#     for filename in os.listdir(os.path.join(path, 'results')):
+#         if filename.startswith("scores_"):
+#             subcategory = filename.split("_")[1].split("_sub")[0]
+#             sub_number = filename.split("_")[1].split("_sub")[1].split(".")[0]
+#             if subcategory == f'{modality}_{decoding_criterion}':
+#                 subs.append(sub_number)
+#     return subs
+
