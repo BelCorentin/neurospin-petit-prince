@@ -23,7 +23,7 @@ from utils import (
     add_syntax,
     mne_events,
     decoding_from_criterion,
-    get_embeddings
+    get_embeddings,
 )
 import spacy
 import sys
@@ -46,9 +46,26 @@ CHAPTERS = {
 }
 
 
-EPOCH_WINDOWS = {"word": {"onset_min": -0.3, "onset_max": 1.0, "offset_min": -1.0, "offset_max": 0.3},
-                  "constituent": {"offset_min": -2.0, "offset_max": 0.5, "onset_min": -0.5, "onset_max": 2.0},
-                  "sentence": {"offset_min": -4.0, "offset_max": 1.0, "onset_min": -1.0, "onset_max": 4.0}}
+EPOCH_WINDOWS = {
+    "word": {
+        "onset_min": -0.3,
+        "onset_max": 1.0,
+        "offset_min": -1.0,
+        "offset_max": 0.3,
+    },
+    "constituent": {
+        "offset_min": -2.0,
+        "offset_max": 0.5,
+        "onset_min": -0.5,
+        "onset_max": 2.0,
+    },
+    "sentence": {
+        "offset_min": -4.0,
+        "offset_max": 1.0,
+        "onset_min": -1.0,
+        "onset_max": 4.0,
+    },
+}
 # FUNC
 
 
@@ -126,7 +143,7 @@ def read_raw(subject, run_id, events_return=False, modality="visual"):
         # However, the meta.word might have lost the hyphens because
         # of the previous match when adding syntax.
         # Handle the first two subjects:
-        if subject == '2':
+        if subject == "2":
             events[:, 2] = events[:, 2] - 2048
         i, j = match_list(events[:, 2], meta.wlength)
         assert len(i) > (0.8 * len(events))
@@ -287,18 +304,18 @@ def epoch_on_selection(raw, sel, start, level):
     return epochs
 
 
-def apply_baseline(epochs, level, tmin=-.300, tmax=0):
+def apply_baseline(epochs, level, tmin=-0.300, tmax=0):
     """
     To be applied at the beginning of the preproc
-    
+
     """
     meta = epochs.metadata.copy()
-    LEVELS = dict(sentence='word_id', constituent='const_word_id')
+    LEVELS = dict(sentence="word_id", constituent="const_word_id")
 
-    meta["level_uid"] = np.cumsum(epochs.metadata[LEVELS[level]] == 0)*-1
+    meta["level_uid"] = np.cumsum(epochs.metadata[LEVELS[level]] == 0) * -1
     bsl_time = (epochs.times >= tmin) * (epochs.times <= tmax)
     # For each sentence, baseline by the first word
-    for sid, df in epochs.metadata.groupby('sentence_uid'):
+    for sid, df in epochs.metadata.groupby("sentence_uid"):
         # Basline activity of the first word
         bsl = epochs.data[df.index[0], :, bsl_time].mean(-2)
         # Remove basline to all words in the sentence
@@ -306,7 +323,7 @@ def apply_baseline(epochs, level, tmin=-.300, tmax=0):
     return epochs
 
 
-def populate_metadata_epochs(    
+def populate_metadata_epochs(
     modality,
     subject,
     level,
@@ -381,16 +398,23 @@ def analysis_subject(subject, modality, start, level, decoding_criterion, runs=9
     Returns a dataframe containing the scores, as well as saving it under ./results
 
     """
-    file_path = f"./results/{modality}/{decoding_criterion}_{level}_{start}_sub{subject}.csv"
+    file_path = (
+        f"./results/{modality}/{decoding_criterion}_{level}_{start}_sub{subject}.csv"
+    )
     if os.path.exists(file_path):
         print("Analysis already done")
         return None
     else:
-        epochs = populate_metadata_epochs(modality, subject, level, start, runs=runs, decoding_criterion=decoding_criterion)
-
-        all_scores = decoding_from_criterion(
-            decoding_criterion, epochs, start, level, subject
+        epochs = populate_metadata_epochs(
+            modality,
+            subject,
+            level,
+            start,
+            runs=runs,
+            decoding_criterion=decoding_criterion,
         )
+
+        all_scores = decoding_from_criterion(decoding_criterion, epochs, level, subject)
 
         pd.DataFrame(all_scores).to_csv(file_path, index=False)
 
@@ -414,8 +438,10 @@ def unique_plot(subject, level, start, decoding_criterion, modality):
     plt.plot(x, y)
     plt.set_title(f"{level} {start}")
     plt.axhline(y=0, color="r", linestyle="-")
-    plt.suptitle(f"Decoding Performance for {decoding_criterion} and \
-                 {modality} for sub-{subject}, epoched on {level} {start}")
+    plt.suptitle(
+        f"Decoding Performance for {decoding_criterion} and \
+                 {modality} for sub-{subject}, epoched on {level} {start}"
+    )
 
 
 # # OLD AND NOT WORKING ANYMORE
@@ -493,29 +519,29 @@ def unique_plot(subject, level, start, decoding_criterion, modality):
 
 # def check_plotting_possible():
 #     """
-#     This function gives an overview of the type of results file 
-#     available, such that can be used to decide easily what to plot 
+#     This function gives an overview of the type of results file
+#     available, such that can be used to decide easily what to plot
 #     using the plot_scores function
 #     """
 #     path = '.'
 #     file_types = []
-#     for filename in os.listdir(os.path.join(path, 'results')):  
+#     for filename in os.listdir(os.path.join(path, 'results')):
 #         if filename.startswith("scores_"):
-#             parts = filename.split("_")      
-#             file_type = parts[1] 
-#             # Check if second part is 'embeddings'      
-#             if parts[2] == 'embeddings':  
+#             parts = filename.split("_")
+#             file_type = parts[1]
+#             # Check if second part is 'embeddings'
+#             if parts[2] == 'embeddings':
 #                 file_types.append(file_type)
 #             else:
-#                 # Get everything after file type until next '_'        
-#                 rest = "_".join(parts[2:])  
-#                 file_types.append(file_type + "_" + rest)         
+#                 # Get everything after file type until next '_'
+#                 rest = "_".join(parts[2:])
+#                 file_types.append(file_type + "_" + rest)
 #     return list(set(file_types))
 
 
 # def subs_to_plot(modality, decoding_criterion):
 #     """
-#     This function calculates the amount of subjects for which we can do 
+#     This function calculates the amount of subjects for which we can do
 #     the plotting of their results
 #     """
 #     path = '.'
@@ -527,4 +553,3 @@ def unique_plot(subject, level, start, decoding_criterion, modality):
 #             if subcategory == f'{modality}_{decoding_criterion}':
 #                 subs.append(sub_number)
 #     return subs
-

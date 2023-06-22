@@ -117,10 +117,10 @@ def add_syntax(meta, syntax_path, run):
     meta has:
     "j'avais"
 
-    That means there is a limitation in terms of matching we can do: 
+    That means there is a limitation in terms of matching we can do:
     Since what is presented is: "J'avais" but to parse the syntax, we need j + avais
     We'll never get a perfect match.
-    Option chosen: keep only the second part (verb) and tag it as a VERB 
+    Option chosen: keep only the second part (verb) and tag it as a VERB
     When aligning it with brain signals
     """
     # get basic annotations
@@ -202,8 +202,7 @@ def get_syntax(file):
     for sent, d in synt.groupby("sequence_id"):
         for token in d.itertuples():
             for tok in token.word.split("'"):
-                out.append(dict(word=tok, n_closing=1,
-                                is_last_word=False, pos="XXX"))
+                out.append(dict(word=tok, n_closing=1, is_last_word=False, pos="XXX"))
             out[-1]["n_closing"] = token.n_closing
             out[-1]["is_last_word"] = token.is_last_word
             out[-1]["pos"] = token.pos
@@ -261,8 +260,7 @@ def add_new_syntax(meta, syntax_path, run):
     i, j = match_list(meta_tokens, synt_tokens)
     assert (len(i) / len(meta_tokens)) > 0.95
 
-    for key, default_value in dict(n_closing=1,
-                                   is_last_word=False, pos="XXX").items():
+    for key, default_value in dict(n_closing=1, is_last_word=False, pos="XXX").items():
         meta[key] = default_value
         meta.loc[i, key] = synt.iloc[j][key].values
 
@@ -276,8 +274,7 @@ def add_new_syntax(meta, syntax_path, run):
 def decod_xy(X, y):
     assert len(X) == len(y)
     # define data
-    model = make_pipeline(StandardScaler(),
-                          RidgeCV(alphas=np.logspace(-3, 8, 10)))
+    model = make_pipeline(StandardScaler(), RidgeCV(alphas=np.logspace(-3, 8, 10)))
     cv = KFold(5, shuffle=True, random_state=0)
 
     # fit predict
@@ -320,7 +317,7 @@ def mne_events(meta, raw, start, level):
 # TODO: add lru_cache
 @lru_cache()
 def get_embeddings(list_of_strings):
-    model = SentenceTransformer('all-MiniLM-L6-v2')
+    model = SentenceTransformer("all-MiniLM-L6-v2")
 
     embeddings = model.encode(list_of_strings)
 
@@ -329,16 +326,14 @@ def get_embeddings(list_of_strings):
 
 def generate_embeddings(meta, level):
     all_embeddings = []
-    for level_id, df in meta.groupby(f'{level}_id'):
-        complete_string = ' '.join(df[f'{level}_words'].values[0])
+    for level_id, df in meta.groupby(f"{level}_id"):
+        complete_string = " ".join(df[f"{level}_words"].values[0])
         embeddings = get_embeddings(complete_string)
         all_embeddings.append(embeddings)
     return all_embeddings
 
 
-def decoding_from_criterion(
-    criterion, epochs, start, level, subject
-):
+def decoding_from_criterion(criterion, epochs, level, subject):
     """
     Input:
     - criterion: the criterion on which the decoding will
@@ -368,9 +363,7 @@ def decoding_from_criterion(
         print("Word decoding")
         # Same, with get_embeddings
         nlp = spacy.load("fr_core_news_sm")
-        embeddings = epochs.metadata.word.apply(
-            lambda word: nlp(word).vector
-        ).values
+        embeddings = epochs.metadata.word.apply(lambda word: nlp(word).vector).values
         embeddings = np.array([emb for emb in embeddings])
         R_vec = decod_xy(X, embeddings)
         scores = np.mean(R_vec, axis=1)
@@ -382,13 +375,11 @@ def decoding_from_criterion(
         # embeddings = np.vstack(all_embeddings)
         # R_vec = decod_xy(X, embeddings)
         # scores = np.mean(R_vec, axis=1)
-    elif criterion.__contains__('word'):
+    elif criterion.__contains__("word"):
         print("Word decoding")
         # Same, with get_embeddings
         nlp = spacy.load("fr_core_news_sm")
-        embeddings = epochs.metadata.word.apply(
-            lambda word: nlp(word).vector
-        ).values
+        embeddings = epochs.metadata.word.apply(lambda word: nlp(word).vector).values
         embeddings = np.array([emb for emb in embeddings])
         R_vec = decod_xy(X, embeddings)
         scores = np.mean(R_vec, axis=1)
