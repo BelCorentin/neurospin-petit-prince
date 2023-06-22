@@ -108,6 +108,7 @@ def read_raw(subject, run_id, events_return=False, modality="visual"):
         )
     # Initial wlength, as presented in the stimuli / triggers to match list
     meta["wlength"] = meta.word.apply(len)
+    meta["run"] = run_id
     # Enriching the metadata with outside files:
     # path_syntax = get_code_path() / "data/syntax"
     path_syntax = get_code_path() / "data" / "syntax_new_no_punct"  # testing new syntax
@@ -376,14 +377,14 @@ def populate_metadata_epochs(
     return epochs
 
 
-def analysis(modality, decoding_criterion):
+def analysis(modality, start, level, decoding_criterion):
     path = get_path(modality)
     subjects = get_subjects(path)
     all_scores = []
     if modality == "auditory":  # TODO REDO BIDS AND FIX THIS
         subjects = subjects[2:]
     for subject in subjects:
-        scores = analysis_subject(subject, modality, decoding_criterion)
+        scores = analysis_subject(subject, modality, start, level, decoding_criterion)
         all_scores.append(scores)
 
     file_path = f"./results/all_scores_{modality}_{decoding_criterion}.csv"
@@ -436,7 +437,6 @@ def unique_plot(subject, level, start, decoding_criterion, modality):
         y.append(score_avg)
         x.append(s)
     plt.plot(x, y)
-    plt.set_title(f"{level} {start}")
     plt.axhline(y=0, color="r", linestyle="-")
     plt.suptitle(
         f"Decoding Performance for {decoding_criterion} and \
