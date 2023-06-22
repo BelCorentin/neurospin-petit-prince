@@ -314,7 +314,6 @@ def mne_events(meta, raw, start, level):
         return 0
 
 
-# TODO: add lru_cache
 @lru_cache()
 def get_embeddings(list_of_strings):
     model = SentenceTransformer("all-MiniLM-L6-v2")
@@ -360,21 +359,22 @@ def decoding_from_criterion(criterion, epochs, level, subject):
     X = epochs.get_data()
 
     if criterion == "emb_sentence" or criterion == "emb_constituent":
-        print("Word decoding")
-        # Same, with get_embeddings
-        nlp = spacy.load("fr_core_news_sm")
-        embeddings = epochs.metadata.word.apply(lambda word: nlp(word).vector).values
-        embeddings = np.array([emb for emb in embeddings])
+        print("Embeddings decoding")
+        all_embeddings = generate_embeddings(epochs.metadata, level)
+        embeddings = np.vstack(all_embeddings)
+
+        # DANGER /!\ Source of hard to debug problems
+        # Make sure that there aren't any constant / equal to zero dimension
+        # Had a problem with that hard to debug where a dimension
+        # of the sentence embeddings were constant...
+        problematic_rows = np.where(embeddings.std(0) < 1e-3)
+
+        # Add noise
+        for prob in problematic_rows[0]:
+            embeddings[:, prob] = 1e-3 * np.random.rand(embeddings.shape[0])
+
         R_vec = decod_xy(X, embeddings)
         scores = np.mean(R_vec, axis=1)
-        # print("Embeddings decoding")
-        # # Calculate embeddings here
-        # # Like:
-        # all_embeddings = generate_embeddings(epochs.metadata,
-        #                                      level)
-        # embeddings = np.vstack(all_embeddings)
-        # R_vec = decod_xy(X, embeddings)
-        # scores = np.mean(R_vec, axis=1)
     elif criterion.__contains__("word"):
         print("Word decoding")
         # Same, with get_embeddings
