@@ -16,6 +16,7 @@ from sklearn.linear_model import RidgeCV
 from Levenshtein import editops
 import string
 import spacy
+from pathlib import Path
 from sentence_transformers import SentenceTransformer
 
 from functools import lru_cache
@@ -413,6 +414,27 @@ def generate_embeddings(meta, level):
     return all_embeddings
 
 
+def generate_embeddings_sum(meta, level, nb_words):
+    """
+    Generate embeddings from the metadata:
+    Using the meta.{level}_words: use the spacy embeddings
+    of the sum of the words wanted
+
+    Returns: a list of embeddings a size meta.shape[0]
+    """
+    nlp = spacy.load("fr_core_news_sm")
+    all_embeddings = []
+    for level_id, df in meta.groupby(["run", f"{level}_id"]):
+        emb_list = []
+        for word_i in range(nb_words):
+            word = df[f"{level}_words"].values[0][word_i]
+            emb = nlp(word).vector
+            emb_list.append(emb)
+        summed_emb = np.sum(emb_list, axis=0)
+        all_embeddings.append(summed_emb)
+    return all_embeddings
+
+
 def decoding_from_criterion(criterion, epochs, level, subject):
     """
     Input:
@@ -456,8 +478,16 @@ def decoding_from_criterion(criterion, epochs, level, subject):
 
         R_vec = decod_xy(X, embeddings)
         scores = np.mean(R_vec, axis=1)
+
+    # DEBUGGING SENTENCE EMBD: adding multiple word embeddings
+    elif criterion.__contains__("multiple_words"):
+        print("Multiple word decoding")
+        nb_words = criterion.split("multiple_words")[1][:1]
+        embeddings = generate_embeddings_sum(epochs.metadata, level, int(nb_words))
+        embeddings = np.array([emb for emb in embeddings])
+        R_vec = decod_xy(X, embeddings)
+        scores = np.mean(R_vec, axis=1)
     elif criterion.__contains__("word"):
-        print("Word decoding")
         # Same, with get_embeddings
         nlp = spacy.load("fr_core_news_sm")
         embeddings = epochs.metadata.word.apply(lambda word: nlp(word).vector).values

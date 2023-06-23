@@ -16,18 +16,17 @@ import pandas as pd
 # Tools
 from pathlib import Path
 import os
-import subprocess
 from utils import (
     match_list,
-    add_new_syntax,
     add_syntax,
     mne_events,
     decoding_from_criterion,
-    get_embeddings,
+    
 )
 import spacy
-import sys
 import matplotlib.pyplot as plt
+from functools import lru_cache
+
 
 nlp = spacy.load("fr_core_news_sm")
 
@@ -68,7 +67,7 @@ EPOCH_WINDOWS = {
 }
 # FUNC
 
-
+@lru_cache(maxsize=None)
 def read_raw(subject, run_id, events_return=False, modality="visual"):
     print(f"Reading raw files for modality: {modality}")
     path = get_path(modality)
@@ -241,6 +240,7 @@ def enrich_metadata(meta):
     meta["sentence_id"] = np.cumsum(meta.sentence_onset)
     for s, d in meta.groupby("sentence_id"):
         meta.loc[d.index, "sent_word_id"] = range(len(d))
+        meta.loc[d.index, "sent_length"] = len(d)
         meta.loc[d.index, "sentence_start"] = d.start.min()
         last_word_duration = meta.loc[d.index.max(), "duration"]
         meta.loc[d.index, "sentence_stop"] = d.start.max() + last_word_duration
@@ -253,6 +253,7 @@ def enrich_metadata(meta):
     meta["constituent_id"] = np.cumsum(meta.constituent_onset)
     for s, d in meta.groupby("constituent_id"):
         meta.loc[d.index, "const_word_id"] = range(len(d))
+        meta.loc[d.index, "const_length"] = len(d)
         meta.loc[d.index, "constituent_start"] = d.start.min()
         last_word_duration = meta.loc[d.index.max(), "duration"]
         meta.loc[d.index, "constituent_stop"] = d.start.max() + last_word_duration
@@ -279,6 +280,9 @@ def select_meta_subset(meta, level, decoding_criterion):
         sel = meta.query(f"{level}_onset==True and is_last_word==False")
     elif decoding_criterion == "embeddings_word_const_end":
         sel = meta.query(f"{level}_onset==True and is_last_word==True")
+    # For debugging sentence embeddings
+    elif decoding_criterion.__contains__("embeddings_multiple_words"):
+        sel = meta.query(f"{level}_onset==True and sent_length > 3")
     else:
         sel = meta.query(f"{level}_onset==True")
     assert sel.shape[0] > 10
@@ -378,6 +382,13 @@ def populate_metadata_epochs(
 
 
 def analysis(modality, start, level, decoding_criterion):
+    """
+    Function similar to the analysis_subject one, except that it 
+    is ran on all available subjects 
+
+    Returns all scores
+    
+    """
     path = get_path(modality)
     subjects = get_subjects(path)
     all_scores = []
@@ -389,6 +400,8 @@ def analysis(modality, start, level, decoding_criterion):
 
     file_path = f"./results/all_scores_{modality}_{decoding_criterion}.csv"
     pd.DataFrame(all_scores).to_csv(file_path, index=False)
+
+    return all_scores
 
 
 def analysis_subject(subject, modality, start, level, decoding_criterion, runs=9):
@@ -439,8 +452,7 @@ def unique_plot(subject, level, start, decoding_criterion, modality):
     plt.plot(x, y)
     plt.axhline(y=0, color="r", linestyle="-")
     plt.suptitle(
-        f"Decoding Performance for {decoding_criterion} and \
-                 {modality} for sub-{subject}, epoched on {level} {start}"
+        f"Decoding Performance for {decoding_criterion} and {modality} for sub-{subject}, epoched on {level} {start}"
     )
 
 
