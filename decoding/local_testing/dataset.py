@@ -401,7 +401,7 @@ def analysis(modality, start, level, decoding_criterion):
         scores = analysis_subject(subject, modality, start, level, decoding_criterion)
         all_scores.append(scores)
 
-    file_path = f"./results/all_scores_{modality}_{decoding_criterion}.csv"
+    file_path = f"./results/all_scores_{modality}_{decoding_criterion}_{level}_{start}.csv"
     pd.DataFrame(all_scores).to_csv(file_path, index=False)
 
     return all_scores
