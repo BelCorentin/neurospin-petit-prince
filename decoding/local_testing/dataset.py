@@ -67,7 +67,9 @@ EPOCH_WINDOWS = {
 }
 # FUNC
 
-@lru_cache(maxsize=None)
+
+# LRU cache is useful for notebooks
+@lru_cache(maxsize=1)
 def read_raw(subject, run_id, events_return=False, modality="visual"):
     print(f"Reading raw files for modality: {modality}")
     path = get_path(modality)
@@ -383,11 +385,12 @@ def populate_metadata_epochs(
 
 def analysis(modality, start, level, decoding_criterion):
     """
-    Function similar to the analysis_subject one, except that it 
-    is ran on all available subjects 
+    Function similar to the analysis_subject one, except that subjects
+    is a list of subject_id (list(string)) and the analysis_subject function
+    will be ran for all subjects, then all_scores will be concatenated and outputted 
 
     Returns all scores
-    
+
     """
     path = get_path(modality)
     subjects = get_subjects(path)
@@ -404,7 +407,7 @@ def analysis(modality, start, level, decoding_criterion):
     return all_scores
 
 
-def analysis_subject(subject, modality, start, level, decoding_criterion, runs=9):
+def analysis_subject(subject, modality, start, level, decoding_criterion, runs=9, write=True):
     """
     Decode for the criterion the correlation score between predicted
     and real criterion
@@ -430,7 +433,8 @@ def analysis_subject(subject, modality, start, level, decoding_criterion, runs=9
 
         all_scores = decoding_from_criterion(decoding_criterion, epochs, level, subject)
 
-        pd.DataFrame(all_scores).to_csv(file_path, index=False)
+        if write:
+            pd.DataFrame(all_scores).to_csv(file_path, index=False)
 
         return all_scores
 
@@ -441,8 +445,11 @@ def load_scores(subject, level, start, decoding_criterion, modality):
     return scores
 
 
-def unique_plot(subject, level, start, decoding_criterion, modality):
-    data = load_scores(subject, level, start, decoding_criterion, modality)
+def unique_plot(subject, level, start, decoding_criterion, modality, from_scores=False, scores=None):
+    if from_scores:
+        data = pd.DataFrame(scores)
+    else:
+        data = load_scores(subject, level, start, decoding_criterion, modality)
     y = []
     x = []
     for s, t in data.groupby("t"):
