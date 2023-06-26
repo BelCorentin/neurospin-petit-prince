@@ -242,7 +242,7 @@ def enrich_metadata(meta):
     meta["sentence_id"] = np.cumsum(meta.sentence_onset)
     for s, d in meta.groupby("sentence_id"):
         meta.loc[d.index, "sent_word_id"] = range(len(d))
-        meta.loc[d.index, "sent_length"] = len(d)
+        meta.loc[d.index, "sentence_length"] = len(d)
         meta.loc[d.index, "sentence_start"] = d.start.min()
         last_word_duration = meta.loc[d.index.max(), "duration"]
         meta.loc[d.index, "sentence_stop"] = d.start.max() + last_word_duration
@@ -255,7 +255,7 @@ def enrich_metadata(meta):
     meta["constituent_id"] = np.cumsum(meta.constituent_onset)
     for s, d in meta.groupby("constituent_id"):
         meta.loc[d.index, "const_word_id"] = range(len(d))
-        meta.loc[d.index, "const_length"] = len(d)
+        meta.loc[d.index, "constituent_length"] = len(d)
         meta.loc[d.index, "constituent_start"] = d.start.min()
         last_word_duration = meta.loc[d.index.max(), "duration"]
         meta.loc[d.index, "constituent_stop"] = d.start.max() + last_word_duration
@@ -285,6 +285,10 @@ def select_meta_subset(meta, level, decoding_criterion):
     # For debugging sentence embeddings
     elif decoding_criterion.__contains__("embeddings_multiple_words"):
         sel = meta.query(f"{level}_onset==True and sent_length > 3")
+    # For choosing subsets of sentence / constituent of minimal length:
+    elif decoding_criterion.__contains__("min"):
+        min = decoding_criterion.split("_min")[1]
+        sel = meta.query(f"{level}_onset==True and {level}_length > {min}")
     else:
         sel = meta.query(f"{level}_onset==True")
     assert sel.shape[0] > 10
@@ -460,6 +464,33 @@ def unique_plot(subject, level, start, decoding_criterion, modality, from_scores
     plt.axhline(y=0, color="r", linestyle="-")
     plt.suptitle(
         f"Decoding Performance for {decoding_criterion} and {modality} for sub-{subject}, epoched on {level} {start}"
+    )
+
+
+def sub_avg_plot(level, start, decoding_criterion, modality, from_scores=False, scores=None):
+    if from_scores:
+        all_scores = pd.DataFrame(scores)
+    else:
+        path = get_path(modality)
+        subjects = get_subjects(path)[2:]
+        all_scores = load_scores(subjects[0], level, start, decoding_criterion, modality)
+        # Create the sub dataframe
+        for sub in subjects[1:]:
+            try:
+                all_scores = pd.concat([all_scores, load_scores(sub, level, start, decoding_criterion, modality)])
+            except Exception as e:
+                print(f'No decoding data for sub-{sub}')
+                print(e)
+    y = []
+    x = []
+    for s, t in all_scores.groupby("t"):
+        score_avg = t.score.mean()
+        y.append(score_avg)
+        x.append(s)
+    plt.plot(x, y)
+    plt.axhline(y=0, color="r", linestyle="-")
+    plt.suptitle(
+        f"Decoding Performance for {decoding_criterion} and {modality} for all_subjects, epoched on {level} {start}"
     )
 
 

@@ -445,6 +445,15 @@ def decoding_from_criterion(criterion, epochs, level, subject):
     - starts: (onset, offset)
     - levels: (word, sentence, constituent)
 
+    Options for criterion:
+    - embeddings: decodes on the embeddings based on the level: sentence,
+        constituent or word.
+    - embeddings_multiple_words{x}: where x is an integer between 1 and 3:
+        decodes the sum of embeddings of the x following words
+    - word_const_non_end / word_const_end: decodes the words embeddings
+        of a subset: words that end a constituant vs words that don't
+    - wlength: the length of the word
+
     Returns:
     Two dataframes:
     - all_scores: decoding scores for each subject / starts x levels
@@ -453,14 +462,16 @@ def decoding_from_criterion(criterion, epochs, level, subject):
     """
 
     all_scores = []
+
     # All epochs -> Decoding and generate evoked potentials
-    if criterion == "embeddings":
+    if criterion == "embeddings" or criterion.__contains__('min'):
         criterion = f"emb_{level}"
 
     # decoding word emb
     epochs = epochs.pick_types(meg=True, stim=False, misc=False).load_data()
     X = epochs.get_data()
 
+    
     if criterion == "emb_sentence" or criterion == "emb_constituent":
         print(f" {level} embeddings decoding")
         all_embeddings = generate_embeddings(epochs.metadata, level)
@@ -483,18 +494,22 @@ def decoding_from_criterion(criterion, epochs, level, subject):
     elif criterion.__contains__("multiple_words"):
         nb_words = criterion.split("multiple_words")[1][:1]
         print(f"Multiple word decoding: for {nb_words} words")
+        print(f'For: {level}')
         embeddings = generate_embeddings_sum(epochs.metadata, level, int(nb_words))
         embeddings = np.array([emb for emb in embeddings])
         R_vec = decod_xy(X, embeddings)
         scores = np.mean(R_vec, axis=1)
     elif criterion.__contains__("word"):
         # Same, with get_embeddings
+        print("Word embeddings decoding")
+        print(f'For: {level}')
         nlp = spacy.load("fr_core_news_sm")
         embeddings = epochs.metadata.word.apply(lambda word: nlp(word).vector).values
         embeddings = np.array([emb for emb in embeddings])
         R_vec = decod_xy(X, embeddings)
         scores = np.mean(R_vec, axis=1)
     elif criterion == "wlength":
+        print(f'Decoding word length for: {level}')
         y = epochs.metadata.wlength
         R_vec = decod_xy(X, y)
         scores = R_vec
