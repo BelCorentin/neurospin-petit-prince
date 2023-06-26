@@ -18,6 +18,13 @@ import string
 import spacy
 from pathlib import Path
 from sentence_transformers import SentenceTransformer
+from joblib import Memory
+from datetime import datetime, timedelta
+import functools
+import inspect
+import shutil
+import sys
+import time
 
 from functools import lru_cache
 
@@ -35,6 +42,26 @@ CHAPTERS = {
     9: "26-27",
 }
 
+# Create a joblib Memory object to handle caching
+memory = Memory(location='./cache', verbose=0)
+
+
+def disk_cache(func):
+    @functools.wraps(func)
+    def wrapper(*args, **kwargs):
+        args_size = sys.getsizeof(args) + sys.getsizeof(kwargs)
+        if args_size > 10 * 1024 * 1024:
+            raise ValueError("Arguments size exceeds 10MB limit.")
+        if inspect.ismethod(func):
+            instance = args[0]
+            args = args[1:]
+            cached_func = memory.cache(func.__func__)
+            return cached_func(instance, *args, **kwargs)
+        else:
+            cached_func = memory.cache(func)
+            return cached_func(*args, **kwargs)
+
+    return wrapper
 # Function to return the Pearson correlation
 # Between X and Y
 
@@ -152,6 +179,7 @@ def match_list(A, B, on_replace="delete"):
     return A_sel.astype(int), B_sel.astype(int)
 
 
+@disk_cache
 def add_syntax(meta, syntax_path, run):
     """
     Use the get_syntax function to add it directly to
@@ -471,7 +499,6 @@ def decoding_from_criterion(criterion, epochs, level, subject):
     epochs = epochs.pick_types(meg=True, stim=False, misc=False).load_data()
     X = epochs.get_data()
 
-    
     if criterion == "emb_sentence" or criterion == "emb_constituent":
         print(f" {level} embeddings decoding")
         all_embeddings = generate_embeddings(epochs.metadata, level)
