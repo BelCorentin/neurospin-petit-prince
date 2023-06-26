@@ -305,7 +305,7 @@ def epoch_on_selection(raw, sel, start, level):
     epochs = mne.Epochs(
         raw,
         **mne_events(sel, raw, start=start, level=level),
-        decim=10,
+        decim=100,
         tmin=EPOCH_WINDOWS[f"{level}"][f"{start}_min"],
         tmax=EPOCH_WINDOWS[f"{level}"][f"{start}_max"],
         event_repeated="drop",
