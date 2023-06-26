@@ -9,7 +9,7 @@ mne.set_log_level(verbose='error')
 def get_parser(args):
     parser = argparse.ArgumentParser(description='Launch the LPP analysis')
 
-    parser.add_argument('--nb_cpu', type=int, default=1, help="cpus")
+    parser.add_argument('--nb_cpu', type=int, default=32, help="cpus")
     parser.add_argument('--nb_nodes', type=int, default=1, help="nb nodes")
     parser.add_argument('--criterion', type=str,
                         default="embeddings", help="embeddings / wlength")
@@ -30,8 +30,7 @@ def main(args):
     criterion = args_class.criterion
     modality = args_class.modality
 
-    # subjects = get_subjects(get_path(modality))
-    subjects = ['3']
+    subjects = get_subjects(get_path(modality))
 
     executor.update_parameters(slurm_partition="cpu_p1",  # gpu_p2
                                nodes=NUM_NODES,
