@@ -15,7 +15,10 @@ def get_parser(args):
                         default="embeddings", help="embeddings / wlength")
     parser.add_argument('--modality', type=str,
                         default="visual", help="auditory/visual")
-
+    parser.add_argument('--start', type=str,
+                        default="onset", help="onset/offset")
+    parser.add_argument('--level', type=str,
+                        default="word", help="word/sentence/constituent")
     args_class = parser.parse_args(args)
     return args_class
 
@@ -29,6 +32,8 @@ def main(args):
     NUM_NODES = args_class.nb_nodes
     criterion = args_class.criterion
     modality = args_class.modality
+    start = args_class.start
+    level = args_class.level
 
     subjects = get_subjects(get_path(modality))
 
@@ -44,7 +49,7 @@ def main(args):
             print('Decoding criterion chosen: ', criterion)
             print('Decoding modality chosen: ', modality)
             print(f'Doing it for subject: {subject}')
-            analysis_subject(subject, modality, criterion)
+            analysis_subject(subject, modality, start, level, criterion)
 
     task = Task()
     jobs = []
