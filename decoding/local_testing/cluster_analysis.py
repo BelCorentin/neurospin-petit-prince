@@ -54,7 +54,7 @@ def main(args):
     task = Task()
     jobs = []
     with executor.batch():
-        for subject in subjects[2:20]:
+        for subject in subjects[2:3]:
             job = executor.submit(task, subject)
             jobs.append(job)
     submitit.helpers.monitor_jobs(jobs)
