@@ -320,15 +320,18 @@ def apply_baseline(epochs, level, tmin=-0.300, tmax=0):
     To be applied at the beginning of the preproc
 
     """
+    if level == 'word':
+        return epochs
     meta = epochs.metadata.copy()
-    LEVELS = dict(sentence="word_id", constituent="const_word_id")
+    meta.reset_index(inplace=True)
+    LEVELS = dict(sentence="sent_word_id", constituent="const_word_id")
 
-    meta["level_uid"] = np.cumsum(epochs.metadata[LEVELS[level]] == 0) * -1
+    meta[f"{level}_uid"] = np.cumsum(epochs.metadata[LEVELS[level]] == 0) * -1
     bsl_time = (epochs.times >= tmin) * (epochs.times <= tmax)
     # For each sentence, baseline by the first word
-    for sid, df in epochs.metadata.groupby("sentence_uid"):
+    for sid, df in meta.groupby(f"{level}_uid"):
         # Basline activity of the first word
-        bsl = epochs.data[df.index[0], :, bsl_time].mean(-2)
+        bsl = epochs._data[df.index[0], :, bsl_time].mean(-2)
         # Remove basline to all words in the sentence
         epochs._data[df.index] -= bsl[None, :, None]
     return epochs
@@ -368,6 +371,8 @@ def populate_metadata_epochs(
         # Add the embeddings to the metadata limited to the level
 
         epochs = epoch_on_selection(raw, sel, start, level)
+
+        epochs = apply_baseline(epochs, level, tmin=EPOCH_WINDOWS[f"{level}"][f"{start}_min"], tmax=0)
 
         all_epochs.append(epochs)
 
