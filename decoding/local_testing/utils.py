@@ -19,12 +19,9 @@ import spacy
 from pathlib import Path
 from sentence_transformers import SentenceTransformer
 from joblib import Memory
-from datetime import datetime, timedelta
 import functools
 import inspect
-import shutil
 import sys
-import time
 
 from functools import lru_cache
 
@@ -190,7 +187,8 @@ def add_syntax(meta, syntax_path, run):
     "j'avais"
 
     That means there is a limitation in terms of matching we can do:
-    Since what is presented is: "J'avais" but to parse the syntax, we need j + avais
+    Since what is presented is: "J'avais" but
+    to parse the syntax, we need j + avais
     We'll never get a perfect match.
     Option chosen: keep only the second part (verb) and tag it as a VERB
     When aligning it with brain signals
@@ -208,7 +206,8 @@ def add_syntax(meta, syntax_path, run):
     # Clean the meta tokens to match synt tokens
     meta_tokens = meta.word.fillna("XXXX").apply(format_text).values
     # Get the word after the hyphen to match the synt tokens
-    meta_tokens = [stri.split("'")[1] if "'" in stri else stri for stri in meta.word]
+    meta_tokens = [stri.split("'")[1]
+                   if "'" in stri else stri for stri in meta.word]
     # Remove the punctuation
     translator = str.maketrans("", "", string.punctuation)
     meta_tokens = [stri.translate(translator) for stri in meta_tokens]
@@ -220,13 +219,15 @@ def add_syntax(meta, syntax_path, run):
     # synt_tokens = [
     #     stri
     #     for stri in synt_tokens
-    #     if stri.strip() != "" and not any(char in punctuation_chars for char in stri)
+    #     if stri.strip() != "" and not any(char
+    #     in punctuation_chars for char in stri)
     # ]
 
     i, j = match_list(meta_tokens, synt_tokens)
     assert (len(i) / len(meta_tokens)) > 0.8
 
-    for key, default_value in dict(n_closing=1, is_last_word=False, pos="XXX").items():
+    for key, default_value in dict(n_closing=1,
+                                   is_last_word=False, pos="XXX").items():
         meta[key] = default_value
         meta.loc[i, key] = synt.iloc[j][key].values
 
@@ -274,7 +275,8 @@ def get_syntax(file):
     for sent, d in synt.groupby("sequence_id"):
         for token in d.itertuples():
             for tok in token.word.split("'"):
-                out.append(dict(word=tok, n_closing=1, is_last_word=False, pos="XXX"))
+                out.append(dict(word=tok, n_closing=1,
+                                is_last_word=False, pos="XXX"))
             out[-1]["n_closing"] = token.n_closing
             out[-1]["is_last_word"] = token.is_last_word
             out[-1]["pos"] = token.pos
@@ -332,7 +334,8 @@ def add_new_syntax(meta, syntax_path, run):
     i, j = match_list(meta_tokens, synt_tokens)
     assert (len(i) / len(meta_tokens)) > 0.95
 
-    for key, default_value in dict(n_closing=1, is_last_word=False, pos="XXX").items():
+    for key, default_value in dict(n_closing=1,
+                                   is_last_word=False, pos="XXX").items():
         meta[key] = default_value
         meta.loc[i, key] = synt.iloc[j][key].values
 
@@ -346,7 +349,8 @@ def add_new_syntax(meta, syntax_path, run):
 def decod_xy(X, y):
     assert len(X) == len(y)
     # define data
-    model = make_pipeline(StandardScaler(), RidgeCV(alphas=np.logspace(-3, 8, 10)))
+    model = make_pipeline(StandardScaler(),
+                          RidgeCV(alphas=np.logspace(-3, 8, 10)))
     cv = KFold(5, shuffle=True, random_state=0)
 
     # fit predict
@@ -417,7 +421,8 @@ def get_embeddings_disk(run_id, level_id, level):
     dim = 1024
 
     embeds = np.fromfile(
-        f"{get_code_path()}/decoding/local_testing/embeds/emb/run{run_id}_{level}_{level_id}.bin",
+        f"{get_code_path()}/decoding/\
+        local_testing/embeds/emb/run{run_id}_{level}_{level_id}.bin",
         dtype=np.float32,
         count=-1,
     )
@@ -437,7 +442,9 @@ def generate_embeddings(meta, level):
     all_embeddings = []
     for level_id, df in meta.groupby(["run", f"{level}_id"]):
         complete_string = " ".join(df[f"{level}_words"].values[0])
-        embeddings = get_embeddings(complete_string)
+        # Trying from disk as Jean-Zay breaks when no internet
+        embeddings = get_embeddings_disk(complete_string)
+        # embeddings = get_embeddings(complete_string)
         all_embeddings.append(embeddings)
     return all_embeddings
 
@@ -551,7 +558,7 @@ def decoding_from_criterion(criterion, epochs, level, subject):
     """
 
     all_scores = []
-    
+
     # All epochs -> Decoding and generate evoked potentials
     if criterion == "embeddings" or criterion.__contains__('min'):
         criterion = f"emb_{level}"
@@ -584,10 +591,12 @@ def decoding_from_criterion(criterion, epochs, level, subject):
         print(f'For: {level}')
         try:
             strategy = criterion.split('bow_')[1]
-        except:
-            print('No bow strategy given: basic sum will be applied') 
+        except Exception as e:
+            print('No bow strategy given: basic sum will be applied')
+            print(e)
             strategy = 'sum'
-        embeddings = generate_embeddings_bow(epochs.metadata, level, strategy=strategy)
+        embeddings = generate_embeddings_bow(epochs.metadata,
+                                             level, strategy=strategy)
         embeddings = np.array([emb for emb in embeddings])
         R_vec = decod_xy(X, embeddings)
         scores = np.mean(R_vec, axis=1)
@@ -597,7 +606,8 @@ def decoding_from_criterion(criterion, epochs, level, subject):
         nb_words = criterion.split("multiple_words")[1][:1]
         print(f"Multiple word decoding: for {nb_words} words")
         print(f'For: {level}')
-        embeddings = generate_embeddings_sum(epochs.metadata, level, int(nb_words))
+        embeddings = generate_embeddings_sum(epochs.metadata,
+                                             level, int(nb_words))
         embeddings = np.array([emb for emb in embeddings])
         R_vec = decod_xy(X, embeddings)
         scores = np.mean(R_vec, axis=1)
@@ -605,7 +615,8 @@ def decoding_from_criterion(criterion, epochs, level, subject):
     elif criterion.__contains__("only"):
         n_th_word = criterion.split("only")[1]
         print(f"{level} nth word embedding decoding: for {n_th_word} word")
-        embeddings = generate_nth_embedding(epochs.metadata, level, int(n_th_word))
+        embeddings = generate_nth_embedding(epochs.metadata,
+                                            level, int(n_th_word))
         embeddings = np.array([emb for emb in embeddings])
         R_vec = decod_xy(X, embeddings)
         scores = np.mean(R_vec, axis=1)
@@ -616,7 +627,8 @@ def decoding_from_criterion(criterion, epochs, level, subject):
         print("Word embeddings decoding")
         print(f'For: {level}')
         nlp = spacy.load("fr_core_news_sm")
-        embeddings = epochs.metadata.word.apply(lambda word: nlp(word).vector).values
+        embeddings = epochs.metadata.word.\
+            apply(lambda word: nlp(word).vector).values
         embeddings = np.array([emb for emb in embeddings])
         R_vec = decod_xy(X, embeddings)
         scores = np.mean(R_vec, axis=1)
