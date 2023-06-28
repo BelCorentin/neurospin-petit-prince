@@ -481,6 +481,7 @@ def generate_embeddings_bow(meta, level, strategy='sum'):
     all_embeddings = []
     nlp = load_spacy()
     for level_id, df in meta.groupby(["run", f"{level}_id"]):
+        print(df.shape[0])
         assert df.shape[0] == 1
         emb_list = []
         nb_words = df[f"{level}_words"].values[0].shape[0]

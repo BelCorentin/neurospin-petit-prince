@@ -272,7 +272,15 @@ def select_meta_subset(meta, level, decoding_criterion):
     Select only the rows containing the True for the conditions
     Simplified to only get for the onset: sentence onset epochs, constituent onset epochs,etc
     """
+    # When running the analysis on all decoding criterions, to try to get more stable
+    # results; especially when comparing only1,2,3,4, it might be better to set the decoding on 
+    # the same subset: select only sentences longer than 5 words; so the decoders are trained
+    # on the same dataset
 
+    if level == 'sentence':
+        sel = meta.query(f"{level}_onset==True and sentence_length >= 5")
+        assert sel.shape[0] > 10
+        return sel
     # In the case of sentences, it might be worth it to try to
     # Only select longer sentences ?
     # Like:
