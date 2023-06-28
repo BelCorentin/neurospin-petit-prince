@@ -10,6 +10,7 @@ modalities = ('visual', 'auditory')
 starts = ('onset', 'offset')
 
 
+
 def get_parser(args):
     parser = argparse.ArgumentParser(description='Launch the LPP analysis')
 
@@ -53,6 +54,7 @@ def main(args):
     class Task:
         def __call__(self, subject):
             if total:
+                level = 'sentence'
                 # Iterate on modalities, starts, decoding criterions
                 for modality in modalities:
                     for start in starts:
@@ -62,8 +64,6 @@ def main(args):
                 print('Decoding criterion chosen: ', criterion)
                 print('Decoding modality chosen: ', modality)
                 print(f'Doing it for subject: {subject}')
-                
-
                 analysis_subject(subject, modality, start, level, criterion)
 
     task = Task()
