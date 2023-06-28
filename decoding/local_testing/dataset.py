@@ -284,11 +284,16 @@ def select_meta_subset(meta, level, decoding_criterion):
         sel = meta.query(f"{level}_onset==True and is_last_word==True")
     # For debugging sentence embeddings
     elif decoding_criterion.__contains__("embeddings_multiple_words"):
-        sel = meta.query(f"{level}_onset==True and sent_length > 3")
+        min = decoding_criterion.split("multiple_words")[1]
+        sel = meta.query(f"{level}_onset==True and {level}_length >= {min}")
     # For choosing subsets of sentence / constituent of minimal length:
     elif decoding_criterion.__contains__("min"):
         min = decoding_criterion.split("_min")[1]
-        sel = meta.query(f"{level}_onset==True and {level}_length > {min}")
+        sel = meta.query(f"{level}_onset==True and {level}_length >= {min}")
+    # Handling only n_th word embeddings
+    elif decoding_criterion.__contains__("only"):
+        min = decoding_criterion.split("only")[1]
+        sel = meta.query(f"{level}_onset==True and {level}_length >= {min}")
     else:
         sel = meta.query(f"{level}_onset==True")
     assert sel.shape[0] > 10

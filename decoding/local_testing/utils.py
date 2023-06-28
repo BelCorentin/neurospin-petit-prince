@@ -442,6 +442,12 @@ def generate_embeddings(meta, level):
     return all_embeddings
 
 
+@lru_cache(maxsize=1)
+def load_spacy():
+    nlp = spacy.load("fr_core_news_sm")
+    return nlp
+
+
 def generate_embeddings_sum(meta, level, nb_words):
     """
     Generate embeddings from the metadata:
@@ -450,14 +456,36 @@ def generate_embeddings_sum(meta, level, nb_words):
 
     Returns: a list of embeddings a size meta.shape[0]
     """
-    nlp = spacy.load("fr_core_news_sm")
     all_embeddings = []
+    nlp = load_spacy()
     for level_id, df in meta.groupby(["run", f"{level}_id"]):
+        assert df.shape[0] == 1
         emb_list = []
         for word_i in range(nb_words):
             word = df[f"{level}_words"].values[0][word_i]
             emb = nlp(word).vector
             emb_list.append(emb)
+        summed_emb = np.sum(emb_list, axis=0)
+        all_embeddings.append(summed_emb)
+    return all_embeddings
+
+
+def generate_nth_embedding(meta, level, n_th_word):
+    """
+    Generate embeddings from the metadata:
+    Using the meta.{level}_words: use the spacy embeddings
+    of the n_th word wanted
+
+    Returns: a list of embeddings a size meta.shape[0]
+    """
+    all_embeddings = []
+    nlp = load_spacy()
+    for level_id, df in meta.groupby(["run", f"{level}_id"]):
+        assert df.shape[0] == 1
+        emb_list = []
+        word = df[f"{level}_words"].values[0][n_th_word-1]
+        emb = nlp(word).vector
+        emb_list.append(emb)
         summed_emb = np.sum(emb_list, axis=0)
         all_embeddings.append(summed_emb)
     return all_embeddings
@@ -490,7 +518,7 @@ def decoding_from_criterion(criterion, epochs, level, subject):
     """
 
     all_scores = []
-
+    
     # All epochs -> Decoding and generate evoked potentials
     if criterion == "embeddings" or criterion.__contains__('min'):
         criterion = f"emb_{level}"
@@ -517,7 +545,7 @@ def decoding_from_criterion(criterion, epochs, level, subject):
         R_vec = decod_xy(X, embeddings)
         scores = np.mean(R_vec, axis=1)
 
-    # DEBUGGING SENTENCE EMBD: adding multiple word embeddings
+    # Summing multiple word embeddings case
     elif criterion.__contains__("multiple_words"):
         nb_words = criterion.split("multiple_words")[1][:1]
         print(f"Multiple word decoding: for {nb_words} words")
@@ -526,6 +554,16 @@ def decoding_from_criterion(criterion, epochs, level, subject):
         embeddings = np.array([emb for emb in embeddings])
         R_vec = decod_xy(X, embeddings)
         scores = np.mean(R_vec, axis=1)
+
+    elif criterion.__contains__("only"):
+        n_th_word = criterion.split("only")[1]
+        print(f"{level} nth word embedding decoding: for {n_th_word} word")
+        embeddings = generate_nth_embedding(epochs.metadata, level, int(n_th_word))
+        embeddings = np.array([emb for emb in embeddings])
+        R_vec = decod_xy(X, embeddings)
+        scores = np.mean(R_vec, axis=1)
+
+    #  Simple word embeddings
     elif criterion.__contains__("word"):
         # Same, with get_embeddings
         print("Word embeddings decoding")
