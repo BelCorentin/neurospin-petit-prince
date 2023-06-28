@@ -481,7 +481,6 @@ def generate_embeddings_bow(meta, level, strategy='sum'):
     all_embeddings = []
     nlp = load_spacy()
     for level_id, df in meta.groupby(["run", f"{level}_id"]):
-        print(df.shape[0])
         assert df.shape[0] == 1
         emb_list = []
         nb_words = df[f"{level}_words"].values[0].shape[0]
@@ -489,10 +488,11 @@ def generate_embeddings_bow(meta, level, strategy='sum'):
             word = df[f"{level}_words"].values[0][word_i]
             emb = nlp(word).vector
             emb_list.append(emb)
-        if strategy == 'sum':
-            summed_emb = np.sum(emb_list, axis=0)
-        elif strategy == 'mean':
+        if strategy == 'mean':
             summed_emb = np.mean(emb_list, axis=0)
+        else:
+            summed_emb = np.sum(emb_list, axis=0)
+
         all_embeddings.append(summed_emb)
     return all_embeddings
 
@@ -582,7 +582,12 @@ def decoding_from_criterion(criterion, epochs, level, subject):
     elif criterion.__contains__("bow"):
         print("BOW decoding")
         print(f'For: {level}')
-        embeddings = generate_embeddings_bow(epochs.metadata, level)
+        try:
+            strategy = criterion.split('bow_')[1]
+        except:
+            print('No bow strategy given: basic sum will be applied') 
+            strategy = 'sum'
+        embeddings = generate_embeddings_bow(epochs.metadata, level, strategy=strategy)
         embeddings = np.array([emb for emb in embeddings])
         R_vec = decod_xy(X, embeddings)
         scores = np.mean(R_vec, axis=1)
