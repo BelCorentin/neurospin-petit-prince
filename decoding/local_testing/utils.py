@@ -470,6 +470,32 @@ def generate_embeddings_sum(meta, level, nb_words):
     return all_embeddings
 
 
+def generate_embeddings_bow(meta, level, strategy='sum'):
+    """
+    Generate embeddings from the metadata:
+    Using the meta.{level}_words: use the spacy embeddings
+    of the sum of the words wanted
+
+    Returns: a list of embeddings a size meta.shape[0]
+    """
+    all_embeddings = []
+    nlp = load_spacy()
+    for level_id, df in meta.groupby(["run", f"{level}_id"]):
+        assert df.shape[0] == 1
+        emb_list = []
+        nb_words = df[f"{level}_words"].values[0].shape[0]
+        for word_i in range(nb_words):
+            word = df[f"{level}_words"].values[0][word_i]
+            emb = nlp(word).vector
+            emb_list.append(emb)
+        if strategy == 'sum':
+            summed_emb = np.sum(emb_list, axis=0)
+        elif strategy == 'mean':
+            summed_emb = np.mean(emb_list, axis=0)
+        all_embeddings.append(summed_emb)
+    return all_embeddings
+
+
 def generate_nth_embedding(meta, level, n_th_word):
     """
     Generate embeddings from the metadata:
@@ -506,14 +532,20 @@ def decoding_from_criterion(criterion, epochs, level, subject):
         constituent or word.
     - embeddings_multiple_words{x}: where x is an integer between 1 and 3:
         decodes the sum of embeddings of the x following words
+    - embeddings_min{x}: where x is an int:
+        decodes embeddings for sent/const of minimum length x
+    - only{x}: where x is an int:
+        decodes only the word embedding for sent/const at position x
+    - bow:
+        decodes the [sum/mean] of the sent/const's word embeddings
     - word_const_non_end / word_const_end: decodes the words embeddings
         of a subset: words that end a constituant vs words that don't
     - wlength: the length of the word
 
     Returns:
     Two dataframes:
-    - all_scores: decoding scores for each subject / starts x levels
-    - all_evos: ERP plots for each subject / starts x levels
+    - all_scores: decoding scores for the subject / level / criterion
+    on an arbitrary time window
 
     """
 
@@ -542,6 +574,15 @@ def decoding_from_criterion(criterion, epochs, level, subject):
         for prob in problematic_rows[0]:
             embeddings[:, prob] = 1e-3 * np.random.rand(embeddings.shape[0])
 
+        R_vec = decod_xy(X, embeddings)
+        scores = np.mean(R_vec, axis=1)
+
+    # BOW decoding
+    elif criterion.__contains__("bow"):
+        print("BOW decoding")
+        print(f'For: {level}')
+        embeddings = generate_embeddings_bow(epochs.metadata, level)
+        embeddings = np.array([emb for emb in embeddings])
         R_vec = decod_xy(X, embeddings)
         scores = np.mean(R_vec, axis=1)
 

@@ -69,7 +69,7 @@ EPOCH_WINDOWS = {
 
 
 # LRU cache is useful for notebooks
-@lru_cache(maxsize=1)
+@lru_cache(maxsize=9)
 def read_raw(subject, run_id, events_return=False, modality="visual"):
     print(f"Reading raw files for modality: {modality}")
     path = get_path(modality)
