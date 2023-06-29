@@ -512,6 +512,113 @@ def sub_avg_plot(level, start, decoding_criterion, modality, from_scores=False, 
     )
 
 
+## Group analysis plots, more complex
+
+
+def labelize_criterion(criterion):
+    if criterion.__contains__('only'):
+        nb_only = criterion.split('only')[1]
+        return f'sentence {nb_only}st word embedding'
+    elif criterion == 'bow':
+        return 'Bag of Words embedding'
+    elif criterion == 'embeddings':
+        return 'LASER embed'
+    elif criterion.__contains__('multiple_words'):
+        nb_only = criterion.split('multiple_words')[1]
+        return f'sentence {nb_only} words embedding'
+    
+
+def plot_all_conditions_one_subject(subject, modalities, starts, criterions, level):
+    figure = plt.figure(figsize=(32, 20), dpi=80)
+    fig, axes = plt.subplots(2, 2)
+    for axes_, modality in zip(axes, modalities):
+        for ax, start in zip(axes_, starts):
+            # For each criterion:
+            # Plot the score associated
+            
+            # For embeddings (laser), bow, only1;2 etc .. it's direct
+            # Then outside of the for crit in criterion, plot the sum of decoding scores for 
+            # all the only...
+            for decoding_criterion in criterions:
+                
+                data = load_scores(subject, level, start, decoding_criterion, modality)
+                y = []
+                x = []
+                for s, t in data.groupby("t"):
+                    score_avg = t.score.mean()
+                    y.append(score_avg)
+                    x.append(s)
+                label = labelize_criterion(decoding_criterion)
+                ax.fill_between(x, y, label=label, alpha=0.7)
+                
+
+                ax.set_title(f"{modality} {start}")
+                ax.axhline(y=0, color="r", linestyle="-")
+                
+            # Summing decoding scores of n_th_words
+            all_data = pd.DataFrame()
+            for i in range(1,6):
+                data = load_scores(subject, level, start, f'only{i}', modality)
+                all_data = pd.concat([all_data, data])
+            y = []
+            x = []
+            for s, t in all_data.groupby("t"):
+                score_summed = t.score.sum()
+                y.append(score_summed)
+                x.append(s)
+            #ax.fill_between(x, y, label='sum of decoding performances', alpha=0.6)
+            #ax.set_title(f"{modality} {start}")
+            #ax.axhline(y=0, color="r", linestyle="-")
+
+    plt.suptitle(f"Decoding Performance for {subject}")
+    plt.legend()
+
+
+def plot_sentence_simple(criterions, subject, start, modality):
+    level = 'sentence'
+    figure = plt.figure(figsize=(32, 20), dpi=80)
+    fig, axes = plt.subplots(1, 1)
+
+    # For each criterion:
+    # Plot the score associated
+
+    # For embeddings (laser), bow, only1;2 etc .. it's direct
+    # Then outside of the for crit in criterion, plot the sum of decoding scores for 
+    # all the only...
+
+    for decoding_criterion in criterions:
+        data = load_scores(subject, level, start, decoding_criterion, modality)
+        y = []
+        x = []
+        for s, t in data.groupby("t"):
+            score_avg = t.score.mean()
+            y.append(score_avg)
+            x.append(s)
+        label = labelize_criterion(decoding_criterion)
+        axes.fill_between(x, y, label=label, alpha=0.7)
+
+
+        axes.set_title(f"{modality} {start}")
+        axes.axhline(y=0, color="r", linestyle="-")
+
+    # Summing decoding scores of n_th_words
+    all_data = pd.DataFrame()
+    for i in range(1, 6):
+        data = load_scores(subject, level, start, f'only{i}', modality)
+        all_data = pd.concat([all_data, data])
+    y = []
+    x = []
+    for s, t in all_data.groupby("t"):
+        score_summed = t.score.sum()
+        y.append(score_summed)
+        x.append(s)
+    # axes.fill_between(x, y, label='sum of decoding performances', alpha=0.6)
+    # axes.set_title(f"{modality} {start}")
+    # axes.axhline(y=0, color="r", linestyle="-")
+
+    plt.suptitle(f"Decoding Performance for {subject}")
+    plt.legend()
+
 # # OLD AND NOT WORKING ANYMORE
 
 # def load_scores_debug(modality, decoding_criterion):
