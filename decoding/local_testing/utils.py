@@ -439,8 +439,8 @@ def generate_embeddings(meta, level):
     for level_id, df in meta.groupby(["run", f"{level}_id"]):
         # complete_string = " ".join(df[f"{level}_words"].values[0])
         # Trying from disk as Jean-Zay breaks when no internet
-        run_id = df.run[0]
-        level_id = df[f"{level}_id"][0]
+        run_id = df.run.values[0]
+        level_id = df[f"{level}_id"].values[0]
         embeddings = get_embeddings_disk(run_id, level_id, level)
         # embeddings = get_embeddings(complete_string)
         all_embeddings.append(embeddings)
