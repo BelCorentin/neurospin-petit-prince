@@ -665,7 +665,7 @@ def plot_all_conditions(modalities, starts, criterions, level):
                         data_one = load_scores(
                             subject, level, start, decoding_criterion, modality
                         )
-                        pd.concat([data, data_one])
+                        data = pd.concat([data, data_one])
                     except Exception as e:
                         print(e)
 
