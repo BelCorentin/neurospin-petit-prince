@@ -655,7 +655,14 @@ def plot_all_conditions(subjects, modalities, starts, criterions, level):
             # all the only...
             for decoding_criterion in criterions:
 
-                data = load_scores(subject, level, start, decoding_criterion, modality)
+                # Iteration on subject to mean their data
+                data = pd.DataFrame
+                for subject in subjects:
+                    data_one = load_scores(
+                        subject, level, start, decoding_criterion, modality
+                    )
+                    pd.concat([data, data_one])
+
                 y = []
                 x = []
                 for s, t in data.groupby("t"):
