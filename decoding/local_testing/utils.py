@@ -418,8 +418,7 @@ def get_embeddings_disk(run_id, level_id, level):
     dim = 1024
 
     embeds = np.fromfile(
-        f"{get_code_path()}/decoding/\
-        local_testing/embeds/emb/run{run_id}_{level}_{level_id}.bin",
+        f"{get_code_path()}/decoding/local_testing/embeds/emb/run{run_id}_{level}_{level_id}.bin",
         dtype=np.float32,
         count=-1,
     )
@@ -441,6 +440,7 @@ def generate_embeddings(meta, level):
         # complete_string = " ".join(df[f"{level}_words"].values[0])
         # Trying from disk as Jean-Zay breaks when no internet
         run_id = df.run[0]
+        level_id = df[f"{level}_id"][0]
         embeddings = get_embeddings_disk(run_id, level_id, level)
         # embeddings = get_embeddings(complete_string)
         all_embeddings.append(embeddings)
