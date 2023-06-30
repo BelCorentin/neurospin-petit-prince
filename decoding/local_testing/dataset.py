@@ -634,7 +634,7 @@ def plot_sentence_simple(criterions, subject, start, modality):
     plt.legend()
 
 
-def plot_all_conditions(subjects, modalities, starts, criterions, level):
+def plot_all_conditions(modalities, starts, criterions, level):
     """
     Plot all the conditions, for all subjects
 
@@ -646,6 +646,9 @@ def plot_all_conditions(subjects, modalities, starts, criterions, level):
     figure = plt.figure(figsize=(32, 20), dpi=80)
     fig, axes = plt.subplots(2, 2)
     for axes_, modality in zip(axes, modalities):
+        path = get_path(modality)
+        subjects = get_subjects(path)[2:]
+
         for ax, start in zip(axes_, starts):
             # For each criterion:
             # Plot the score associated
