@@ -661,10 +661,13 @@ def plot_all_conditions(modalities, starts, criterions, level):
                 # Iteration on subject to mean their data
                 data = pd.DataFrame()
                 for subject in subjects:
-                    data_one = load_scores(
-                        subject, level, start, decoding_criterion, modality
-                    )
-                    pd.concat([data, data_one])
+                    try:
+                        data_one = load_scores(
+                            subject, level, start, decoding_criterion, modality
+                        )
+                        pd.concat([data, data_one])
+                    except Exception as e:
+                        print(e)
 
                 y = []
                 x = []
