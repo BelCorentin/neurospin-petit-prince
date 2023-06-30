@@ -659,7 +659,7 @@ def plot_all_conditions(modalities, starts, criterions, level):
             for decoding_criterion in criterions:
 
                 # Iteration on subject to mean their data
-                data = pd.DataFrame
+                data = pd.DataFrame()
                 for subject in subjects:
                     data_one = load_scores(
                         subject, level, start, decoding_criterion, modality
