@@ -558,7 +558,7 @@ def plot_all_conditions_one_subject(subject, modalities, starts, criterions, lev
             # For embeddings (laser), bow, only1;2 etc .. it's direct
             # Then outside of the for crit in criterion, plot the sum of decoding scores for
             # all the only...
-            for decoding_criterion in criterions:
+            for decoding_criterion in np.atleast_1d(criterions):
 
                 data = load_scores(subject, level, start, decoding_criterion, modality)
                 y = []
@@ -604,7 +604,7 @@ def plot_sentence_simple(criterions, subject, start, modality):
     # Then outside of the for crit in criterion, plot the sum of decoding scores for
     # all the only...
 
-    for decoding_criterion in criterions:
+    for decoding_criterion in np.atleast_1d(criterions):
         data = load_scores(subject, level, start, decoding_criterion, modality)
         y = []
         x = []
@@ -659,7 +659,7 @@ def plot_all_conditions(modalities, starts, criterions, level):
             # For embeddings (laser), bow, only1;2 etc .. it's direct
             # Then outside of the for crit in criterion, plot the sum of decoding scores for
             # all the only...
-            for decoding_criterion in criterions:
+            for decoding_criterion in np.atleast_1d(criterions):
 
                 # Iteration on subject to mean their data
                 data = pd.DataFrame()
