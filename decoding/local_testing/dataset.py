@@ -300,7 +300,10 @@ def select_meta_subset(meta, level, decoding_criterion):
     # Handling only n_th word embeddings
     elif decoding_criterion.__contains__("only"):
         min = decoding_criterion.split("only")[1]
-        sel = meta.query(f"{level}_onset==True and {level}_length >= {min}")
+        if level == "word":
+            sel = meta.query(f"{level}_onset==True")
+        else:
+            sel = meta.query(f"{level}_onset==True and {level}_length >= {min}")
     else:
         sel = meta.query(f"{level}_onset==True")
     assert sel.shape[0] > 10
