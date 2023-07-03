@@ -1,4 +1,4 @@
-# first line: 179
+# first line: 181
 @disk_cache
 def add_syntax(meta, syntax_path, run):
     """
@@ -29,8 +29,7 @@ def add_syntax(meta, syntax_path, run):
     # Clean the meta tokens to match synt tokens
     meta_tokens = meta.word.fillna("XXXX").apply(format_text).values
     # Get the word after the hyphen to match the synt tokens
-    meta_tokens = [stri.split("'")[1]
-                   if "'" in stri else stri for stri in meta.word]
+    meta_tokens = [stri.split("'")[1] if "'" in stri else stri for stri in meta.word]
     # Remove the punctuation
     translator = str.maketrans("", "", string.punctuation)
     meta_tokens = [stri.translate(translator) for stri in meta_tokens]
@@ -49,8 +48,7 @@ def add_syntax(meta, syntax_path, run):
     i, j = match_list(meta_tokens, synt_tokens)
     assert (len(i) / len(meta_tokens)) > 0.8
 
-    for key, default_value in dict(n_closing=1,
-                                   is_last_word=False, pos="XXX").items():
+    for key, default_value in dict(n_closing=1, is_last_word=False, pos="XXX").items():
         meta[key] = default_value
         meta.loc[i, key] = synt.iloc[j][key].values
 
