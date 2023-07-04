@@ -1,6 +1,11 @@
 """
 
-DATASET related functions
+This dataset.py file contains all the functions that are needed
+to either read, preprocess, populate, epochs, or in general deal
+with the MEG data, metadata etc..
+
+All the more general functions, not necessarily linked to the LPP
+dataset will be put in utils.py instead
 
 """
 
@@ -21,6 +26,8 @@ from utils import (
     add_syntax,
     mne_events,
     decoding_from_criterion,
+    get_code_path,
+    get_path,
 )
 import spacy
 import matplotlib.pyplot as plt
@@ -43,7 +50,8 @@ CHAPTERS = {
     9: "26-27",
 }
 
-
+# The dict setting the epoch windows times:
+# Can be adapted depending on sentence / constituent length?
 EPOCH_WINDOWS = {
     "word": {
         "onset_min": -0.3,
@@ -67,9 +75,17 @@ EPOCH_WINDOWS = {
 # FUNC
 
 
-# LRU cache is useful for notebooks
+# Putting a lru_cache here when iterating on notebooks,
+# Or when doing multiple decodings for the same subject
 @lru_cache(maxsize=9)
 def read_raw(subject, run_id, events_return=False, modality="visual"):
+    """
+    Basic function that for a subject, modality and run returns the epochs
+    object that has been aligned from the MEG metadata and STIM events file.
+
+    Returns an epochs object
+
+    """
     print(f"Reading raw files for modality: {modality}")
     path = get_path(modality)
     task_map = {"auditory": "listen", "visual": "read", "fmri": "listen"}
@@ -167,50 +183,11 @@ def read_raw(subject, run_id, events_return=False, modality="visual"):
         return raw, meta
 
 
-def get_path(name="visual"):
-    path_file = Path("./../../data/data_path.txt")
-    with open(path_file, "r") as f:
-        data = Path(f.readlines()[0].strip("\n"))
-    if name == "visual":
-        # TASK = "read"
-        data = data / "LPP_MEG_visual"
-
-    elif name == "auditory":
-        # TASK = "listen"
-        data = data / "LPP_MEG_auditory"
-    elif name == "fmri":
-        # TASK = "listen"
-        data = data / "LPP_MEG_fMRI"
-    else:
-        print(
-            f"{name} is an invalid name. \n\
-        Current options: visual and auditory, fmri"
-        )
-
-    return data
-
-
-def get_code_path():
-    path_file = Path("./../../data/origin.txt")
-    with open(path_file, "r") as f:
-        user = Path(f.readlines()[0].strip("\n"))
-        user = str(user)
-    if user == "XPS":
-        # TASK = "read"
-        data = get_path() / "../../code"
-    elif user == "NS":
-        # TASK = "listen"
-        data = get_path() / "../../../../code/neurospin-petit-prince"
-    elif user == "jeanzay":
-        # TASK = "listen"
-        data = Path("/gpfswork/rech/qtr/ulg98mt/code/neurospin-petit-prince")
-    else:
-        return f"{user} is an invalid name. \n\
-        Current options: XPS and NS"
-    return data
-
-
 def get_subjects(path):
+    """
+    Returns the subject list (list(String)) from
+    the path chosen
+    """
     subjects = pd.read_csv(str(path) + "/participants.tsv", sep="\t")
     subjects = subjects.participant_id.apply(lambda x: x.split("-")[1]).values
     # subjects = np.delete(subjects, subjects.shape[0]-1)
@@ -312,8 +289,6 @@ def select_meta_subset(meta, level, decoding_criterion):
 
 def epoch_on_selection(raw, sel, start, level):
     """
-    TODO: add adaptative baseline
-
     Epoching from the metadata having all onset events: if the start=Offset, the mne events
     Function will epoch on the offset of each level instead of the onset
     """
@@ -333,7 +308,11 @@ def epoch_on_selection(raw, sel, start, level):
 def apply_baseline(epochs, level, tmin=-0.300, tmax=0):
     """
     To be applied at the beginning of the preproc
+    TODO: check more thoroughly the exact part where it
+    should be applied
+    Applies a baseline to the epochs data
 
+    Returns the epochs object baselined
     """
     if level == "word":
         return epochs
@@ -441,9 +420,10 @@ def analysis_subject(
     """
     Decode for the criterion the correlation score between predicted
     and real criterion
+    E.g.: for sentence level, gives the Pearson Correlation between fitted/predicted
+    sentence embeddings & the real ones
 
     Returns a dataframe containing the scores, as well as saving it under ./results
-
     """
     file_path = (
         f"./results/{modality}/{decoding_criterion}_{level}_{start}_sub{subject}.csv"
@@ -470,6 +450,14 @@ def analysis_subject(
 
 
 def load_scores(subject, level, start, decoding_criterion, modality):
+    """
+    Loading scores of a:
+    - subject, for a level and given start, criterion and modality
+    that has run the function analysis_subject on them
+
+    Returns a pandas DF containing the scores, with columns:
+    subject, t, score
+    """
     file = f"./results/{modality}/{decoding_criterion}_{level}_{start}_sub{subject}.csv"
     scores = pd.read_csv(file)
     return scores
@@ -593,49 +581,50 @@ def plot_all_conditions_one_subject(subject, modalities, starts, criterions, lev
     plt.suptitle(f"Decoding Performance for {subject}")
     plt.legend()
 
-    def plot_sentence_simple(criterions, subject, start, modality):
-        level = "sentence"
-        figure = plt.figure(figsize=(32, 20), dpi=80)
-        fig, axes = plt.subplots(1, 1)
 
-        # For each criterion:
-        # Plot the score associated
+def plot_sentence_simple(criterions, subject, start, modality):
+    level = "sentence"
+    figure = plt.figure(figsize=(32, 20), dpi=80)
+    fig, axes = plt.subplots(1, 1)
 
-        # For embeddings (laser), bow, only1;2 etc .. it's direct
-        # Then outside of the for crit in criterion, plot the sum of decoding scores for
-        # all the only...
+    # For each criterion:
+    # Plot the score associated
 
-        for decoding_criterion in np.atleast_1d(criterions):
-            data = load_scores(subject, level, start, decoding_criterion, modality)
-            y = []
-            x = []
-            for s, t in data.groupby("t"):
-                score_avg = t.score.mean()
-                y.append(score_avg)
-                x.append(s)
-            label = labelize_criterion(decoding_criterion)
-            axes.fill_between(x, y, label=label, alpha=0.7)
+    # For embeddings (laser), bow, only1;2 etc .. it's direct
+    # Then outside of the for crit in criterion, plot the sum of decoding scores for
+    # all the only...
 
-            axes.set_title(f"{modality} {start}")
-            axes.axhline(y=0, color="r", linestyle="-")
-
-        # Summing decoding scores of n_th_words
-        all_data = pd.DataFrame()
-        for i in range(1, 6):
-            data = load_scores(subject, level, start, f"only{i}", modality)
-            all_data = pd.concat([all_data, data])
+    for decoding_criterion in np.atleast_1d(criterions):
+        data = load_scores(subject, level, start, decoding_criterion, modality)
         y = []
         x = []
-        for s, t in all_data.groupby("t"):
-            score_summed = t.score.sum()
-            y.append(score_summed)
+        for s, t in data.groupby("t"):
+            score_avg = t.score.mean()
+            y.append(score_avg)
             x.append(s)
-        # axes.fill_between(x, y, label='sum of decoding performances', alpha=0.6)
-        # axes.set_title(f"{modality} {start}")
-        # axes.axhline(y=0, color="r", linestyle="-")
+        label = labelize_criterion(decoding_criterion)
+        axes.fill_between(x, y, label=label, alpha=0.7)
 
-        plt.suptitle(f"Decoding Performance for {subject}")
-        plt.legend()
+        axes.set_title(f"{modality} {start}")
+        axes.axhline(y=0, color="r", linestyle="-")
+
+    # Summing decoding scores of n_th_words
+    all_data = pd.DataFrame()
+    for i in range(1, 6):
+        data = load_scores(subject, level, start, f"only{i}", modality)
+        all_data = pd.concat([all_data, data])
+    y = []
+    x = []
+    for s, t in all_data.groupby("t"):
+        score_summed = t.score.sum()
+        y.append(score_summed)
+        x.append(s)
+    # axes.fill_between(x, y, label='sum of decoding performances', alpha=0.6)
+    # axes.set_title(f"{modality} {start}")
+    # axes.axhline(y=0, color="r", linestyle="-")
+
+    plt.suptitle(f"Decoding Performance for {subject}")
+    plt.legend()
 
 
 def plot_all_conditions(modalities, starts, criterions, level):

@@ -1,6 +1,9 @@
 """
 
-General functions for decoding purposes
+This utils.py file will regroup all the functions that are not 
+directly linked to the LPP dataset, such as training a 
+Ridge Regression, generating embeddings from a text, etc..
+
 
 """
 
@@ -46,6 +49,11 @@ memory = Memory(location="./cache", verbose=0)
 def disk_cache(func):
     @functools.wraps(func)
     def wrapper(*args, **kwargs):
+        """
+        JR's function for disk caching
+        Can be useful when not wanting to recalculate embeddings for example
+        Things such as API calls to HuggingFace can be prevented with this
+        """
         args_size = sys.getsizeof(args) + sys.getsizeof(kwargs)
         if args_size > 10 * 1024 * 1024:
             raise ValueError("Arguments size exceeds 10MB limit.")
@@ -61,11 +69,12 @@ def disk_cache(func):
     return wrapper
 
 
-# Function to return the Pearson correlation
-# Between X and Y
-
-
 def get_path(name="visual"):
+    """
+    Returns the path of the data
+
+    If it fails, make sure you have the data/data_path.txt file!
+    """
     path_file = Path("./../../data/data_path.txt")
     with open(path_file, "r") as f:
         data = Path(f.readlines()[0].strip("\n"))
@@ -89,6 +98,12 @@ def get_path(name="visual"):
 
 
 def get_code_path():
+    """
+    Returns the path of the code depending on the workstation
+
+    If fails: make sure you have the data/origin.txt file
+    that points to the data!
+    """
     path_file = Path("./../../data/origin.txt")
     with open(path_file, "r") as f:
         user = Path(f.readlines()[0].strip("\n"))
@@ -104,7 +119,7 @@ def get_code_path():
         data = Path("/gpfswork/rech/qtr/ulg98mt/code/neurospin-petit-prince")
     else:
         return f"{user} is an invalid name. \n\
-        Current options: XPS and NS"
+        Current options: XPS and NS and jeanzay"
     return data
 
 
@@ -642,23 +657,3 @@ def decoding_from_criterion(criterion, epochs, level, subject):
         )
 
     return all_scores
-
-
-def plot_scores(all_scores, levels, starts, decoding_criterion):
-    # figure = plt.figure(figsize=(16, 10), dpi=80)
-    fig, axes = plt.subplots(3, 2)
-    for axes_, level in zip(axes, levels):
-        for ax, start in zip(axes_, starts):
-            cond1 = all_scores.level == f"{level}"
-            cond2 = all_scores.start == f"{start}"
-            data = all_scores[cond1 & cond2]
-            y = []
-            x = []
-            for s, t in data.groupby("t"):
-                score_avg = t.score.mean()
-                y.append(score_avg)
-                x.append(s)
-            ax.plot(x, y)
-            ax.set_title(f"{level} {start}")
-            ax.axhline(y=0, color="r", linestyle="-")
-    plt.suptitle(f"Decoding Performance for {decoding_criterion}")
