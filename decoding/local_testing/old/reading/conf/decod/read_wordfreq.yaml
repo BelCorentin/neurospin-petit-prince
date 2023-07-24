@@ -1,4 +1,0 @@
-decoding_criterion: "word_freq"
-task: "read"
-baseline_min: -0.2
-baseline_max: 0.8

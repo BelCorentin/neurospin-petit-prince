@@ -1,5 +1,0 @@
-decoding_criterion: "syntax"
-task: "read"
-baseline_min: -0.2
-baseline_max: 1.2
-decode_on: "word"
