@@ -428,7 +428,7 @@ def get_embeddings_disk(run_id, level_id, level):
     dim = 1024
 
     embeds = np.fromfile(
-        f"{get_code_path()}/decoding/local_testing/embeds/emb/run{run_id}_{level}_{level_id}.bin",
+        f"{get_code_path()}/decoding/data/embeds/emb/run{run_id}_{level}_{level_id}.bin",
         dtype=np.float32,
         count=-1,
     )
