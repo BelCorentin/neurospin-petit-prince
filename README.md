@@ -5,7 +5,7 @@ This repo contains all the code for the Le Petit Prince experiment.
 It is divided into 5 parts: 
 
 - data: all the data files (parsers output, embeddings, path files)
-## Note: 
+#### Hint: 
 You need to create both the data_path.txt and the origin.txt files
 e.g:
 ``` 
@@ -21,7 +21,7 @@ Then add your my_computer to the function get_code_path in decoding/functions/ut
 - documentation: documentation about the LPP_experiment
 
 - LPP_experiment: code and documentation about the visual MEG Experiment, STIM, etc.. 
-## Note:
+#### Hint:
 For the auditory experiment, it is available in this repository:
 https://github.com/chrplr/lpp-paradigm/tree/merging-meg-fmri
 
