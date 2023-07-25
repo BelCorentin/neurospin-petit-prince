@@ -72,6 +72,7 @@ from utils import (
     get_path,
 )
 
+mne.set_log_level(verbose="error")
 nlp = spacy.load("fr_core_news_sm")
 
 # The dict setting the epoch windows times:
