@@ -1,1846 +1,1846 @@
-word	position	sentence_id
-La	1	1
-sixième	2	1
-planète	3	1
-était	4	1
-une	5	1
-planète	6	1
-dix	7	1
-fois	8	1
-plus	9	1
-vaste	10	1
-Elle	1	2
-était	2	2
-habitée	3	2
-par	4	2
-un	5	2
-vieux	6	2
-monsieur	7	2
-qui	8	2
-écrivait	9	2
-d	10	2
-énormes	11	2
-livres	12	2
-tiens	1	3
-Voilà	1	4
-un	2	4
-explorateur	3	4
-S	1	5
-écria	2	5
-t	3	5
-il	4	5
-quand	5	5
-il	6	5
-aperçut	7	5
-le	8	5
-petit	9	5
-prince	10	5
-Le	1	6
-petit	2	6
-prince	3	6
-s	4	6
-assit	5	6
-sur	6	6
-la	7	6
-table	8	6
-et	9	6
-souffla	10	6
-un	11	6
-peu	12	6
-Il	1	7
-avait	2	7
-déjà	3	7
-tant	4	7
-voyagé	5	7
-d	1	8
-où	2	8
-viens	3	8
-tu	4	8
-Lui	1	9
-dit	2	9
-le	3	9
-vieux	4	9
-monsieur	5	9
-Quel	1	10
-est	2	10
-ce	3	10
-gros	4	10
-livre	5	10
-Dit	1	11
-le	2	11
-petit	3	11
-prince	4	11
-Que	1	12
-faites	2	12
-vous	3	12
-ici	4	12
-Je	1	13
-suis	2	13
-géographe	3	13
-dit	4	13
-le	5	13
-vieux	6	13
-monsieur	7	13
-Qu	1	14
-est	2	14
-ce	3	14
-qu	4	14
-un	5	14
-géographe	6	14
-C	1	15
-est	2	15
-un	3	15
-savant	4	15
-qui	5	15
-connaît	6	15
-où	7	15
-se	8	15
-trouvent	9	15
-les	10	15
-mers	11	15
-les	12	15
-fleuves	13	15
-les	14	15
-villes	15	15
-les	16	15
-montagnes	17	15
-et	18	15
-les	19	15
-déserts	20	15
-Ça	1	16
-c	2	16
-est	3	16
-bien	4	16
-intéressant	5	16
-dit	6	16
-le	7	16
-petit	8	16
-prince	9	16
-Ça	1	17
-c	2	17
-est	3	17
-enfin	4	17
-un	5	17
-véritable	6	17
-métier	7	17
-Et	1	18
-il	2	18
-jeta	3	18
-un	4	18
-coup	5	18
-d	6	18
-oeil	7	18
-autour	8	18
-de	9	18
-lui	10	18
-sur	11	18
-la	12	18
-planète	13	18
-du	14	18
-géographe	15	18
-Il	1	19
-n	2	19
-avait	3	19
-jamais	4	19
-vu	5	19
-encore	6	19
-une	7	19
-planète	8	19
-aussi	9	19
-majestueuse	10	19
-elle	1	20
-est	2	20
-bien	3	20
-belle	4	20
-votre	5	20
-planète	6	20
-Est	1	21
-ce	2	21
-qu	3	21
-il	4	21
-y	5	21
-a	6	21
-des	7	21
-océans	8	21
-Je	1	22
-ne	2	22
-puis	3	22
-pas	4	22
-le	5	22
-savoir	6	22
-dit	7	22
-le	8	22
-géographe	9	22
-Ah	1	23
-Le	1	24
-petit	2	24
-prince	3	24
-était	4	24
-déçu	5	24
-Et	1	25
-des	2	25
-montagnes	3	25
-Je	1	26
-ne	2	26
-puis	3	26
-pas	4	26
-le	5	26
-savoir	6	26
-dit	7	26
-le	8	26
-géographe	9	26
-Et	1	27
-des	2	27
-villes	3	27
-et	4	27
-des	5	27
-fleuves	6	27
-et	7	27
-des	8	27
-déserts	9	27
-Je	1	28
-ne	2	28
-puis	3	28
-pas	4	28
-le	5	28
-savoir	6	28
-non	7	28
-plus	8	28
-dit	9	28
-le	10	28
-géographe	11	28
-Mais	1	29
-vous	2	29
-êtes	3	29
-géographe	4	29
-C	1	30
-est	2	30
-exact	3	30
-dit	4	30
-le	5	30
-géographe	6	30
-mais	7	30
-je	8	30
-ne	9	30
-suis	10	30
-pas	11	30
-explorateur	12	30
-Je	1	31
-manque	2	31
-absolument	3	31
-d	4	31
-explorateurs	5	31
-Ce	1	32
-n	2	32
-est	3	32
-pas	4	32
-le	5	32
-géographe	6	32
-qui	7	32
-va	8	32
-faire	9	32
-le	10	32
-compte	11	32
-des	12	32
-villes	13	32
-des	14	32
-fleuves	15	32
-des	16	32
-montagnes	17	32
-des	18	32
-mers	19	32
-des	20	32
-océans	21	32
-et	22	32
-des	23	32
-déserts	24	32
-Le	1	33
-géographe	2	33
-est	3	33
-trop	4	33
-important	5	33
-pour	6	33
-flâner	7	33
-Il	1	34
-ne	2	34
-quitte	3	34
-pas	4	34
-son	5	34
-bureau	6	34
-Mais	1	35
-il	2	35
-y	3	35
-reçoit	4	35
-les	5	35
-explorateurs	6	35
-Il	1	36
-les	2	36
-interroge	3	36
-et	4	36
-il	5	36
-prend	6	36
-en	7	36
-note	8	36
-leurs	9	36
-souvenirs	10	36
-Et	1	37
-si	2	37
-les	3	37
-souvenirs	4	37
-de	5	37
-l	6	37
-un	7	37
-d	8	37
-entre	9	37
-eux	10	37
-lui	11	37
-paraissent	12	37
-intéressants	13	37
-le	14	37
-géographe	15	37
-fait	16	37
-faire	17	37
-une	18	37
-enquête	19	37
-sur	20	37
-la	21	37
-moralité	22	37
-de	23	37
-l	24	37
-explorateur	25	37
-Pourquoi	1	38
-ça	2	38
-Parce	1	39
-qu	2	39
-un	3	39
-explorateur	4	39
-qui	5	39
-mentirait	6	39
-entraînerait	7	39
-des	8	39
-catastrophes	9	39
-dans	10	39
-les	11	39
-livres	12	39
-de	13	39
-géographie	14	39
-Et	1	40
-aussi	2	40
-un	3	40
-explorateur	4	40
-qui	5	40
-boirait	6	40
-trop	7	40
-Pourquoi	1	41
-ça	2	41
-Fit	1	42
-le	2	42
-petit	3	42
-prince	4	42
-Parce	1	43
-que	2	43
-les	3	43
-ivrognes	4	43
-voient	5	43
-double	6	43
-Alors	1	44
-le	2	44
-géographe	3	44
-noterait	4	44
-deux	5	44
-montagnes	6	44
-là	7	44
-où	8	44
-il	9	44
-n	10	44
-y	11	44
-en	12	44
-a	13	44
-qu	14	44
-une	15	44
-seule	16	44
-Je	1	45
-connais	2	45
-quelqu	3	45
-un	4	45
-dit	5	45
-le	6	45
-petit	7	45
-prince	8	45
-qui	9	45
-serait	10	45
-mauvais	11	45
-explorateur	12	45
-C	1	46
-est	2	46
-possible	3	46
-Donc	1	47
-quand	2	47
-la	3	47
-moralité	4	47
-de	5	47
-l	6	47
-explorateur	7	47
-paraît	8	47
-bonne	9	47
-on	10	47
-fait	11	47
-une	12	47
-enquête	13	47
-sur	14	47
-sa	15	47
-découverte	16	47
-On	1	48
-va	2	48
-voir	3	48
-Non	1	49
-C	1	50
-est	2	50
-trop	3	50
-compliqué	4	50
-Mais	1	51
-on	2	51
-exige	3	51
-de	4	51
-l	5	51
-explorateur	6	51
-qu	7	51
-il	8	51
-fournisse	9	51
-des	10	51
-preuves	11	51
-S	1	52
-il	2	52
-s	3	52
-agit	4	52
-par	5	52
-exemple	6	52
-de	7	52
-la	8	52
-découverte	9	52
-d	10	52
-une	11	52
-grosse	12	52
-montagne	13	52
-on	14	52
-exige	15	52
-qu	16	52
-il	17	52
-en	18	52
-rapporte	19	52
-de	20	52
-grosses	21	52
-pierres	22	52
-Le	1	53
-géographe	2	53
-soudain	3	53
-s	4	53
-émut	5	53
-mais	1	54
-toi	2	54
-tu	3	54
-viens	4	54
-de	5	54
-loin	6	54
-Tu	1	55
-es	2	55
-explorateur	3	55
-Tu	1	56
-vas	2	56
-me	3	56
-décrire	4	56
-ta	5	56
-planète	6	56
-Et	1	57
-le	2	57
-géographe	3	57
-ayant	4	57
-ouvert	5	57
-son	6	57
-registre	7	57
-tailla	8	57
-son	9	57
-crayon	10	57
-On	1	58
-note	2	58
-d	3	58
-abord	4	58
-au	5	58
-crayon	6	58
-les	7	58
-récits	8	58
-des	9	58
-explorateurs	10	58
-On	1	59
-attend	2	59
-pour	3	59
-noter	4	59
-à	5	59
-l	6	59
-encre	7	59
-que	8	59
-l	9	59
-explorateur	10	59
-ait	11	59
-fourni	12	59
-des	13	59
-preuves	14	59
-alors	1	60
-Interrogea	1	61
-le	2	61
-géographe	3	61
-Oh	1	62
-Chez	1	63
-moi	2	63
-dit	3	63
-le	4	63
-petit	5	63
-prince	6	63
-ce	7	63
-n	8	63
-est	9	63
-pas	10	63
-très	11	63
-intéressant	12	63
-c	13	63
-est	14	63
-tout	15	63
-petit	16	63
-J	1	64
-ai	2	64
-trois	3	64
-volcans	4	64
-Deux	1	65
-volcans	2	65
-en	3	65
-activité	4	65
-et	5	65
-un	6	65
-volcan	7	65
-éteint	8	65
-Mais	1	66
-on	2	66
-ne	3	66
-sait	4	66
-jamais	5	66
-On	1	67
-ne	2	67
-sait	3	67
-jamais	4	67
-dit	5	67
-le	6	67
-géographe	7	67
-J	1	68
-ai	2	68
-aussi	3	68
-une	4	68
-fleur	5	68
-Nous	1	69
-ne	2	69
-notons	3	69
-pas	4	69
-les	5	69
-fleurs	6	69
-dit	7	69
-le	8	69
-géographe	9	69
-Pourquoi	1	70
-ça	2	70
-C	1	71
-est	2	71
-le	3	71
-plus	4	71
-joli	5	71
-Parce	1	72
-que	2	72
-les	3	72
-fleurs	4	72
-sont	5	72
-éphémères	6	72
-Qu	1	73
-est	2	73
-ce	3	73
-que	4	73
-signifie	5	73
-éphémère	6	73
-Les	1	74
-géographies	2	74
-dit	3	74
-le	4	74
-géographe	5	74
-sont	6	74
-les	7	74
-livres	8	74
-les	9	74
-plus	10	74
-sérieux	11	74
-de	12	74
-tous	13	74
-les	14	74
-livres	15	74
-Elles	1	75
-ne	2	75
-se	3	75
-démodent	4	75
-jamais	5	75
-Il	1	76
-est	2	76
-très	3	76
-rare	4	76
-qu	5	76
-une	6	76
-montagne	7	76
-change	8	76
-de	9	76
-place	10	76
-Il	1	77
-est	2	77
-très	3	77
-rare	4	77
-qu	5	77
-un	6	77
-océan	7	77
-se	8	77
-vide	9	77
-de	10	77
-son	11	77
-eau	12	77
-Nous	1	78
-écrivons	2	78
-des	3	78
-choses	4	78
-éternelles	5	78
-Mais	1	79
-les	2	79
-volcans	3	79
-éteints	4	79
-peuvent	5	79
-se	6	79
-réveiller	7	79
-interrompit	8	79
-le	9	79
-petit	10	79
-prince	11	79
-Qu	1	80
-est	2	80
-ce	3	80
-que	4	80
-signifie	5	80
-éphémère	6	80
-Que	1	81
-les	2	81
-volcans	3	81
-soient	4	81
-éteints	5	81
-ou	6	81
-soient	7	81
-éveillés	8	81
-ça	9	81
-revient	10	81
-au	11	81
-même	12	81
-pour	13	81
-nous	14	81
-autres	15	81
-dit	16	81
-le	17	81
-géographe	18	81
-Ce	1	82
-qui	2	82
-compte	3	82
-pour	4	82
-nous	5	82
-c	6	82
-est	7	82
-la	8	82
-montagne	9	82
-Elle	1	83
-ne	2	83
-change	3	83
-pas	4	83
-Mais	1	84
-qu	2	84
-est	3	84
-ce	4	84
-que	5	84
-signifie	6	84
-éphémère	7	84
-Répéta	1	85
-le	2	85
-petit	3	85
-prince	4	85
-qui	5	85
-de	6	85
-sa	7	85
-vie	8	85
-n	9	85
-avait	10	85
-renoncé	11	85
-à	12	85
-une	13	85
-question	14	85
-une	15	85
-fois	16	85
-qu	17	85
-il	18	85
-l	19	85
-avait	20	85
-posée	21	85
-Ça	1	86
-signifie	2	86
-qui	3	86
-est	4	86
-menacé	5	86
-de	6	86
-disparition	7	86
-prochaine	8	86
-Ma	1	87
-fleur	2	87
-est	3	87
-menacée	4	87
-de	5	87
-disparition	6	87
-prochaine	7	87
-Bien	1	88
-sûr	2	88
-ma	1	89
-fleur	2	89
-est	3	89
-éphémère	4	89
-se	5	89
-dit	6	89
-le	7	89
-petit	8	89
-prince	9	89
-et	10	89
-elle	11	89
-n	12	89
-a	13	89
-que	14	89
-quatre	15	89
-épines	16	89
-pour	17	89
-se	18	89
-défendre	19	89
-contre	20	89
-le	21	89
-monde	22	89
-Et	1	90
-je	2	90
-l	3	90
-ai	4	90
-laissée	5	90
-toute	6	90
-seule	7	90
-chez	8	90
-moi	9	90
-Ce	1	91
-fut	2	91
-là	3	91
-son	4	91
-premier	5	91
-mouvement	6	91
-de	7	91
-regret	8	91
-Mais	1	92
-il	2	92
-reprit	3	92
-courage	4	92
-Que	5	92
-me	6	92
-conseillez	7	92
-vous	8	92
-d	9	92
-aller	10	92
-visiter	11	92
-Demanda	1	93
-t	2	93
-il	3	93
-La	1	94
-planète	2	94
-Terre	3	94
-lui	4	94
-répondit	5	94
-le	6	94
-géographe	7	94
-Elle	1	95
-a	2	95
-une	3	95
-bonne	4	95
-réputation	5	95
-Et	1	96
-le	2	96
-petit	3	96
-prince	4	96
-s	5	96
-en	6	96
-fut	7	96
-songeant	8	96
-à	9	96
-sa	10	96
-fleur	11	96
-La	1	97
-septième	2	97
-planète	3	97
-fut	4	97
-donc	5	97
-la	6	97
-Terre	7	97
-La	1	98
-Terre	2	98
-n	3	98
-est	4	98
-pas	5	98
-une	6	98
-planète	7	98
-quelconque	8	98
-On	1	99
-y	2	99
-compte	3	99
-cent	4	99
-onze	5	99
-rois	6	99
-en	7	99
-n	8	99
-oubliant	9	99
-pas	10	99
-bien	11	99
-sûr	12	99
-les	13	99
-rois	14	99
-nègres	15	99
-sept	16	99
-mille	17	99
-géographes	18	99
-neuf	19	99
-cent	20	99
-mille	21	99
-businessmen	22	99
-sept	23	99
-millions	24	99
-et	25	99
-demi	26	99
-d	27	99
-ivrognes	28	99
-trois	29	99
-cent	30	99
-onze	31	99
-millions	32	99
-de	33	99
-vaniteux	34	99
-c	35	99
-est	36	99
-à	37	99
-dire	38	99
-environ	39	99
-deux	40	99
-milliards	41	99
-de	42	99
-grandes	43	99
-personnes	44	99
-Pour	1	100
-vous	2	100
-donner	3	100
-une	4	100
-idée	5	100
-des	6	100
-dimensions	7	100
-de	8	100
-la	9	100
-Terre	10	100
-je	11	100
-vous	12	100
-dirai	13	100
-qu	14	100
-avant	15	100
-l	16	100
-invention	17	100
-de	18	100
-l	19	100
-électricité	20	100
-on	21	100
-y	22	100
-devait	23	100
-entretenir	24	100
-sur	25	100
-l	26	100
-ensemble	27	100
-des	28	100
-six	29	100
-continents	30	100
-une	31	100
-véritable	32	100
-armée	33	100
-de	34	100
-quatre	35	100
-cent	36	100
-soixante	37	100
-deux	38	100
-mille	39	100
-cinq	40	100
-cent	41	100
-onze	42	100
-allumeurs	43	100
-de	44	100
-réverbères	45	100
-Vu	1	101
-d	2	101
-un	3	101
-peu	4	101
-loin	5	101
-ça	6	101
-faisait	7	101
-un	8	101
-effet	9	101
-splendide	10	101
-Les	1	102
-mouvements	2	102
-de	3	102
-cette	4	102
-armée	5	102
-étaient	6	102
-réglés	7	102
-comme	8	102
-ceux	9	102
-d	10	102
-un	11	102
-ballet	12	102
-d	13	102
-opéra	14	102
-D	1	103
-abord	2	103
-venait	3	103
-le	4	103
-tour	5	103
-des	6	103
-allumeurs	7	103
-de	8	103
-réverbères	9	103
-de	10	103
-Nouvelle	11	103
-Zélande	12	103
-et	13	103
-d	14	103
-Australie	15	103
-Puis	1	104
-ceux	2	104
-ci	3	104
-ayant	4	104
-allumé	5	104
-leurs	6	104
-lampions	7	104
-s	8	104
-en	9	104
-allaient	10	104
-dormir	11	104
-Alors	1	105
-entraient	2	105
-à	3	105
-leur	4	105
-tour	5	105
-dans	6	105
-la	7	105
-danse	8	105
-les	9	105
-allumeurs	10	105
-de	11	105
-réverbères	12	105
-de	13	105
-Chine	14	105
-et	15	105
-de	16	105
-Sibérie	17	105
-Puis	1	106
-eux	2	106
-aussi	3	106
-s	4	106
-escamotaient	5	106
-dans	6	106
-les	7	106
-coulisses	8	106
-Alors	1	107
-venait	2	107
-le	3	107
-tour	4	107
-des	5	107
-allumeurs	6	107
-de	7	107
-réverbères	8	107
-de	9	107
-Russie	10	107
-et	11	107
-des	12	107
-Indes	13	107
-Puis	1	108
-de	2	108
-ceux	3	108
-d	4	108
-Afrique	5	108
-et	6	108
-d	7	108
-Europe	8	108
-Puis	1	109
-de	2	109
-ceux	3	109
-d	4	109
-Amérique	5	109
-du	6	109
-Sud	7	109
-Puis	1	110
-de	2	110
-ceux	3	110
-d	4	110
-Amérique	5	110
-du	6	110
-Nord	7	110
-Et	1	111
-jamais	2	111
-ils	3	111
-ne	4	111
-se	5	111
-trompaient	6	111
-dans	7	111
-leur	8	111
-ordre	9	111
-d	10	111
-entrée	11	111
-en	12	111
-scène	13	111
-C	1	112
-était	2	112
-grandiose	3	112
-Seuls	1	113
-l	2	113
-allumeur	3	113
-de	4	113
-l	5	113
-unique	6	113
-réverbère	7	113
-du	8	113
-pôle	9	113
-Nord	10	113
-et	11	113
-son	12	113
-confrère	13	113
-de	14	113
-l	15	113
-unique	16	113
-réverbère	17	113
-du	18	113
-pôle	19	113
-Sud	20	113
-menaient	21	113
-des	22	113
-vies	23	113
-d	24	113
-oisiveté	25	113
-et	26	113
-de	27	113
-nonchalance	28	113
-ils	29	113
-travaillaient	30	113
-deux	31	113
-fois	32	113
-par	33	113
-an	34	113
-Quand	1	114
-on	2	114
-veut	3	114
-faire	4	114
-de	5	114
-l	6	114
-esprit	7	114
-il	8	114
-arrive	9	114
-que	10	114
-l	11	114
-on	12	114
-mente	13	114
-un	14	114
-peu	15	114
-Je	1	115
-n	2	115
-ai	3	115
-pas	4	115
-été	5	115
-très	6	115
-honnête	7	115
-en	8	115
-vous	9	115
-parlant	10	115
-des	11	115
-allumeurs	12	115
-de	13	115
-réverbères	14	115
-Je	1	116
-risque	2	116
-de	3	116
-donner	4	116
-une	5	116
-fausse	6	116
-idée	7	116
-de	8	116
-notre	9	116
-planète	10	116
-à	11	116
-ceux	12	116
-qui	13	116
-ne	14	116
-la	15	116
-connaissent	16	116
-pas	17	116
-Les	1	117
-hommes	2	117
-occupent	3	117
-très	4	117
-peu	5	117
-de	6	117
-place	7	117
-sur	8	117
-la	9	117
-Terre	10	117
-Si	1	118
-les	2	118
-deux	3	118
-milliards	4	118
-d	5	118
-habitants	6	118
-qui	7	118
-peuplent	8	118
-la	9	118
-Terre	10	118
-se	11	118
-tenaient	12	118
-debout	13	118
-et	14	118
-un	15	118
-peu	16	118
-serrés	17	118
-comme	18	118
-pour	19	118
-un	20	118
-meeting	21	118
-ils	22	118
-logeraient	23	118
-aisément	24	118
-sur	25	118
-une	26	118
-place	27	118
-publique	28	118
-de	29	118
-vingt	30	118
-milles	31	118
-de	32	118
-long	33	118
-sur	34	118
-vingt	35	118
-milles	36	118
-de	37	118
-large	38	118
-On	1	119
-pourrait	2	119
-entasser	3	119
-l	4	119
-humanité	5	119
-sur	6	119
-le	7	119
-moindre	8	119
-petit	9	119
-îlot	10	119
-du	11	119
-Pacifique	12	119
-Les	1	120
-grandes	2	120
-personnes	3	120
-bien	4	120
-sûr	5	120
-ne	6	120
-vous	7	120
-croiront	8	120
-pas	9	120
-Elles	1	121
-s	2	121
-imaginent	3	121
-tenir	4	121
-beaucoup	5	121
-de	6	121
-place	7	121
-Elles	1	122
-se	2	122
-voient	3	122
-importantes	4	122
-comme	5	122
-des	6	122
-baobabs	7	122
-Vous	1	123
-leur	2	123
-conseillerez	3	123
-donc	4	123
-de	5	123
-faire	6	123
-le	7	123
-calcul	8	123
-Elles	1	124
-adorent	2	124
-les	3	124
-chiffres	4	124
-ça	5	124
-leur	6	124
-plaira	7	124
-Mais	1	125
-ne	2	125
-perdez	3	125
-pas	4	125
-votre	5	125
-temps	6	125
-à	7	125
-ce	8	125
-pensum	9	125
-C	1	126
-est	2	126
-inutile	3	126
-Vous	1	127
-avez	2	127
-confiance	3	127
-en	4	127
-moi	5	127
-Le	1	128
-petit	2	128
-prince	3	128
-une	4	128
-fois	5	128
-sur	6	128
-Terre	7	128
-fut	8	128
-donc	9	128
-bien	10	128
-surpris	11	128
-de	12	128
-ne	13	128
-voir	14	128
-personne	15	128
-Il	1	129
-avait	2	129
-déjà	3	129
-peur	4	129
-de	5	129
-s	6	129
-être	7	129
-trompé	8	129
-de	9	129
-planète	10	129
-quand	11	129
-un	12	129
-anneau	13	129
-couleur	14	129
-de	15	129
-lune	16	129
-remua	17	129
-dans	18	129
-le	19	129
-sable	20	129
-bonne	1	130
-nuit	2	130
-fit	3	130
-le	4	130
-petit	5	130
-prince	6	130
-à	7	130
-tout	8	130
-hasard	9	130
-Bonne	1	131
-nuit	2	131
-fit	3	131
-le	4	131
-serpent	5	131
-Sur	1	132
-quelle	2	132
-planète	3	132
-suis	4	132
-je	5	132
-tombé	6	132
-Demanda	1	133
-le	2	133
-petit	3	133
-prince	4	133
-Sur	1	134
-la	2	134
-Terre	3	134
-en	4	134
-Afrique	5	134
-répondit	6	134
-le	7	134
-serpent	8	134
-Ah	1	135
-Il	1	136
-n	2	136
-y	3	136
-a	4	136
-donc	5	136
-personne	6	136
-sur	7	136
-la	8	136
-Terre	9	136
-Ici	1	137
-c	2	137
-est	3	137
-le	4	137
-désert	5	137
-Il	1	138
-n	2	138
-y	3	138
-a	4	138
-personne	5	138
-dans	6	138
-les	7	138
-déserts	8	138
-La	1	139
-Terre	2	139
-est	3	139
-grande	4	139
-dit	5	139
-le	6	139
-serpent	7	139
-Le	1	140
-petit	2	140
-prince	3	140
-s	4	140
-assit	5	140
-sur	6	140
-une	7	140
-pierre	8	140
-et	9	140
-leva	10	140
-les	11	140
-yeux	12	140
-vers	13	140
-le	14	140
-ciel	15	140
-Je	16	140
-me	17	140
-demande	18	140
-dit	19	140
-il	20	140
-si	21	140
-les	22	140
-étoiles	23	140
-sont	24	140
-éclairées	25	140
-afin	26	140
-que	27	140
-chacun	28	140
-puisse	29	140
-un	30	140
-jour	31	140
-retrouver	32	140
-la	33	140
-sienne	34	140
-Regarde	1	141
-ma	2	141
-planète	3	141
-Elle	1	142
-est	2	142
-juste	3	142
-au	4	142
-dessus	5	142
-de	6	142
-nous	7	142
-Mais	1	143
-comme	2	143
-elle	3	143
-est	4	143
-loin	5	143
-Elle	1	144
-est	2	144
-belle	3	144
-dit	4	144
-le	5	144
-serpent	6	144
-Que	1	145
-viens	2	145
-tu	3	145
-faire	4	145
-ici	5	145
-J	1	146
-ai	2	146
-des	3	146
-difficultés	4	146
-avec	5	146
-une	6	146
-fleur	7	146
-dit	8	146
-le	9	146
-petit	10	146
-prince	11	146
-Ah	1	147
-Fit	1	148
-le	2	148
-serpent	3	148
-Et	1	149
-ils	2	149
-se	3	149
-turent	4	149
-où	1	150
-sont	2	150
-les	3	150
-hommes	4	150
-Reprit	1	151
-enfin	2	151
-le	3	151
-petit	4	151
-prince	5	151
-On	1	152
-est	2	152
-un	3	152
-peu	4	152
-seul	5	152
-dans	6	152
-le	7	152
-désert	8	152
-On	1	153
-est	2	153
-seul	3	153
-aussi	4	153
-chez	5	153
-les	6	153
-hommes	7	153
-dit	8	153
-le	9	153
-serpent	10	153
-Le	1	154
-petit	2	154
-prince	3	154
-le	4	154
-regarda	5	154
-longtemps	6	154
-Tu	7	154
-es	8	154
-une	9	154
-drôle	10	154
-de	11	154
-bête	12	154
-lui	13	154
-dit	14	154
-il	15	154
-enfin	16	154
-mince	17	154
-comme	18	154
-un	19	154
-doigt	20	154
-Mais	1	155
-je	2	155
-suis	3	155
-plus	4	155
-puissant	5	155
-que	6	155
-le	7	155
-doigt	8	155
-d	9	155
-un	10	155
-roi	11	155
-dit	12	155
-le	13	155
-serpent	14	155
-Le	1	156
-petit	2	156
-prince	3	156
-eut	4	156
-un	5	156
-sourire	6	156
-Tu	7	156
-n	8	156
-es	9	156
-pas	10	156
-bien	11	156
-puissant	12	156
-Tu	1	157
-n	2	157
-as	3	157
-même	4	157
-pas	5	157
-de	6	157
-pattes	7	157
-Tu	1	158
-ne	2	158
-peux	3	158
-même	4	158
-pas	5	158
-voyager	6	158
-Je	1	159
-puis	2	159
-t	3	159
-emporter	4	159
-plus	5	159
-loin	6	159
-qu	7	159
-un	8	159
-navire	9	159
-dit	10	159
-le	11	159
-serpent	12	159
-Il	1	160
-s	2	160
-enroula	3	160
-autour	4	160
-de	5	160
-la	6	160
-cheville	7	160
-du	8	160
-petit	9	160
-prince	10	160
-comme	11	160
-un	12	160
-bracelet	13	160
-d	14	160
-or	15	160
-Celui	16	160
-que	17	160
-je	18	160
-touche	19	160
-je	20	160
-le	21	160
-rends	22	160
-à	23	160
-la	24	160
-terre	25	160
-dont	26	160
-il	27	160
-est	28	160
-sorti	29	160
-dit	30	160
-il	31	160
-encore	32	160
-Mais	1	161
-tu	2	161
-es	3	161
-pur	4	161
-et	5	161
-tu	6	161
-viens	7	161
-d	8	161
-une	9	161
-étoile	10	161
-Le	1	162
-petit	2	162
-prince	3	162
-ne	4	162
-répondit	5	162
-rien	6	162
-tu	1	163
-me	2	163
-fais	3	163
-pitié	4	163
-toi	5	163
-si	6	163
-faible	7	163
-sur	8	163
-cette	9	163
-Terre	10	163
-de	11	163
-granit	12	163
-Je	1	164
-puis	2	164
-t	3	164
-aider	4	164
-un	5	164
-jour	6	164
-si	7	164
-tu	8	164
-regrettes	9	164
-trop	10	164
-ta	11	164
-planète	12	164
-Je	1	165
-puis	2	165
-Oh	1	166
-J	1	167
-ai	2	167
-très	3	167
-bien	4	167
-compris	5	167
-fit	6	167
-le	7	167
-petit	8	167
-prince	9	167
-mais	10	167
-pourquoi	11	167
-parles	12	167
-tu	13	167
-toujours	14	167
-par	15	167
-énigmes	16	167
-Je	1	168
-les	2	168
-résous	3	168
-toutes	4	168
-dit	5	168
-le	6	168
-serpent	7	168
-Et	1	169
-ils	2	169
-se	3	169
-turent	4	169
-Le	1	170
-petit	2	170
-prince	3	170
-traversa	4	170
-le	5	170
-désert	6	170
-et	7	170
-ne	8	170
-rencontra	9	170
-qu	10	170
-une	11	170
-fleur	12	170
-Une	1	171
-fleur	2	171
-à	3	171
-trois	4	171
-pétales	5	171
-une	6	171
-fleur	7	171
-de	8	171
-rien	9	171
-du	10	171
-tout	11	171
-bonjour	1	172
-dit	2	172
-le	3	172
-petit	4	172
-prince	5	172
-Bonjour	1	173
-dit	2	173
-la	3	173
-fleur	4	173
-Où	1	174
-sont	2	174
-les	3	174
-hommes	4	174
-Demanda	1	175
-poliment	2	175
-le	3	175
-petit	4	175
-prince	5	175
-La	1	176
-fleur	2	176
-un	3	176
-jour	4	176
-avait	5	176
-vu	6	176
-passer	7	176
-une	8	176
-caravane	9	176
-Les	10	176
-hommes	11	176
-Il	1	177
-en	2	177
-existe	3	177
-je	4	177
-crois	5	177
-six	6	177
-ou	7	177
-sept	8	177
-Je	1	178
-les	2	178
-ai	3	178
-aperçus	4	178
-il	5	178
-y	6	178
-a	7	178
-des	8	178
-années	9	178
-Mais	1	179
-on	2	179
-ne	3	179
-sait	4	179
-jamais	5	179
-où	6	179
-les	7	179
-trouver	8	179
-Le	1	180
-vent	2	180
-les	3	180
-promène	4	180
-Ils	1	181
-manquent	2	181
-de	3	181
-racines	4	181
-ça	5	181
-les	6	181
-gêne	7	181
-beaucoup	8	181
-Adieu	1	182
-fit	2	182
-le	3	182
-petit	4	182
-prince	5	182
-Adieu	1	183
-dit	2	183
-la	3	183
-fleur	4	183
-Le	1	184
-petit	2	184
-prince	3	184
-fit	4	184
-l	5	184
-ascension	6	184
-d	7	184
-une	8	184
-haute	9	184
-montagne	10	184
-Les	1	185
-seules	2	185
-montagnes	3	185
-qu	4	185
-il	5	185
-eût	6	185
-jamais	7	185
-connues	8	185
-étaient	9	185
-les	10	185
-trois	11	185
-volcans	12	185
-qui	13	185
-lui	14	185
-arrivaient	15	185
-au	16	185
-genou	17	185
-Et	1	186
-il	2	186
-se	3	186
-servait	4	186
-du	5	186
-volcan	6	186
-éteint	7	186
-comme	8	186
-d	9	186
-un	10	186
-tabouret	11	186
-d	1	187
-une	2	187
-montagne	3	187
-haute	4	187
-comme	5	187
-celle	6	187
-ci	7	187
-se	8	187
-dit	9	187
-il	10	187
-donc	11	187
-j	12	187
-apercevrai	13	187
-d	14	187
-un	15	187
-coup	16	187
-toute	17	187
-la	18	187
-planète	19	187
-et	20	187
-tous	21	187
-les	22	187
-hommes	23	187
-Mais	1	188
-il	2	188
-n	3	188
-aperçut	4	188
-rien	5	188
-que	6	188
-des	7	188
-aiguilles	8	188
-de	9	188
-roc	10	188
-bien	11	188
-aiguisées	12	188
-bonjour	1	189
-dit	2	189
-il	3	189
-à	4	189
-tout	5	189
-hasard	6	189
-Bonjour	1	190
-Bonjour	1	191
-Bonjour	1	192
-Répondit	1	193
-l	2	193
-écho	3	193
-Qui	1	194
-êtes	2	194
-vous	3	194
-Dit	1	195
-le	2	195
-petit	3	195
-prince	4	195
-Qui	1	196
-êtes	2	196
-vous	3	196
-Qui	1	197
-êtes	2	197
-vous	3	197
-Qui	1	198
-êtes	2	198
-vous	3	198
-Répondit	1	199
-l	2	199
-écho	3	199
-Soyez	1	200
-mes	2	200
-amis	3	200
-je	4	200
-suis	5	200
-seul	6	200
-dit	7	200
-il	8	200
-Je	1	201
-suis	2	201
-seul	3	201
-Je	1	202
-suis	2	202
-seul	3	202
-Je	1	203
-suis	2	203
-seul	3	203
-Répondit	1	204
-l	2	204
-écho	3	204
-quelle	1	205
-drôle	2	205
-de	3	205
-planète	4	205
-Pensa	1	206
-t	2	206
-il	3	206
-alors	4	206
-Elle	1	207
-est	2	207
-toute	3	207
-sèche	4	207
-et	5	207
-toute	6	207
-pointue	7	207
-et	8	207
-toute	9	207
-salée	10	207
-Et	1	208
-les	2	208
-hommes	3	208
-manquent	4	208
-d	5	208
-imagination	6	208
-Ils	1	209
-répètent	2	209
-ce	3	209
-qu	4	209
-on	5	209
-leur	6	209
-dit	7	209
-Chez	1	210
-moi	2	210
-j	3	210
-avais	4	210
-une	5	210
-fleur	6	210
-elle	7	210
-parlait	8	210
-toujours	9	210
-la	10	210
-première	11	210
+word	position	sentence_id	is_last_word
+La	1	1	0
+sixième	2	1	0
+planète	3	1	0
+était	4	1	0
+une	5	1	0
+planète	6	1	0
+dix	7	1	0
+fois	8	1	0
+plus	9	1	0
+vaste	10	1	1
+Elle	1	2	0
+était	2	2	0
+habitée	3	2	0
+par	4	2	0
+un	5	2	0
+vieux	6	2	0
+monsieur	7	2	0
+qui	8	2	0
+écrivait	9	2	0
+d	10	2	0
+énormes	11	2	0
+livres	12	2	1
+tiens	1	3	1
+Voilà	1	4	0
+un	2	4	0
+explorateur	3	4	1
+S	1	5	0
+écria	2	5	0
+t	3	5	0
+il	4	5	0
+quand	5	5	0
+il	6	5	0
+aperçut	7	5	0
+le	8	5	0
+petit	9	5	0
+prince	10	5	1
+Le	1	6	0
+petit	2	6	0
+prince	3	6	0
+s	4	6	0
+assit	5	6	0
+sur	6	6	0
+la	7	6	0
+table	8	6	0
+et	9	6	0
+souffla	10	6	0
+un	11	6	0
+peu	12	6	1
+Il	1	7	0
+avait	2	7	0
+déjà	3	7	0
+tant	4	7	0
+voyagé	5	7	1
+d	1	8	0
+où	2	8	0
+viens	3	8	0
+tu	4	8	1
+Lui	1	9	0
+dit	2	9	0
+le	3	9	0
+vieux	4	9	0
+monsieur	5	9	1
+Quel	1	10	0
+est	2	10	0
+ce	3	10	0
+gros	4	10	0
+livre	5	10	1
+Dit	1	11	0
+le	2	11	0
+petit	3	11	0
+prince	4	11	1
+Que	1	12	0
+faites	2	12	0
+vous	3	12	0
+ici	4	12	1
+Je	1	13	0
+suis	2	13	0
+géographe	3	13	0
+dit	4	13	0
+le	5	13	0
+vieux	6	13	0
+monsieur	7	13	1
+Qu	1	14	0
+est	2	14	0
+ce	3	14	0
+qu	4	14	0
+un	5	14	0
+géographe	6	14	1
+C	1	15	0
+est	2	15	0
+un	3	15	0
+savant	4	15	0
+qui	5	15	0
+connaît	6	15	0
+où	7	15	0
+se	8	15	0
+trouvent	9	15	0
+les	10	15	0
+mers	11	15	0
+les	12	15	0
+fleuves	13	15	0
+les	14	15	0
+villes	15	15	0
+les	16	15	0
+montagnes	17	15	0
+et	18	15	0
+les	19	15	0
+déserts	20	15	1
+Ça	1	16	0
+c	2	16	0
+est	3	16	0
+bien	4	16	0
+intéressant	5	16	0
+dit	6	16	0
+le	7	16	0
+petit	8	16	0
+prince	9	16	1
+Ça	1	17	0
+c	2	17	0
+est	3	17	0
+enfin	4	17	0
+un	5	17	0
+véritable	6	17	0
+métier	7	17	1
+Et	1	18	0
+il	2	18	0
+jeta	3	18	0
+un	4	18	0
+coup	5	18	0
+d	6	18	0
+oeil	7	18	0
+autour	8	18	0
+de	9	18	0
+lui	10	18	0
+sur	11	18	0
+la	12	18	0
+planète	13	18	0
+du	14	18	0
+géographe	15	18	1
+Il	1	19	0
+n	2	19	0
+avait	3	19	0
+jamais	4	19	0
+vu	5	19	0
+encore	6	19	0
+une	7	19	0
+planète	8	19	0
+aussi	9	19	0
+majestueuse	10	19	1
+elle	1	20	0
+est	2	20	0
+bien	3	20	0
+belle	4	20	0
+votre	5	20	0
+planète	6	20	1
+Est	1	21	0
+ce	2	21	0
+qu	3	21	0
+il	4	21	0
+y	5	21	0
+a	6	21	0
+des	7	21	0
+océans	8	21	1
+Je	1	22	0
+ne	2	22	0
+puis	3	22	0
+pas	4	22	0
+le	5	22	0
+savoir	6	22	0
+dit	7	22	0
+le	8	22	0
+géographe	9	22	1
+Ah	1	23	1
+Le	1	24	0
+petit	2	24	0
+prince	3	24	0
+était	4	24	0
+déçu	5	24	1
+Et	1	25	0
+des	2	25	0
+montagnes	3	25	1
+Je	1	26	0
+ne	2	26	0
+puis	3	26	0
+pas	4	26	0
+le	5	26	0
+savoir	6	26	0
+dit	7	26	0
+le	8	26	0
+géographe	9	26	1
+Et	1	27	0
+des	2	27	0
+villes	3	27	0
+et	4	27	0
+des	5	27	0
+fleuves	6	27	0
+et	7	27	0
+des	8	27	0
+déserts	9	27	1
+Je	1	28	0
+ne	2	28	0
+puis	3	28	0
+pas	4	28	0
+le	5	28	0
+savoir	6	28	0
+non	7	28	0
+plus	8	28	0
+dit	9	28	0
+le	10	28	0
+géographe	11	28	1
+Mais	1	29	0
+vous	2	29	0
+êtes	3	29	0
+géographe	4	29	1
+C	1	30	0
+est	2	30	0
+exact	3	30	0
+dit	4	30	0
+le	5	30	0
+géographe	6	30	0
+mais	7	30	0
+je	8	30	0
+ne	9	30	0
+suis	10	30	0
+pas	11	30	0
+explorateur	12	30	1
+Je	1	31	0
+manque	2	31	0
+absolument	3	31	0
+d	4	31	0
+explorateurs	5	31	1
+Ce	1	32	0
+n	2	32	0
+est	3	32	0
+pas	4	32	0
+le	5	32	0
+géographe	6	32	0
+qui	7	32	0
+va	8	32	0
+faire	9	32	0
+le	10	32	0
+compte	11	32	0
+des	12	32	0
+villes	13	32	0
+des	14	32	0
+fleuves	15	32	0
+des	16	32	0
+montagnes	17	32	0
+des	18	32	0
+mers	19	32	0
+des	20	32	0
+océans	21	32	0
+et	22	32	0
+des	23	32	0
+déserts	24	32	1
+Le	1	33	0
+géographe	2	33	0
+est	3	33	0
+trop	4	33	0
+important	5	33	0
+pour	6	33	0
+flâner	7	33	1
+Il	1	34	0
+ne	2	34	0
+quitte	3	34	0
+pas	4	34	0
+son	5	34	0
+bureau	6	34	1
+Mais	1	35	0
+il	2	35	0
+y	3	35	0
+reçoit	4	35	0
+les	5	35	0
+explorateurs	6	35	1
+Il	1	36	0
+les	2	36	0
+interroge	3	36	0
+et	4	36	0
+il	5	36	0
+prend	6	36	0
+en	7	36	0
+note	8	36	0
+leurs	9	36	0
+souvenirs	10	36	1
+Et	1	37	0
+si	2	37	0
+les	3	37	0
+souvenirs	4	37	0
+de	5	37	0
+l	6	37	0
+un	7	37	0
+d	8	37	0
+entre	9	37	0
+eux	10	37	0
+lui	11	37	0
+paraissent	12	37	0
+intéressants	13	37	0
+le	14	37	0
+géographe	15	37	0
+fait	16	37	0
+faire	17	37	0
+une	18	37	0
+enquête	19	37	0
+sur	20	37	0
+la	21	37	0
+moralité	22	37	0
+de	23	37	0
+l	24	37	0
+explorateur	25	37	1
+Pourquoi	1	38	0
+ça	2	38	1
+Parce	1	39	0
+qu	2	39	0
+un	3	39	0
+explorateur	4	39	0
+qui	5	39	0
+mentirait	6	39	0
+entraînerait	7	39	0
+des	8	39	0
+catastrophes	9	39	0
+dans	10	39	0
+les	11	39	0
+livres	12	39	0
+de	13	39	0
+géographie	14	39	1
+Et	1	40	0
+aussi	2	40	0
+un	3	40	0
+explorateur	4	40	0
+qui	5	40	0
+boirait	6	40	0
+trop	7	40	1
+Pourquoi	1	41	0
+ça	2	41	1
+Fit	1	42	0
+le	2	42	0
+petit	3	42	0
+prince	4	42	1
+Parce	1	43	0
+que	2	43	0
+les	3	43	0
+ivrognes	4	43	0
+voient	5	43	0
+double	6	43	1
+Alors	1	44	0
+le	2	44	0
+géographe	3	44	0
+noterait	4	44	0
+deux	5	44	0
+montagnes	6	44	0
+là	7	44	0
+où	8	44	0
+il	9	44	0
+n	10	44	0
+y	11	44	0
+en	12	44	0
+a	13	44	0
+qu	14	44	0
+une	15	44	0
+seule	16	44	1
+Je	1	45	0
+connais	2	45	0
+quelqu	3	45	0
+un	4	45	0
+dit	5	45	0
+le	6	45	0
+petit	7	45	0
+prince	8	45	0
+qui	9	45	0
+serait	10	45	0
+mauvais	11	45	0
+explorateur	12	45	1
+C	1	46	0
+est	2	46	0
+possible	3	46	1
+Donc	1	47	0
+quand	2	47	0
+la	3	47	0
+moralité	4	47	0
+de	5	47	0
+l	6	47	0
+explorateur	7	47	0
+paraît	8	47	0
+bonne	9	47	0
+on	10	47	0
+fait	11	47	0
+une	12	47	0
+enquête	13	47	0
+sur	14	47	0
+sa	15	47	0
+découverte	16	47	1
+On	1	48	0
+va	2	48	0
+voir	3	48	1
+Non	1	49	1
+C	1	50	0
+est	2	50	0
+trop	3	50	0
+compliqué	4	50	1
+Mais	1	51	0
+on	2	51	0
+exige	3	51	0
+de	4	51	0
+l	5	51	0
+explorateur	6	51	0
+qu	7	51	0
+il	8	51	0
+fournisse	9	51	0
+des	10	51	0
+preuves	11	51	1
+S	1	52	0
+il	2	52	0
+s	3	52	0
+agit	4	52	0
+par	5	52	0
+exemple	6	52	0
+de	7	52	0
+la	8	52	0
+découverte	9	52	0
+d	10	52	0
+une	11	52	0
+grosse	12	52	0
+montagne	13	52	0
+on	14	52	0
+exige	15	52	0
+qu	16	52	0
+il	17	52	0
+en	18	52	0
+rapporte	19	52	0
+de	20	52	0
+grosses	21	52	0
+pierres	22	52	1
+Le	1	53	0
+géographe	2	53	0
+soudain	3	53	0
+s	4	53	0
+émut	5	53	1
+mais	1	54	0
+toi	2	54	0
+tu	3	54	0
+viens	4	54	0
+de	5	54	0
+loin	6	54	1
+Tu	1	55	0
+es	2	55	0
+explorateur	3	55	1
+Tu	1	56	0
+vas	2	56	0
+me	3	56	0
+décrire	4	56	0
+ta	5	56	0
+planète	6	56	1
+Et	1	57	0
+le	2	57	0
+géographe	3	57	0
+ayant	4	57	0
+ouvert	5	57	0
+son	6	57	0
+registre	7	57	0
+tailla	8	57	0
+son	9	57	0
+crayon	10	57	1
+On	1	58	0
+note	2	58	0
+d	3	58	0
+abord	4	58	0
+au	5	58	0
+crayon	6	58	0
+les	7	58	0
+récits	8	58	0
+des	9	58	0
+explorateurs	10	58	1
+On	1	59	0
+attend	2	59	0
+pour	3	59	0
+noter	4	59	0
+à	5	59	0
+l	6	59	0
+encre	7	59	0
+que	8	59	0
+l	9	59	0
+explorateur	10	59	0
+ait	11	59	0
+fourni	12	59	0
+des	13	59	0
+preuves	14	59	1
+alors	1	60	1
+Interrogea	1	61	0
+le	2	61	0
+géographe	3	61	1
+Oh	1	62	1
+Chez	1	63	0
+moi	2	63	0
+dit	3	63	0
+le	4	63	0
+petit	5	63	0
+prince	6	63	0
+ce	7	63	0
+n	8	63	0
+est	9	63	0
+pas	10	63	0
+très	11	63	0
+intéressant	12	63	0
+c	13	63	0
+est	14	63	0
+tout	15	63	0
+petit	16	63	1
+J	1	64	0
+ai	2	64	0
+trois	3	64	0
+volcans	4	64	1
+Deux	1	65	0
+volcans	2	65	0
+en	3	65	0
+activité	4	65	0
+et	5	65	0
+un	6	65	0
+volcan	7	65	0
+éteint	8	65	1
+Mais	1	66	0
+on	2	66	0
+ne	3	66	0
+sait	4	66	0
+jamais	5	66	1
+On	1	67	0
+ne	2	67	0
+sait	3	67	0
+jamais	4	67	0
+dit	5	67	0
+le	6	67	0
+géographe	7	67	1
+J	1	68	0
+ai	2	68	0
+aussi	3	68	0
+une	4	68	0
+fleur	5	68	1
+Nous	1	69	0
+ne	2	69	0
+notons	3	69	0
+pas	4	69	0
+les	5	69	0
+fleurs	6	69	0
+dit	7	69	0
+le	8	69	0
+géographe	9	69	1
+Pourquoi	1	70	0
+ça	2	70	1
+C	1	71	0
+est	2	71	0
+le	3	71	0
+plus	4	71	0
+joli	5	71	1
+Parce	1	72	0
+que	2	72	0
+les	3	72	0
+fleurs	4	72	0
+sont	5	72	0
+éphémères	6	72	1
+Qu	1	73	0
+est	2	73	0
+ce	3	73	0
+que	4	73	0
+signifie	5	73	0
+éphémère	6	73	1
+Les	1	74	0
+géographies	2	74	0
+dit	3	74	0
+le	4	74	0
+géographe	5	74	0
+sont	6	74	0
+les	7	74	0
+livres	8	74	0
+les	9	74	0
+plus	10	74	0
+sérieux	11	74	0
+de	12	74	0
+tous	13	74	0
+les	14	74	0
+livres	15	74	1
+Elles	1	75	0
+ne	2	75	0
+se	3	75	0
+démodent	4	75	0
+jamais	5	75	1
+Il	1	76	0
+est	2	76	0
+très	3	76	0
+rare	4	76	0
+qu	5	76	0
+une	6	76	0
+montagne	7	76	0
+change	8	76	0
+de	9	76	0
+place	10	76	1
+Il	1	77	0
+est	2	77	0
+très	3	77	0
+rare	4	77	0
+qu	5	77	0
+un	6	77	0
+océan	7	77	0
+se	8	77	0
+vide	9	77	0
+de	10	77	0
+son	11	77	0
+eau	12	77	1
+Nous	1	78	0
+écrivons	2	78	0
+des	3	78	0
+choses	4	78	0
+éternelles	5	78	1
+Mais	1	79	0
+les	2	79	0
+volcans	3	79	0
+éteints	4	79	0
+peuvent	5	79	0
+se	6	79	0
+réveiller	7	79	0
+interrompit	8	79	0
+le	9	79	0
+petit	10	79	0
+prince	11	79	1
+Qu	1	80	0
+est	2	80	0
+ce	3	80	0
+que	4	80	0
+signifie	5	80	0
+éphémère	6	80	1
+Que	1	81	0
+les	2	81	0
+volcans	3	81	0
+soient	4	81	0
+éteints	5	81	0
+ou	6	81	0
+soient	7	81	0
+éveillés	8	81	0
+ça	9	81	0
+revient	10	81	0
+au	11	81	0
+même	12	81	0
+pour	13	81	0
+nous	14	81	0
+autres	15	81	0
+dit	16	81	0
+le	17	81	0
+géographe	18	81	1
+Ce	1	82	0
+qui	2	82	0
+compte	3	82	0
+pour	4	82	0
+nous	5	82	0
+c	6	82	0
+est	7	82	0
+la	8	82	0
+montagne	9	82	1
+Elle	1	83	0
+ne	2	83	0
+change	3	83	0
+pas	4	83	1
+Mais	1	84	0
+qu	2	84	0
+est	3	84	0
+ce	4	84	0
+que	5	84	0
+signifie	6	84	0
+éphémère	7	84	1
+Répéta	1	85	0
+le	2	85	0
+petit	3	85	0
+prince	4	85	0
+qui	5	85	0
+de	6	85	0
+sa	7	85	0
+vie	8	85	0
+n	9	85	0
+avait	10	85	0
+renoncé	11	85	0
+à	12	85	0
+une	13	85	0
+question	14	85	0
+une	15	85	0
+fois	16	85	0
+qu	17	85	0
+il	18	85	0
+l	19	85	0
+avait	20	85	0
+posée	21	85	1
+Ça	1	86	0
+signifie	2	86	0
+qui	3	86	0
+est	4	86	0
+menacé	5	86	0
+de	6	86	0
+disparition	7	86	0
+prochaine	8	86	1
+Ma	1	87	0
+fleur	2	87	0
+est	3	87	0
+menacée	4	87	0
+de	5	87	0
+disparition	6	87	0
+prochaine	7	87	1
+Bien	1	88	0
+sûr	2	88	1
+ma	1	89	0
+fleur	2	89	0
+est	3	89	0
+éphémère	4	89	0
+se	5	89	0
+dit	6	89	0
+le	7	89	0
+petit	8	89	0
+prince	9	89	0
+et	10	89	0
+elle	11	89	0
+n	12	89	0
+a	13	89	0
+que	14	89	0
+quatre	15	89	0
+épines	16	89	0
+pour	17	89	0
+se	18	89	0
+défendre	19	89	0
+contre	20	89	0
+le	21	89	0
+monde	22	89	1
+Et	1	90	0
+je	2	90	0
+l	3	90	0
+ai	4	90	0
+laissée	5	90	0
+toute	6	90	0
+seule	7	90	0
+chez	8	90	0
+moi	9	90	1
+Ce	1	91	0
+fut	2	91	0
+là	3	91	0
+son	4	91	0
+premier	5	91	0
+mouvement	6	91	0
+de	7	91	0
+regret	8	91	1
+Mais	1	92	0
+il	2	92	0
+reprit	3	92	0
+courage	4	92	0
+Que	5	92	0
+me	6	92	0
+conseillez	7	92	0
+vous	8	92	0
+d	9	92	0
+aller	10	92	0
+visiter	11	92	1
+Demanda	1	93	0
+t	2	93	0
+il	3	93	1
+La	1	94	0
+planète	2	94	0
+Terre	3	94	0
+lui	4	94	0
+répondit	5	94	0
+le	6	94	0
+géographe	7	94	1
+Elle	1	95	0
+a	2	95	0
+une	3	95	0
+bonne	4	95	0
+réputation	5	95	1
+Et	1	96	0
+le	2	96	0
+petit	3	96	0
+prince	4	96	0
+s	5	96	0
+en	6	96	0
+fut	7	96	0
+songeant	8	96	0
+à	9	96	0
+sa	10	96	0
+fleur	11	96	1
+La	1	97	0
+septième	2	97	0
+planète	3	97	0
+fut	4	97	0
+donc	5	97	0
+la	6	97	0
+Terre	7	97	1
+La	1	98	0
+Terre	2	98	0
+n	3	98	0
+est	4	98	0
+pas	5	98	0
+une	6	98	0
+planète	7	98	0
+quelconque	8	98	1
+On	1	99	0
+y	2	99	0
+compte	3	99	0
+cent	4	99	0
+onze	5	99	0
+rois	6	99	0
+en	7	99	0
+n	8	99	0
+oubliant	9	99	0
+pas	10	99	0
+bien	11	99	0
+sûr	12	99	0
+les	13	99	0
+rois	14	99	0
+nègres	15	99	0
+sept	16	99	0
+mille	17	99	0
+géographes	18	99	0
+neuf	19	99	0
+cent	20	99	0
+mille	21	99	0
+businessmen	22	99	0
+sept	23	99	0
+millions	24	99	0
+et	25	99	0
+demi	26	99	0
+d	27	99	0
+ivrognes	28	99	0
+trois	29	99	0
+cent	30	99	0
+onze	31	99	0
+millions	32	99	0
+de	33	99	0
+vaniteux	34	99	0
+c	35	99	0
+est	36	99	0
+à	37	99	0
+dire	38	99	0
+environ	39	99	0
+deux	40	99	0
+milliards	41	99	0
+de	42	99	0
+grandes	43	99	0
+personnes	44	99	1
+Pour	1	100	0
+vous	2	100	0
+donner	3	100	0
+une	4	100	0
+idée	5	100	0
+des	6	100	0
+dimensions	7	100	0
+de	8	100	0
+la	9	100	0
+Terre	10	100	0
+je	11	100	0
+vous	12	100	0
+dirai	13	100	0
+qu	14	100	0
+avant	15	100	0
+l	16	100	0
+invention	17	100	0
+de	18	100	0
+l	19	100	0
+électricité	20	100	0
+on	21	100	0
+y	22	100	0
+devait	23	100	0
+entretenir	24	100	0
+sur	25	100	0
+l	26	100	0
+ensemble	27	100	0
+des	28	100	0
+six	29	100	0
+continents	30	100	0
+une	31	100	0
+véritable	32	100	0
+armée	33	100	0
+de	34	100	0
+quatre	35	100	0
+cent	36	100	0
+soixante	37	100	0
+deux	38	100	0
+mille	39	100	0
+cinq	40	100	0
+cent	41	100	0
+onze	42	100	0
+allumeurs	43	100	0
+de	44	100	0
+réverbères	45	100	1
+Vu	1	101	0
+d	2	101	0
+un	3	101	0
+peu	4	101	0
+loin	5	101	0
+ça	6	101	0
+faisait	7	101	0
+un	8	101	0
+effet	9	101	0
+splendide	10	101	1
+Les	1	102	0
+mouvements	2	102	0
+de	3	102	0
+cette	4	102	0
+armée	5	102	0
+étaient	6	102	0
+réglés	7	102	0
+comme	8	102	0
+ceux	9	102	0
+d	10	102	0
+un	11	102	0
+ballet	12	102	0
+d	13	102	0
+opéra	14	102	1
+D	1	103	0
+abord	2	103	0
+venait	3	103	0
+le	4	103	0
+tour	5	103	0
+des	6	103	0
+allumeurs	7	103	0
+de	8	103	0
+réverbères	9	103	0
+de	10	103	0
+Nouvelle	11	103	0
+Zélande	12	103	0
+et	13	103	0
+d	14	103	0
+Australie	15	103	1
+Puis	1	104	0
+ceux	2	104	0
+ci	3	104	0
+ayant	4	104	0
+allumé	5	104	0
+leurs	6	104	0
+lampions	7	104	0
+s	8	104	0
+en	9	104	0
+allaient	10	104	0
+dormir	11	104	1
+Alors	1	105	0
+entraient	2	105	0
+à	3	105	0
+leur	4	105	0
+tour	5	105	0
+dans	6	105	0
+la	7	105	0
+danse	8	105	0
+les	9	105	0
+allumeurs	10	105	0
+de	11	105	0
+réverbères	12	105	0
+de	13	105	0
+Chine	14	105	0
+et	15	105	0
+de	16	105	0
+Sibérie	17	105	1
+Puis	1	106	0
+eux	2	106	0
+aussi	3	106	0
+s	4	106	0
+escamotaient	5	106	0
+dans	6	106	0
+les	7	106	0
+coulisses	8	106	1
+Alors	1	107	0
+venait	2	107	0
+le	3	107	0
+tour	4	107	0
+des	5	107	0
+allumeurs	6	107	0
+de	7	107	0
+réverbères	8	107	0
+de	9	107	0
+Russie	10	107	0
+et	11	107	0
+des	12	107	0
+Indes	13	107	1
+Puis	1	108	0
+de	2	108	0
+ceux	3	108	0
+d	4	108	0
+Afrique	5	108	0
+et	6	108	0
+d	7	108	0
+Europe	8	108	1
+Puis	1	109	0
+de	2	109	0
+ceux	3	109	0
+d	4	109	0
+Amérique	5	109	0
+du	6	109	0
+Sud	7	109	1
+Puis	1	110	0
+de	2	110	0
+ceux	3	110	0
+d	4	110	0
+Amérique	5	110	0
+du	6	110	0
+Nord	7	110	1
+Et	1	111	0
+jamais	2	111	0
+ils	3	111	0
+ne	4	111	0
+se	5	111	0
+trompaient	6	111	0
+dans	7	111	0
+leur	8	111	0
+ordre	9	111	0
+d	10	111	0
+entrée	11	111	0
+en	12	111	0
+scène	13	111	1
+C	1	112	0
+était	2	112	0
+grandiose	3	112	1
+Seuls	1	113	0
+l	2	113	0
+allumeur	3	113	0
+de	4	113	0
+l	5	113	0
+unique	6	113	0
+réverbère	7	113	0
+du	8	113	0
+pôle	9	113	0
+Nord	10	113	0
+et	11	113	0
+son	12	113	0
+confrère	13	113	0
+de	14	113	0
+l	15	113	0
+unique	16	113	0
+réverbère	17	113	0
+du	18	113	0
+pôle	19	113	0
+Sud	20	113	0
+menaient	21	113	0
+des	22	113	0
+vies	23	113	0
+d	24	113	0
+oisiveté	25	113	0
+et	26	113	0
+de	27	113	0
+nonchalance	28	113	0
+ils	29	113	0
+travaillaient	30	113	0
+deux	31	113	0
+fois	32	113	0
+par	33	113	0
+an	34	113	1
+Quand	1	114	0
+on	2	114	0
+veut	3	114	0
+faire	4	114	0
+de	5	114	0
+l	6	114	0
+esprit	7	114	0
+il	8	114	0
+arrive	9	114	0
+que	10	114	0
+l	11	114	0
+on	12	114	0
+mente	13	114	0
+un	14	114	0
+peu	15	114	1
+Je	1	115	0
+n	2	115	0
+ai	3	115	0
+pas	4	115	0
+été	5	115	0
+très	6	115	0
+honnête	7	115	0
+en	8	115	0
+vous	9	115	0
+parlant	10	115	0
+des	11	115	0
+allumeurs	12	115	0
+de	13	115	0
+réverbères	14	115	1
+Je	1	116	0
+risque	2	116	0
+de	3	116	0
+donner	4	116	0
+une	5	116	0
+fausse	6	116	0
+idée	7	116	0
+de	8	116	0
+notre	9	116	0
+planète	10	116	0
+à	11	116	0
+ceux	12	116	0
+qui	13	116	0
+ne	14	116	0
+la	15	116	0
+connaissent	16	116	0
+pas	17	116	1
+Les	1	117	0
+hommes	2	117	0
+occupent	3	117	0
+très	4	117	0
+peu	5	117	0
+de	6	117	0
+place	7	117	0
+sur	8	117	0
+la	9	117	0
+Terre	10	117	1
+Si	1	118	0
+les	2	118	0
+deux	3	118	0
+milliards	4	118	0
+d	5	118	0
+habitants	6	118	0
+qui	7	118	0
+peuplent	8	118	0
+la	9	118	0
+Terre	10	118	0
+se	11	118	0
+tenaient	12	118	0
+debout	13	118	0
+et	14	118	0
+un	15	118	0
+peu	16	118	0
+serrés	17	118	0
+comme	18	118	0
+pour	19	118	0
+un	20	118	0
+meeting	21	118	0
+ils	22	118	0
+logeraient	23	118	0
+aisément	24	118	0
+sur	25	118	0
+une	26	118	0
+place	27	118	0
+publique	28	118	0
+de	29	118	0
+vingt	30	118	0
+milles	31	118	0
+de	32	118	0
+long	33	118	0
+sur	34	118	0
+vingt	35	118	0
+milles	36	118	0
+de	37	118	0
+large	38	118	1
+On	1	119	0
+pourrait	2	119	0
+entasser	3	119	0
+l	4	119	0
+humanité	5	119	0
+sur	6	119	0
+le	7	119	0
+moindre	8	119	0
+petit	9	119	0
+îlot	10	119	0
+du	11	119	0
+Pacifique	12	119	1
+Les	1	120	0
+grandes	2	120	0
+personnes	3	120	0
+bien	4	120	0
+sûr	5	120	0
+ne	6	120	0
+vous	7	120	0
+croiront	8	120	0
+pas	9	120	1
+Elles	1	121	0
+s	2	121	0
+imaginent	3	121	0
+tenir	4	121	0
+beaucoup	5	121	0
+de	6	121	0
+place	7	121	1
+Elles	1	122	0
+se	2	122	0
+voient	3	122	0
+importantes	4	122	0
+comme	5	122	0
+des	6	122	0
+baobabs	7	122	1
+Vous	1	123	0
+leur	2	123	0
+conseillerez	3	123	0
+donc	4	123	0
+de	5	123	0
+faire	6	123	0
+le	7	123	0
+calcul	8	123	1
+Elles	1	124	0
+adorent	2	124	0
+les	3	124	0
+chiffres	4	124	0
+ça	5	124	0
+leur	6	124	0
+plaira	7	124	1
+Mais	1	125	0
+ne	2	125	0
+perdez	3	125	0
+pas	4	125	0
+votre	5	125	0
+temps	6	125	0
+à	7	125	0
+ce	8	125	0
+pensum	9	125	1
+C	1	126	0
+est	2	126	0
+inutile	3	126	1
+Vous	1	127	0
+avez	2	127	0
+confiance	3	127	0
+en	4	127	0
+moi	5	127	1
+Le	1	128	0
+petit	2	128	0
+prince	3	128	0
+une	4	128	0
+fois	5	128	0
+sur	6	128	0
+Terre	7	128	0
+fut	8	128	0
+donc	9	128	0
+bien	10	128	0
+surpris	11	128	0
+de	12	128	0
+ne	13	128	0
+voir	14	128	0
+personne	15	128	1
+Il	1	129	0
+avait	2	129	0
+déjà	3	129	0
+peur	4	129	0
+de	5	129	0
+s	6	129	0
+être	7	129	0
+trompé	8	129	0
+de	9	129	0
+planète	10	129	0
+quand	11	129	0
+un	12	129	0
+anneau	13	129	0
+couleur	14	129	0
+de	15	129	0
+lune	16	129	0
+remua	17	129	0
+dans	18	129	0
+le	19	129	0
+sable	20	129	1
+bonne	1	130	0
+nuit	2	130	0
+fit	3	130	0
+le	4	130	0
+petit	5	130	0
+prince	6	130	0
+à	7	130	0
+tout	8	130	0
+hasard	9	130	1
+Bonne	1	131	0
+nuit	2	131	0
+fit	3	131	0
+le	4	131	0
+serpent	5	131	1
+Sur	1	132	0
+quelle	2	132	0
+planète	3	132	0
+suis	4	132	0
+je	5	132	0
+tombé	6	132	1
+Demanda	1	133	0
+le	2	133	0
+petit	3	133	0
+prince	4	133	1
+Sur	1	134	0
+la	2	134	0
+Terre	3	134	0
+en	4	134	0
+Afrique	5	134	0
+répondit	6	134	0
+le	7	134	0
+serpent	8	134	1
+Ah	1	135	1
+Il	1	136	0
+n	2	136	0
+y	3	136	0
+a	4	136	0
+donc	5	136	0
+personne	6	136	0
+sur	7	136	0
+la	8	136	0
+Terre	9	136	1
+Ici	1	137	0
+c	2	137	0
+est	3	137	0
+le	4	137	0
+désert	5	137	1
+Il	1	138	0
+n	2	138	0
+y	3	138	0
+a	4	138	0
+personne	5	138	0
+dans	6	138	0
+les	7	138	0
+déserts	8	138	1
+La	1	139	0
+Terre	2	139	0
+est	3	139	0
+grande	4	139	0
+dit	5	139	0
+le	6	139	0
+serpent	7	139	1
+Le	1	140	0
+petit	2	140	0
+prince	3	140	0
+s	4	140	0
+assit	5	140	0
+sur	6	140	0
+une	7	140	0
+pierre	8	140	0
+et	9	140	0
+leva	10	140	0
+les	11	140	0
+yeux	12	140	0
+vers	13	140	0
+le	14	140	0
+ciel	15	140	0
+Je	16	140	0
+me	17	140	0
+demande	18	140	0
+dit	19	140	0
+il	20	140	0
+si	21	140	0
+les	22	140	0
+étoiles	23	140	0
+sont	24	140	0
+éclairées	25	140	0
+afin	26	140	0
+que	27	140	0
+chacun	28	140	0
+puisse	29	140	0
+un	30	140	0
+jour	31	140	0
+retrouver	32	140	0
+la	33	140	0
+sienne	34	140	1
+Regarde	1	141	0
+ma	2	141	0
+planète	3	141	1
+Elle	1	142	0
+est	2	142	0
+juste	3	142	0
+au	4	142	0
+dessus	5	142	0
+de	6	142	0
+nous	7	142	1
+Mais	1	143	0
+comme	2	143	0
+elle	3	143	0
+est	4	143	0
+loin	5	143	1
+Elle	1	144	0
+est	2	144	0
+belle	3	144	0
+dit	4	144	0
+le	5	144	0
+serpent	6	144	1
+Que	1	145	0
+viens	2	145	0
+tu	3	145	0
+faire	4	145	0
+ici	5	145	1
+J	1	146	0
+ai	2	146	0
+des	3	146	0
+difficultés	4	146	0
+avec	5	146	0
+une	6	146	0
+fleur	7	146	0
+dit	8	146	0
+le	9	146	0
+petit	10	146	0
+prince	11	146	1
+Ah	1	147	1
+Fit	1	148	0
+le	2	148	0
+serpent	3	148	1
+Et	1	149	0
+ils	2	149	0
+se	3	149	0
+turent	4	149	1
+où	1	150	0
+sont	2	150	0
+les	3	150	0
+hommes	4	150	1
+Reprit	1	151	0
+enfin	2	151	0
+le	3	151	0
+petit	4	151	0
+prince	5	151	1
+On	1	152	0
+est	2	152	0
+un	3	152	0
+peu	4	152	0
+seul	5	152	0
+dans	6	152	0
+le	7	152	0
+désert	8	152	1
+On	1	153	0
+est	2	153	0
+seul	3	153	0
+aussi	4	153	0
+chez	5	153	0
+les	6	153	0
+hommes	7	153	0
+dit	8	153	0
+le	9	153	0
+serpent	10	153	1
+Le	1	154	0
+petit	2	154	0
+prince	3	154	0
+le	4	154	0
+regarda	5	154	0
+longtemps	6	154	0
+Tu	7	154	0
+es	8	154	0
+une	9	154	0
+drôle	10	154	0
+de	11	154	0
+bête	12	154	0
+lui	13	154	0
+dit	14	154	0
+il	15	154	0
+enfin	16	154	0
+mince	17	154	0
+comme	18	154	0
+un	19	154	0
+doigt	20	154	1
+Mais	1	155	0
+je	2	155	0
+suis	3	155	0
+plus	4	155	0
+puissant	5	155	0
+que	6	155	0
+le	7	155	0
+doigt	8	155	0
+d	9	155	0
+un	10	155	0
+roi	11	155	0
+dit	12	155	0
+le	13	155	0
+serpent	14	155	1
+Le	1	156	0
+petit	2	156	0
+prince	3	156	0
+eut	4	156	0
+un	5	156	0
+sourire	6	156	0
+Tu	7	156	0
+n	8	156	0
+es	9	156	0
+pas	10	156	0
+bien	11	156	0
+puissant	12	156	1
+Tu	1	157	0
+n	2	157	0
+as	3	157	0
+même	4	157	0
+pas	5	157	0
+de	6	157	0
+pattes	7	157	1
+Tu	1	158	0
+ne	2	158	0
+peux	3	158	0
+même	4	158	0
+pas	5	158	0
+voyager	6	158	1
+Je	1	159	0
+puis	2	159	0
+t	3	159	0
+emporter	4	159	0
+plus	5	159	0
+loin	6	159	0
+qu	7	159	0
+un	8	159	0
+navire	9	159	0
+dit	10	159	0
+le	11	159	0
+serpent	12	159	1
+Il	1	160	0
+s	2	160	0
+enroula	3	160	0
+autour	4	160	0
+de	5	160	0
+la	6	160	0
+cheville	7	160	0
+du	8	160	0
+petit	9	160	0
+prince	10	160	0
+comme	11	160	0
+un	12	160	0
+bracelet	13	160	0
+d	14	160	0
+or	15	160	0
+Celui	16	160	0
+que	17	160	0
+je	18	160	0
+touche	19	160	0
+je	20	160	0
+le	21	160	0
+rends	22	160	0
+à	23	160	0
+la	24	160	0
+terre	25	160	0
+dont	26	160	0
+il	27	160	0
+est	28	160	0
+sorti	29	160	0
+dit	30	160	0
+il	31	160	0
+encore	32	160	1
+Mais	1	161	0
+tu	2	161	0
+es	3	161	0
+pur	4	161	0
+et	5	161	0
+tu	6	161	0
+viens	7	161	0
+d	8	161	0
+une	9	161	0
+étoile	10	161	1
+Le	1	162	0
+petit	2	162	0
+prince	3	162	0
+ne	4	162	0
+répondit	5	162	0
+rien	6	162	1
+tu	1	163	0
+me	2	163	0
+fais	3	163	0
+pitié	4	163	0
+toi	5	163	0
+si	6	163	0
+faible	7	163	0
+sur	8	163	0
+cette	9	163	0
+Terre	10	163	0
+de	11	163	0
+granit	12	163	1
+Je	1	164	0
+puis	2	164	0
+t	3	164	0
+aider	4	164	0
+un	5	164	0
+jour	6	164	0
+si	7	164	0
+tu	8	164	0
+regrettes	9	164	0
+trop	10	164	0
+ta	11	164	0
+planète	12	164	1
+Je	1	165	0
+puis	2	165	1
+Oh	1	166	1
+J	1	167	0
+ai	2	167	0
+très	3	167	0
+bien	4	167	0
+compris	5	167	0
+fit	6	167	0
+le	7	167	0
+petit	8	167	0
+prince	9	167	0
+mais	10	167	0
+pourquoi	11	167	0
+parles	12	167	0
+tu	13	167	0
+toujours	14	167	0
+par	15	167	0
+énigmes	16	167	1
+Je	1	168	0
+les	2	168	0
+résous	3	168	0
+toutes	4	168	0
+dit	5	168	0
+le	6	168	0
+serpent	7	168	1
+Et	1	169	0
+ils	2	169	0
+se	3	169	0
+turent	4	169	1
+Le	1	170	0
+petit	2	170	0
+prince	3	170	0
+traversa	4	170	0
+le	5	170	0
+désert	6	170	0
+et	7	170	0
+ne	8	170	0
+rencontra	9	170	0
+qu	10	170	0
+une	11	170	0
+fleur	12	170	1
+Une	1	171	0
+fleur	2	171	0
+à	3	171	0
+trois	4	171	0
+pétales	5	171	0
+une	6	171	0
+fleur	7	171	0
+de	8	171	0
+rien	9	171	0
+du	10	171	0
+tout	11	171	1
+bonjour	1	172	0
+dit	2	172	0
+le	3	172	0
+petit	4	172	0
+prince	5	172	1
+Bonjour	1	173	0
+dit	2	173	0
+la	3	173	0
+fleur	4	173	1
+Où	1	174	0
+sont	2	174	0
+les	3	174	0
+hommes	4	174	1
+Demanda	1	175	0
+poliment	2	175	0
+le	3	175	0
+petit	4	175	0
+prince	5	175	1
+La	1	176	0
+fleur	2	176	0
+un	3	176	0
+jour	4	176	0
+avait	5	176	0
+vu	6	176	0
+passer	7	176	0
+une	8	176	0
+caravane	9	176	0
+Les	10	176	0
+hommes	11	176	1
+Il	1	177	0
+en	2	177	0
+existe	3	177	0
+je	4	177	0
+crois	5	177	0
+six	6	177	0
+ou	7	177	0
+sept	8	177	1
+Je	1	178	0
+les	2	178	0
+ai	3	178	0
+aperçus	4	178	0
+il	5	178	0
+y	6	178	0
+a	7	178	0
+des	8	178	0
+années	9	178	1
+Mais	1	179	0
+on	2	179	0
+ne	3	179	0
+sait	4	179	0
+jamais	5	179	0
+où	6	179	0
+les	7	179	0
+trouver	8	179	1
+Le	1	180	0
+vent	2	180	0
+les	3	180	0
+promène	4	180	1
+Ils	1	181	0
+manquent	2	181	0
+de	3	181	0
+racines	4	181	0
+ça	5	181	0
+les	6	181	0
+gêne	7	181	0
+beaucoup	8	181	1
+Adieu	1	182	0
+fit	2	182	0
+le	3	182	0
+petit	4	182	0
+prince	5	182	1
+Adieu	1	183	0
+dit	2	183	0
+la	3	183	0
+fleur	4	183	1
+Le	1	184	0
+petit	2	184	0
+prince	3	184	0
+fit	4	184	0
+l	5	184	0
+ascension	6	184	0
+d	7	184	0
+une	8	184	0
+haute	9	184	0
+montagne	10	184	1
+Les	1	185	0
+seules	2	185	0
+montagnes	3	185	0
+qu	4	185	0
+il	5	185	0
+eût	6	185	0
+jamais	7	185	0
+connues	8	185	0
+étaient	9	185	0
+les	10	185	0
+trois	11	185	0
+volcans	12	185	0
+qui	13	185	0
+lui	14	185	0
+arrivaient	15	185	0
+au	16	185	0
+genou	17	185	1
+Et	1	186	0
+il	2	186	0
+se	3	186	0
+servait	4	186	0
+du	5	186	0
+volcan	6	186	0
+éteint	7	186	0
+comme	8	186	0
+d	9	186	0
+un	10	186	0
+tabouret	11	186	1
+d	1	187	0
+une	2	187	0
+montagne	3	187	0
+haute	4	187	0
+comme	5	187	0
+celle	6	187	0
+ci	7	187	0
+se	8	187	0
+dit	9	187	0
+il	10	187	0
+donc	11	187	0
+j	12	187	0
+apercevrai	13	187	0
+d	14	187	0
+un	15	187	0
+coup	16	187	0
+toute	17	187	0
+la	18	187	0
+planète	19	187	0
+et	20	187	0
+tous	21	187	0
+les	22	187	0
+hommes	23	187	1
+Mais	1	188	0
+il	2	188	0
+n	3	188	0
+aperçut	4	188	0
+rien	5	188	0
+que	6	188	0
+des	7	188	0
+aiguilles	8	188	0
+de	9	188	0
+roc	10	188	0
+bien	11	188	0
+aiguisées	12	188	1
+bonjour	1	189	0
+dit	2	189	0
+il	3	189	0
+à	4	189	0
+tout	5	189	0
+hasard	6	189	1
+Bonjour	1	190	1
+Bonjour	1	191	1
+Bonjour	1	192	1
+Répondit	1	193	0
+l	2	193	0
+écho	3	193	1
+Qui	1	194	0
+êtes	2	194	0
+vous	3	194	1
+Dit	1	195	0
+le	2	195	0
+petit	3	195	0
+prince	4	195	1
+Qui	1	196	0
+êtes	2	196	0
+vous	3	196	1
+Qui	1	197	0
+êtes	2	197	0
+vous	3	197	1
+Qui	1	198	0
+êtes	2	198	0
+vous	3	198	1
+Répondit	1	199	0
+l	2	199	0
+écho	3	199	1
+Soyez	1	200	0
+mes	2	200	0
+amis	3	200	0
+je	4	200	0
+suis	5	200	0
+seul	6	200	0
+dit	7	200	0
+il	8	200	1
+Je	1	201	0
+suis	2	201	0
+seul	3	201	1
+Je	1	202	0
+suis	2	202	0
+seul	3	202	1
+Je	1	203	0
+suis	2	203	0
+seul	3	203	1
+Répondit	1	204	0
+l	2	204	0
+écho	3	204	1
+quelle	1	205	0
+drôle	2	205	0
+de	3	205	0
+planète	4	205	1
+Pensa	1	206	0
+t	2	206	0
+il	3	206	0
+alors	4	206	1
+Elle	1	207	0
+est	2	207	0
+toute	3	207	0
+sèche	4	207	0
+et	5	207	0
+toute	6	207	0
+pointue	7	207	0
+et	8	207	0
+toute	9	207	0
+salée	10	207	1
+Et	1	208	0
+les	2	208	0
+hommes	3	208	0
+manquent	4	208	0
+d	5	208	0
+imagination	6	208	1
+Ils	1	209	0
+répètent	2	209	0
+ce	3	209	0
+qu	4	209	0
+on	5	209	0
+leur	6	209	0
+dit	7	209	1
+Chez	1	210	0
+moi	2	210	0
+j	3	210	0
+avais	4	210	0
+une	5	210	0
+fleur	6	210	0
+elle	7	210	0
+parlait	8	210	0
+toujours	9	210	0
+la	10	210	0
+première	11	210	1

@@ -1,1521 +1,1521 @@
-word	position	sentence_id
-La	1	1
-quatrième	2	1
-planète	3	1
-était	4	1
-celle	5	1
-du	6	1
-businessman	7	1
-Cet	1	2
-homme	2	2
-était	3	2
-si	4	2
-occupé	5	2
-qu	6	2
-il	7	2
-ne	8	2
-leva	9	2
-même	10	2
-pas	11	2
-la	12	2
-tête	13	2
-à	14	2
-l	15	2
-arrivée	16	2
-du	17	2
-petit	18	2
-prince	19	2
-bonjour	1	3
-lui	2	3
-dit	3	3
-celui	4	3
-ci	5	3
-Votre	1	4
-cigarette	2	4
-est	3	4
-éteinte	4	4
-trois	1	5
-et	2	5
-deux	3	5
-font	4	5
-cinq	5	5
-Cinq	1	6
-et	2	6
-sept	3	6
-douze	4	6
-Douze	1	7
-et	2	7
-trois	3	7
-quinze	4	7
-Bonjour	1	8
-Quinze	1	9
-et	2	9
-sept	3	9
-vingt	4	9
-deux	5	9
-Vingt	1	10
-deux	2	10
-et	3	10
-six	4	10
-vingt	5	10
-huit	6	10
-Pas	1	11
-le	2	11
-temps	3	11
-de	4	11
-la	5	11
-rallumer	6	11
-Vingt	1	12
-six	2	12
-et	3	12
-cinq	4	12
-trente	5	12
-et	6	12
-un	7	12
-Ouf	1	13
-Ça	1	14
-fait	2	14
-donc	3	14
-cinq	4	14
-cent	5	14
-un	6	14
-millions	7	14
-six	8	14
-cent	9	14
-vingt	10	14
-deux	11	14
-mille	12	14
-sept	13	14
-cent	14	14
-trente	15	14
-et	16	14
-un	17	14
-cinq	1	15
-cents	2	15
-millions	3	15
-de	4	15
-quoi	5	15
-hein	1	16
-Tu	1	17
-es	2	17
-toujours	3	17
-là	4	17
-Cinq	1	18
-cent	2	18
-un	3	18
-millions	4	18
-de	5	18
-Je	1	19
-ne	2	19
-sais	3	19
-plus	4	19
-J	1	20
-ai	2	20
-tellement	3	20
-de	4	20
-travail	5	20
-Je	1	21
-suis	2	21
-sérieux	3	21
-moi	4	21
-je	5	21
-ne	6	21
-m	7	21
-amuse	8	21
-pas	9	21
-à	10	21
-des	11	21
-balivernes	12	21
-Deux	1	22
-et	2	22
-cinq	3	22
-sept	4	22
-cinq	1	23
-cent	2	23
-un	3	23
-millions	4	23
-de	5	23
-quoi	6	23
-Répéta	1	24
-le	2	24
-petit	3	24
-prince	4	24
-qui	5	24
-jamais	6	24
-de	7	24
-sa	8	24
-vie	9	24
-n	10	24
-avait	11	24
-renoncé	12	24
-à	13	24
-une	14	24
-question	15	24
-une	16	24
-fois	17	24
-qu	18	24
-il	19	24
-l	20	24
-avait	21	24
-posée	22	24
-Le	1	25
-businessman	2	25
-leva	3	25
-la	4	25
-tête	5	25
-depuis	6	25
-cinquante	7	25
-quatre	8	25
-ans	9	25
-que	10	25
-j	11	25
-habite	12	25
-cette	13	25
-planète	14	25
-ci	15	25
-je	16	25
-n	17	25
-ai	18	25
-été	19	25
-dérangé	20	25
-que	21	25
-trois	22	25
-fois	23	25
-La	1	26
-première	2	26
-fois	3	26
-ç	4	26
-a	5	26
-été	6	26
-il	7	26
-y	8	26
-a	9	26
-vingt	10	26
-deux	11	26
-ans	12	26
-par	13	26
-un	14	26
-hanneton	15	26
-qui	16	26
-était	17	26
-tombé	18	26
-dieu	19	26
-sait	20	26
-d	21	26
-où	22	26
-Il	1	27
-répandait	2	27
-un	3	27
-bruit	4	27
-épouvantable	5	27
-et	6	27
-j	7	27
-ai	8	27
-fait	9	27
-quatre	10	27
-erreurs	11	27
-dans	12	27
-une	13	27
-addition	14	27
-La	1	28
-seconde	2	28
-fois	3	28
-ç	4	28
-a	5	28
-été	6	28
-il	7	28
-y	8	28
-a	9	28
-onze	10	28
-ans	11	28
-par	12	28
-une	13	28
-crise	14	28
-de	15	28
-rhumatisme	16	28
-Je	1	29
-manque	2	29
-d	3	29
-exercice	4	29
-Je	1	30
-n	2	30
-ai	3	30
-pas	4	30
-le	5	30
-temps	6	30
-de	7	30
-flâner	8	30
-Je	1	31
-suis	2	31
-sérieux	3	31
-moi	4	31
-La	1	32
-troisième	2	32
-fois	3	32
-La	1	33
-voici	2	33
-Je	1	34
-disais	2	34
-donc	3	34
-cinq	4	34
-cent	5	34
-un	6	34
-millions	7	34
-millions	1	35
-de	2	35
-quoi	3	35
-Le	1	36
-businessman	2	36
-comprit	3	36
-qu	4	36
-il	5	36
-n	6	36
-était	7	36
-point	8	36
-d	9	36
-espoir	10	36
-de	11	36
-paix	12	36
-millions	13	36
-de	14	36
-ces	15	36
-petites	16	36
-choses	17	36
-que	18	36
-l	19	36
-on	20	36
-voit	21	36
-quelquefois	22	36
-dans	23	36
-le	24	36
-ciel	25	36
-des	1	37
-mouches	2	37
-mais	1	38
-non	2	38
-des	3	38
-petites	4	38
-choses	5	38
-qui	6	38
-brillent	7	38
-des	1	39
-abeilles	2	39
-mais	1	40
-non	2	40
-Des	1	41
-petites	2	41
-choses	3	41
-dorées	4	41
-qui	5	41
-font	6	41
-rêvasser	7	41
-les	8	41
-fainéants	9	41
-Mais	1	42
-je	2	42
-suis	3	42
-sérieux	4	42
-moi	5	42
-Je	1	43
-n	2	43
-ai	3	43
-pas	4	43
-le	5	43
-temps	6	43
-de	7	43
-rêvasser	8	43
-ah	1	44
-Des	1	45
-étoiles	2	45
-c	1	46
-est	2	46
-bien	3	46
-ça	4	46
-Des	1	47
-étoiles	2	47
-et	1	48
-que	2	48
-fais	3	48
-tu	4	48
-de	5	48
-cinq	6	48
-cents	7	48
-millions	8	48
-d	9	48
-étoiles	10	48
-cinq	1	49
-cent	2	49
-un	3	49
-millions	4	49
-six	5	49
-cent	6	49
-vingt	7	49
-deux	8	49
-mille	9	49
-sept	10	49
-cent	11	49
-trente	12	49
-et	13	49
-un	14	49
-Je	1	50
-suis	2	50
-sérieux	3	50
-moi	4	50
-je	5	50
-suis	6	50
-précis	7	50
-et	1	51
-que	2	51
-fais	3	51
-tu	4	51
-de	5	51
-ces	6	51
-étoiles	7	51
-ce	1	52
-que	2	52
-j	3	52
-en	4	52
-fais	5	52
-oui	1	53
-rien	1	54
-Je	1	55
-les	2	55
-possède	3	55
-tu	1	56
-possèdes	2	56
-les	3	56
-étoiles	4	56
-oui	1	57
-mais	1	58
-j	2	58
-ai	3	58
-déjà	4	58
-vu	5	58
-un	6	58
-roi	7	58
-qui	8	58
-les	1	59
-rois	2	59
-ne	3	59
-possèdent	4	59
-pas	5	59
-Ils	1	60
-règnent	2	60
-sur	3	60
-C	1	61
-est	2	61
-très	3	61
-différent	4	61
-et	1	62
-à	2	62
-quoi	3	62
-cela	4	62
-te	5	62
-sert	6	62
-il	7	62
-de	8	62
-posséder	9	62
-les	10	62
-étoiles	11	62
-ça	1	63
-me	2	63
-sert	3	63
-à	4	63
-être	5	63
-riche	6	63
-et	1	64
-à	2	64
-quoi	3	64
-cela	4	64
-te	5	64
-sert	6	64
-il	7	64
-d	8	64
-être	9	64
-riche	10	64
-à	1	65
-acheter	2	65
-d	3	65
-autres	4	65
-étoiles	5	65
-si	6	65
-quelqu	7	65
-un	8	65
-en	9	65
-trouve	10	65
-celui	1	66
-là	2	66
-se	3	66
-dit	4	66
-en	5	66
-lui	6	66
-même	7	66
-le	8	66
-petit	9	66
-prince	10	66
-il	11	66
-raisonne	12	66
-un	13	66
-peu	14	66
-comme	15	66
-mon	16	66
-ivrogne	17	66
-Cependant	1	67
-il	2	67
-posa	3	67
-encore	4	67
-des	5	67
-questions	6	67
-comment	7	67
-peut	8	67
-on	9	67
-posséder	10	67
-les	11	67
-étoiles	12	67
-à	1	68
-qui	2	68
-sont	3	68
-elles	4	68
-Riposta	1	69
-grincheux	2	69
-le	3	69
-businessman	4	69
-je	1	70
-ne	2	70
-sais	3	70
-pas	4	70
-À	1	71
-personne	2	71
-alors	1	72
-elles	2	72
-sont	3	72
-à	4	72
-moi	5	72
-car	6	72
-j	7	72
-y	8	72
-ai	9	72
-pensé	10	72
-le	11	72
-premier	12	72
-ça	1	73
-suffit	2	73
-bien	1	74
-sûr	2	74
-Quand	1	75
-tu	2	75
-trouves	3	75
-un	4	75
-diamant	5	75
-qui	6	75
-n	7	75
-est	8	75
-à	9	75
-personne	10	75
-il	11	75
-est	12	75
-à	13	75
-toi	14	75
-Quand	1	76
-tu	2	76
-trouves	3	76
-une	4	76
-île	5	76
-qui	6	76
-n	7	76
-est	8	76
-à	9	76
-personne	10	76
-elle	11	76
-est	12	76
-à	13	76
-toi	14	76
-Quand	1	77
-tu	2	77
-as	3	77
-une	4	77
-idée	5	77
-le	6	77
-premier	7	77
-tu	8	77
-la	9	77
-fais	10	77
-breveter	11	77
-elle	12	77
-est	13	77
-à	14	77
-toi	15	77
-Et	1	78
-moi	2	78
-je	3	78
-possède	4	78
-les	5	78
-étoiles	6	78
-puisque	7	78
-jamais	8	78
-personne	9	78
-avant	10	78
-moi	11	78
-n	12	78
-a	13	78
-songé	14	78
-à	15	78
-les	16	78
-posséder	17	78
-ça	1	79
-c	2	79
-est	3	79
-vrai	4	79
-dit	5	79
-le	6	79
-petit	7	79
-prince	8	79
-Et	1	80
-qu	2	80
-en	3	80
-fais	4	80
-tu	5	80
-je	1	81
-les	2	81
-gère	3	81
-je	4	81
-les	5	81
-compte	6	81
-et	7	81
-je	8	81
-les	9	81
-recompte	10	81
-dit	11	81
-le	12	81
-businessman	13	81
-C	1	82
-est	2	82
-difficile	3	82
-Mais	1	83
-je	2	83
-suis	3	83
-un	4	83
-homme	5	83
-sérieux	6	83
-Le	1	84
-petit	2	84
-prince	3	84
-n	4	84
-était	5	84
-pas	6	84
-satisfait	7	84
-encore	8	84
-moi	1	85
-si	2	85
-je	3	85
-possède	4	85
-un	5	85
-foulard	6	85
-je	7	85
-puis	8	85
-le	9	85
-mettre	10	85
-autour	11	85
-de	12	85
-mon	13	85
-cou	14	85
-et	15	85
-l	16	85
-emporter	17	85
-Moi	1	86
-si	2	86
-je	3	86
-possède	4	86
-une	5	86
-fleur	6	86
-je	7	86
-puis	8	86
-cueillir	9	86
-ma	10	86
-fleur	11	86
-et	12	86
-l	13	86
-emporter	14	86
-Mais	1	87
-tu	2	87
-ne	3	87
-peux	4	87
-pas	5	87
-cueillir	6	87
-les	7	87
-étoiles	8	87
-non	1	88
-mais	2	88
-je	3	88
-puis	4	88
-les	5	88
-placer	6	88
-en	7	88
-banque	8	88
-qu	1	89
-est	2	89
-ce	3	89
-que	4	89
-ça	5	89
-veut	6	89
-dire	7	89
-ça	1	90
-veut	2	90
-dire	3	90
-que	4	90
-j	5	90
-écris	6	90
-sur	7	90
-un	8	90
-petit	9	90
-papier	10	90
-le	11	90
-nombre	12	90
-de	13	90
-mes	14	90
-étoiles	15	90
-Et	1	91
-puis	2	91
-j	3	91
-enferme	4	91
-à	5	91
-clef	6	91
-ce	7	91
-papier	8	91
-là	9	91
-dans	10	91
-un	11	91
-tiroir	12	91
-et	1	92
-c	2	92
-est	3	92
-tout	4	92
-ça	1	93
-suffit	2	93
-c	1	94
-est	2	94
-amusant	3	94
-pensa	4	94
-le	5	94
-petit	6	94
-prince	7	94
-C	1	95
-est	2	95
-assez	3	95
-poétique	4	95
-Mais	1	96
-ce	2	96
-n	3	96
-est	4	96
-pas	5	96
-très	6	96
-sérieux	7	96
-Le	1	97
-petit	2	97
-prince	3	97
-avait	4	97
-sur	5	97
-les	6	97
-choses	7	97
-sérieuses	8	97
-des	9	97
-idées	10	97
-très	11	97
-différentes	12	97
-des	13	97
-idées	14	97
-des	15	97
-grandes	16	97
-personnes	17	97
-moi	1	98
-dit	2	98
-il	3	98
-encore	4	98
-je	5	98
-possède	6	98
-une	7	98
-fleur	8	98
-que	9	98
-j	10	98
-arrose	11	98
-tous	12	98
-les	13	98
-jours	14	98
-Je	1	99
-possède	2	99
-trois	3	99
-volcans	4	99
-que	5	99
-je	6	99
-ramone	7	99
-toutes	8	99
-les	9	99
-semaines	10	99
-Car	1	100
-je	2	100
-ramone	3	100
-aussi	4	100
-celui	5	100
-qui	6	100
-est	7	100
-éteint	8	100
-On	1	101
-ne	2	101
-sait	3	101
-jamais	4	101
-C	1	102
-est	2	102
-utile	3	102
-à	4	102
-mes	5	102
-volcans	6	102
-et	7	102
-c	8	102
-est	9	102
-utile	10	102
-à	11	102
-ma	12	102
-fleur	13	102
-que	14	102
-je	15	102
-les	16	102
-possède	17	102
-Mais	1	103
-tu	2	103
-n	3	103
-es	4	103
-pas	5	103
-utile	6	103
-aux	7	103
-étoiles	8	103
-Le	1	104
-businessman	2	104
-ouvrit	3	104
-la	4	104
-bouche	5	104
-mais	6	104
-ne	7	104
-trouva	8	104
-rien	9	104
-à	10	104
-répondre	11	104
-et	12	104
-le	13	104
-petit	14	104
-prince	15	104
-s	16	104
-en	17	104
-fut	18	104
-les	1	105
-grandes	2	105
-personnes	3	105
-sont	4	105
-décidément	5	105
-tout	6	105
-à	7	105
-fait	8	105
-extraordinaires	9	105
-se	10	105
-disait	11	105
-il	12	105
-simplement	13	105
-en	14	105
-lui	15	105
-même	16	105
-durant	17	105
-le	18	105
-voyage	19	105
-La	1	106
-cinquième	2	106
-planète	3	106
-était	4	106
-très	5	106
-curieuse	6	106
-C	1	107
-était	2	107
-la	3	107
-plus	4	107
-petite	5	107
-de	6	107
-toutes	7	107
-Il	1	108
-y	2	108
-avait	3	108
-là	4	108
-juste	5	108
-assez	6	108
-de	7	108
-place	8	108
-pour	9	108
-loger	10	108
-un	11	108
-réverbère	12	108
-et	13	108
-un	14	108
-allumeur	15	108
-de	16	108
-réverbères	17	108
-Le	1	109
-petit	2	109
-prince	3	109
-ne	4	109
-parvenait	5	109
-pas	6	109
-à	7	109
-s	8	109
-expliquer	9	109
-à	10	109
-quoi	11	109
-pouvaient	12	109
-servir	13	109
-quelque	14	109
-part	15	109
-dans	16	109
-le	17	109
-ciel	18	109
-sur	19	109
-une	20	109
-planète	21	109
-sans	22	109
-maison	23	109
-ni	24	109
-population	25	109
-un	26	109
-réverbère	27	109
-et	28	109
-un	29	109
-allumeur	30	109
-de	31	109
-réverbères	32	109
-Cependant	1	110
-il	2	110
-se	3	110
-dit	4	110
-en	5	110
-lui	6	110
-même	7	110
-peut	8	110
-être	9	110
-bien	10	110
-que	11	110
-cet	12	110
-homme	13	110
-est	14	110
-absurde	15	110
-Cependant	1	111
-il	2	111
-est	3	111
-moins	4	111
-absurde	5	111
-que	6	111
-le	7	111
-roi	8	111
-que	9	111
-le	10	111
-vaniteux	11	111
-que	12	111
-le	13	111
-businessman	14	111
-et	15	111
-que	16	111
-le	17	111
-buveur	18	111
-Au	1	112
-moins	2	112
-son	3	112
-travail	4	112
-a	5	112
-t	6	112
-il	7	112
-un	8	112
-sens	9	112
-Quand	1	113
-il	2	113
-allume	3	113
-son	4	113
-réverbère	5	113
-c	6	113
-est	7	113
-comme	8	113
-s	9	113
-il	10	113
-faisait	11	113
-naître	12	113
-une	13	113
-étoile	14	113
-de	15	113
-plus	16	113
-ou	17	113
-une	18	113
-fleur	19	113
-Quand	1	114
-il	2	114
-éteint	3	114
-son	4	114
-réverbère	5	114
-ça	6	114
-endort	7	114
-la	8	114
-fleur	9	114
-ou	10	114
-l	11	114
-étoile	12	114
-C	1	115
-est	2	115
-une	3	115
-occupation	4	115
-très	5	115
-jolie	6	115
-C	1	116
-est	2	116
-véritablement	3	116
-utile	4	116
-puisque	5	116
-c	6	116
-est	7	116
-joli	8	116
-Lorsqu	1	117
-il	2	117
-aborda	3	117
-la	4	117
-planète	5	117
-il	6	117
-salua	7	117
-respectueusement	8	117
-l	9	117
-allumeur	10	117
-bonjour	11	117
-Pourquoi	1	118
-viens	2	118
-tu	3	118
-d	4	118
-éteindre	5	118
-ton	6	118
-réverbère	7	118
-c	1	119
-est	2	119
-la	3	119
-consigne	4	119
-répondit	5	119
-l	6	119
-allumeur	7	119
-Bonjour	1	120
-qu	1	121
-est	2	121
-ce	3	121
-que	4	121
-la	5	121
-consigne	6	121
-c	1	122
-est	2	122
-d	3	122
-éteindre	4	122
-mon	5	122
-réverbère	6	122
-Bonsoir	1	123
-Et	1	124
-il	2	124
-le	3	124
-ralluma	4	124
-mais	1	125
-pourquoi	2	125
-viens	3	125
-tu	4	125
-de	5	125
-le	6	125
-rallumer	7	125
-c	1	126
-est	2	126
-la	3	126
-consigne	4	126
-répondit	5	126
-l	6	126
-allumeur	7	126
-je	1	127
-ne	2	127
-comprends	3	127
-pas	4	127
-dit	5	127
-le	6	127
-petit	7	127
-prince	8	127
-il	1	128
-n	2	128
-y	3	128
-a	4	128
-rien	5	128
-à	6	128
-comprendre	7	128
-dit	8	128
-l	9	128
-allumeur	10	128
-La	1	129
-consigne	2	129
-c	3	129
-est	4	129
-la	5	129
-consigne	6	129
-Bonjour	1	130
-Et	1	131
-il	2	131
-éteignit	3	131
-son	4	131
-réverbère	5	131
-Puis	1	132
-il	2	132
-s	3	132
-épongea	4	132
-le	5	132
-front	6	132
-avec	7	132
-un	8	132
-mouchoir	9	132
-à	10	132
-carreaux	11	132
-rouges	12	132
-je	1	133
-fais	2	133
-là	3	133
-un	4	133
-métier	5	133
-terrible	6	133
-C	1	134
-était	2	134
-raisonnable	3	134
-autrefois	4	134
-J	1	135
-éteignais	2	135
-le	3	135
-matin	4	135
-et	5	135
-j	6	135
-allumais	7	135
-le	8	135
-soir	9	135
-J	1	136
-avais	2	136
-le	3	136
-reste	4	136
-du	5	136
-jour	6	136
-pour	7	136
-me	8	136
-reposer	9	136
-et	10	136
-le	11	136
-reste	12	136
-de	13	136
-la	14	136
-nuit	15	136
-pour	16	136
-dormir	17	136
-et	1	137
-depuis	2	137
-cette	3	137
-époque	4	137
-la	5	137
-consigne	6	137
-a	7	137
-changé	8	137
-la	1	138
-consigne	2	138
-n	3	138
-a	4	138
-pas	5	138
-changé	6	138
-dit	7	138
-l	8	138
-allumeur	9	138
-C	1	139
-est	2	139
-bien	3	139
-là	4	139
-le	5	139
-drame	6	139
-La	1	140
-planète	2	140
-d	3	140
-année	4	140
-en	5	140
-année	6	140
-a	7	140
-tourné	8	140
-de	9	140
-plus	10	140
-en	11	140
-plus	12	140
-vite	13	140
-et	14	140
-la	15	140
-consigne	16	140
-n	17	140
-a	18	140
-pas	19	140
-changé	20	140
-alors	1	141
-Dit	1	142
-le	2	142
-petit	3	142
-prince	4	142
-alors	1	143
-maintenant	2	143
-qu	3	143
-elle	4	143
-fait	5	143
-un	6	143
-tour	7	143
-par	8	143
-minute	9	143
-je	10	143
-n	11	143
-ai	12	143
-plus	13	143
-une	14	143
-seconde	15	143
-de	16	143
-repos	17	143
-J	1	144
-allume	2	144
-et	3	144
-j	4	144
-éteins	5	144
-une	6	144
-fois	7	144
-par	8	144
-minute	9	144
-ça	1	145
-c	2	145
-est	3	145
-drôle	4	145
-Les	1	146
-jours	2	146
-chez	3	146
-toi	4	146
-durent	5	146
-une	6	146
-minute	7	146
-ce	1	147
-n	2	147
-est	3	147
-pas	4	147
-drôle	5	147
-du	6	147
-tout	7	147
-dit	8	147
-l	9	147
-allumeur	10	147
-Ça	1	148
-fait	2	148
-déjà	3	148
-un	4	148
-mois	5	148
-que	6	148
-nous	7	148
-parlons	8	148
-ensemble	9	148
-un	1	149
-mois	2	149
-oui	1	150
-Trente	1	151
-minutes	2	151
-Trente	1	152
-jours	2	152
-Bonsoir	1	153
-Et	1	154
-il	2	154
-ralluma	3	154
-son	4	154
-réverbère	5	154
-Le	1	155
-petit	2	155
-prince	3	155
-le	4	155
-regarda	5	155
-et	6	155
-il	7	155
-aima	8	155
-cet	9	155
-allumeur	10	155
-qui	11	155
-était	12	155
-tellement	13	155
-fidèle	14	155
-à	15	155
-la	16	155
-consigne	17	155
-Il	1	156
-se	2	156
-souvint	3	156
-des	4	156
-couchers	5	156
-de	6	156
-soleil	7	156
-que	8	156
-lui	9	156
-même	10	156
-allait	11	156
-autrefois	12	156
-chercher	13	156
-en	14	156
-tirant	15	156
-sa	16	156
-chaise	17	156
-Il	1	157
-voulut	2	157
-aider	3	157
-son	4	157
-ami	5	157
-tu	6	157
-sais	7	157
-Je	1	158
-connais	2	158
-un	3	158
-moyen	4	158
-de	5	158
-te	6	158
-reposer	7	158
-quand	8	158
-tu	9	158
-voudras	10	158
-je	1	159
-veux	2	159
-toujours	3	159
-dit	4	159
-l	5	159
-allumeur	6	159
-Car	1	160
-on	2	160
-peut	3	160
-être	4	160
-à	5	160
-la	6	160
-fois	7	160
-fidèle	8	160
-et	9	160
-paresseux	10	160
-Le	1	161
-petit	2	161
-prince	3	161
-poursuivit	4	161
-ta	5	161
-planète	6	161
-est	7	161
-tellement	8	161
-petite	9	161
-que	10	161
-tu	11	161
-en	12	161
-fais	13	161
-le	14	161
-tour	15	161
-en	16	161
-trois	17	161
-enjambées	18	161
-Tu	1	162
-n	2	162
-as	3	162
-qu	4	162
-à	5	162
-marcher	6	162
-assez	7	162
-lentement	8	162
-pour	9	162
-rester	10	162
-toujours	11	162
-au	12	162
-soleil	13	162
-Quand	1	163
-tu	2	163
-voudras	3	163
-te	4	163
-reposer	5	163
-tu	6	163
-marcheras	7	163
-Et	1	164
-le	2	164
-jour	3	164
-durera	4	164
-aussi	5	164
-longtemps	6	164
-que	7	164
-tu	8	164
-voudras	9	164
-ça	1	165
-ne	2	165
-m	3	165
-avance	4	165
-pas	5	165
-à	6	165
-grand	7	165
-chose	8	165
-dit	9	165
-l	10	165
-allumeur	11	165
-Ce	1	166
-que	2	166
-j	3	166
-aime	4	166
-dans	5	166
-la	6	166
-vie	7	166
-c	8	166
-est	9	166
-dormir	10	166
-ce	1	167
-n	2	167
-est	3	167
-pas	4	167
-de	5	167
-chance	6	167
-dit	7	167
-le	8	167
-petit	9	167
-prince	10	167
-ce	1	168
-n	2	168
-est	3	168
-pas	4	168
-de	5	168
-chance	6	168
-dit	7	168
-l	8	168
-allumeur	9	168
-Bonjour	1	169
-Et	1	170
-il	2	170
-éteignit	3	170
-son	4	170
-réverbère	5	170
-celui	1	171
-là	2	171
-se	3	171
-dit	4	171
-le	5	171
-petit	6	171
-prince	7	171
-tandis	8	171
-qu	9	171
-il	10	171
-poursuivait	11	171
-plus	12	171
-loin	13	171
-son	14	171
-voyage	15	171
-celui	16	171
-là	17	171
-serait	18	171
-méprisé	19	171
-par	20	171
-tous	21	171
-les	22	171
-autres	23	171
-par	24	171
-le	25	171
-roi	26	171
-par	27	171
-le	28	171
-vaniteux	29	171
-par	30	171
-le	31	171
-buveur	32	171
-par	33	171
-le	34	171
-businessman	35	171
-Cependant	1	172
-c	2	172
-est	3	172
-le	4	172
-seul	5	172
-qui	6	172
-ne	7	172
-me	8	172
-paraisse	9	172
-pas	10	172
-ridicule	11	172
-C	1	173
-est	2	173
-peut	3	173
-être	4	173
-parce	5	173
-qu	6	173
-il	7	173
-s	8	173
-occupe	9	173
-d	10	173
-autre	11	173
-chose	12	173
-que	13	173
-de	14	173
-soi	15	173
-même	16	173
-Il	1	174
-eut	2	174
-un	3	174
-soupir	4	174
-de	5	174
-regret	6	174
-et	7	174
-se	8	174
-dit	9	174
-encore	10	174
-celui	11	174
-là	12	174
-est	13	174
-le	14	174
-seul	15	174
-dont	16	174
-j	17	174
-eusse	18	174
-pu	19	174
-faire	20	174
-mon	21	174
-ami	22	174
-Mais	1	175
-sa	2	175
-planète	3	175
-est	4	175
-vraiment	5	175
-trop	6	175
-petite	7	175
-Il	1	176
-n	2	176
-y	3	176
-a	4	176
-pas	5	176
-de	6	176
-place	7	176
-pour	8	176
-deux	9	176
-Ce	1	177
-que	2	177
-le	3	177
-petit	4	177
-prince	5	177
-n	6	177
-osait	7	177
-pas	8	177
-s	9	177
-avouer	10	177
-c	11	177
-est	12	177
-qu	13	177
-il	14	177
-regrettait	15	177
-cette	16	177
-planète	17	177
-bénie	18	177
-à	19	177
-cause	20	177
-surtout	21	177
-des	22	177
-mille	23	177
-quatre	24	177
-cent	25	177
-quarante	26	177
-couchers	27	177
-de	28	177
-soleil	29	177
-par	30	177
-vingt	31	177
-quatre	32	177
-heures	33	177
+word	position	sentence_id	is_last_word
+La	1	1	0
+quatrième	2	1	0
+planète	3	1	0
+était	4	1	0
+celle	5	1	0
+du	6	1	0
+businessman	7	1	1
+Cet	1	2	0
+homme	2	2	0
+était	3	2	0
+si	4	2	0
+occupé	5	2	0
+qu	6	2	0
+il	7	2	0
+ne	8	2	0
+leva	9	2	0
+même	10	2	0
+pas	11	2	0
+la	12	2	0
+tête	13	2	0
+à	14	2	0
+l	15	2	0
+arrivée	16	2	0
+du	17	2	0
+petit	18	2	0
+prince	19	2	1
+bonjour	1	3	0
+lui	2	3	0
+dit	3	3	0
+celui	4	3	0
+ci	5	3	1
+Votre	1	4	0
+cigarette	2	4	0
+est	3	4	0
+éteinte	4	4	1
+trois	1	5	0
+et	2	5	0
+deux	3	5	0
+font	4	5	0
+cinq	5	5	1
+Cinq	1	6	0
+et	2	6	0
+sept	3	6	0
+douze	4	6	1
+Douze	1	7	0
+et	2	7	0
+trois	3	7	0
+quinze	4	7	1
+Bonjour	1	8	1
+Quinze	1	9	0
+et	2	9	0
+sept	3	9	0
+vingt	4	9	0
+deux	5	9	1
+Vingt	1	10	0
+deux	2	10	0
+et	3	10	0
+six	4	10	0
+vingt	5	10	0
+huit	6	10	1
+Pas	1	11	0
+le	2	11	0
+temps	3	11	0
+de	4	11	0
+la	5	11	0
+rallumer	6	11	1
+Vingt	1	12	0
+six	2	12	0
+et	3	12	0
+cinq	4	12	0
+trente	5	12	0
+et	6	12	0
+un	7	12	1
+Ouf	1	13	1
+Ça	1	14	0
+fait	2	14	0
+donc	3	14	0
+cinq	4	14	0
+cent	5	14	0
+un	6	14	0
+millions	7	14	0
+six	8	14	0
+cent	9	14	0
+vingt	10	14	0
+deux	11	14	0
+mille	12	14	0
+sept	13	14	0
+cent	14	14	0
+trente	15	14	0
+et	16	14	0
+un	17	14	1
+cinq	1	15	0
+cents	2	15	0
+millions	3	15	0
+de	4	15	0
+quoi	5	15	1
+hein	1	16	1
+Tu	1	17	0
+es	2	17	0
+toujours	3	17	0
+là	4	17	1
+Cinq	1	18	0
+cent	2	18	0
+un	3	18	0
+millions	4	18	0
+de	5	18	1
+Je	1	19	0
+ne	2	19	0
+sais	3	19	0
+plus	4	19	1
+J	1	20	0
+ai	2	20	0
+tellement	3	20	0
+de	4	20	0
+travail	5	20	1
+Je	1	21	0
+suis	2	21	0
+sérieux	3	21	0
+moi	4	21	0
+je	5	21	0
+ne	6	21	0
+m	7	21	0
+amuse	8	21	0
+pas	9	21	0
+à	10	21	0
+des	11	21	0
+balivernes	12	21	1
+Deux	1	22	0
+et	2	22	0
+cinq	3	22	0
+sept	4	22	1
+cinq	1	23	0
+cent	2	23	0
+un	3	23	0
+millions	4	23	0
+de	5	23	0
+quoi	6	23	1
+Répéta	1	24	0
+le	2	24	0
+petit	3	24	0
+prince	4	24	0
+qui	5	24	0
+jamais	6	24	0
+de	7	24	0
+sa	8	24	0
+vie	9	24	0
+n	10	24	0
+avait	11	24	0
+renoncé	12	24	0
+à	13	24	0
+une	14	24	0
+question	15	24	0
+une	16	24	0
+fois	17	24	0
+qu	18	24	0
+il	19	24	0
+l	20	24	0
+avait	21	24	0
+posée	22	24	1
+Le	1	25	0
+businessman	2	25	0
+leva	3	25	0
+la	4	25	0
+tête	5	25	0
+depuis	6	25	0
+cinquante	7	25	0
+quatre	8	25	0
+ans	9	25	0
+que	10	25	0
+j	11	25	0
+habite	12	25	0
+cette	13	25	0
+planète	14	25	0
+ci	15	25	0
+je	16	25	0
+n	17	25	0
+ai	18	25	0
+été	19	25	0
+dérangé	20	25	0
+que	21	25	0
+trois	22	25	0
+fois	23	25	1
+La	1	26	0
+première	2	26	0
+fois	3	26	0
+ç	4	26	0
+a	5	26	0
+été	6	26	0
+il	7	26	0
+y	8	26	0
+a	9	26	0
+vingt	10	26	0
+deux	11	26	0
+ans	12	26	0
+par	13	26	0
+un	14	26	0
+hanneton	15	26	0
+qui	16	26	0
+était	17	26	0
+tombé	18	26	0
+dieu	19	26	0
+sait	20	26	0
+d	21	26	0
+où	22	26	1
+Il	1	27	0
+répandait	2	27	0
+un	3	27	0
+bruit	4	27	0
+épouvantable	5	27	0
+et	6	27	0
+j	7	27	0
+ai	8	27	0
+fait	9	27	0
+quatre	10	27	0
+erreurs	11	27	0
+dans	12	27	0
+une	13	27	0
+addition	14	27	1
+La	1	28	0
+seconde	2	28	0
+fois	3	28	0
+ç	4	28	0
+a	5	28	0
+été	6	28	0
+il	7	28	0
+y	8	28	0
+a	9	28	0
+onze	10	28	0
+ans	11	28	0
+par	12	28	0
+une	13	28	0
+crise	14	28	0
+de	15	28	0
+rhumatisme	16	28	1
+Je	1	29	0
+manque	2	29	0
+d	3	29	0
+exercice	4	29	1
+Je	1	30	0
+n	2	30	0
+ai	3	30	0
+pas	4	30	0
+le	5	30	0
+temps	6	30	0
+de	7	30	0
+flâner	8	30	1
+Je	1	31	0
+suis	2	31	0
+sérieux	3	31	0
+moi	4	31	1
+La	1	32	0
+troisième	2	32	0
+fois	3	32	1
+La	1	33	0
+voici	2	33	1
+Je	1	34	0
+disais	2	34	0
+donc	3	34	0
+cinq	4	34	0
+cent	5	34	0
+un	6	34	0
+millions	7	34	1
+millions	1	35	0
+de	2	35	0
+quoi	3	35	1
+Le	1	36	0
+businessman	2	36	0
+comprit	3	36	0
+qu	4	36	0
+il	5	36	0
+n	6	36	0
+était	7	36	0
+point	8	36	0
+d	9	36	0
+espoir	10	36	0
+de	11	36	0
+paix	12	36	0
+millions	13	36	0
+de	14	36	0
+ces	15	36	0
+petites	16	36	0
+choses	17	36	0
+que	18	36	0
+l	19	36	0
+on	20	36	0
+voit	21	36	0
+quelquefois	22	36	0
+dans	23	36	0
+le	24	36	0
+ciel	25	36	1
+des	1	37	0
+mouches	2	37	1
+mais	1	38	0
+non	2	38	0
+des	3	38	0
+petites	4	38	0
+choses	5	38	0
+qui	6	38	0
+brillent	7	38	1
+des	1	39	0
+abeilles	2	39	1
+mais	1	40	0
+non	2	40	1
+Des	1	41	0
+petites	2	41	0
+choses	3	41	0
+dorées	4	41	0
+qui	5	41	0
+font	6	41	0
+rêvasser	7	41	0
+les	8	41	0
+fainéants	9	41	1
+Mais	1	42	0
+je	2	42	0
+suis	3	42	0
+sérieux	4	42	0
+moi	5	42	1
+Je	1	43	0
+n	2	43	0
+ai	3	43	0
+pas	4	43	0
+le	5	43	0
+temps	6	43	0
+de	7	43	0
+rêvasser	8	43	1
+ah	1	44	1
+Des	1	45	0
+étoiles	2	45	1
+c	1	46	0
+est	2	46	0
+bien	3	46	0
+ça	4	46	1
+Des	1	47	0
+étoiles	2	47	1
+et	1	48	0
+que	2	48	0
+fais	3	48	0
+tu	4	48	0
+de	5	48	0
+cinq	6	48	0
+cents	7	48	0
+millions	8	48	0
+d	9	48	0
+étoiles	10	48	1
+cinq	1	49	0
+cent	2	49	0
+un	3	49	0
+millions	4	49	0
+six	5	49	0
+cent	6	49	0
+vingt	7	49	0
+deux	8	49	0
+mille	9	49	0
+sept	10	49	0
+cent	11	49	0
+trente	12	49	0
+et	13	49	0
+un	14	49	1
+Je	1	50	0
+suis	2	50	0
+sérieux	3	50	0
+moi	4	50	0
+je	5	50	0
+suis	6	50	0
+précis	7	50	1
+et	1	51	0
+que	2	51	0
+fais	3	51	0
+tu	4	51	0
+de	5	51	0
+ces	6	51	0
+étoiles	7	51	1
+ce	1	52	0
+que	2	52	0
+j	3	52	0
+en	4	52	0
+fais	5	52	1
+oui	1	53	1
+rien	1	54	1
+Je	1	55	0
+les	2	55	0
+possède	3	55	1
+tu	1	56	0
+possèdes	2	56	0
+les	3	56	0
+étoiles	4	56	1
+oui	1	57	1
+mais	1	58	0
+j	2	58	0
+ai	3	58	0
+déjà	4	58	0
+vu	5	58	0
+un	6	58	0
+roi	7	58	0
+qui	8	58	1
+les	1	59	0
+rois	2	59	0
+ne	3	59	0
+possèdent	4	59	0
+pas	5	59	1
+Ils	1	60	0
+règnent	2	60	0
+sur	3	60	1
+C	1	61	0
+est	2	61	0
+très	3	61	0
+différent	4	61	1
+et	1	62	0
+à	2	62	0
+quoi	3	62	0
+cela	4	62	0
+te	5	62	0
+sert	6	62	0
+il	7	62	0
+de	8	62	0
+posséder	9	62	0
+les	10	62	0
+étoiles	11	62	1
+ça	1	63	0
+me	2	63	0
+sert	3	63	0
+à	4	63	0
+être	5	63	0
+riche	6	63	1
+et	1	64	0
+à	2	64	0
+quoi	3	64	0
+cela	4	64	0
+te	5	64	0
+sert	6	64	0
+il	7	64	0
+d	8	64	0
+être	9	64	0
+riche	10	64	1
+à	1	65	0
+acheter	2	65	0
+d	3	65	0
+autres	4	65	0
+étoiles	5	65	0
+si	6	65	0
+quelqu	7	65	0
+un	8	65	0
+en	9	65	0
+trouve	10	65	1
+celui	1	66	0
+là	2	66	0
+se	3	66	0
+dit	4	66	0
+en	5	66	0
+lui	6	66	0
+même	7	66	0
+le	8	66	0
+petit	9	66	0
+prince	10	66	0
+il	11	66	0
+raisonne	12	66	0
+un	13	66	0
+peu	14	66	0
+comme	15	66	0
+mon	16	66	0
+ivrogne	17	66	1
+Cependant	1	67	0
+il	2	67	0
+posa	3	67	0
+encore	4	67	0
+des	5	67	0
+questions	6	67	0
+comment	7	67	0
+peut	8	67	0
+on	9	67	0
+posséder	10	67	0
+les	11	67	0
+étoiles	12	67	1
+à	1	68	0
+qui	2	68	0
+sont	3	68	0
+elles	4	68	1
+Riposta	1	69	0
+grincheux	2	69	0
+le	3	69	0
+businessman	4	69	1
+je	1	70	0
+ne	2	70	0
+sais	3	70	0
+pas	4	70	1
+À	1	71	0
+personne	2	71	1
+alors	1	72	0
+elles	2	72	0
+sont	3	72	0
+à	4	72	0
+moi	5	72	0
+car	6	72	0
+j	7	72	0
+y	8	72	0
+ai	9	72	0
+pensé	10	72	0
+le	11	72	0
+premier	12	72	1
+ça	1	73	0
+suffit	2	73	1
+bien	1	74	0
+sûr	2	74	1
+Quand	1	75	0
+tu	2	75	0
+trouves	3	75	0
+un	4	75	0
+diamant	5	75	0
+qui	6	75	0
+n	7	75	0
+est	8	75	0
+à	9	75	0
+personne	10	75	0
+il	11	75	0
+est	12	75	0
+à	13	75	0
+toi	14	75	1
+Quand	1	76	0
+tu	2	76	0
+trouves	3	76	0
+une	4	76	0
+île	5	76	0
+qui	6	76	0
+n	7	76	0
+est	8	76	0
+à	9	76	0
+personne	10	76	0
+elle	11	76	0
+est	12	76	0
+à	13	76	0
+toi	14	76	1
+Quand	1	77	0
+tu	2	77	0
+as	3	77	0
+une	4	77	0
+idée	5	77	0
+le	6	77	0
+premier	7	77	0
+tu	8	77	0
+la	9	77	0
+fais	10	77	0
+breveter	11	77	0
+elle	12	77	0
+est	13	77	0
+à	14	77	0
+toi	15	77	1
+Et	1	78	0
+moi	2	78	0
+je	3	78	0
+possède	4	78	0
+les	5	78	0
+étoiles	6	78	0
+puisque	7	78	0
+jamais	8	78	0
+personne	9	78	0
+avant	10	78	0
+moi	11	78	0
+n	12	78	0
+a	13	78	0
+songé	14	78	0
+à	15	78	0
+les	16	78	0
+posséder	17	78	1
+ça	1	79	0
+c	2	79	0
+est	3	79	0
+vrai	4	79	0
+dit	5	79	0
+le	6	79	0
+petit	7	79	0
+prince	8	79	1
+Et	1	80	0
+qu	2	80	0
+en	3	80	0
+fais	4	80	0
+tu	5	80	1
+je	1	81	0
+les	2	81	0
+gère	3	81	0
+je	4	81	0
+les	5	81	0
+compte	6	81	0
+et	7	81	0
+je	8	81	0
+les	9	81	0
+recompte	10	81	0
+dit	11	81	0
+le	12	81	0
+businessman	13	81	1
+C	1	82	0
+est	2	82	0
+difficile	3	82	1
+Mais	1	83	0
+je	2	83	0
+suis	3	83	0
+un	4	83	0
+homme	5	83	0
+sérieux	6	83	1
+Le	1	84	0
+petit	2	84	0
+prince	3	84	0
+n	4	84	0
+était	5	84	0
+pas	6	84	0
+satisfait	7	84	0
+encore	8	84	1
+moi	1	85	0
+si	2	85	0
+je	3	85	0
+possède	4	85	0
+un	5	85	0
+foulard	6	85	0
+je	7	85	0
+puis	8	85	0
+le	9	85	0
+mettre	10	85	0
+autour	11	85	0
+de	12	85	0
+mon	13	85	0
+cou	14	85	0
+et	15	85	0
+l	16	85	0
+emporter	17	85	1
+Moi	1	86	0
+si	2	86	0
+je	3	86	0
+possède	4	86	0
+une	5	86	0
+fleur	6	86	0
+je	7	86	0
+puis	8	86	0
+cueillir	9	86	0
+ma	10	86	0
+fleur	11	86	0
+et	12	86	0
+l	13	86	0
+emporter	14	86	1
+Mais	1	87	0
+tu	2	87	0
+ne	3	87	0
+peux	4	87	0
+pas	5	87	0
+cueillir	6	87	0
+les	7	87	0
+étoiles	8	87	1
+non	1	88	0
+mais	2	88	0
+je	3	88	0
+puis	4	88	0
+les	5	88	0
+placer	6	88	0
+en	7	88	0
+banque	8	88	1
+qu	1	89	0
+est	2	89	0
+ce	3	89	0
+que	4	89	0
+ça	5	89	0
+veut	6	89	0
+dire	7	89	1
+ça	1	90	0
+veut	2	90	0
+dire	3	90	0
+que	4	90	0
+j	5	90	0
+écris	6	90	0
+sur	7	90	0
+un	8	90	0
+petit	9	90	0
+papier	10	90	0
+le	11	90	0
+nombre	12	90	0
+de	13	90	0
+mes	14	90	0
+étoiles	15	90	1
+Et	1	91	0
+puis	2	91	0
+j	3	91	0
+enferme	4	91	0
+à	5	91	0
+clef	6	91	0
+ce	7	91	0
+papier	8	91	0
+là	9	91	0
+dans	10	91	0
+un	11	91	0
+tiroir	12	91	1
+et	1	92	0
+c	2	92	0
+est	3	92	0
+tout	4	92	1
+ça	1	93	0
+suffit	2	93	1
+c	1	94	0
+est	2	94	0
+amusant	3	94	0
+pensa	4	94	0
+le	5	94	0
+petit	6	94	0
+prince	7	94	1
+C	1	95	0
+est	2	95	0
+assez	3	95	0
+poétique	4	95	1
+Mais	1	96	0
+ce	2	96	0
+n	3	96	0
+est	4	96	0
+pas	5	96	0
+très	6	96	0
+sérieux	7	96	1
+Le	1	97	0
+petit	2	97	0
+prince	3	97	0
+avait	4	97	0
+sur	5	97	0
+les	6	97	0
+choses	7	97	0
+sérieuses	8	97	0
+des	9	97	0
+idées	10	97	0
+très	11	97	0
+différentes	12	97	0
+des	13	97	0
+idées	14	97	0
+des	15	97	0
+grandes	16	97	0
+personnes	17	97	1
+moi	1	98	0
+dit	2	98	0
+il	3	98	0
+encore	4	98	0
+je	5	98	0
+possède	6	98	0
+une	7	98	0
+fleur	8	98	0
+que	9	98	0
+j	10	98	0
+arrose	11	98	0
+tous	12	98	0
+les	13	98	0
+jours	14	98	1
+Je	1	99	0
+possède	2	99	0
+trois	3	99	0
+volcans	4	99	0
+que	5	99	0
+je	6	99	0
+ramone	7	99	0
+toutes	8	99	0
+les	9	99	0
+semaines	10	99	1
+Car	1	100	0
+je	2	100	0
+ramone	3	100	0
+aussi	4	100	0
+celui	5	100	0
+qui	6	100	0
+est	7	100	0
+éteint	8	100	1
+On	1	101	0
+ne	2	101	0
+sait	3	101	0
+jamais	4	101	1
+C	1	102	0
+est	2	102	0
+utile	3	102	0
+à	4	102	0
+mes	5	102	0
+volcans	6	102	0
+et	7	102	0
+c	8	102	0
+est	9	102	0
+utile	10	102	0
+à	11	102	0
+ma	12	102	0
+fleur	13	102	0
+que	14	102	0
+je	15	102	0
+les	16	102	0
+possède	17	102	1
+Mais	1	103	0
+tu	2	103	0
+n	3	103	0
+es	4	103	0
+pas	5	103	0
+utile	6	103	0
+aux	7	103	0
+étoiles	8	103	1
+Le	1	104	0
+businessman	2	104	0
+ouvrit	3	104	0
+la	4	104	0
+bouche	5	104	0
+mais	6	104	0
+ne	7	104	0
+trouva	8	104	0
+rien	9	104	0
+à	10	104	0
+répondre	11	104	0
+et	12	104	0
+le	13	104	0
+petit	14	104	0
+prince	15	104	0
+s	16	104	0
+en	17	104	0
+fut	18	104	1
+les	1	105	0
+grandes	2	105	0
+personnes	3	105	0
+sont	4	105	0
+décidément	5	105	0
+tout	6	105	0
+à	7	105	0
+fait	8	105	0
+extraordinaires	9	105	0
+se	10	105	0
+disait	11	105	0
+il	12	105	0
+simplement	13	105	0
+en	14	105	0
+lui	15	105	0
+même	16	105	0
+durant	17	105	0
+le	18	105	0
+voyage	19	105	1
+La	1	106	0
+cinquième	2	106	0
+planète	3	106	0
+était	4	106	0
+très	5	106	0
+curieuse	6	106	1
+C	1	107	0
+était	2	107	0
+la	3	107	0
+plus	4	107	0
+petite	5	107	0
+de	6	107	0
+toutes	7	107	1
+Il	1	108	0
+y	2	108	0
+avait	3	108	0
+là	4	108	0
+juste	5	108	0
+assez	6	108	0
+de	7	108	0
+place	8	108	0
+pour	9	108	0
+loger	10	108	0
+un	11	108	0
+réverbère	12	108	0
+et	13	108	0
+un	14	108	0
+allumeur	15	108	0
+de	16	108	0
+réverbères	17	108	1
+Le	1	109	0
+petit	2	109	0
+prince	3	109	0
+ne	4	109	0
+parvenait	5	109	0
+pas	6	109	0
+à	7	109	0
+s	8	109	0
+expliquer	9	109	0
+à	10	109	0
+quoi	11	109	0
+pouvaient	12	109	0
+servir	13	109	0
+quelque	14	109	0
+part	15	109	0
+dans	16	109	0
+le	17	109	0
+ciel	18	109	0
+sur	19	109	0
+une	20	109	0
+planète	21	109	0
+sans	22	109	0
+maison	23	109	0
+ni	24	109	0
+population	25	109	0
+un	26	109	0
+réverbère	27	109	0
+et	28	109	0
+un	29	109	0
+allumeur	30	109	0
+de	31	109	0
+réverbères	32	109	1
+Cependant	1	110	0
+il	2	110	0
+se	3	110	0
+dit	4	110	0
+en	5	110	0
+lui	6	110	0
+même	7	110	0
+peut	8	110	0
+être	9	110	0
+bien	10	110	0
+que	11	110	0
+cet	12	110	0
+homme	13	110	0
+est	14	110	0
+absurde	15	110	1
+Cependant	1	111	0
+il	2	111	0
+est	3	111	0
+moins	4	111	0
+absurde	5	111	0
+que	6	111	0
+le	7	111	0
+roi	8	111	0
+que	9	111	0
+le	10	111	0
+vaniteux	11	111	0
+que	12	111	0
+le	13	111	0
+businessman	14	111	0
+et	15	111	0
+que	16	111	0
+le	17	111	0
+buveur	18	111	1
+Au	1	112	0
+moins	2	112	0
+son	3	112	0
+travail	4	112	0
+a	5	112	0
+t	6	112	0
+il	7	112	0
+un	8	112	0
+sens	9	112	1
+Quand	1	113	0
+il	2	113	0
+allume	3	113	0
+son	4	113	0
+réverbère	5	113	0
+c	6	113	0
+est	7	113	0
+comme	8	113	0
+s	9	113	0
+il	10	113	0
+faisait	11	113	0
+naître	12	113	0
+une	13	113	0
+étoile	14	113	0
+de	15	113	0
+plus	16	113	0
+ou	17	113	0
+une	18	113	0
+fleur	19	113	1
+Quand	1	114	0
+il	2	114	0
+éteint	3	114	0
+son	4	114	0
+réverbère	5	114	0
+ça	6	114	0
+endort	7	114	0
+la	8	114	0
+fleur	9	114	0
+ou	10	114	0
+l	11	114	0
+étoile	12	114	1
+C	1	115	0
+est	2	115	0
+une	3	115	0
+occupation	4	115	0
+très	5	115	0
+jolie	6	115	1
+C	1	116	0
+est	2	116	0
+véritablement	3	116	0
+utile	4	116	0
+puisque	5	116	0
+c	6	116	0
+est	7	116	0
+joli	8	116	1
+Lorsqu	1	117	0
+il	2	117	0
+aborda	3	117	0
+la	4	117	0
+planète	5	117	0
+il	6	117	0
+salua	7	117	0
+respectueusement	8	117	0
+l	9	117	0
+allumeur	10	117	0
+bonjour	11	117	1
+Pourquoi	1	118	0
+viens	2	118	0
+tu	3	118	0
+d	4	118	0
+éteindre	5	118	0
+ton	6	118	0
+réverbère	7	118	1
+c	1	119	0
+est	2	119	0
+la	3	119	0
+consigne	4	119	0
+répondit	5	119	0
+l	6	119	0
+allumeur	7	119	1
+Bonjour	1	120	1
+qu	1	121	0
+est	2	121	0
+ce	3	121	0
+que	4	121	0
+la	5	121	0
+consigne	6	121	1
+c	1	122	0
+est	2	122	0
+d	3	122	0
+éteindre	4	122	0
+mon	5	122	0
+réverbère	6	122	1
+Bonsoir	1	123	1
+Et	1	124	0
+il	2	124	0
+le	3	124	0
+ralluma	4	124	1
+mais	1	125	0
+pourquoi	2	125	0
+viens	3	125	0
+tu	4	125	0
+de	5	125	0
+le	6	125	0
+rallumer	7	125	1
+c	1	126	0
+est	2	126	0
+la	3	126	0
+consigne	4	126	0
+répondit	5	126	0
+l	6	126	0
+allumeur	7	126	1
+je	1	127	0
+ne	2	127	0
+comprends	3	127	0
+pas	4	127	0
+dit	5	127	0
+le	6	127	0
+petit	7	127	0
+prince	8	127	1
+il	1	128	0
+n	2	128	0
+y	3	128	0
+a	4	128	0
+rien	5	128	0
+à	6	128	0
+comprendre	7	128	0
+dit	8	128	0
+l	9	128	0
+allumeur	10	128	1
+La	1	129	0
+consigne	2	129	0
+c	3	129	0
+est	4	129	0
+la	5	129	0
+consigne	6	129	1
+Bonjour	1	130	1
+Et	1	131	0
+il	2	131	0
+éteignit	3	131	0
+son	4	131	0
+réverbère	5	131	1
+Puis	1	132	0
+il	2	132	0
+s	3	132	0
+épongea	4	132	0
+le	5	132	0
+front	6	132	0
+avec	7	132	0
+un	8	132	0
+mouchoir	9	132	0
+à	10	132	0
+carreaux	11	132	0
+rouges	12	132	1
+je	1	133	0
+fais	2	133	0
+là	3	133	0
+un	4	133	0
+métier	5	133	0
+terrible	6	133	1
+C	1	134	0
+était	2	134	0
+raisonnable	3	134	0
+autrefois	4	134	1
+J	1	135	0
+éteignais	2	135	0
+le	3	135	0
+matin	4	135	0
+et	5	135	0
+j	6	135	0
+allumais	7	135	0
+le	8	135	0
+soir	9	135	1
+J	1	136	0
+avais	2	136	0
+le	3	136	0
+reste	4	136	0
+du	5	136	0
+jour	6	136	0
+pour	7	136	0
+me	8	136	0
+reposer	9	136	0
+et	10	136	0
+le	11	136	0
+reste	12	136	0
+de	13	136	0
+la	14	136	0
+nuit	15	136	0
+pour	16	136	0
+dormir	17	136	1
+et	1	137	0
+depuis	2	137	0
+cette	3	137	0
+époque	4	137	0
+la	5	137	0
+consigne	6	137	0
+a	7	137	0
+changé	8	137	1
+la	1	138	0
+consigne	2	138	0
+n	3	138	0
+a	4	138	0
+pas	5	138	0
+changé	6	138	0
+dit	7	138	0
+l	8	138	0
+allumeur	9	138	1
+C	1	139	0
+est	2	139	0
+bien	3	139	0
+là	4	139	0
+le	5	139	0
+drame	6	139	1
+La	1	140	0
+planète	2	140	0
+d	3	140	0
+année	4	140	0
+en	5	140	0
+année	6	140	0
+a	7	140	0
+tourné	8	140	0
+de	9	140	0
+plus	10	140	0
+en	11	140	0
+plus	12	140	0
+vite	13	140	0
+et	14	140	0
+la	15	140	0
+consigne	16	140	0
+n	17	140	0
+a	18	140	0
+pas	19	140	0
+changé	20	140	1
+alors	1	141	1
+Dit	1	142	0
+le	2	142	0
+petit	3	142	0
+prince	4	142	1
+alors	1	143	0
+maintenant	2	143	0
+qu	3	143	0
+elle	4	143	0
+fait	5	143	0
+un	6	143	0
+tour	7	143	0
+par	8	143	0
+minute	9	143	0
+je	10	143	0
+n	11	143	0
+ai	12	143	0
+plus	13	143	0
+une	14	143	0
+seconde	15	143	0
+de	16	143	0
+repos	17	143	1
+J	1	144	0
+allume	2	144	0
+et	3	144	0
+j	4	144	0
+éteins	5	144	0
+une	6	144	0
+fois	7	144	0
+par	8	144	0
+minute	9	144	1
+ça	1	145	0
+c	2	145	0
+est	3	145	0
+drôle	4	145	1
+Les	1	146	0
+jours	2	146	0
+chez	3	146	0
+toi	4	146	0
+durent	5	146	0
+une	6	146	0
+minute	7	146	1
+ce	1	147	0
+n	2	147	0
+est	3	147	0
+pas	4	147	0
+drôle	5	147	0
+du	6	147	0
+tout	7	147	0
+dit	8	147	0
+l	9	147	0
+allumeur	10	147	1
+Ça	1	148	0
+fait	2	148	0
+déjà	3	148	0
+un	4	148	0
+mois	5	148	0
+que	6	148	0
+nous	7	148	0
+parlons	8	148	0
+ensemble	9	148	1
+un	1	149	0
+mois	2	149	1
+oui	1	150	1
+Trente	1	151	0
+minutes	2	151	1
+Trente	1	152	0
+jours	2	152	1
+Bonsoir	1	153	1
+Et	1	154	0
+il	2	154	0
+ralluma	3	154	0
+son	4	154	0
+réverbère	5	154	1
+Le	1	155	0
+petit	2	155	0
+prince	3	155	0
+le	4	155	0
+regarda	5	155	0
+et	6	155	0
+il	7	155	0
+aima	8	155	0
+cet	9	155	0
+allumeur	10	155	0
+qui	11	155	0
+était	12	155	0
+tellement	13	155	0
+fidèle	14	155	0
+à	15	155	0
+la	16	155	0
+consigne	17	155	1
+Il	1	156	0
+se	2	156	0
+souvint	3	156	0
+des	4	156	0
+couchers	5	156	0
+de	6	156	0
+soleil	7	156	0
+que	8	156	0
+lui	9	156	0
+même	10	156	0
+allait	11	156	0
+autrefois	12	156	0
+chercher	13	156	0
+en	14	156	0
+tirant	15	156	0
+sa	16	156	0
+chaise	17	156	1
+Il	1	157	0
+voulut	2	157	0
+aider	3	157	0
+son	4	157	0
+ami	5	157	0
+tu	6	157	0
+sais	7	157	1
+Je	1	158	0
+connais	2	158	0
+un	3	158	0
+moyen	4	158	0
+de	5	158	0
+te	6	158	0
+reposer	7	158	0
+quand	8	158	0
+tu	9	158	0
+voudras	10	158	1
+je	1	159	0
+veux	2	159	0
+toujours	3	159	0
+dit	4	159	0
+l	5	159	0
+allumeur	6	159	1
+Car	1	160	0
+on	2	160	0
+peut	3	160	0
+être	4	160	0
+à	5	160	0
+la	6	160	0
+fois	7	160	0
+fidèle	8	160	0
+et	9	160	0
+paresseux	10	160	1
+Le	1	161	0
+petit	2	161	0
+prince	3	161	0
+poursuivit	4	161	0
+ta	5	161	0
+planète	6	161	0
+est	7	161	0
+tellement	8	161	0
+petite	9	161	0
+que	10	161	0
+tu	11	161	0
+en	12	161	0
+fais	13	161	0
+le	14	161	0
+tour	15	161	0
+en	16	161	0
+trois	17	161	0
+enjambées	18	161	1
+Tu	1	162	0
+n	2	162	0
+as	3	162	0
+qu	4	162	0
+à	5	162	0
+marcher	6	162	0
+assez	7	162	0
+lentement	8	162	0
+pour	9	162	0
+rester	10	162	0
+toujours	11	162	0
+au	12	162	0
+soleil	13	162	1
+Quand	1	163	0
+tu	2	163	0
+voudras	3	163	0
+te	4	163	0
+reposer	5	163	0
+tu	6	163	0
+marcheras	7	163	1
+Et	1	164	0
+le	2	164	0
+jour	3	164	0
+durera	4	164	0
+aussi	5	164	0
+longtemps	6	164	0
+que	7	164	0
+tu	8	164	0
+voudras	9	164	1
+ça	1	165	0
+ne	2	165	0
+m	3	165	0
+avance	4	165	0
+pas	5	165	0
+à	6	165	0
+grand	7	165	0
+chose	8	165	0
+dit	9	165	0
+l	10	165	0
+allumeur	11	165	1
+Ce	1	166	0
+que	2	166	0
+j	3	166	0
+aime	4	166	0
+dans	5	166	0
+la	6	166	0
+vie	7	166	0
+c	8	166	0
+est	9	166	0
+dormir	10	166	1
+ce	1	167	0
+n	2	167	0
+est	3	167	0
+pas	4	167	0
+de	5	167	0
+chance	6	167	0
+dit	7	167	0
+le	8	167	0
+petit	9	167	0
+prince	10	167	1
+ce	1	168	0
+n	2	168	0
+est	3	168	0
+pas	4	168	0
+de	5	168	0
+chance	6	168	0
+dit	7	168	0
+l	8	168	0
+allumeur	9	168	1
+Bonjour	1	169	1
+Et	1	170	0
+il	2	170	0
+éteignit	3	170	0
+son	4	170	0
+réverbère	5	170	1
+celui	1	171	0
+là	2	171	0
+se	3	171	0
+dit	4	171	0
+le	5	171	0
+petit	6	171	0
+prince	7	171	0
+tandis	8	171	0
+qu	9	171	0
+il	10	171	0
+poursuivait	11	171	0
+plus	12	171	0
+loin	13	171	0
+son	14	171	0
+voyage	15	171	0
+celui	16	171	0
+là	17	171	0
+serait	18	171	0
+méprisé	19	171	0
+par	20	171	0
+tous	21	171	0
+les	22	171	0
+autres	23	171	0
+par	24	171	0
+le	25	171	0
+roi	26	171	0
+par	27	171	0
+le	28	171	0
+vaniteux	29	171	0
+par	30	171	0
+le	31	171	0
+buveur	32	171	0
+par	33	171	0
+le	34	171	0
+businessman	35	171	1
+Cependant	1	172	0
+c	2	172	0
+est	3	172	0
+le	4	172	0
+seul	5	172	0
+qui	6	172	0
+ne	7	172	0
+me	8	172	0
+paraisse	9	172	0
+pas	10	172	0
+ridicule	11	172	1
+C	1	173	0
+est	2	173	0
+peut	3	173	0
+être	4	173	0
+parce	5	173	0
+qu	6	173	0
+il	7	173	0
+s	8	173	0
+occupe	9	173	0
+d	10	173	0
+autre	11	173	0
+chose	12	173	0
+que	13	173	0
+de	14	173	0
+soi	15	173	0
+même	16	173	1
+Il	1	174	0
+eut	2	174	0
+un	3	174	0
+soupir	4	174	0
+de	5	174	0
+regret	6	174	0
+et	7	174	0
+se	8	174	0
+dit	9	174	0
+encore	10	174	0
+celui	11	174	0
+là	12	174	0
+est	13	174	0
+le	14	174	0
+seul	15	174	0
+dont	16	174	0
+j	17	174	0
+eusse	18	174	0
+pu	19	174	0
+faire	20	174	0
+mon	21	174	0
+ami	22	174	1
+Mais	1	175	0
+sa	2	175	0
+planète	3	175	0
+est	4	175	0
+vraiment	5	175	0
+trop	6	175	0
+petite	7	175	1
+Il	1	176	0
+n	2	176	0
+y	3	176	0
+a	4	176	0
+pas	5	176	0
+de	6	176	0
+place	7	176	0
+pour	8	176	0
+deux	9	176	1
+Ce	1	177	0
+que	2	177	0
+le	3	177	0
+petit	4	177	0
+prince	5	177	0
+n	6	177	0
+osait	7	177	0
+pas	8	177	0
+s	9	177	0
+avouer	10	177	0
+c	11	177	0
+est	12	177	0
+qu	13	177	0
+il	14	177	0
+regrettait	15	177	0
+cette	16	177	0
+planète	17	177	0
+bénie	18	177	0
+à	19	177	0
+cause	20	177	0
+surtout	21	177	0
+des	22	177	0
+mille	23	177	0
+quatre	24	177	0
+cent	25	177	0
+quarante	26	177	0
+couchers	27	177	0
+de	28	177	0
+soleil	29	177	0
+par	30	177	0
+vingt	31	177	0
+quatre	32	177	0
+heures	33	177	1
