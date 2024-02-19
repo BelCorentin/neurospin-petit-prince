@@ -172,11 +172,28 @@ def read_raw(subject, run_id, events_return=False, modality="visual"):
 
     # Two cases for match list: is it auditory or visual ?
     if modality == "auditory":
+
+        ## Updated code
+        # word events
+        # match events and metadata
         word_events = events[events[:, 2] > 1]
-        meg_delta = np.round(np.diff(word_events[:, 0] / raw.info["sfreq"]))
-        meta_delta = np.round(np.diff(meta.onset.values))
-        i, j = match_list(meg_delta, meta_delta)
-        assert len(i) > 1
+        meg_delta = np.diff(word_events[:, 0].astype(float) / raw.info["sfreq"])
+        meta_delta = np.diff(meta.onset.values)
+        pres = 1e2
+        i, j = match_list(np.round(meg_delta*pres), np.round(meta_delta*pres))
+        assert len(i) / len(meg_delta) > .85
+        assert len(i) > 500
+
+        # Not needed anymore, as we need the whole metadata for syntax and embeddings
+        # meta = meta.iloc[j].reset_index(drop=True)
+        # meta["start"] = word_events[i, 0] / raw.info["sfreq"]
+
+        # Old code
+        # word_events = events[events[:, 2] > 1]
+        # meg_delta = np.round(np.diff(word_events[:, 0] / raw.info["sfreq"]))
+        # meta_delta = np.round(np.diff(meta.onset.values))
+        # i, j = match_list(meg_delta, meta_delta)
+        # assert len(i) > 1
         # events = events[i]  # events = words_events[i]
 
     # For auditory, we match on the time difference between triggers
@@ -201,7 +218,6 @@ def read_raw(subject, run_id, events_return=False, modality="visual"):
 
     # integrate events to meta for simplicity
     meta.loc[j, "start"] = events[i, 0] / raw.info["sfreq"]
-
     # preproc raw
     raw.load_data()
     raw = raw.filter(0.5, 20)
@@ -349,7 +365,7 @@ def epoch_on_selection(raw, sel, start, level):
     epochs = mne.Epochs(
         raw,
         **mne_events(sel, raw, start=start, level=level),
-        decim=100,
+        decim=10,
         tmin=EPOCH_WINDOWS[f"{level}"][f"{start}_min"],
         tmax=EPOCH_WINDOWS[f"{level}"][f"{start}_max"],
         event_repeated="drop",
