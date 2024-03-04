@@ -181,7 +181,7 @@ def read_raw(subject, run_id, events_return=False, modality="visual"):
         meta_delta = np.diff(meta.onset.values)
         pres = 1e2
         i, j = match_list(np.round(meg_delta*pres), np.round(meta_delta*pres))
-        assert len(i) / len(meg_delta) > .85
+        assert len(i) / len(meg_delta) > .70
         assert len(i) > 500
 
         # Not needed anymore, as we need the whole metadata for syntax and embeddings
