@@ -102,7 +102,7 @@ EPOCH_WINDOWS = {
 # Putting a cache here when iterating on notebooks,
 # Or when doing multiple decodings for the same subject
 @lru_cache(maxsize=9)
-def read_raw(subject, run_id, events_return=False, modality="visual"):
+def read_raw(subject, run_id, events_return=False, modality="auditory"):
     """
     Epoching function that for a subject, modality and run returns the epochs
     object which triggers have been aligned from the
@@ -116,7 +116,9 @@ def read_raw(subject, run_id, events_return=False, modality="visual"):
     Returns:
         - mne.Epochs
     """
-    path = get_path(modality)
+    #path = get_path(modality)
+    # For testing
+    path = Path("/media/co/T7/workspace-LPP/data/MEG/LPP/PallierListen2023/download")
     task_map = {"auditory": "listen", "visual": "read", "fmri": "listen"}
     task = task_map[modality]
     print(f"\n Epoching for run {run_id}, subject: {subject}\n")
