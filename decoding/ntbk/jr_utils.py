@@ -53,6 +53,10 @@ def align_series(x, y, stretches, decim=1):
     n = len(x)
 
     R = []
+    corrs = []
+    b_offsets = []
+    R = []
+    
     for stretch in tqdm(stretches):
         new_length = int(stretch * n)
         y_hat = resample(y, new_length)
@@ -63,12 +67,23 @@ def align_series(x, y, stretches, decim=1):
     strech = stretches[best]
 
     # offset
-    r = correlate(X, Y)
+    new_length = int(stretch * len(X))
+    Y_hat = resample(Y, new_length)
+    Y_hat = Y
+    r = correlate(X, Y_hat)
     best = np.argmax(r)
-    offsets = np.arange(-len(X) + 1, len(Y))
+    offsets = np.arange(-len(X) + 1, len(Y_hat))
     offset = offsets[best]
+
+    # offset
+    #new_length = int(stretch * len(X))
+    #Y_hat = resample(Y, new_length)
+    #r = correlate(X, Y_hat)
+    #best = np.argmax(r)
+    #offsets = np.arange(-len(X) + 1, len(Y))
+    #offset = offsets[best]
     
-    return strech, offset
+    return strech, offset, r
     
 
 def resample_safe(x, target_length):
@@ -82,11 +97,12 @@ class Align(BaseModel):
 
     _stretch: float
     _offset: float
+    _corr: tp.Any
 
     def fit(self, X, Y):
         X = lowpass(X, self.freq)
         Y = lowpass(Y, self.freq)
-        self._stretch, self._offset = align_series(Y, X, self.stretches, self.decim)
+        self._stretch, self._offset, self._corr = align_series(Y, X, self.stretches, self.decim)
         return self
 
     def predict(self, X):
