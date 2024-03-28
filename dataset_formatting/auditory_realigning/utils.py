@@ -139,6 +139,7 @@ def save_multiplot(subject, run):
     # Get the length of the recorded word triggers
     meg_word_length = (word_triggers[-1] - word_triggers[0]) / raw.info['sfreq']
     # Deduct the stretch factor
+    audio_word_length = np.load('audio_word_length.npy')
     stretch = meg_word_length / audio_word_length[run-1]
 
     # plt.plot(offset+(wav_times*stretch), wav_triggers)
@@ -153,9 +154,19 @@ def save_multiplot(subject, run):
 
     plt.savefig(f'figures/Multiplot_{subject}_{run}.png')
     plt.close()
+    # Flush the plot 
+    plt.clf()
+    plt.cla()
+    
+    # del raw
+    # import gc
+    # gc.collect()
 
 
-    import mne
+    return stretch, offset
+
+
+import mne
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
