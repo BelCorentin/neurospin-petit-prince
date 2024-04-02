@@ -8,6 +8,7 @@ import typing as tp
 import numpy as np
 
 import dataclasses
+import matplotlib.pyplot as plt
 
 class NoApproximateMatch(ValueError):
     def __init__(self, msg: str, ind: int, matches: tp.Any) -> None:
@@ -149,3 +150,33 @@ TOL_MISSING_DICT = {
     (44, 9): (30, 5),
     (24, 2): (10, 20)
 }
+
+def plot_matches(seq0, seq1, wav):
+    try:
+        matches = approx_match_samples(seq0, seq1, abs_tol=10, max_missing=5)
+    except NoApproximateMatch as e:
+        matches = e.matches
+        print(e)
+    position0 = seq0[matches[0][-1]]
+    position1 = seq1[matches[1][-1]]
+    offset = position0 - position1
+    print(f"Matching until {position0} ({position1} on second seq, {offset=}")
+    L = max(0, int(max(seq0) + 10))
+    for d, seq, m, off in [(1, seq0, matches[0], 0), (-1, seq1, matches[1], offset)]:
+        print(off)
+        data = np.zeros(L)
+        select = (np.array(seq) + off).astype(int)
+        select2 = select[m]
+        select = select[0 <= select]
+        select = select[select < len(data)]
+        data[select] = d
+        data[select2] += d
+        # Label this plotted data as the ground truth
+        plt.plot(data)
+
+    # Assuming the audio is sampled at 1000 Hz
+    total_duration = len(wav)
+    time = np.linspace(25000, total_duration + 25000, len(wav))
+
+    plt.plot(time, wav)
+    return matches
