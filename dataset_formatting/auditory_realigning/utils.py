@@ -14,7 +14,7 @@ def get_wav_duration(filename):
         return duration
 
 import numpy as np 
-from scipy.io import wavfile
+from scipy.io import wavfilematches
 import matplotlib.pyplot as plt
 
 CHAPTER_PATHS = [
