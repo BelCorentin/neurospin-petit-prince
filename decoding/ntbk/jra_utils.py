@@ -129,3 +129,23 @@ def approx_match_samples(
             out = tuple(np.array(s.matches) for s in seqs)
             raise NoApproximateMatch(msg, ind=seqs[0].last_value, matches=out)
     return tuple(np.array(s.matches) for s in seqs)
+
+TOL_MISSING_DICT = {
+    (9, 6): (30, 5),
+    (10, 6): (30, 5),
+    (12, 5): (30, 5),
+    (13, 3): (30, 5),
+    (13, 7): (30, 5),
+    (14, 9): (30, 5),
+    (21, 6): (30, 5),
+    (21, 8): (30, 5),
+    (22, 4): (30, 5),
+    (33, 2): (30, 5),
+    (39, 5): (30, 5),
+    (40, 2): (30, 5),
+    (41, 1): (30, 5),
+    (43, 4): (30, 5),
+    (43, 5): (30, 5),
+    (44, 9): (30, 5),
+    (24, 2): (10, 20)
+}
