@@ -151,7 +151,7 @@ TOL_MISSING_DICT = {
     (24, 2): (10, 20)
 }
 
-def plot_matches(seq0, seq1, wav):
+def plot_matches(seq0, seq1):
     try:
         matches = approx_match_samples(seq0, seq1, abs_tol=10, max_missing=5)
     except NoApproximateMatch as e:
@@ -174,9 +174,4 @@ def plot_matches(seq0, seq1, wav):
         # Label this plotted data as the ground truth
         plt.plot(data)
 
-    # Assuming the audio is sampled at 1000 Hz
-    total_duration = len(wav)
-    time = np.linspace(25000, total_duration + 25000, len(wav))
-
-    plt.plot(time, wav)
     return matches
