@@ -152,9 +152,9 @@ TOL_MISSING_DICT = {
     (24, 2): (10, 20)
 }
 
-def plot_matches(seq0, seq1):
+def plot_matches(seq0, seq1, abs_tol=5, max_missing=30):
     try:
-        matches = approx_match_samples(seq0, seq1, abs_tol=10, max_missing=5)
+        matches = approx_match_samples(seq0, seq1, abs_tol=abs_tol, max_missing=max_missing)
     except NoApproximateMatch as e:
         matches = e.matches
         print(e)
